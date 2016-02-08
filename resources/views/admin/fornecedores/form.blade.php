@@ -20,7 +20,7 @@
 <div class='form-group'>
     <div class='col-md-7'>
         {!!Form::label('email', 'Email', array('class'=>'control-label'))!!}
-        {!!Form::text('email', null, array('class'=>'form-control', 'id' => 'email', 'required' => 'required'))!!}
+        {!!Form::email('email', null, array('class'=>'form-control', 'id' => 'email', 'required' => 'required'))!!}
     </div>
     <div class='col-md-5'>
         {!!Form::label('cnpj', 'CNPJ', array('class'=>'control-label'))!!}

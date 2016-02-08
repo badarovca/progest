@@ -17,7 +17,7 @@
     </div>
     <div class='col-md-8'>
         {!!Form::label('email', 'E-mail', array('class'=>'control-label'))!!}
-        {!!Form::text('email', null, array('class'=>'form-control', 'id' => 'email', 'required' => 'required'))!!}
+        {!!Form::email('email', null, array('class'=>'form-control', 'id' => 'email', 'required' => 'required'))!!}
     </div>
 </div>
 
