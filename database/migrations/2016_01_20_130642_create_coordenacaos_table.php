@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCoordenaçãosTable extends Migration
+class CreateCoordenacaosTable extends Migration
 {
     /**
      * Run the migrations.

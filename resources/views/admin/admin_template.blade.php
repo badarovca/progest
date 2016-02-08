@@ -22,6 +22,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         -->
         <link href="{{ asset("/bower_components/admin-lte/dist/css/skins/skin-green.min.css")}}" rel="stylesheet" type="text/css" />
 
+        <script src="{{asset("/js/jquery-1.12.0.js")}}" type="text/javascript"></script>
+        <script src="{{asset("/js/jquery.maskedinput.js")}}" type="text/javascript"></script>
+        <script src="{{asset("/js/mask_validator.js")}}" type="text/javascript"></script>
+        
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -37,7 +42,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Sidebar -->
             @include('template/sidebar')
-            
+
             @yield('content')
 
             <!-- Footer -->
@@ -59,6 +64,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Laravel DELETE plugin -->
         <script src="{{ asset ("/js/laravel.js") }}"></script>
         <script src="{{ asset ("/js/empenho.js") }}"></script>
-        
+
     </body>
 </html>

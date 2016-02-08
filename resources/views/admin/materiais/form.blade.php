@@ -33,19 +33,19 @@
 
     <div class="row">
         <div class='form-group'>
-            <div class='col-md-1'>
+            <div class='col-md-2'>
                 {!!Form::label('qtd_1', 'Qtd estoque 1', array('class'=>'control-label'))!!}
                 {!!Form::text('qtd_1', null, array('class'=>'form-control', 'id' => 'qtd_1', 'required' => 'required'))!!}
             </div>
-            <div class='col-md-1'>
+            <div class='col-md-2'>
                 {!!Form::label('qtd_2', 'Qtd estoque 2', array('class'=>'control-label'))!!}
                 {!!Form::text('qtd_2', null, array('class'=>'form-control', 'id' => 'qtd_2', 'required' => 'required'))!!}
             </div>
-            <div class='col-md-1'>
+            <div class='col-md-2'>
                 {!!Form::label('qtd_3', 'Qtd estoque 3', array('class'=>'control-label'))!!}
                 {!!Form::text('qtd_3', null, array('class'=>'form-control', 'id' => 'qtd_3', 'required' => 'required'))!!}
             </div>
-            <div class='col-md-1'>
+            <div class='col-md-2'>
                 {!!Form::label('qtd_4', 'Qtd estoque 4', array('class'=>'control-label'))!!}
                 {!!Form::text('qtd_4', null, array('class'=>'form-control', 'id' => 'qtd_4', 'required' => 'required'))!!}
             </div>
