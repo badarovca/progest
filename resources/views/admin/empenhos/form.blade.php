@@ -62,11 +62,14 @@
             </div>
         </div>
     </div>
-    <div class='row'>
-        <a id='add_material' class='col-md-3' href="#">Novo material</a>
-        <div class='new-material'>
-            
-        </div>
+    <br>
+    <div class='new-material'>
+
     </div>
+    <div class='row'>
+        <a id='add-material' class='col-md-3 text-right pull-right' href="javascript:void(0)">Novo material</a>
+
+    </div>
+    <br>
 </div>
 

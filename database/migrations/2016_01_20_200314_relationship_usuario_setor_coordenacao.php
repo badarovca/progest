@@ -23,8 +23,10 @@ class RelationshipUsuarioSetorCoordenacao extends Migration {
      * @return void
      */
     public function down() {
-        $table->dropForeign('users_setor_id_foreign');
-        $table->dropForeign('users_coordenacao_id_foreign');
+        Schema::table('users', function ($table) {
+            $table->dropForeign('users_setor_id_foreign');
+            $table->dropForeign('users_coordenacao_id_foreign');
+        });
     }
 
 }

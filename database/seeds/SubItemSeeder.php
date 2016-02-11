@@ -12,6 +12,8 @@ class SubItemSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         // clear table
         SubItem::truncate();
         
@@ -174,6 +176,7 @@ class SubItemSeeder extends Seeder {
         SubItem::create([
             'material_consumo' => 'MATERIAL METEOROLOGICO',
         ]);
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 
 }

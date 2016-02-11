@@ -34,6 +34,7 @@ class MaterialRepository {
         $material->disponivel = isset($input['disponivel']) ? 1 : 0;
 
         $subItem = SubItem::find($input['sub_item_id']);
+        dd($subItem);
         $material->subItem()->associate($subItem);
 
         $material->save();

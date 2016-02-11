@@ -20,8 +20,8 @@ class AddEstoquesMateriais extends Migration {
             $table->string('qtd_3');
             $table->string('qtd_4');
             $table->boolean('disponivel');
-            $table->dropColumn('subitem_id');
             $table->integer('sub_item_id')->unsigned();
+            $table->foreign('sub_item_id')->references('id')->on('sub_items');
         });
     }
 
@@ -41,7 +41,6 @@ class AddEstoquesMateriais extends Migration {
             $table->dropColumn('qtd_4');
             $table->dropColumn('disponivel');
             $table->dropColumn('sub_item_id')->unsigned();
-            $table->integer('subitem_id')->unsigned();
         });
     }
 

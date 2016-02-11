@@ -1,11 +1,11 @@
 $(document).ready(function () {
 
-    $("#add_material").click(function () {
+    $("#add-material").click(function () {
+        url = $("#base_url").val()+'/form-material';
         $.get(
-                "form-material",
+                url,
                 function (data) {
-                    console.log(data);
-                    $(".new_material").append(data);
+                    $(".new-material").append(data.html);
                 });
     });
 

@@ -50,7 +50,9 @@ class EmpenhoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $this->empenhoRepository->store($request->all());
+        $input['empenho'] = $request->except('_token', 'codigo', 'descricao', 'unidade', 'marca', 'sub_item_id', 'vl_total', 'quant');
+        $input['materiais'] = $request->only('codigo', 'descricao', 'unidade', 'marca', 'sub_item_id', 'vl_total', 'quant');
+        $this->empenhoRepository->store($input);
         return redirect()->route('admin.empenhos.index')->with('success', 'Registro inserido com sucesso!');
     }
 
@@ -98,16 +100,16 @@ class EmpenhoController extends Controller {
         $this->empenhoRepository->destroy($id);
         return back()->with('success', 'Removido com sucesso!');
     }
-    
+
     /**
      * Busca a view com o formulário dinamico para criação de um novo material
      *
      * @return view
      */
-    
-    public function getFormMaterial(){
+    public function getFormMaterial() {
         $subitens = $this->subItemRepository->dataForSelect();
-        return view('admin.materiais.form')->with(compact('subitens'));
+        $returnHTML = view('admin.empenhos.form-material')->with(compact('subitens'))->render();
+        return response()->json(array('success' => true, 'html' => $returnHTML));
     }
 
 }
