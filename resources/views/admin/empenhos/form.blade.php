@@ -62,6 +62,15 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class='form-group'>
+            <div class='col-md-12'>
+                {!!Form::label('ids_materiais[]', 'Buscar materiais', array('class'=>'control-label'))!!}
+                {!!Form::select('ids_materiais[]', $materiais, null, ['class'=>'form-control multiple-select', 'id'=>'ids_materiais[]', 'multiple'=>''])!!}
+            </div>
+        </div>
+    </div>
     <br>
     <div class='new-material'>
 

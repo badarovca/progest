@@ -25,3 +25,4 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 Route::get('form-material', ['uses' => 'EmpenhoController@getFormMaterial']);
+Route::get('busca-materiais/{param}', ['uses' => 'MaterialController@buscarMateriais']);

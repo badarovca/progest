@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/html/progest/public/js/empenho.js</file>
-            <file>file:/var/www/html/progest/app/Http/Controllers/EmpenhoController.php</file>
+            <file>file:/var/www/html/progest/resources/views/admin/empenhos/form.blade.php</file>
+            <file>file:/var/www/html/progest/resources/views/template/header.blade.php</file>
+            <file>file:/var/www/html/progest/app/Http/routes.php</file>
+            <file>file:/var/www/html/progest/resources/views/layouts/app.blade.php</file>
         </group>
     </open-files>
 </project-private>

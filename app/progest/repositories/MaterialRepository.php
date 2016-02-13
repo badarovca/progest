@@ -10,7 +10,6 @@ class MaterialRepository {
     public function dataForSelect() {
         $baseArray = Material::all();
         $materiais = array();
-        $materiais[] = 'Selecione...';
         foreach ($baseArray as $value) {
             $materiais[$value->id] = $value->descricao;
         }
@@ -65,6 +64,11 @@ class MaterialRepository {
     public function destroy($id) {
         $material = Material::find($id);
         return $material->delete();
+    }
+    
+    public function search($param){
+        $materiais = Material::where('descricao', 'like', "%$param%")->orWhere('marca', 'like', "%$param%")->get();
+        return $materiais;
     }
 
 }

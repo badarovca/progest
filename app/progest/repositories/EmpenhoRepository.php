@@ -29,8 +29,12 @@ class EmpenhoRepository {
         $empenho->fornecedor()->associate($fornecedor);
 
         $empenho->save();
-        foreach ($materiais['objects'] as $key => $val) {
-            $empenho->materiais()->save($val, $materiais['joinings'][$key]);
+
+        $empenho->materiais()->sync($input['ids_materiais']['ids_materiais']);
+        if ($materiais) {
+            foreach ($materiais['objects'] as $key => $val) {
+                $empenho->materiais()->save($val, $materiais['joinings'][$key]);
+            }
         }
     }
 
@@ -63,6 +67,9 @@ class EmpenhoRepository {
     public function preparaDadosMateriais($input) {
         $materiaisArray = array();
         foreach ($input as $key => $val) {
+            if ($val === null) {
+                return false;
+            }
             foreach ($val as $i => $j) {
                 $materiaisArray[$i][$key] = $j;
             }

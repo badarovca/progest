@@ -95,5 +95,9 @@ class MaterialController extends Controller {
         $this->materialRepository->destroy($id);
         return back()->with('success', 'Removido com sucesso!');
     }
+    
+    public function buscarMateriais(Request $request, $param){
+        dd($this->materialRepository->search($param)->toJson());
+    }
 
 }

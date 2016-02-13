@@ -8,17 +8,21 @@ use Illuminate\Http\Request;
 use App\progest\repositories\EmpenhoRepository;
 use App\progest\repositories\FornecedorRepository;
 use App\progest\repositories\SubItemRepository;
+use App\progest\repositories\MaterialRepository;
 
 class EmpenhoController extends Controller {
 
     protected $empenhoRepository;
     protected $fornecedorRepository;
     protected $subItemRepository;
+    protected $materialRepository;
 
-    public function __construct(EmpenhoRepository $empenhoRepository, FornecedorRepository $fornecedorRepository, SubItemRepository $subItemRepository) {
+    public function __construct(EmpenhoRepository $empenhoRepository, FornecedorRepository $fornecedorRepository, 
+            SubItemRepository $subItemRepository, MaterialRepository $materialRepository) {
         $this->empenhoRepository = $empenhoRepository;
         $this->fornecedorRepository = $fornecedorRepository;
         $this->subItemRepository = $subItemRepository;
+        $this->materialRepository = $materialRepository;
     }
 
     /**
@@ -40,7 +44,8 @@ class EmpenhoController extends Controller {
     public function create() {
         $empenho = null;
         $fornecedores = $this->fornecedorRepository->dataForSelect();
-        return view('admin.empenhos.create')->with(compact(['empenho', 'fornecedores']));
+        $materiais = $this->materialRepository->dataForSelect();
+        return view('admin.empenhos.create')->with(compact(['empenho', 'fornecedores', 'materiais']));
     }
 
     /**
@@ -50,8 +55,9 @@ class EmpenhoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $input['empenho'] = $request->except('_token', 'codigo', 'descricao', 'unidade', 'marca', 'sub_item_id', 'vl_total', 'quant');
+        $input['empenho'] = $request->except('_token', 'codigo', 'descricao', 'unidade', 'marca', 'sub_item_id', 'vl_total', 'quant', 'ids_materiais');
         $input['materiais'] = $request->only('codigo', 'descricao', 'unidade', 'marca', 'sub_item_id', 'vl_total', 'quant');
+        $input['ids_materiais'] = $request->only('ids_materiais');
         $this->empenhoRepository->store($input);
         return redirect()->route('admin.empenhos.index')->with('success', 'Registro inserido com sucesso!');
     }
@@ -75,7 +81,8 @@ class EmpenhoController extends Controller {
     public function edit($id) {
         $empenho = $this->empenhoRepository->show($id);
         $fornecedores = $this->fornecedorRepository->dataForSelect();
-        return view('admin.empenhos.edit')->with(compact(['empenho', 'fornecedores']));
+        $materiais = $this->materialRepository->dataForSelect();
+        return view('admin.empenhos.edit')->with(compact(['empenho', 'fornecedores', 'materiais']));
     }
 
     /**
