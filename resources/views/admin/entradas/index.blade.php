@@ -6,8 +6,8 @@
     <!--Content Header (Page header) -->
     <section class = "content-header">
         <h1>
-            {!! $page_title or "Empenhos" !!}
-            <small>{!! $page_description or null !!}</small>
+            {!! $page_title or "Entradas - " !!}
+            <small>Empenho: <b>{!! $empenho->numero or "todos"!!}</b></small>
         </h1>
         <!--You can dynamically generate breadcrumbs here -->
         <ol class = "breadcrumb">
@@ -15,39 +15,38 @@
             <li class = "active">Here</li>
         </ol>
         @include('template.alerts')
-        <small><a href="{!! route('admin.empenhos.create') !!}">
-                <i class="fa fa-plus"></i> Novo empenho
+        @if(isset($empenho))
+            <small><a href="{{ route('admin.empenhos.entradas.create', [$empenho->id]) }}">
+                <i class="fa fa-plus"></i> Nova entrada
             </a></small>
+        @endif
     </section>
 
     <!--Main content -->
     <section class = "content">
         <!--Your Page Content Here -->
-        @if(count($empenhos) > 0)
+        @if(count($entradas) > 0)
         <table class="table table-bordered table-hover table-striped">
             <thead>
                 <tr>
-                    <th>Número</th>
+                    <th>Número NF</th>
                     <th>Fornecedor</th>
-                    <th>Tipo</th>
-                    <th>Modalidade</th>
-                    <th>Nº processo.</th>
+                    <th>Natureza da operação</th>
+                    <th>Valor</th>
+                    <th>Data do recebimento</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($empenhos as $empenho)
+                @foreach($entradas as $entrada)
                 <tr>
-                    <td>{!! $empenho->numero !!}</td>
-                    <td>{!! $empenho->fornecedor->razao !!}</td>
-                    <td>{!! $empenho->tipo !!}</td>
-                    <td>{!! $empenho->mod_aplicacao !!}</td>
-                    <td>{!! $empenho->num_processo !!}</td>
+                    <td>{!! $entrada->num_nf !!}</td>
+                    <td>{!! $entrada->empenho->fornecedor->razao !!}</td>
+                    <td>{!! $entrada->natureza_op !!}</td>
+                    <td>{!! $entrada->vl_total !!}</td>
+                    <td>{!! $entrada->dt_recebimento !!}</td>
                     <td width="1%" nowrap>
-                        <a href="{!! route('admin.empenhos.entradas.index', $empenho->id) !!}" class="btn btn-warning btn-xs">
-                            <i class="fa fa-fw fa-archive"></i> entradas
-                        </a>
-                        <a href="{!! route('admin.empenhos.edit', $empenho->id) !!}" class="btn btn-primary btn-xs">
+                        <a href="{!! route('admin.empenhos.entradas.edit', [$entrada->empenho->id, $entrada->id]) !!}" class="btn btn-primary btn-xs">
                             <i class="fa fa-fw fa-pencil"></i> editar
                         </a>
                     </td>
@@ -56,7 +55,7 @@
             </tbody>
         </table>
         @else
-        <h5 class="well">Nenhum empenho ainda cadastrado.</h5>
+        <h5 class="well">Nenhuma entrada ainda cadastrado.</h5>
         @endif
     </section><!--/.content -->
 </div><!--/.content-wrapper -->

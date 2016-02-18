@@ -27,7 +27,7 @@ class Material extends Model {
     }
     
     public function empenhos(){
-        return $this->belongsToMany('App\Empenho')->withTimestamps();
+        return $this->belongsToMany('App\Empenho')->withTimestamps()->withPivot('quant', 'vl_total');;
     }
 
 }

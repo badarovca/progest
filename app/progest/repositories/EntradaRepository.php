@@ -2,13 +2,11 @@
 
 namespace App\progest\repositories;
 
-use App\Fornecedor;
 use App\Empenho;
 use App\Material;
-use App\SubItem;
 use App\Entrada;
 
-class EmpenhoRepository {
+class EntradaRepository {
 
     protected $materialRepository;
 
@@ -16,27 +14,35 @@ class EmpenhoRepository {
         $this->materialRepository = $materialRepository;
     }
 
-    public function index() {
-        return Empenho::all();
+    public function index($empenho = null) {
+        if ($empenho == null) {
+            return Entrada::all();
+        } else {
+            return Entrada::where('empenho_id', $empenho)->get();
+        }
     }
 
     public function store($input) {
-        $fornecedor_id = $input['empenho']['fornecedor_id'];
-        unset($input['empenho']['fornecedor_id']);
-        $empenho = new Empenho($input['empenho']);
-        $materiais = $this->preparaDadosMateriais($input['materiais']);
+        $entrada = new Entrada($input['entrada']);
 
-        $fornecedor = Fornecedor::find($fornecedor_id);
-        $empenho->fornecedor()->associate($fornecedor);
+        $empenho = Empenho::find($input['empenho']);
+        $entrada->empenho()->associate($empenho);
 
-        $empenho->save();
-
-        $empenho->materiais()->sync($input['ids_materiais']['ids_materiais']);
-        if ($materiais) {
-            foreach ($materiais['objects'] as $key => $val) {
-                $empenho->materiais()->save($val, $materiais['joinings'][$key]);
-            }
+        $entrada->save();
+        $materiais = [];
+        foreach ($input['materiais']['qtds'] as $key => $val) {
+            $materiais[$key] = ['quant' => $val];
         }
+
+        $entrada->materiais()->sync($materiais);
+        
+        foreach($materiais as $key=>$val){
+            $material = Material::find($key);
+            $material->qtd_1 += $val['quant'];
+            $material->save();
+        }
+
+        return $entrada;
     }
 
     public function update($id, $input) {
@@ -57,7 +63,7 @@ class EmpenhoRepository {
     }
 
     public function show($id) {
-        return Empenho::find($id);
+        return Empenho::findOrFail($id);
     }
 
     public function destroy($id) {
@@ -94,19 +100,6 @@ class EmpenhoRepository {
         $materiais['joinings'] = $materiaisArray;
         $materiais['objects'] = $materiaisObjects;
         return $materiais;
-    }
-
-    public function getQtdsEntregues($empenho) {
-        foreach ($empenho->materiais as $material) {
-            $qtds[$material->id]['qnt_entregue'] = 0;
-        }
-        foreach ($empenho->entradas as $entrada) {
-            foreach ($entrada->materiais as $material) {
-                $qtds[$material->id]['qnt_entregue'] += $material->pivot->quant;
-            }
-        }
-        
-        return $qtds;
     }
 
 }
