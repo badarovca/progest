@@ -31,7 +31,15 @@ class EmpenhoRepository {
 
         $empenho->save();
 
-        $empenho->materiais()->sync($input['ids_materiais']['ids_materiais']);
+        if ($input['qtds']['qtds']) {
+            $materiais_ids = [];
+
+            foreach ($input['qtds']['qtds'] as $key => $val) {
+                $materiais_ids[$key] = ['quant' => $val];
+            }
+            $empenho->materiais()->sync($materiais_ids);
+        }
+
         if ($materiais) {
             foreach ($materiais['objects'] as $key => $val) {
                 $empenho->materiais()->save($val, $materiais['joinings'][$key]);
@@ -105,7 +113,7 @@ class EmpenhoRepository {
                 $qtds[$material->id]['qnt_entregue'] += $material->pivot->quant;
             }
         }
-        
+
         return $qtds;
     }
 

@@ -1,0 +1,13 @@
+.row-add-material{
+    position: relative!important;
+}
+.add-material{
+    position: absolute!important;
+    bottom: -43px!important;
+}
+.select2-container .select2-selection--single {
+    height: auto!important;
+}    
+.select2-container--default .select2-selection--single{
+    border-radius: 0!important;  
+}

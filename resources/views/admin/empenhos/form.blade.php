@@ -62,13 +62,34 @@
             </div>
         </div>
     </div>
-
+    <br>
+    @include('admin.comuns.form-material')
+    <br>
     <div class="row">
-        <div class='form-group'>
-            <div class='col-md-12'>
-                {!!Form::label('ids_materiais[]', 'Buscar materiais', array('class'=>'control-label'))!!}
-                {!!Form::select('ids_materiais[]', $materiais, null, ['class'=>'form-control multiple-select', 'id'=>'ids_materiais[]', 'multiple'=>''])!!}
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Materiais</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Descricao</th>
+                                <th>Quant</th>
+                            </tr>
+                        </thead>
+                        <tbody id='lista-materiais'>
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
             </div>
+            <!-- /.box -->
+
         </div>
     </div>
     <br>

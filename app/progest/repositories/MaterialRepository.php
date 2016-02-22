@@ -9,9 +9,9 @@ class MaterialRepository {
 
     public function dataForSelect() {
         $baseArray = Material::all();
-        $materiais = array();
+        $materiais = array(''=>'Selecione...');
         foreach ($baseArray as $value) {
-            $materiais[$value->id] = $value->descricao;
+            $materiais[$value->id] = $value->descricao." (cod: $value->codigo)";
         }
         return $materiais;
     }

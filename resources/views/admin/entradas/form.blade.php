@@ -70,10 +70,10 @@
                             @foreach($empenho->materiais as $material)
                             <tr>
                                 <td style="width: 10%">{{$material->codigo}}</td>
-                                <td style="width: 60%">{{$material->descricao}}</td>
+                                <td style="width: 58%">{{$material->descricao}}</td>
                                 <td style="width: 5%">{{($material->pivot->quant - $qtds[$material->id]['qnt_entregue'])}}</td>
                                 <td style="width: 5%">{{$qtds[$material->id]['qnt_entregue']}}</td>
-                                <td style="width: 5%">{!!Form::text("qtds[$material->id]", null, array('class'=>'form-control', 'id' => 'qtd[$material->id]', 'required' => 'required'))!!}</td>
+                                <td style="width: 5%">{!!Form::number("qtds[$material->id]", null, array('class'=>'form-control', 'id' => 'qtd[$material->id]', 'required' => 'required', 'min' => '0', 'max'=>$material->pivot->quant - $qtds[$material->id]['qnt_entregue'] ,$material->pivot->quant - $qtds[$material->id]['qnt_entregue'] > 0 ? '' : 'disabled'))!!}</td>
                             </tr>
                             @endforeach
                         </tbody>

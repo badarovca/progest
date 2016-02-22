@@ -9,6 +9,16 @@ use Artesaos\Defender\Role;
 
 class UsuarioRepository {
 
+    public function dataForSelect() {
+        $baseArray = User::all();
+        $usuarios = array();
+        $usuarios[] = 'Selecione...';
+        foreach ($baseArray as $value) {
+            $usuarios[$value->id] = $value->name;
+        }
+        return $usuarios;
+    }
+
     public function index() {
         return User::all();
     }
@@ -20,7 +30,7 @@ class UsuarioRepository {
         $user->email = $input['email'];
         $user->telefone = $input['telefone'];
         $user->habilitado = isset($input['habilitado']) ? 1 : 0;
-        
+
         $setor = Setor::find($input['setor_id']);
         $coordenacao = Setor::find($input['coordenacao_id']);
         $user->setor()->associate($setor);
@@ -53,7 +63,7 @@ class UsuarioRepository {
         $user = User::find($id);
         return $user->delete();
     }
-    
+
 //    public function getRolesForSelect(){
 //        $baseArray = Role::all();
 //        $roles = array();
@@ -62,5 +72,4 @@ class UsuarioRepository {
 //        }
 //        return $roles;
 //    }
-
 }

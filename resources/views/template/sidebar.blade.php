@@ -8,29 +8,40 @@
             <li class="header">GERENCIAR</li>
             <!-- Optionally, you can add icons to the links -->
             <!--<li><a href="#"><span>Setores</span></a></li>-->
-<!--            <li class="treeview">
-                <a href="#"><span>Usuários</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <!--            <li class="treeview">
+                            <a href="#"><span>Usuários</span> <i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="#">Usuários</a></li>
+                                <li><a href="#">Setores</a></li>
+                                <li><a href="#">Coordenações</a></li>
+                            </ul>
+                        </li>-->
+            <li class="treeview">
+                <a href="#"><span>Cadastros</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="#">Usuários</a></li>
-                    <li><a href="#">Setores</a></li>
-                    <li><a href="#">Coordenações</a></li>
+                    <li><a href="{{ route('admin.usuarios.index')}}"><span>Usuários</span></a></li>
+                    <li><a href="{{ route('admin.setores.index')}}"><span>Setores</span></a></li>
+                    <li><a href="{{ route('admin.coordenacoes.index')}}"><span>Cordenações</span></a></li>
+                    <li><a href="{{ route('admin.fornecedores.index')}}"><span>Fornecedores</span></a></li>
                 </ul>
-            </li>-->
-            <li><a href="{{ route('admin.usuarios.index')}}"><span>Usuários</span></a></li>
-            <li><a href="{{ route('admin.setores.index')}}"><span>Setores</span></a></li>
-            <li><a href="{{ route('admin.coordenacoes.index')}}"><span>Cordenações</span></a></li>
-            <li><a href="{{ route('admin.fornecedores.index')}}"><span>Fornecedores</span></a></li>
+            </li>
             <li class="treeview">
                 <a href="#"><span>Inventário</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('admin.empenhos.index')}}">Empenhos</a></li>
-                    <li><a href="{{ route('admin.entradas')}}">Entradas</a></li>
                     <li><a href="{{ route('admin.materiais.index')}}">Materiais</a></li>
                     <li><a href="{{ route('admin.subitens.index')}}">SubItens</a></li>
                 </ul>
             </li>
+            <li class="treeview">
+                <a href="#"><span>Movimentação</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('admin.entradas')}}">Entradas</a></li>
+                    <li><a href="{{ route('admin.saidas.index')}}">Saídas</a></li>
+                </ul>
+            </li>
 
-        </ul><!-- /.sidebar-menu -->
+        </ul><!-- /.sidebar-menu 
     </section>
-    <!-- /.sidebar -->
+        <!-- /.sidebar -->
 </aside>

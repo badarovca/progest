@@ -18,6 +18,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('fornecedores', 'FornecedorController');
     Route::resource('empenhos', 'EmpenhoController');
     Route::resource('empenhos.entradas', 'EntradaController');
+    Route::resource('saidas', 'SaidaController');
     Route::get('/entradas', ['as'=>'admin.entradas', 'uses' => 'EntradaController@index']);
     Route::resource('materiais', 'MaterialController');
     Route::resource('subitens', 'SubItemController');
