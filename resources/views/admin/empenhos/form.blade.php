@@ -63,7 +63,7 @@
         </div>
     </div>
     <br>
-    @include('admin.comuns.form-material')
+    @include('admin.empenhos.form-select-material')
     <br>
     <div class="row">
         <div class="col-xs-12">
@@ -79,6 +79,7 @@
                                 <th>ID</th>
                                 <th>Descricao</th>
                                 <th>Quant</th>
+                                <th>Valor total</th>
                             </tr>
                         </thead>
                         <tbody id='lista-materiais'>

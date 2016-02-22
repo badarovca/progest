@@ -26,7 +26,7 @@ class EntradaController extends Controller {
     public function index($empenho = null) {
         $entradas = $this->entradaRepository->index($empenho);
         $empenho = $this->empenhoRepository->show($empenho);
-        return view('admin.entradas.index')->with(compact('entradas','empenho'));
+        return view('admin.entradas.index')->with(compact('entradas', 'empenho'));
     }
 
     /**
@@ -51,10 +51,10 @@ class EntradaController extends Controller {
         $input['entrada'] = $request->only('num_nf', 'numero_emepenho', 'cod_chave', 'natureza_op', 'vl_total', 'dt_emissao', 'dt_recebimento');
         $input['materiais'] = $request->only('qtds');
         $input['empenho'] = $empenho;
-        
+
         $this->entradaRepository->store($input);
-        
-        return redirect()->route('admin.empenhos.entradas.index',[$empenho])->with('success', 'Registro inserido com sucesso!');
+
+        return redirect()->route('admin.empenhos.entradas.index', [$empenho])->with('success', 'Registro inserido com sucesso!');
         //
     }
 
@@ -94,8 +94,9 @@ class EntradaController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id) {
-        //
+    public function destroy($id_empenho, $id_entrada) {
+        $this->entradaRepository->destroy($id_entrada);
+        return back()->with('success', 'Entrada cancelada com sucesso!');
     }
-    
+
 }

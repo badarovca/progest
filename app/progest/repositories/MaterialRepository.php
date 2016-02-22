@@ -7,7 +7,7 @@ use App\SubItem;
 
 class MaterialRepository {
 
-    public function dataForSelect() {
+    public function dataForSelect($filter = null) {
         $baseArray = Material::all();
         $materiais = array(''=>'Selecione...');
         foreach ($baseArray as $value) {

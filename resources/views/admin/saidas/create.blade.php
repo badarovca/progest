@@ -18,7 +18,7 @@
 
     <!--Main content -->
     <section class = "content">
-        @include('admin.comuns.form-material')
+        @include('admin.saidas.form-material')
 
         {!! Form::model($saida, ['route' => ["admin.saidas.store"] ])!!}
         @include('admin.saidas.form')

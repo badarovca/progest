@@ -35,8 +35,8 @@ class EntradaRepository {
         }
 
         $entrada->materiais()->sync($materiais);
-        
-        foreach($materiais as $key=>$val){
+
+        foreach ($materiais as $key => $val) {
             $material = Material::find($key);
             $material->qtd_1 += $val['quant'];
             $material->save();
@@ -67,8 +67,13 @@ class EntradaRepository {
     }
 
     public function destroy($id) {
-        $empenho = Empenho::find($id);
-        return $empenho->delete();
+        $entrada = Entrada::find($id);
+
+        foreach ($entrada->materiais as $material) {
+            $material->qtd_1 -= $material->pivot->quant;
+            $material->save();
+        }
+        return $entrada->delete();
     }
 
     public function preparaDadosMateriais($input) {

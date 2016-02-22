@@ -1,6 +1,10 @@
 @extends('admin.admin_template')
 
 @section('content')
+<!-- Laravel DELETE plugin -->
+<script>
+    window.csrfToken = '<?php echo csrf_token(); ?>';
+</script>
 <!--Content Wrapper. Contains page content -->
 <div class = "content-wrapper">
     <!--Content Header (Page header) -->
@@ -46,8 +50,8 @@
                     <td>{!! $entrada->vl_total !!}</td>
                     <td>{!! $entrada->dt_recebimento !!}</td>
                     <td width="1%" nowrap>
-                        <a href="{!! route('admin.empenhos.entradas.edit', [$entrada->empenho->id, $entrada->id]) !!}" class="btn btn-primary btn-xs">
-                            <i class="fa fa-fw fa-pencil"></i> editar
+                        <a href="{!! route('admin.empenhos.entradas.destroy', [$entrada->empenho->id, $entrada->id]) !!}"  data-method="delete" data-confirm="Deseja cancelar a entrada?" class="btn btn-danger btn-xs">
+                            <i class="fa fa-fw fa-pencil"></i> cancelar
                         </a>
                     </td>
                 </tr>

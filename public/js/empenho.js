@@ -15,22 +15,22 @@ $(document).ready(function () {
     });
 
     $(".add-material").on('click', function (e) {
-        e.preventDefault();
-        if ($('#qtd-material')[0].checkValidity()) {
-            values = $("#form-add-material").serializeArray();
+        if ($('#qtd-material').val() != '' && $('#valor-material').val() != '' && $("#material_id").val() != '') {
             material_id = $("#material_id").val();
             material_descricao = $("#material_id option:selected").text();
             qtd = $("#qtd-material").val();
+            valor = $("#valor-material").val();
             $("#lista-materiais").append("\
                 <tr>\n\
                 <td style='width: 15%'>" + material_id + "</td>\n\
-                <td style='width: 75%'>" + material_descricao + "</td>\n\
+                <td style='width: 65%'>" + material_descricao + "</td>\n\
                 <td style='width: 10%'><input type='text' class='form-control' name='qtds[" + material_id + "]' id='qtds[" + material_id + "]' value='" + qtd + "' required readonly='true'></td>\n\
+                <td style='width: 10%'><input type='text' class='form-control' name='valores_materiais[" + material_id + "]' id='valores_materiais[" + material_id + "]' value='" + valor + "' required readonly='true'></td>\n\
                 </tr>");
             $('#qtd-material').val("");
+            $('#valor-material').val("");
         }
-
-        return false;
+        return;
     });
 });
 

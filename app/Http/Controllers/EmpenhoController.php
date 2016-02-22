@@ -58,6 +58,7 @@ class EmpenhoController extends Controller {
         $input['empenho'] = $request->except('_token', 'codigo', 'descricao', 'unidade', 'marca', 'sub_item_id', 'vl_total', 'quant', 'ids_materiais');
         $input['materiais'] = $request->only('codigo', 'descricao', 'unidade', 'marca', 'sub_item_id', 'vl_total', 'quant');
         $input['qtds'] = $request->only('qtds');
+        $input['valores_materiais'] = $request->only('valores_materiais');
         $this->empenhoRepository->store($input);
         return redirect()->route('admin.empenhos.index')->with('success', 'Registro inserido com sucesso!');
     }

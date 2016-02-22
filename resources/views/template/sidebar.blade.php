@@ -28,7 +28,6 @@
             <li class="treeview">
                 <a href="#"><span>Inventário</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('admin.empenhos.index')}}">Empenhos</a></li>
                     <li><a href="{{ route('admin.materiais.index')}}">Materiais</a></li>
                     <li><a href="{{ route('admin.subitens.index')}}">SubItens</a></li>
                 </ul>
@@ -36,6 +35,7 @@
             <li class="treeview">
                 <a href="#"><span>Movimentação</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
+                    <li><a href="{{ route('admin.empenhos.index')}}">Empenhos</a></li>
                     <li><a href="{{ route('admin.entradas')}}">Entradas</a></li>
                     <li><a href="{{ route('admin.saidas.index')}}">Saídas</a></li>
                 </ul>

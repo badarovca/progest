@@ -35,7 +35,7 @@ class EmpenhoRepository {
             $materiais_ids = [];
 
             foreach ($input['qtds']['qtds'] as $key => $val) {
-                $materiais_ids[$key] = ['quant' => $val];
+                $materiais_ids[$key] = ['quant' => $val, 'vl_total' => $input['valores_materiais']['valores_materiais'][$key]];
             }
             $empenho->materiais()->sync($materiais_ids);
         }
