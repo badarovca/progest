@@ -19,7 +19,7 @@
 
     <!--Main content -->
     <section class = "content">
-        {!! Form::model(unidade, ['route' => ['admin.unidades.update', unidade->id], 'method'=>'PUT'])!!}
+        {!! Form::model($unidade, ['route' => ['admin.unidades.update', $unidade->id], 'method'=>'PUT'])!!}
         @include('admin.unidades.form')
         <div class="form-group">
             <div class='col-md-12 '>

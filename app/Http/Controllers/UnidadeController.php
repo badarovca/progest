@@ -33,7 +33,7 @@ class UnidadeController extends Controller {
      */
     public function create() {
         $unidade = null;
-        return view('admin.unidades.create')->with(compact('unidades'));
+        return view('admin.unidades.create')->with(compact('unidade'));
     }
 
     /**
@@ -65,9 +65,9 @@ class UnidadeController extends Controller {
      */
     public function edit($id) {
         $unidade = $this->unidadeRepository->show($id);
-        return view('admin.unidades.edit')->with(compact('unidades'));
+        return view('admin.unidades.edit')->with(compact('unidade'));
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -79,7 +79,7 @@ class UnidadeController extends Controller {
         $this->unidadeRepository->update($id, $request->all());
         return redirect()->route('admin.unidades.index')->with('success', 'Registro atualizado com sucesso!');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
