@@ -71,5 +71,11 @@ jQuery(function ($) {
     $("#qtd_3").mask("9?9999999999");
     $("#qtd_4").mask("9?9999999999");
     
+    //mask para numero NF
+    $("#num_nf").mask("999.999.999");
+    
+    //mask para codigo chave - codigo de barras da NFe
+    $("#cod_chave").mask("99999999999999999999999999999999999999999999");
+    
     
 });
