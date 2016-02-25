@@ -15,6 +15,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('usuarios', 'UsuarioController');
     Route::resource('setores', 'SetorController');
     Route::resource('coordenacoes', 'CoordenacaoController');
+    Route::resource('unidades', 'UnidadeController');
     Route::resource('fornecedores', 'FornecedorController');
     Route::resource('empenhos', 'EmpenhoController');
     Route::resource('empenhos.entradas', 'EntradaController');
