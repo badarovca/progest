@@ -23,13 +23,13 @@
                     <li><a href="{{ route('admin.setores.index')}}"><span>Setores</span></a></li>
                     <li><a href="{{ route('admin.coordenacoes.index')}}"><span>Cordenações</span></a></li>
                     <li><a href="{{ route('admin.fornecedores.index')}}"><span>Fornecedores</span></a></li>
+                    <li><a href="{{ route('admin.subitens.index')}}">SubItens</a></li>
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><span>Inventário</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><span>Estoque</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('admin.materiais.index')}}">Materiais</a></li>
-                    <li><a href="{{ route('admin.subitens.index')}}">SubItens</a></li>
                 </ul>
             </li>
             <li class="treeview">
