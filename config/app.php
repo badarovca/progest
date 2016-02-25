@@ -129,6 +129,7 @@ return [
         'App\Providers\EventServiceProvider',
         'App\Providers\RouteServiceProvider',
         'Collective\Html\HtmlServiceProvider',
+        'Zizaco\Entrust\EntrustServiceProvider',
     ],
     /*
       |--------------------------------------------------------------------------
@@ -176,5 +177,6 @@ return [
         'View' => 'Illuminate\Support\Facades\View',
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
+        'Entrust' => 'Zizaco\Entrust\EntrustServiceProvider',
     ],
 ];
