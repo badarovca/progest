@@ -24,6 +24,7 @@
                     <li><a href="{{ route('admin.coordenacoes.index')}}"><span>Cordenações</span></a></li>
                     <li><a href="{{ route('admin.fornecedores.index')}}"><span>Fornecedores</span></a></li>
                     <li><a href="{{ route('admin.subitens.index')}}">SubItens</a></li>
+                    <li><a href="{{ route('admin.unidades.index')}}">Unidades</a></li>
                 </ul>
             </li>
             <li class="treeview">
