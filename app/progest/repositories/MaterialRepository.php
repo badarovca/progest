@@ -4,6 +4,7 @@ namespace App\progest\repositories;
 
 use App\Material;
 use App\SubItem;
+use App\Unidade;
 
 class MaterialRepository {
 
@@ -24,7 +25,6 @@ class MaterialRepository {
         $material = new Material();
         $material->codigo = $input['codigo'];
         $material->descricao = $input['descricao'];
-        $material->unidade = $input['unidade'];
         $material->marca = $input['marca'];
         $material->qtd_1 = $input['qtd_1'];
         $material->qtd_2 = $input['qtd_2'];
@@ -33,8 +33,10 @@ class MaterialRepository {
         $material->disponivel = isset($input['disponivel']) ? 1 : 0;
 
         $subItem = SubItem::find($input['sub_item_id']);
-        dd($subItem);
         $material->subItem()->associate($subItem);
+        
+        $unidade = Unidade::find($input['unidade_id']);
+        $material->unidade()->associate($unidade);
 
         $material->save();
     }
@@ -43,7 +45,6 @@ class MaterialRepository {
         $material = Material::find($id);
         $material->codigo = $input['codigo'];
         $material->descricao = $input['descricao'];
-        $material->unidade = $input['unidade'];
         $material->marca = $input['marca'];
         $material->qtd_1 = $input['qtd_1'];
         $material->qtd_2 = $input['qtd_2'];
@@ -53,7 +54,10 @@ class MaterialRepository {
 
         $subItem = SubItem::find($input['sub_item_id']);
         $material->subItem()->associate($subItem);
-
+        
+        $unidade = Unidade::find($input['unidade_id']);
+        $material->unidade()->associate($unidade);
+        
         return $material->save();
     }
 

@@ -16,8 +16,8 @@
     <div class="row">
         <div class='form-group'>
             <div class='col-md-2'>
-                {!!Form::label('unidade', 'Unidade', array('class'=>'control-label'))!!}
-                {!!Form::text('unidade', null, array('class'=>'form-control', 'id' => 'unidade', 'required' => 'required'))!!}
+                {!!Form::label('unidade_id', 'Unidade', array('class'=>'control-label'))!!}
+                {!!Form::select('unidade_id', $unidades, null, ['required' => 'required', 'class'=>'form-control', 'id'=>'unidade_id'])!!}
             </div>
             <div class='col-md-5'>
                 {!!Form::label('marca', 'Marca', array('class'=>'control-label'))!!}
