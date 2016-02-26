@@ -26,6 +26,10 @@ class Material extends Model {
         return $this->belongsTo('App\SubItem');
     }
     
+    public function unidade() {
+        return $this->belongsTo('App\Unidade');
+    }
+    
     public function empenhos(){
         return $this->belongsToMany('App\Empenho')->withTimestamps()->withPivot('quant', 'vl_total');
     }

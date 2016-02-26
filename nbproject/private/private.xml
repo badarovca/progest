@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/html/progest/config/cache.php</file>
-            <file>file:/var/www/html/progest/config/database.php</file>
-            <file>file:/var/www/html/progest/resources/views/template/sidebar.blade.php</file>
+            <file>file:/C:/wamp/www/progest/app/Http/Controllers/UnidadeController.php</file>
+            <file>file:/C:/wamp/www/progest/resources/views/admin/unidades/edit.blade.php</file>
+            <file>file:/C:/wamp/www/progest/app/Http/Controllers/SubItemController.php</file>
         </group>
     </open-files>
 </project-private>

@@ -7,15 +7,20 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\progest\repositories\SubItemRepository;
 use App\progest\repositories\MaterialRepository;
+use App\progest\repositories\UnidadeRepository;
 
 class MaterialController extends Controller {
 
     protected $materialRepository;
     protected $subItemRepository;
+    protected $UnidadeItemRepository;
+    
 
-    public function __construct(SubItemRepository $subItemRepository, MaterialRepository $materialRepository) {
+    public function __construct(SubItemRepository $subItemRepository, MaterialRepository $materialRepository, 
+     UnidadeRepository $unidadeRepository) {
         $this->subItemRepository = $subItemRepository;
         $this->materialRepository = $materialRepository;
+        $this->unidadeRepository = $unidadeRepository;
     }
 
     /**
@@ -25,7 +30,6 @@ class MaterialController extends Controller {
      */
     public function index() {
         $materiais = $this->materialRepository->index();
-
         return view('admin.materiais.index')->with(compact('materiais'));
     }
 
@@ -37,7 +41,8 @@ class MaterialController extends Controller {
     public function create() {
         $material = null;
         $subitens = $this->subItemRepository->dataForSelect();
-        return view('admin.materiais.create')->with(compact(['material', 'subitens']));
+        $unidades = $this->unidadeRepository->dataForSelect();
+        return view('admin.materiais.create')->with(compact(['material', 'subitens', 'unidades']));
     }
 
     /**
@@ -70,7 +75,8 @@ class MaterialController extends Controller {
     public function edit($id) {
         $material = $this->materialRepository->show($id);
         $subitens = $this->subItemRepository->dataForSelect();
-        return view('admin.materiais.edit')->with(compact(['material', 'subitens']));
+        $unidades = $this->unidadeRepository->dataForSelect();
+        return view('admin.materiais.edit')->with(compact(['material', 'subitens', 'unidades']));
     }
 
     /**
