@@ -5,7 +5,7 @@
             <div class='col-md-5'>
                 <div class='form-group'>
                     {!!Form::label('material_id', 'Materiais', array('class'=>'control-label'))!!}
-                    {!!Form::select('null', $materiais, null, ['class'=>'form-control material-select2', 'id'=>'material_id'])!!}
+                    {!!Form::select(null, $materiais, null, ['class'=>'form-control material-select2', 'id'=>'material_id'])!!}
                 </div>
             </div>
             <div class='col-md-2'>

@@ -20,7 +20,7 @@
     <!--Main content -->
     <section class = "content">
         {!! Form::model($empenho, ['route' => ['admin.empenhos.update', $empenho->id], 'method'=>'PUT'])!!}
-        @include('admin.empenhos.form')
+        @include('admin.empenhos.form-edit')
         <div class="form-group">
             <div class='col-md-12'>
                 {!!Form::submit('Salvar', ['class'=>'btn btn-primary pull-right'])!!}

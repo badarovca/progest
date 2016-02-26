@@ -49,17 +49,34 @@ class EmpenhoRepository {
 
     public function update($id, $input) {
         $empenho = Empenho::find($id);
-        $empenho->numero = $input['numero'];
-        $empenho->tipo = $input['tipo'];
-        $empenho->cat_despesa = $input['cat_despesa'];
-        $empenho->mod_aplicacao = $input['mod_aplicacao'];
-        $empenho->el_consumo = $input['el_consumo'];
-        $empenho->mod_licitacao = $input['mod_licitacao'];
-        $empenho->num_processo = $input['num_processo'];
-        $empenho->solicitantes = $input['solicitantes'];
+        $empenho->numero = $input['empenho']['numero'];
+        $empenho->tipo = $input['empenho']['tipo'];
+        $empenho->cat_despesa = $input['empenho']['cat_despesa'];
+        $empenho->mod_aplicacao = $input['empenho']['mod_aplicacao'];
+        $empenho->el_consumo = $input['empenho']['el_consumo'];
+        $empenho->mod_licitacao = $input['empenho']['mod_licitacao'];
+        $empenho->num_processo = $input['empenho']['num_processo'];
+        $empenho->solicitantes = $input['empenho']['solicitantes'];
 
-        $fornecedor = Fornecedor::find($input['fornecedor_id']);
+        $materiais = $this->preparaDadosMateriais($input['materiais']);
+
+        $fornecedor = Fornecedor::find($input['empenho']['fornecedor_id']);
         $empenho->fornecedor()->associate($fornecedor);
+        
+        if ($input['qtds']['qtds']) {
+            $materiais_ids = [];
+
+            foreach ($input['qtds']['qtds'] as $key => $val) {
+                $materiais_ids[$key] = ['quant' => $val, 'vl_total' => $input['valores_materiais']['valores_materiais'][$key]];
+            }
+            $empenho->materiais()->sync($materiais_ids);
+        }
+
+        if ($materiais) {
+            foreach ($materiais['objects'] as $key => $val) {
+                $empenho->materiais()->save($val, $materiais['joinings'][$key]);
+            }
+        }
 
         return $empenho->save();
     }

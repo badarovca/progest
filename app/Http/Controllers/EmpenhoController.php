@@ -17,8 +17,7 @@ class EmpenhoController extends Controller {
     protected $subItemRepository;
     protected $materialRepository;
 
-    public function __construct(EmpenhoRepository $empenhoRepository, FornecedorRepository $fornecedorRepository, 
-            SubItemRepository $subItemRepository, MaterialRepository $materialRepository) {
+    public function __construct(EmpenhoRepository $empenhoRepository, FornecedorRepository $fornecedorRepository, SubItemRepository $subItemRepository, MaterialRepository $materialRepository) {
         $this->empenhoRepository = $empenhoRepository;
         $this->fornecedorRepository = $fornecedorRepository;
         $this->subItemRepository = $subItemRepository;
@@ -94,7 +93,11 @@ class EmpenhoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        $this->empenhoRepository->update($id, $request->all());
+        $input['empenho'] = $request->except('_token', 'codigo', 'descricao', 'unidade', 'marca', 'sub_item_id', 'vl_total', 'quant', 'ids_materiais');
+        $input['materiais'] = $request->only('codigo', 'descricao', 'unidade', 'marca', 'sub_item_id', 'vl_total', 'quant');
+        $input['qtds'] = $request->only('qtds');
+        $input['valores_materiais'] = $request->only('valores_materiais');
+        $this->empenhoRepository->update($id, $input);
         return redirect()->route('admin.empenhos.index')->with('success', 'Registro atualizado com sucesso!');
     }
 

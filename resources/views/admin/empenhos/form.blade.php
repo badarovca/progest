@@ -83,7 +83,7 @@
                             </tr>
                         </thead>
                         <tbody id='lista-materiais'>
-
+                            @yield('lista-materiais')
                         </tbody>
                     </table>
                 </div>

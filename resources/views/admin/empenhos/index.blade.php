@@ -47,9 +47,9 @@
                         <a href="{!! route('admin.empenhos.entradas.index', $empenho->id) !!}" class="btn btn-warning btn-xs">
                             <i class="fa fa-fw fa-archive"></i> entradas
                         </a>
-<!--                        <a href="{!! route('admin.empenhos.edit', $empenho->id) !!}" class="btn btn-primary btn-xs">
+                        <a href="{!! route('admin.empenhos.edit', $empenho->id) !!}" class="btn btn-primary btn-xs">
                             <i class="fa fa-fw fa-pencil"></i> editar
-                        </a>-->
+                        </a>
                     </td>
                 </tr>
                 @endforeach
