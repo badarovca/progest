@@ -177,6 +177,6 @@ return [
         'View' => 'Illuminate\Support\Facades\View',
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
-        'Entrust' => 'Zizaco\Entrust\EntrustServiceProvider',
+        'Entrust' => 'Zizaco\Entrust\EntrustFacade'
     ],
 ];
