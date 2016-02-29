@@ -99,7 +99,6 @@
     </div>
     <div class='row'>
         <a id='add-material' class='col-md-3 text-right pull-right' href="javascript:void(0)">Novo material</a>
-
     </div>
     <br>
 </div>
