@@ -13,5 +13,8 @@ class Coordenacao extends Model {
     public function usuarios() {
         return $this->hasMany('App\User');
     }
-
+    
+    public function setores() {
+        return $this->hasMany('App\Setor');
+    }
 }

@@ -9,6 +9,7 @@ use App\progest\repositories\EmpenhoRepository;
 use App\progest\repositories\FornecedorRepository;
 use App\progest\repositories\SubItemRepository;
 use App\progest\repositories\MaterialRepository;
+use App\progest\repositories\UnidadeRepository;
 
 class EmpenhoController extends Controller {
 
@@ -16,12 +17,15 @@ class EmpenhoController extends Controller {
     protected $fornecedorRepository;
     protected $subItemRepository;
     protected $materialRepository;
+    protected $unidadeRepository;
 
-    public function __construct(EmpenhoRepository $empenhoRepository, FornecedorRepository $fornecedorRepository, SubItemRepository $subItemRepository, MaterialRepository $materialRepository) {
+    public function __construct(EmpenhoRepository $empenhoRepository, FornecedorRepository $fornecedorRepository,
+            SubItemRepository $subItemRepository, MaterialRepository $materialRepository, UnidadeRepository $unidadeRepository) {
         $this->empenhoRepository = $empenhoRepository;
         $this->fornecedorRepository = $fornecedorRepository;
         $this->subItemRepository = $subItemRepository;
         $this->materialRepository = $materialRepository;
+        $this->unidadeRepository = $unidadeRepository;
     }
 
     /**
@@ -54,8 +58,8 @@ class EmpenhoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $input['empenho'] = $request->except('_token', 'codigo', 'descricao', 'unidade', 'marca', 'sub_item_id', 'vl_total', 'quant', 'ids_materiais');
-        $input['materiais'] = $request->only('codigo', 'descricao', 'unidade', 'marca', 'sub_item_id', 'vl_total', 'quant');
+        $input['empenho'] = $request->except('_token', 'codigo', 'descricao', 'unidade_id', 'marca', 'sub_item_id', 'vl_total', 'quant', 'ids_materiais');
+        $input['materiais'] = $request->only('codigo', 'descricao', 'unidade_id', 'marca', 'sub_item_id', 'vl_total', 'quant');
         $input['qtds'] = $request->only('qtds');
         $input['valores_materiais'] = $request->only('valores_materiais');
         $this->empenhoRepository->store($input);
@@ -93,8 +97,8 @@ class EmpenhoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        $input['empenho'] = $request->except('_token', 'codigo', 'descricao', 'unidade', 'marca', 'sub_item_id', 'vl_total', 'quant', 'ids_materiais');
-        $input['materiais'] = $request->only('codigo', 'descricao', 'unidade', 'marca', 'sub_item_id', 'vl_total', 'quant');
+        $input['empenho'] = $request->except('_token', 'codigo', 'descricao', 'unidade_id', 'marca', 'sub_item_id', 'vl_total', 'quant', 'ids_materiais');
+        $input['materiais'] = $request->only('codigo', 'descricao', 'unidade_id', 'marca', 'sub_item_id', 'vl_total', 'quant');
         $input['qtds'] = $request->only('qtds');
         $input['valores_materiais'] = $request->only('valores_materiais');
         $this->empenhoRepository->update($id, $input);
@@ -119,7 +123,8 @@ class EmpenhoController extends Controller {
      */
     public function getFormMaterial() {
         $subitens = $this->subItemRepository->dataForSelect();
-        $returnHTML = view('admin.empenhos.form-material')->with(compact('subitens'))->render();
+        $unidades = $this->unidadeRepository->dataForSelect();
+        $returnHTML = view('admin.empenhos.form-material')->with(compact('subitens','unidades'))->render();
         return response()->json(array('success' => true, 'html' => $returnHTML));
     }
 

@@ -15,7 +15,6 @@ class CreateMaterialsTable extends Migration {
             $table->increments('id');
             $table->bigInteger('codigo');
             $table->string('descricao', 300);
-            $table->integer('subitem_id')->unsigned();
             $table->string('marca', 100);
             $table->integer('qtd');
             $table->double('vl_un', 10, 2);

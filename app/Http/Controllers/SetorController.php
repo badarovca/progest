@@ -6,15 +6,18 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\progest\repositories\SetorRepository;
+use App\progest\repositories\CoordenacaoRepository;
 
 class SetorController extends Controller {
 
     protected $setorRepository;
+    protected $coordenacaoRepository;
 
-    public function __construct(SetorRepository $userRepository) {
+    public function __construct(SetorRepository $userRepository, CoordenacaoRepository $coordenacaoRepository) {
         $this->setorRepository = $userRepository;
+        $this->coordenacaoRepository = $coordenacaoRepository;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -32,8 +35,9 @@ class SetorController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
+        $coordenacoes = $this->coordenacaoRepository->dataForSelect();
         $setor = null;
-        return view('admin.setores.create')->with(compact('setor'));
+        return view('admin.setores.create')->with(compact('setor', 'coordenacoes'));
     }
 
     /**
@@ -65,7 +69,8 @@ class SetorController extends Controller {
      */
     public function edit($id) {
         $setor = $this->setorRepository->show($id);
-        return view('admin.setores.edit')->with(compact('setor'));
+        $coordenacoes = $this->coordenacaoRepository->dataForSelect();
+        return view('admin.setores.edit')->with(compact('setor','coordenacoes'));
     }
 
     /**

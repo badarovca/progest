@@ -25,8 +25,9 @@ class RelationshipUnidadeMaterial extends Migration {
 	 */
 	public function down()
 	{
-            Schema::table('users', function ($table) {
-            $table->dropColumn('unidade_id');
+            Schema::table('materials', function ($table) {
+                $table->dropForeign('materials_unidade_id_foreign');
+                //$table->dropColumn('unidade_id');
         });
 	}
 

@@ -7,6 +7,7 @@ use App\Empenho;
 use App\Material;
 use App\SubItem;
 use App\Entrada;
+use App\Unidade;
 
 class EmpenhoRepository {
 
@@ -104,15 +105,19 @@ class EmpenhoRepository {
         foreach ($materiaisArray as $key => $val) {
             $materiaisObjects[$key] = new Material([
                 'codigo' => $val['codigo'], 'descricao' => $val['descricao'],
-                'unidade' => $val['unidade'], 'marca' => $val['marca'],
+                'marca' => $val['marca'],
                 'qtd_1' => 0, 'qtd_2' => 0, 'qtd_3' => 0, 'qtd_4' => 0, 'disponivel' => 0
             ]);
 
             $subItem = SubItem::find($val['sub_item_id']);
             $materiaisObjects[$key]->subItem()->associate($subItem);
+            
+            $unidade = Unidade::find($val['unidade_id']);
+            $materiaisObjects[$key]->unidade()->associate($unidade);
+            
             unset($materiaisArray[$key]['codigo']);
             unset($materiaisArray[$key]['descricao']);
-            unset($materiaisArray[$key]['unidade']);
+            unset($materiaisArray[$key]['unidade_id']);
             unset($materiaisArray[$key]['marca']);
             unset($materiaisArray[$key]['sub_item_id']);
         }
