@@ -33,6 +33,7 @@
             <thead>
                 <tr>
                     <th>Nome</th>
+                    <th>Coordenação</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -40,6 +41,7 @@
                 @foreach($setores as $setor)
                 <tr>
                     <td>{!! $setor->name !!}</td>
+                    <td>{!! $setor->coordenacao->name !!}</td>
                     <td width="1%" nowrap>
                         <a href="{!! route('admin.setores.edit', $setor->id) !!}" class="btn btn-primary btn-xs">
                             <i class="fa fa-fw fa-pencil"></i> editar
@@ -53,7 +55,7 @@
             </tbody>
         </table>
         @else
-        <h5 class="well">Nenhuma setor ainda cadastrado.</h5>
+        <h5 class="well">Nenhum setor ainda cadastrado.</h5>
         @endif
     </section><!--/.content -->
 </div><!--/.content-wrapper -->

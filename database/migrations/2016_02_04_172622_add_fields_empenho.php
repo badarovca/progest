@@ -50,7 +50,8 @@ class AddFieldsEmpenho extends Migration {
             $table->dropColumn('mod_licitacao');
             $table->dropColumn('num_processo');
             $table->dropColumn('solicitantes');
-            $table->dropColumn('fornecedor_id');
+            //$table->dropColumn('fornecedor_id');
+            $table->dropForeign('empenhos_fornecedor_id_foreign');
         });
 
         Schema::drop('empenho_material');

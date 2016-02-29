@@ -2,6 +2,7 @@
 
 namespace App\progest\repositories;
 
+use App\Coordenacao;
 use App\Setor;
 
 class SetorRepository {
@@ -23,12 +24,20 @@ class SetorRepository {
     public function store($input) {
         $setor = new Setor();
         $setor->name = $input['name'];
+        
+        $coordenacao = Coordenacao::find($input['coordenacao_id']);
+        $setor->coordenacao()->associate($coordenacao);
+        
         $setor->save();
     }
 
     public function update($id, $input) {
         $setor = Setor::find($id);
         $setor->name = $input['name'];
+        
+        $coordenacao = Setor::find($input['coordenacao_id']);
+        $setor->coordenacao()->associate($coordenacao);
+        
         return $setor->save();
     }
 
