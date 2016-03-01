@@ -65,7 +65,8 @@ class EntradaController extends Controller {
      * @return Response
      */
     public function show($id) {
-        //
+        $entrada = $this->entradaRepository->show($id);
+        return view('admin.entradas.show')->with(compact(['entrada']));
     }
 
     /**

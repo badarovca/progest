@@ -63,7 +63,7 @@ class EntradaRepository {
     }
 
     public function show($id) {
-        return Empenho::findOrFail($id);
+        return Entrada::findOrFail($id);
     }
 
     public function destroy($id) {

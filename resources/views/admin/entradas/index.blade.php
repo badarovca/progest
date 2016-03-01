@@ -47,11 +47,14 @@
                     <td>{!! $entrada->num_nf !!}</td>
                     <td>{!! $entrada->empenho->fornecedor->razao !!}</td>
                     <td>{!! $entrada->natureza_op !!}</td>
-                    <td>{!! $entrada->vl_total !!}</td>
+                    <td>{!! number_format($entrada->vl_total, 2, ',', '.') !!}</td>
                     <td>{!! $entrada->dt_recebimento !!}</td>
                     <td width="1%" nowrap>
                         <a href="{!! route('admin.empenhos.entradas.destroy', [$entrada->empenho->id, $entrada->id]) !!}"  data-method="delete" data-confirm="Deseja cancelar a entrada?" class="btn btn-danger btn-xs">
                             <i class="fa fa-fw fa-pencil"></i> cancelar
+                        </a>
+                        <a href="{!! route('admin.empenhos.entradas.show', [$entrada->empenho->id, $entrada->id]) !!}" class="btn btn-info btn-xs">
+                            <i class="fa fa-fw fa-eye"></i> visualizar
                         </a>
                     </td>
                 </tr>
