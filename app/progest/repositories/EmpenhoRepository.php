@@ -25,6 +25,7 @@ class EmpenhoRepository {
         $fornecedor_id = $input['empenho']['fornecedor_id'];
         unset($input['empenho']['fornecedor_id']);
         $empenho = new Empenho($input['empenho']);
+        $input['materiais']['vl_total'] = $this->realToDolar($input['materiais']['vl_total']);
         $materiais = $this->preparaDadosMateriais($input['materiais']);
 
         $fornecedor = Fornecedor::find($fornecedor_id);
@@ -36,7 +37,8 @@ class EmpenhoRepository {
             $materiais_ids = [];
 
             foreach ($input['qtds']['qtds'] as $key => $val) {
-                $materiais_ids[$key] = ['quant' => $val, 'vl_total' => $input['valores_materiais']['valores_materiais'][$key]];
+                $vl_total = $this->realToDolar($input['valores_materiais']['valores_materiais'][$key]);
+                $materiais_ids[$key] = ['quant' => $val, 'vl_total' => $vl_total];
             }
             $empenho->materiais()->sync($materiais_ids);
         }
@@ -58,17 +60,18 @@ class EmpenhoRepository {
         $empenho->mod_licitacao = $input['empenho']['mod_licitacao'];
         $empenho->num_processo = $input['empenho']['num_processo'];
         $empenho->solicitantes = $input['empenho']['solicitantes'];
-
+        $input['materiais']['vl_total'] = $this->realToDolar($input['materiais']['vl_total']);
         $materiais = $this->preparaDadosMateriais($input['materiais']);
 
         $fornecedor = Fornecedor::find($input['empenho']['fornecedor_id']);
         $empenho->fornecedor()->associate($fornecedor);
-        
+
         if ($input['qtds']['qtds']) {
             $materiais_ids = [];
 
             foreach ($input['qtds']['qtds'] as $key => $val) {
-                $materiais_ids[$key] = ['quant' => $val, 'vl_total' => $input['valores_materiais']['valores_materiais'][$key]];
+                $vl_total = $this->realToDolar($input['valores_materiais']['valores_materiais'][$key]);
+                $materiais_ids[$key] = ['quant' => $val, 'vl_total' => $vl_total];
             }
             $empenho->materiais()->sync($materiais_ids);
         }
@@ -91,6 +94,19 @@ class EmpenhoRepository {
         return $empenho->delete();
     }
 
+    public function realToDolar($input) {
+
+        if (is_array($input)) {
+            foreach ($input as $key => $val) {
+                $input[$key] = str_replace(',', '.', str_replace('.', '', $val));
+            }
+        } else {
+            $input = str_replace(',', '.', str_replace('.', '', $input));
+        }
+
+        return $input;
+    }
+
     public function preparaDadosMateriais($input) {
         $materiaisArray = array();
         foreach ($input as $key => $val) {
@@ -111,10 +127,10 @@ class EmpenhoRepository {
 
             $subItem = SubItem::find($val['sub_item_id']);
             $materiaisObjects[$key]->subItem()->associate($subItem);
-            
+
             $unidade = Unidade::find($val['unidade_id']);
             $materiaisObjects[$key]->unidade()->associate($unidade);
-            
+
             unset($materiaisArray[$key]['codigo']);
             unset($materiaisArray[$key]['descricao']);
             unset($materiaisArray[$key]['unidade_id']);

@@ -28,6 +28,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- jQuery 2.1.3 -->
         <script src="{{ asset ("/bower_components/admin-lte/plugins/jQuery/jQuery-2.1.4.min.js") }}"></script>
         <script src="{{asset("/js/jquery.maskedinput.js")}}" type="text/javascript"></script>
+        <script src="{{asset("/js/jquery.maskMoney.js")}}" type="text/javascript"></script>
         <script src="{{asset("/bower_components/admin-lte/plugins/select2/select2.min.js")}}" type="text/javascript"></script>
         <script src="{{asset("/js/mask_validator.js")}}" type="text/javascript"></script>
 

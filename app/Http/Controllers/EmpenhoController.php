@@ -58,7 +58,7 @@ class EmpenhoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $input['empenho'] = $request->except('_token', 'codigo', 'descricao', 'unidade_id', 'marca', 'sub_item_id', 'vl_total', 'quant', 'ids_materiais');
+        $input['empenho'] = $request->except('_token', 'codigo', 'descricao', 'marca', 'sub_item_id', 'vl_total', 'quant', 'ids_materiais');
         $input['materiais'] = $request->only('codigo', 'descricao', 'unidade_id', 'marca', 'sub_item_id', 'vl_total', 'quant');
         $input['qtds'] = $request->only('qtds');
         $input['valores_materiais'] = $request->only('valores_materiais');
@@ -97,7 +97,7 @@ class EmpenhoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        $input['empenho'] = $request->except('_token', 'codigo', 'descricao', 'unidade_id', 'marca', 'sub_item_id', 'vl_total', 'quant', 'ids_materiais');
+        $input['empenho'] = $request->except('_token', 'codigo', 'descricao', 'marca', 'sub_item_id', 'vl_total', 'quant', 'ids_materiais');
         $input['materiais'] = $request->only('codigo', 'descricao', 'unidade_id', 'marca', 'sub_item_id', 'vl_total', 'quant');
         $input['qtds'] = $request->only('qtds');
         $input['valores_materiais'] = $request->only('valores_materiais');

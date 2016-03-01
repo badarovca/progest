@@ -35,7 +35,7 @@
             <div class='form-group'>
                 <div class='col-md-3'>
                     {!!Form::label('vl_total[]', 'Valor total', array('class'=>'control-label'))!!}
-                    {!!Form::text('vl_total[]', null, array('class'=>'form-control', 'id' => 'vl_total[]', 'required' => 'required'))!!}
+                    {!!Form::text('vl_total[]', null, array('class'=>'form-control valor', 'id' => 'vl_total[]', 'required' => 'required'))!!}
                 </div>
                 <div class='col-md-3'>
                     {!!Form::label('quant[]', 'Quantidade', array('class'=>'control-label'))!!}

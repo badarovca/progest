@@ -6,6 +6,7 @@ $(document).ready(function () {
                 url,
                 function (data) {
                     $(".new-material").append(data.html);
+                    $.mascarar_campos();
                 });
     });
 
