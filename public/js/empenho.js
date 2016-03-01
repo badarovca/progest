@@ -10,12 +10,28 @@ $(document).ready(function () {
                 });
     });
 
+    $("#add-material-saida").click(function () {
+        material_id = $("#material_id").val();
+        qtd = $("#qtd-material").val();
+        url = $("#base_url").val() + '/add-material-saida/' + material_id + "/" + qtd;
+        $.get(
+                url,
+                function (data) {
+                    if (data.success === true){
+                        $("#lista-materiais").append(data.html);
+                    }else{
+                        $("#response-msg").html(data.html);
+                    }
+                    
+                });
+    });
+
     $(".multiple-select").select2({
     });
     $(".material-select2").select2({
     });
 
-    $(".add-material").on('click', function (e) {
+    $("#add-material-empenho").on('click', function (e) {
         if ($('#qtd-material').val() != '' && $('#valor-material').val() != '' && $("#material_id").val() != '') {
             material_id = $("#material_id").val();
             material_descricao = $("#material_id option:selected").text();

@@ -38,7 +38,7 @@
                 @foreach($usuarios as $usuario)
                 <tr>
                     <td>{!! $usuario->name !!}</td>
-                    <td>{!! $usuario->status !!}</td>
+                    <td>{{$usuario->habilitado == 1 ? 'Habilitado' : 'Desabilitado' }}</td>
                     <td>{!! $usuario->email !!}</td>
                     <td>{!! $usuario->setor->name !!}</td>
                     <td width="1%" nowrap>

@@ -22,7 +22,7 @@
             </div>
             <div class='col-md-3'>
                 <div class='form-group'>
-                    {!!Form::button('Adicionar', ['class'=>'btn btn-default add-material'])!!}
+                    {!!Form::button('Adicionar', ['class'=>'btn btn-default add-material', 'id'=>"add-material-empenho"])!!}
                 </div>
             </div>
         </div>

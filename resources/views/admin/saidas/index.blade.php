@@ -50,6 +50,9 @@
                         <a href="{!! route('admin.saidas.destroy', $saida->id) !!}" data-method="delete" data-confirm="Deseja cancelar a saída?" class="btn btn-danger btn-xs">
                             <i class="fa fa-fw fa-remove"></i> cancelar
                         </a>
+                        <a href="{!! route('admin.saidas.show', $saida->id) !!}" class="btn btn-info btn-xs">
+                            <i class="fa fa-fw fa-eye"></i> visualizar
+                        </a>
                     </td>
                 </tr>
                 @endforeach

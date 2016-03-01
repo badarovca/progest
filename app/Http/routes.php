@@ -30,4 +30,5 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 Route::get('form-material', ['uses' => 'EmpenhoController@getFormMaterial']);
+Route::get('add-material-saida/{material}/{qtd}', ['uses' => 'SaidaController@addMaterial']);
 Route::get('busca-materiais/{param}', ['uses' => 'MaterialController@buscarMateriais']);

@@ -40,7 +40,7 @@ class SaidaController extends Controller {
     public function create() {
         $saida = null;
         $users = $this->usuarioRepository->dataForSelect();
-        $materiais = $this->materialRepository->dataForSelect();
+        $materiais = $this->materialRepository->dataForSelect(['disponivel' => true]);
         return view('admin.saidas.create')->with(compact(['saida', 'users', 'materiais']));
     }
 
@@ -64,7 +64,8 @@ class SaidaController extends Controller {
      * @return Response
      */
     public function show($id) {
-        //
+        $saida = $this->saidaRepository->show($id);
+        return view('admin.saidas.show')->with(compact(['saida']));
     }
 
     /**
@@ -96,6 +97,19 @@ class SaidaController extends Controller {
     public function destroy($id) {
         $this->saidaRepository->destroy($id);
         return back()->with('success', 'Removido com sucesso!');
+    }
+
+    public function addMaterial($material, $qtd) {
+        $material = $this->materialRepository->show($material);
+        if ($material->qtd_1 < $qtd) {
+            $html = "<div class='alert alert-danger alert-dismissible'>"
+                    . "<button type='buttom' class='close' data-dismiss='alert' aria-hidden='true'>x</button>"
+                    . "Quantidade não disponível no estoque.</div>";
+            return response()->json(array('success' => false, 'html' => $html));
+        } else {
+            $returnHTML = view('admin.saidas.form-add-material')->with(compact('material', 'qtd'))->render();
+            return response()->json(array('success' => true, 'html' => $returnHTML));
+        }
     }
 
 }

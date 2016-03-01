@@ -9,10 +9,19 @@ use App\Unidade;
 class MaterialRepository {
 
     public function dataForSelect($filter = null) {
-        $baseArray = Material::all();
-        $materiais = array(''=>'Selecione...');
+        if ($filter) {
+            $baseArray = Material::where(function($query) use (&$filter) {
+                        if ($filter['disponivel']) {
+                            $query->where('qtd_1', '>', 0);
+                            $query->where('disponivel', '=', 1);
+                        }
+                    })->get();
+        } else {
+            $baseArray = Material::all();
+        }
+        $materiais = array('' => 'Selecione...');
         foreach ($baseArray as $value) {
-            $materiais[$value->id] = $value->descricao." (cod: $value->codigo)";
+            $materiais[$value->id] = $value->descricao . " (cod: $value->codigo)";
         }
         return $materiais;
     }
@@ -34,7 +43,7 @@ class MaterialRepository {
 
         $subItem = SubItem::find($input['sub_item_id']);
         $material->subItem()->associate($subItem);
-        
+
         $unidade = Unidade::find($input['unidade_id']);
         $material->unidade()->associate($unidade);
 
@@ -54,10 +63,10 @@ class MaterialRepository {
 
         $subItem = SubItem::find($input['sub_item_id']);
         $material->subItem()->associate($subItem);
-        
+
         $unidade = Unidade::find($input['unidade_id']);
         $material->unidade()->associate($unidade);
-        
+
         return $material->save();
     }
 
@@ -69,8 +78,8 @@ class MaterialRepository {
         $material = Material::find($id);
         return $material->delete();
     }
-    
-    public function search($param){
+
+    public function search($param) {
         $materiais = Material::where('descricao', 'like', "%$param%")->orWhere('marca', 'like', "%$param%")->get();
         return $materiais;
     }

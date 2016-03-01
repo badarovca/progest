@@ -18,6 +18,7 @@
 
     <!--Main content -->
     <section class = "content">
+        <div id='response-msg'></div>
         @include('admin.saidas.form-material')
 
         {!! Form::model($saida, ['route' => ["admin.saidas.store"] ])!!}

@@ -4,7 +4,7 @@
 @section('content')
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{url('/')}}"><b>Gest</b>IFBA</a>
+        <a href="{{url('/')}}"><b>PRO</b>Gest</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">

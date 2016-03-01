@@ -48,7 +48,7 @@ class EntradaController extends Controller {
      */
     public function store($empenho, Request $request) {
 //        dd($request->all());
-        $input['entrada'] = $request->only('num_nf', 'numero_emepenho', 'cod_chave', 'natureza_op', 'vl_total', 'dt_emissao', 'dt_recebimento');
+        $input['entrada'] = $request->only('num_nf', 'numero_emepenho', 'cod_chave', 'natureza_op', 'dt_emissao', 'dt_recebimento');
         $input['materiais'] = $request->only('qtds');
         $input['empenho'] = $empenho;
 

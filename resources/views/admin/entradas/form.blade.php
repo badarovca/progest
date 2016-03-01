@@ -25,16 +25,6 @@
                 {!!Form::label('natureza_op', 'Natureza da operação', array('class'=>'control-label'))!!}
                 {!!Form::select('natureza_op', ['Venda de Mercadoria' => 'Venda de Mercadoria', 'Doação' => 'Doação'], null, ['required' => 'required', 'class'=>'form-control', 'id'=>'natureza_op'])!!}
             </div>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class='form-group'>
-            <div class='col-md-2'>
-                {!!Form::label('vl_total', 'Valor total', array('class'=>'control-label'))!!}
-                {!!Form::text('vl_total', null, array('class'=>'form-control', 'id' => 'vl_total', 'required' => 'required'))!!}
-            </div>
             <div class='col-md-2'>
                 {!!Form::label('dt_emissao', 'Data emissão', array('class'=>'control-label'))!!}
                 {!!Form::date('dt_emissao', null, array('class'=>'form-control', 'id' => 'dt_emissao', 'required' => 'required'))!!}
@@ -45,7 +35,6 @@
             </div>
         </div>
     </div>
-
     <br>
 
     <div class="row">
@@ -70,10 +59,10 @@
                             @foreach($empenho->materiais as $material)
                             <tr>
                                 <td style="width: 10%">{{$material->codigo}}</td>
-                                <td style="width: 58%">{{$material->descricao}}</td>
+                                <td style="width: 70%">{{$material->descricao}}</td>
                                 <td style="width: 5%">{{($material->pivot->quant - $qtds[$material->id]['qnt_entregue'])}}</td>
                                 <td style="width: 5%">{{$qtds[$material->id]['qnt_entregue']}}</td>
-                                <td style="width: 5%">{!!Form::number("qtds[$material->id]", null, array('class'=>'form-control', 'id' => 'qtd[$material->id]', 'required' => 'required', 'min' => '0', 'max'=>$material->pivot->quant - $qtds[$material->id]['qnt_entregue'] ,$material->pivot->quant - $qtds[$material->id]['qnt_entregue'] > 0 ? '' : 'disabled'))!!}</td>
+                                <td style="width: 10%">{!!Form::number("qtds[$material->id]", null, array('class'=>'form-control', 'id' => 'qtd[$material->id]', 'required' => 'required', 'min' => '0', 'max'=>$material->pivot->quant - $qtds[$material->id]['qnt_entregue'] ,$material->pivot->quant - $qtds[$material->id]['qnt_entregue'] > 0 ? '' : 'disabled'))!!}</td>
                             </tr>
                             @endforeach
                         </tbody>
