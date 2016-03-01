@@ -40,9 +40,8 @@
                 @foreach($coordenacoes as $coordenacao)
                 <tr>
                     <td>{!! $coordenacao->name !!}</td>
-                    <td>{!! $coordenacao->status !!}</td>
-                    <td>{!! $coordenacao->email !!}</td>
-                    <td>Setor</td>
+<!--                    <td>{!! $coordenacao->status !!}</td>
+                    <td>{!! $coordenacao->email !!}</td>-->
                     <td width="1%" nowrap>
                         <a href="{!! route('admin.coordenacoes.edit', $coordenacao->id) !!}" class="btn btn-primary btn-xs">
                             <i class="fa fa-fw fa-pencil"></i> editar
