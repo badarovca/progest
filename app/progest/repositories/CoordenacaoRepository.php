@@ -23,12 +23,18 @@ class CoordenacaoRepository {
     public function store($input) {
         $coordenacao = new Coordenacao();
         $coordenacao->name = $input['name'];
+        $coordenacao->coordenador = $input['coordenador'];
+        $coordenacao->telefone = $input['telefone'];
+        $coordenacao->email = $input['email'];
         $coordenacao->save();
     }
 
     public function update($id, $input) {
         $coordenacao = Coordenacao::find($id);
         $coordenacao->name = $input['name'];
+        $coordenacao->coordenador = $input['coordenador'];
+        $coordenacao->telefone = $input['telefone'];
+        $coordenacao->email = $input['email'];
         return $coordenacao->save();
     }
 
