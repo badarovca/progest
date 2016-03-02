@@ -38,7 +38,9 @@ class SubItemRepository {
 
     public function destroy($id) {
         $subitem = SubItem::find($id);
-        return $subitem->delete();
+        $subitem->desativado = 1;
+        return $subitem->save();
+        //return $subitem->delete();
     }
 
 }

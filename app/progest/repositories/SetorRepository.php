@@ -47,7 +47,9 @@ class SetorRepository {
 
     public function destroy($id) {
         $setor = Setor::find($id);
-        return $setor->delete();
+        $setor->desativado = 1;
+        return $setor->save();
+        //return $setor->delete();
     }
 
 }

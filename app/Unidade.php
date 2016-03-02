@@ -10,10 +10,6 @@ class Unidade extends Model {
         'name'
     ];
 
-    public function usuarios() {
-        return $this->hasMany('App\User');
-    }
-    
     public function materiais() {
         return $this->hasMany('App\Material');
     }
