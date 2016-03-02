@@ -130,6 +130,7 @@ return [
         'App\Providers\RouteServiceProvider',
         'Collective\Html\HtmlServiceProvider',
         'Zizaco\Entrust\EntrustServiceProvider',
+        'Gloudemans\Shoppingcart\ShoppingcartServiceProvider',
     ],
     /*
       |--------------------------------------------------------------------------
@@ -177,6 +178,7 @@ return [
         'View' => 'Illuminate\Support\Facades\View',
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
-        'Entrust' => 'Zizaco\Entrust\EntrustFacade'
+        'Entrust' => 'Zizaco\Entrust\EntrustFacade',
+        'Cart' => 'Gloudemans\Shoppingcart\Facades\Cart',
     ],
 ];

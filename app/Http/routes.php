@@ -25,10 +25,18 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('materiais', 'MaterialController');
     Route::resource('subitens', 'SubItemController');
     Route::get('/home', 'HomeController@index');
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'AdminController@index');
 });
 
+Route::get('/', 'HomeController@index');
+
+Route::group(['prefix' => 'pedidos'], function () {
+    Route::get('/', 'PedidoController@index');
+    Route::get('/busca-materiais', ['as' => 'pedidos.busca-materiais', 'uses' => 'PedidoController@search']);
+    Route::get('/pedido-atual', ['as' => 'pedidos.pedido-atual', 'uses' => 'PedidoController@getPedidoAtual']);
+    Route::post('/add-material', ['as'=>'pedidos.add-material', 'uses' => 'PedidoController@addMaterial']);
+    Route::delete('/remover-material/{rowid}', ['as'=>'pedidos.remover-material', 'uses' => 'PedidoController@removeMaterial']);
+});
 
 Route::get('form-material', ['uses' => 'EmpenhoController@getFormMaterial']);
 Route::get('add-material-saida/{material}/{qtd}', ['uses' => 'SaidaController@addMaterial']);
-Route::get('busca-materiais/{param}', ['uses' => 'MaterialController@buscarMateriais']);

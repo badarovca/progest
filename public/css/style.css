@@ -5,9 +5,20 @@
     position: absolute!important;
     bottom: -43px!important;
 }
+
+.inline-block{
+    display: inline-block;
+}
 .select2-container .select2-selection--single {
     height: auto!important;
 }    
 .select2-container--default .select2-selection--single{
     border-radius: 0!important;  
+}
+
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }

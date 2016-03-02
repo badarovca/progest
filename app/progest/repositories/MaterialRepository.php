@@ -26,8 +26,23 @@ class MaterialRepository {
         return $materiais;
     }
 
-    public function index() {
-        return Material::all();
+    public function index($filter = null) {
+        if ($filter) {
+            $materiais = Material::where(function($query) use (&$filter) {
+                        if (isset($filter['disponivel'])) {
+                            $query->where('qtd_1', '>', 0);
+                            $query->where('disponivel', '=', 1);
+                        }
+                        if(isset($filter['busca'])){
+                            $query->where('descricao', 'like', "%".$filter['busca']."%")->orWhere('marca', 'like', "%".$filter['busca']."%");
+                        }
+                    })
+                    ->orderBy('descricao', 'asc')
+                    ->paginate($filter['paginate']);
+        } else {
+            $materiais = Material::all();
+        }
+        return $materiais;
     }
 
     public function store($input) {
