@@ -66,12 +66,6 @@ jQuery(function ($) {
         //mask para codigo de material
         $("#codigo").mask("99999?99999999");
 
-        //mask para qtd estoques
-        $("#qtd_1").mask("9?9999999999");
-        $("#qtd_2").mask("9?9999999999");
-        $("#qtd_3").mask("9?9999999999");
-        $("#qtd_4").mask("9?9999999999");
-
         //mask para numero NF
         $("#num_nf").mask("999.999.999");
 

@@ -38,6 +38,7 @@
                 <ul class="treeview-menu">
                     <li><a href="{{ route('admin.empenhos.index')}}">Empenhos</a></li>
                     <li><a href="{{ route('admin.entradas')}}">Entradas</a></li>
+                    <li><a href="{{ route('admin.pedidos.index')}}">Pedidos</a></li>
                     <li><a href="{{ route('admin.saidas.index')}}">Saídas</a></li>
                 </ul>
             </li>

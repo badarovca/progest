@@ -8,7 +8,8 @@ class Pedido extends Model {
 
     //
     protected $fillable = [
-        'obs'
+        'obs',
+        'status'
     ];
 
     public function solicitante() {

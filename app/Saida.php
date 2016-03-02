@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Saida extends Model {
     
     protected $fillable = [
-        'justificativa'
+        'obs'
     ];
     
     public function responsavel() {

@@ -19,7 +19,7 @@ class PedidoRepository {
     }
 
     public function store($input) {
-        $pedido = new Pedido(['obs' => $input['obs']]);
+        $pedido = new Pedido(['obs' => $input['obs'], 'status' => 'Pendente']);
         $usuario = User::find(1);
 
         $pedido->solicitante()->associate($usuario);
@@ -36,20 +36,10 @@ class PedidoRepository {
     }
 
     public function update($id, $input) {
-//        $empenho = Empenho::find($id);
-//        $empenho->numero = $input['numero'];
-//        $empenho->tipo = $input['tipo'];
-//        $empenho->cat_despesa = $input['cat_despesa'];
-//        $empenho->mod_aplicacao = $input['mod_aplicacao'];
-//        $empenho->el_consumo = $input['el_consumo'];
-//        $empenho->mod_licitacao = $input['mod_licitacao'];
-//        $empenho->num_processo = $input['num_processo'];
-//        $empenho->solicitantes = $input['solicitantes'];
-//
-//        $fornecedor = Fornecedor::find($input['fornecedor_id']);
-//        $empenho->fornecedor()->associate($fornecedor);
-//
-//        return $empenho->save();
+        $pedido = Pedido::find($id);
+        $pedido->status = $input['status'];
+        
+        return $empenho->save();
     }
 
     public function show($id) {
