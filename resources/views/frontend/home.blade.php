@@ -6,6 +6,7 @@
 <div class = "content-wrapper">
     <!--Content Header (Page header) -->
     <section class = "content-header container">
+        @include('template.alerts')
         <h1>
             {{ "Busca por materiais" }}
         </h1>
