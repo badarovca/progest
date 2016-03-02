@@ -32,9 +32,7 @@ class UsuarioRepository {
         $user->habilitado = isset($input['habilitado']) ? 1 : 0;
 
         $setor = Setor::find($input['setor_id']);
-        $coordenacao = Setor::find($input['coordenacao_id']);
         $user->setor()->associate($setor);
-        $user->coordenacao()->associate($coordenacao);
 
         $user->save();
     }
@@ -48,10 +46,8 @@ class UsuarioRepository {
         $user->habilitado = isset($input['habilitado']) ? 1 : 0;
 
         $setor = Setor::find($input['setor_id']);
-        $coordenacao = Setor::find($input['coordenacao_id']);
         $user->setor()->associate($setor);
-        $user->coordenacao()->associate($coordenacao);
-
+        
         return $user->save();
     }
 

@@ -22,15 +22,11 @@
 </div>
 
 <div class='form-group'>
-    <div class='col-md-4'>
+    <div class='col-md-6'>
         {!!Form::label('setor', 'Setor', array('class'=>'control-label'))!!}
         {!!Form::select('setor_id', $setores, null, ['required' => 'required', 'class'=>'form-control', 'id'=>'setor_id'])!!}
     </div>
-    <div class='col-md-4'>
-        {!!Form::label('coordenacao', 'Cordenação', array('class'=>'control-label'))!!}
-        {!!Form::select('coordenacao_id', $coordenacoes, null, ['required' => 'required', 'class'=>'form-control'])!!}
-    </div>
-    <div class='col-md-4'>
+    <div class='col-md-6'>
         {!!Form::label('role', 'Permissão', array('class'=>'control-label'))!!}
         {!!Form::select('role', $roles, null, ['required' => 'required', 'class'=>'form-control'])!!}
     </div>

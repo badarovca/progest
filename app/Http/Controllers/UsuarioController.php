@@ -6,7 +6,6 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\progest\repositories\UsuarioRepository;
-use App\progest\repositories\CoordenacaoRepository;
 use App\progest\repositories\SetorRepository;
 Use App\User;
 
@@ -18,12 +17,10 @@ class UsuarioController extends Controller {
      * @return \Illuminate\Http\Response
      */
     protected $usuarioRepository;
-    protected $coordenacaoRepository;
     protected $setorRepository;
 
-    public function __construct(UsuarioRepository $userRepository, CoordenacaoRepository $coordenacaoRepository, SetorRepository $setorRepository) {
+    public function __construct(UsuarioRepository $userRepository, SetorRepository $setorRepository) {
         $this->usuarioRepository = $userRepository;
-        $this->coordenacaoRepository = $coordenacaoRepository;
         $this->setorRepository = $setorRepository;
     }
 
@@ -40,11 +37,10 @@ class UsuarioController extends Controller {
      */
     public function create() {
         $usuario = new User();
-        $coordenacoes = $this->coordenacaoRepository->dataForSelect();
         $setores = $this->setorRepository->dataForSelect();
         $roles = ['Nivel1', 'Nivel2'];
 
-        return view('admin.usuarios.create')->with(compact(['usuario', 'coordenacoes', 'setores', 'roles']));
+        return view('admin.usuarios.create')->with(compact(['usuario', 'setores', 'roles']));
     }
 
     /**
@@ -77,11 +73,10 @@ class UsuarioController extends Controller {
      */
     public function edit($id) {
         $usuario = $this->usuarioRepository->show($id);
-        $coordenacoes = $this->coordenacaoRepository->dataForSelect();
         $setores = $this->setorRepository->dataForSelect();
         $roles = ['Nivel1', 'Nivel2'];
 
-        return view('admin.usuarios.edit')->with(compact(['usuario', 'coordenacoes', 'setores', 'roles']));
+        return view('admin.usuarios.edit')->with(compact(['usuario', 'setores', 'roles']));
     }
 
     /**

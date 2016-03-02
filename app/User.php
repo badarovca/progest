@@ -40,10 +40,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'password', 'remember_token',
     ];
 
-    public function coordenacao() {
-        return $this->belongsTo('App\Coordenacao');
-    }
-
     public function setor() {
         return $this->belongsTo('App\Setor');
     }
@@ -55,5 +51,5 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function saidas_solicitadas() {
         return $this->hasMany('App\Saida', 'solicitante_id');
     }
-
+    
 }
