@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\progest\repositories\MaterialRepository;
 use App\progest\repositories\UsuarioRepository;
 use App\progest\repositories\SaidaRepository;
+use App\progest\repositories\PedidoRepository;
 use Illuminate\Http\Request;
 
 class SaidaController extends Controller {
@@ -14,11 +15,14 @@ class SaidaController extends Controller {
     protected $materialRepository;
     protected $usuarioRepository;
     protected $saidaRepository;
+    protected $pedidoRepository;
 
-    public function __construct(MaterialRepository $materialRepository, UsuarioRepository $usuarioRepository, SaidaRepository $saidaRepository) {
+    public function __construct(MaterialRepository $materialRepository, UsuarioRepository $usuarioRepository, 
+            SaidaRepository $saidaRepository, PedidoRepository $pedidoRepository) {
         $this->materialRepository = $materialRepository;
         $this->usuarioRepository = $usuarioRepository;
         $this->saidaRepository = $saidaRepository;
+        $this->pedidoRepository = $pedidoRepository;
     }
 
     /**
@@ -51,7 +55,14 @@ class SaidaController extends Controller {
      */
     public function store(Request $request) {
         $input['materiais'] = $request->only('qtds');
-        $input['saida'] = $request->except('qtds', '_token');
+        $input['saida'] = $request->except('qtds', '_token', 'pedido');
+        $input['pedido'] = $request->only('pedido');
+        if($input['pedido'] != null){
+            foreach($input['pedido'] as $key=>$val){
+                $pedido['status'] = $val;
+            }
+            $this->pedidoRepository->update($pedido['pedido']);
+        }
         $this->saidaRepository->store($input);
 
         return redirect()->route('admin.saidas.index')->with('success', 'Saída efetuada com sucesso!');

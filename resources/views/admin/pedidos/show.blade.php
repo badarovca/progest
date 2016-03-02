@@ -7,7 +7,7 @@
     <!--Content Header (Page header) -->
     <section class = "content-header">
         <h1>
-            {!! $page_title or ("Saída $saida->id" ) !!}
+            {!! $page_title or ("Pedido nº $pedido->id" ) !!}
             <small>{!! $page_description or null !!}</small>
         </h1>
         <!--You can dynamically generate breadcrumbs here -->
@@ -22,7 +22,7 @@
         <div class="container-fluid">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Saída de materiais</h3>
+                    <h4 class="box-title">Solicitante: {{$pedido->solicitante->name}} (id: {{$pedido->solicitante->id}})</h4>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -31,25 +31,19 @@
                             <tr>
                                 <th>Cód</th>
                                 <th>Descricao</th>
-                                <th>Qtd</th>
+                                <th>Qtd solicitada</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($saida->materiais as $material)
+                            @foreach($pedido->materiais as $material)
                             <tr>
                                 <td style="width: 10%">{{$material->codigo}}</td>
-                                <td style="width: 58%">{{$material->descricao}}</td>
-                                <td style="width: 5%">{{$material->pivot->quant}}</td>
+                                <td style="width: 75%">{{$material->descricao}}</td>
+                                <td style="width: 15%">{{$material->pivot->quant}}</td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p><b>Justificativa: </b>{{$saida->obs}}</p>
-                        </div>
-                    </div>
                 </div>
                 <!-- /.box-body -->
             </div>

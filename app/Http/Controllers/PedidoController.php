@@ -25,6 +25,12 @@ class PedidoController extends Controller {
      * @return Response
      */
     public function index() {
+        $pedidos = $this->pedidoRepository->index();
+        
+        return view('admin.pedidos.index')->with(compact('pedidos'));
+    }
+
+    public function exibirMateriais() {
         $materiais = $this->materialRepository->index(['disponivel' => true, 'paginate' => 20]);
         return view('frontend.home')->with(compact('materiais'));
     }
@@ -59,7 +65,13 @@ class PedidoController extends Controller {
      * @return Response
      */
     public function show($id) {
-        //
+        $pedido = $this->pedidoRepository->show($id);
+        if($pedido->status == 'Pendente'){
+            return view('admin.pedidos.create-saida')->with(compact('pedido'));
+        }else{
+            return view('admin.pedidos.show')->with(compact('pedido'));
+        }
+        
     }
 
     /**
@@ -105,7 +117,7 @@ class PedidoController extends Controller {
             Cart::add(array('id' => $id, 'qty' => $qtd, 'name' => $material->descricao, 'price' => 0));
         }
 
-        return redirect()->route('pedidos.pedido-atual');
+        return redirect()->route('pedidos')->with('success', 'Item adicionado ao pedido!');
     }
 
     public function getPedidoAtual() {

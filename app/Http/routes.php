@@ -22,6 +22,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('empenhos.entradas', 'EntradaController');
     Route::resource('saidas', 'SaidaController');
     Route::get('/entradas', ['as' => 'admin.entradas', 'uses' => 'EntradaController@index']);
+    Route::get('/pedidos', ['as' => 'admin.pedidos.index', 'uses' => 'PedidoController@index']);
+    Route::get('/pedidos/{id}', ['as' => 'admin.pedidos.show', 'uses' => 'PedidoController@show']);
     Route::resource('materiais', 'MaterialController');
     Route::resource('subitens', 'SubItemController');
     Route::get('/home', 'HomeController@index');
@@ -31,7 +33,7 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('/', 'HomeController@index');
 
 Route::group(['prefix' => 'pedidos'], function () {
-    Route::get('/', ['as'=>'pedidos', 'uses' => 'PedidoController@index']);
+    Route::get('/', ['as'=>'pedidos', 'uses' => 'PedidoController@exibirMateriais']);
     Route::get('/busca-materiais', ['as' => 'pedidos.busca-materiais', 'uses' => 'PedidoController@search']);
     Route::get('/pedido-atual', ['as' => 'pedidos.pedido-atual', 'uses' => 'PedidoController@getPedidoAtual']);
     Route::post('/add-material', ['as'=>'pedidos.add-material', 'uses' => 'PedidoController@addMaterial']);

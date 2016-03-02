@@ -16,9 +16,10 @@ class CreatePedidosTable extends Migration {
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('obs');
+            $table->string('status');
             $table->timestamps();
         });
-        
+
         Schema::create('pedido_material', function(Blueprint $table) {
             $table->integer('pedido_id')->unsigned()->index();
             $table->foreign('pedido_id')->references('id')->on('pedidos');
@@ -35,8 +36,8 @@ class CreatePedidosTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::drop('pedidos');
         Schema::drop('pedido_material');
+        Schema::drop('pedidos');
     }
 
 }
