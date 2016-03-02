@@ -28,6 +28,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
+                        @if(Cart::count() > 0)
                         <div class="row">
                             <div class="col-md-12">
                                 <table id="example2" class="table table-bordered table-hover">
@@ -76,6 +77,15 @@
                             </div>
                         </div>
                         {!! Form::close() !!}
+                        @else
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5>Não há nenhum item no seu pedido atual.</h5>
+                                <br>
+                                <a class="link-black" href="{{route('pedidos')}}">Adicionar itens</a>
+                            </div>
+                        </div>
+                        @endif
                     </div>
                     <!--/.box-body--> 
                 </div>
