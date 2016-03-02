@@ -4,6 +4,7 @@ namespace App\progest\repositories;
 
 use App\Material;
 use App\Pedido;
+use App\User;
 
 class PedidoRepository {
 
@@ -18,26 +19,20 @@ class PedidoRepository {
     }
 
     public function store($input) {
-//        $pedido = new Pedido($input['pedido']);
-//
-//        $empenho = Empenho::find($input['empenho']);
-//        $pedido->empenho()->associate($empenho);
-//
-//        $pedido->save();
-//        $materiais = [];
-//        foreach ($input['materiais']['qtds'] as $key => $val) {
-//            $materiais[$key] = ['quant' => $val];
-//        }
-//
-//        $pedido->materiais()->sync($materiais);
-//
-//        foreach ($materiais as $key => $val) {
-//            $material = Material::find($key);
-//            $material->qtd_1 += $val['quant'];
-//            $material->save();
-//        }
-//
-//        return $pedido;
+        $pedido = new Pedido(['obs' => $input['obs']]);
+        $usuario = User::find(1);
+
+        $pedido->solicitante()->associate($usuario);
+        
+        $pedido->save();
+
+        foreach ($input['qtds'] as $key => $val) {
+            $materiais[$key] = ['quant' => $val];
+        }
+
+        $pedido->materiais()->sync($materiais);
+
+        return $pedido;
     }
 
     public function update($id, $input) {
