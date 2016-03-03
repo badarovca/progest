@@ -23,6 +23,7 @@ class UnidadeRepository {
     public function store($input) {
         $unidade = new Unidade();
         $unidade->name = $input['name'];
+        $unidade->status = 1;
         $unidade->save();
     }
 

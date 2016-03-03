@@ -23,6 +23,7 @@ class SubItemRepository {
     public function store($input) {
         $subitem = new SubItem();
         $subitem->material_consumo = $input['material_consumo'];
+        $subitem->status = 1;
         $subitem->save();
     }
 

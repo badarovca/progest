@@ -26,6 +26,7 @@ class CoordenacaoRepository {
         $coordenacao->coordenador = $input['coordenador'];
         $coordenacao->telefone = $input['telefone'];
         $coordenacao->email = $input['email'];
+        $coordenacao->status = 1;
         $coordenacao->save();
     }
 

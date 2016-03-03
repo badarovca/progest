@@ -13,31 +13,31 @@ class UnidadeSeeder extends Seeder {
         Unidade::truncate();
         
         Unidade::create([
-           'name' => 'Caixa',
+           'name' => 'Caixa', 'status' => true,
         ]);
         Unidade::create([
-           'name' => 'Dúzia',
+           'name' => 'Dúzia', 'status' => true,
         ]);
         Unidade::create([
-           'name' => 'Unidade',
+           'name' => 'Unidade', 'status' => true,
         ]);
         Unidade::create([
-           'name' => 'Pacote',
+           'name' => 'Pacote', 'status' => true,
         ]);
         Unidade::create([
-           'name' => 'Cento',
+           'name' => 'Cento', 'status' => true,
         ]);
         Unidade::create([
-           'name' => 'Resma',
+           'name' => 'Resma', 'status' => true,
         ]);
         Unidade::create([
-           'name' => 'Frasco',
+           'name' => 'Frasco', 'status' => true,
         ]);
         Unidade::create([
-           'name' => 'Quilo',
+           'name' => 'Quilo', 'status' => true,
         ]);
         Unidade::create([
-           'name' => 'Litro',
+           'name' => 'Litro', 'status' => true,
         ]);
                 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');

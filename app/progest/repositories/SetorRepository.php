@@ -28,6 +28,7 @@ class SetorRepository {
         $coordenacao = Coordenacao::find($input['coordenacao_id']);
         $setor->coordenacao()->associate($coordenacao);
         
+        $setor->status = 1;
         $setor->save();
     }
 
