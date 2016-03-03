@@ -37,9 +37,10 @@ class PedidoRepository {
 
     public function update($id, $input) {
         $pedido = Pedido::find($id);
-        $pedido->status = $input['status'];
-        
-        return $empenho->save();
+        foreach ($input as $key=>$val){
+            $pedido->$key = $val;
+        }
+        return $pedido->save();
     }
 
     public function show($id) {

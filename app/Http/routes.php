@@ -11,6 +11,12 @@
   |
  */
 //Entrust::routeNeedsRole('admin*', 'admin');
+//Entrust::routeNeedsRole('pedidos*', 'admin');
+
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+]);
 
 Route::group(['prefix' => 'admin'], function () {
     Route::resource('usuarios', 'UsuarioController');
@@ -31,14 +37,15 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
 
 Route::group(['prefix' => 'pedidos'], function () {
-    Route::get('/', ['as'=>'pedidos', 'uses' => 'PedidoController@exibirMateriais']);
+    Route::get('/', ['as' => 'pedidos', 'uses' => 'PedidoController@exibirMateriais']);
     Route::get('/busca-materiais', ['as' => 'pedidos.busca-materiais', 'uses' => 'PedidoController@search']);
     Route::get('/pedido-atual', ['as' => 'pedidos.pedido-atual', 'uses' => 'PedidoController@getPedidoAtual']);
-    Route::post('/add-material', ['as'=>'pedidos.add-material', 'uses' => 'PedidoController@addMaterial']);
-    Route::post('/store', ['as'=>'pedidos.store', 'uses' => 'PedidoController@store']);
-    Route::delete('/remover-material/{rowid}', ['as'=>'pedidos.remover-material', 'uses' => 'PedidoController@removeMaterial']);
+    Route::post('/add-material', ['as' => 'pedidos.add-material', 'uses' => 'PedidoController@addMaterial']);
+    Route::post('/store', ['as' => 'pedidos.store', 'uses' => 'PedidoController@store']);
+    Route::delete('/remover-material/{rowid}', ['as' => 'pedidos.remover-material', 'uses' => 'PedidoController@removeMaterial']);
 });
 
 Route::get('form-material', ['uses' => 'EmpenhoController@getFormMaterial']);

@@ -56,12 +56,12 @@ class SaidaController extends Controller {
     public function store(Request $request) {
         $input['materiais'] = $request->only('qtds');
         $input['saida'] = $request->except('qtds', '_token', 'pedido');
-        $input['pedido'] = $request->only('pedido');
-        if($input['pedido'] != null){
-            foreach($input['pedido'] as $key=>$val){
-                $pedido['status'] = $val;
+        $pedido = $request->only('pedido');
+        if($pedido['pedido'] != null){
+            foreach($pedido['pedido'] as $key=>$val){
+                $status['status'] = $val;
+                $this->pedidoRepository->update($key, $status);
             }
-            $this->pedidoRepository->update($pedido['pedido']);
         }
         $this->saidaRepository->store($input);
 

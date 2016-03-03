@@ -4,7 +4,7 @@
 
 <div class="register-box">
     <div class="register-logo">
-        <a href="{{url('/')}}"><b>Gest</b>IFBA</a>
+        <a href="{{url('/')}}"><b>PRO</b>Gest</a>
     </div>
 
     <div class="register-box-body">

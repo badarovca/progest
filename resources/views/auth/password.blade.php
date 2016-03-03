@@ -1,50 +1,44 @@
-@extends('app')
+@extends('layouts.app')
 
+<!-- Main Content -->
 @section('content')
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">Reset Password</div>
-				<div class="panel-body">
-					@if (session('status'))
-						<div class="alert alert-success">
-							{{ session('status') }}
-						</div>
-					@endif
 
-					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							<strong>Whoops!</strong> There were some problems with your input.<br><br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
-					@endif
+<div class="login-box">
+    <div class="login-logo">
+        <a href="{{url('/')}}"><b>PRO</b>Gest</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+        @endif
+        <p class="login-box-msg">Informe seu email</p>
 
-					<form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
+            <input type="hidden" value="{{csrf_token()}}" name="_token">
+            <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
+            <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email">
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            @if ($errors->has('email'))
+            <span class="help-block">
+                <strong>{{ $errors->first('email') }}</strong>
+            </span>
+            @endif
+    </div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address</label>
-							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
-							</div>
-						</div>
 
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">
-									Send Password Reset Link
-								</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-8">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Enviar</button>
+
+        </div>
+    </div>
+</form>
+
 </div>
+<!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
 @endsection
