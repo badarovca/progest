@@ -11,7 +11,9 @@ class SubItemRepository {
         $subitemes = array();
         $subitemes[] = 'Selecione...';
         foreach ($baseArray as $value) {
-            $subitemes[$value->id] = $value->id."-".$value->material_consumo;
+            if ($value->status == 1) {
+                $subitemes[$value->id] = $value->id . "-" . $value->material_consumo;
+            }
         }
         return $subitemes;
     }
@@ -23,13 +25,16 @@ class SubItemRepository {
     public function store($input) {
         $subitem = new SubItem();
         $subitem->material_consumo = $input['material_consumo'];
-        $subitem->status = 1;
+        $subitem->status = isset($input['status']) ? 1 : 0;
+        //$setor->status = 1;
+        //$subitem->status = 1;
         $subitem->save();
     }
 
     public function update($id, $input) {
         $subitem = SubItem::find($id);
         $subitem->material_consumo = $input['material_consumo'];
+        $subitem->status = isset($input['status']) ? 1 : 0;
         return $subitem->save();
     }
 
@@ -41,11 +46,10 @@ class SubItemRepository {
         $subitem = SubItem::find($id);
         return $subitem->delete();
     }
-    
-    public function desativar($id){
-        $subitem = SubItem::find($id);
-        $subitem->status = 0;
-        return $subitem->save();
-    }
 
+//    public function desativar($id){
+//        $subitem = SubItem::find($id);
+//        $subitem->status = 0;
+//        return $subitem->save();
+//    }
 }

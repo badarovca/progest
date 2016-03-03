@@ -33,6 +33,7 @@
             <thead>
                 <tr>
                     <th>Nome</th>
+                    <th>Status</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -40,16 +41,14 @@
                 @foreach($unidades as $unidade)
                 <tr>
                     <td>{!! $unidade->name !!}</td>
-                    <td>{!! $unidade->status !!}</td>
-                    <td>{!! $unidade->email !!}</td>
-                    <td>Setor</td>
+                    <td>{{$unidade->status == 1 ? 'Ativado' : 'Desativado' }}</td>
                     <td width="1%" nowrap>
                         <a href="{!! route('admin.unidades.edit', $unidade->id) !!}" class="btn btn-primary btn-xs">
                             <i class="fa fa-fw fa-pencil"></i> editar
                         </a>
-                        <a href="{!! route('admin.unidades.destroy', $unidade->id) !!}" data-method="delete" data-confirm="Deseja remover o registro?" class="btn btn-danger btn-xs">
+<!--                        <a href="{!! route('admin.unidades.destroy', $unidade->id) !!}" data-method="delete" data-confirm="Deseja remover o registro?" class="btn btn-danger btn-xs">
                             <i class="fa fa-fw fa-remove"></i> remover
-                        </a>
+                        </a>-->
                     </td>
                 </tr>
                 @endforeach

@@ -12,7 +12,9 @@ class SetorRepository {
         $setores = array();
         $setores[] = 'Selecione...';
         foreach ($baseArray as $value) {
-            $setores[$value->id] = $value->name;
+            if ($value->status == 1){
+                $setores[$value->id] = $value->name;
+            }
         }
         return $setores;
     }
@@ -28,7 +30,8 @@ class SetorRepository {
         $coordenacao = Coordenacao::find($input['coordenacao_id']);
         $setor->coordenacao()->associate($coordenacao);
         
-        $setor->status = 1;
+        $setor->status = isset($input['status']) ? 1 : 0;
+        //$setor->status = 1;
         $setor->save();
     }
 
@@ -36,9 +39,11 @@ class SetorRepository {
         $setor = Setor::find($id);
         $setor->name = $input['name'];
         
-        $coordenacao = Setor::find($input['coordenacao_id']);
+        $coordenacao = Coordenacao::find($input['coordenacao_id']);
         $setor->coordenacao()->associate($coordenacao);
-        
+
+        $setor->status = isset($input['status']) ? 1 : 0;
+
         return $setor->save();
     }
 
@@ -51,10 +56,10 @@ class SetorRepository {
         return $setor->delete();
     }
     
-    public function desativar($id){
-        $setor = Setor::find($id);
-        $setor->status = 0;
-        return $setor->save();
-    }
+//    public function desativar($id){
+//        $setor = Setor::find($id);
+//        $setor->status = 0;
+//        return $setor->save();
+//    }
 
 }

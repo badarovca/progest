@@ -11,7 +11,9 @@ class CoordenacaoRepository {
         $coordenacoes = array();
         $coordenacoes[] = 'Selecione...';
         foreach ($baseArray as $value) {
-            $coordenacoes[$value->id] = $value->name;
+            if ($value->status == 1){
+                $coordenacoes[$value->id] = $value->name;
+            }
         }
         return $coordenacoes;
     }
@@ -26,7 +28,8 @@ class CoordenacaoRepository {
         $coordenacao->coordenador = $input['coordenador'];
         $coordenacao->telefone = $input['telefone'];
         $coordenacao->email = $input['email'];
-        $coordenacao->status = 1;
+        $coordenacao->status = isset($input['status']) ? 1 : 0;
+        //$coordenacao->status = 1;
         $coordenacao->save();
     }
 
@@ -36,6 +39,7 @@ class CoordenacaoRepository {
         $coordenacao->coordenador = $input['coordenador'];
         $coordenacao->telefone = $input['telefone'];
         $coordenacao->email = $input['email'];
+        $coordenacao->status = isset($input['status']) ? 1 : 0;
         return $coordenacao->save();
     }
 
@@ -48,10 +52,10 @@ class CoordenacaoRepository {
         return $coordenacao->delete();
     }
     
-    public function desativar($id){
-        $coordenacao = Coordenacao::find($id);
-        $coordenacao->status = 0;
-        return $coordenacao->save();
-    }
+//    public function desativar($id){
+//        $coordenacao = Coordenacao::find($id);
+//        $coordenacao->status = 0;
+//        return $coordenacao->save();
+//    }
 
 }

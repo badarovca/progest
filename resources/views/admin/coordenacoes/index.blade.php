@@ -36,6 +36,7 @@
                     <th>Coordenador</th>
                     <th>Telefone</th>
                     <th>Email</th>
+                    <th>Status</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -46,13 +47,14 @@
                     <td>{!! $coordenacao->coordenador !!}</td>
                     <td>{!! $coordenacao->telefone !!}</td>
                     <td>{!! $coordenacao->email !!}</td>
+                    <td>{{$coordenacao->status == 1 ? 'Ativado' : 'Desativado' }}</td>
                     <td width="1%" nowrap>
                         <a href="{!! route('admin.coordenacoes.edit', $coordenacao->id) !!}" class="btn btn-primary btn-xs">
                             <i class="fa fa-fw fa-pencil"></i> editar
                         </a>
-                        <a href="{!! route('admin.coordenacoes.destroy', $coordenacao->id) !!}" data-method="delete" data-confirm="Deseja remover o registro?" class="btn btn-danger btn-xs">
+<!--                        <a href="{!! route('admin.coordenacoes.destroy', $coordenacao->id) !!}" data-method="delete" data-confirm="Deseja remover o registro?" class="btn btn-danger btn-xs">
                             <i class="fa fa-fw fa-remove"></i> remover
-                        </a>
+                        </a>-->
                     </td>
                 </tr>
                 @endforeach

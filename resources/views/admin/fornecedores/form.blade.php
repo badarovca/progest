@@ -38,5 +38,9 @@
         {!!Form::text('telefone2', null, array('class'=>'form-control', 'id' => 'telefone2'))!!}
     </div>
 </div>
-
+<div class='checkbox col-md-4' >
+    <label>
+        {!!Form::checkbox('status', null)!!} Ativado
+    </label>
+</div>
 
