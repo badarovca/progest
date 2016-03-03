@@ -89,5 +89,10 @@ class FornecedorController extends Controller {
         $this->fornecedorRepository->destroy($id);
         return back()->with('success', 'Removido com sucesso!');
     }
+    
+//    public function desativar($id) {
+//        $this->fornecedorRepository->desativar($id);
+//        return back()->with('success', 'Desativado com sucesso!');
+//    }
 
 }

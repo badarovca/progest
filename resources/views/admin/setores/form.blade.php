@@ -11,5 +11,15 @@
             </div>
         </div>
     </div>
-    <br>
+    <div class="row">
+        <div class='col-md-6'>
+            {!!Form::label('coordenacao_id', 'Coordenação', array('class'=>'control-label'))!!}
+            {!!Form::select('coordenacao_id', $coordenacoes, null, ['required' => 'required', 'class' => 'form-control', 'id'=>'coordenacao_id'])!!}
+        </div>
+        <div class='checkbox col-md-4' >
+            <label>
+                {!!Form::checkbox('status', null)!!} Ativado
+            </label>
+        </div>
+    </div>
 </div>

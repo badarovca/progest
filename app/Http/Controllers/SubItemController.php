@@ -90,5 +90,10 @@ class SubItemController extends Controller {
         $this->subItemRepository->destroy($id);
         return back()->with('success', 'Removido com sucesso!');
     }
+    
+//    public function desativar($id) {
+//        $this->subItemRepository->desativar($id);
+//        return back()->with('success', 'Desativado com sucesso!');
+//    }
 
 }

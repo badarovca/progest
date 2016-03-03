@@ -44,5 +44,28 @@
             </div>
         </div>
     </div>
-    <br>
+    <div class="row">
+        <div class='form-group'>
+            <div class='col-md-6'>
+                {!!Form::label('telefone1', 'Telefone 1', array('class'=>'control-label'))!!}
+                {!!Form::text('telefone1', null, array('class'=>'form-control', 'id' => 'telefone1', 'required' => 'required'))!!}
+            </div>
+            <div class='col-md-6'>
+                {!!Form::label('telefone2', 'Telefone 2', array('class'=>'control-label'))!!}
+                {!!Form::text('telefone2', null, array('class'=>'form-control', 'id' => 'telefone2'))!!}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class='checkbox col-md-4' >
+            <label>
+                {!!Form::checkbox('status', null)!!} Ativado
+            </label>
+        </div>
+    </div>
 </div>
+
+
+
+

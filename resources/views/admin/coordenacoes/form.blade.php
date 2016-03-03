@@ -19,5 +19,14 @@
             </div>
         </div>
     </div>
-    <br>
+    <div class="row">
+        <div class="form-group">
+            <div class='checkbox col-md-3' >
+                <label>
+                    {!!Form::checkbox('status', null)!!} Ativado
+                </label>
+            </div>
+        </div>
+    </div>
 </div>
+

@@ -7,5 +7,11 @@
             </div>
         </div>
     </div>
-    <br>
+    <div class="row">
+        <div class='checkbox col-md-4' >
+            <label>
+                {!!Form::checkbox('status', null)!!} Ativado
+            </label>
+        </div>
+    </div>
 </div>

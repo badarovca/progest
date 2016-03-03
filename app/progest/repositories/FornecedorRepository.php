@@ -11,7 +11,9 @@ class FornecedorRepository {
         $fornecedores = array();
         $fornecedores[] = 'Selecione...';
         foreach ($baseArray as $value) {
-            $fornecedores[$value->id] = $value->razao;
+            if ($value->status == 1) {
+                $fornecedores[$value->id] = $value->razao;
+            }
         }
         return $fornecedores;
     }
@@ -29,7 +31,8 @@ class FornecedorRepository {
         $fornecedor->cnpj = $input['cnpj'];
         $fornecedor->telefone1 = $input['telefone1'];
         $fornecedor->telefone2 = $input['telefone2'];
-        $fornecedor->status = 1;
+        $fornecedor->status = isset($input['status']) ? 1 : 0;
+        //$fornecedor->status = 1;
         $fornecedor->save();
     }
 
@@ -42,6 +45,7 @@ class FornecedorRepository {
         $fornecedor->cnpj = $input['cnpj'];
         $fornecedor->telefone1 = $input['telefone1'];
         $fornecedor->telefone2 = $input['telefone2'];
+        $fornecedor->status = isset($input['status']) ? 1 : 0;
         return $fornecedor->save();
     }
 
@@ -51,9 +55,12 @@ class FornecedorRepository {
 
     public function destroy($id) {
         $fornecedor = Fornecedor::find($id);
-        $fornecedor->desativado = 1;
-        return $fornecedor->save();
-//return $fornecedor->delete();
+        return $fornecedor->delete();
     }
 
+//    public function desativar($id){
+//        $fornecedor = Fornecedor::find($id);
+//        $fornecedor->status = 0;
+//        return $fornecedor->save();
+//    }
 }

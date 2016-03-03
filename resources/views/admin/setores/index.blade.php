@@ -29,6 +29,7 @@
                 <tr>
                     <th>Nome</th>
                     <th>Coordenação</th>
+                    <th>Status</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -37,13 +38,14 @@
                 <tr>
                     <td>{!! $setor->name !!}</td>
                     <td>{!! $setor->coordenacao->name !!}</td>
+                    <td>{{$setor->status == 1 ? 'Ativado' : 'Desativado' }}</td>
                     <td width="1%" nowrap>
                         <a href="{!! route('admin.setores.edit', $setor->id) !!}" class="btn btn-primary btn-xs">
                             <i class="fa fa-fw fa-pencil"></i> editar
                         </a>
-                        <a href="{!! route('admin.setores.destroy', $setor->id) !!}" data-method="delete" data-confirm="Deseja remover o registro?" class="btn btn-danger btn-xs">
+<!--                        <a href="{!! route('admin.setores.destroy', $setor->id) !!}" data-method="delete" data-confirm="Deseja remover o registro?" class="btn btn-danger btn-xs">
                             <i class="fa fa-fw fa-remove"></i> remover
-                        </a>
+                        </a>-->
                     </td>
                 </tr>
                 @endforeach
