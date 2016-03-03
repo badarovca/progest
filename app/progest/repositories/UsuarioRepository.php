@@ -5,7 +5,7 @@ namespace App\progest\repositories;
 use App\User;
 use App\Setor;
 use App\Coordenacao;
-use Artesaos\Defender\Role;
+use App\Role;
 
 class UsuarioRepository {
 
@@ -17,6 +17,16 @@ class UsuarioRepository {
             $usuarios[$value->id] = $value->name;
         }
         return $usuarios;
+    }
+    
+    public function getRolesForSelect(){
+        $baseArray = Role::all();
+        $roles = array();
+        $roles[] = 'Selecione...';
+        foreach ($baseArray as $value) {
+            $roles[$value->id] = $value->display_name;
+        }
+        return $roles;
     }
 
     public function index() {
@@ -35,6 +45,8 @@ class UsuarioRepository {
         $user->setor()->associate($setor);
 
         $user->save();
+        $user->roles()->attach($input['role']);
+        return $user;
     }
 
     public function update($id, $input) {
@@ -48,7 +60,11 @@ class UsuarioRepository {
         $setor = Setor::find($input['setor_id']);
         $user->setor()->associate($setor);
         
-        return $user->save();
+        $user->save();
+        if($user->roles()->first()->id != $input['role']){
+            $user->roles()->sync([$input['role']]);
+        }
+        return $user;
     }
 
     public function show($id) {

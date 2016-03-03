@@ -3,15 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/html/progest/app/Unidade.php</file>
-            <file>file:/var/www/html/progest/resources/views/admin/pedidos/form.blade.php</file>
-            <file>file:/var/www/html/progest/app/progest/repositories/PedidoRepository.php</file>
-            <file>file:/var/www/html/progest/resources/views/admin/pedidos/create-saida.blade.php</file>
-            <file>file:/var/www/html/progest/app/progest/repositories/SaidaRepository.php</file>
-            <file>file:/var/www/html/progest/resources/views/frontend/pedidos/pedido-atual.blade.php</file>
-            <file>file:/var/www/html/progest/app/progest/repositories/CoordenacaoRepository.php</file>
-            <file>file:/var/www/html/progest/app/Http/Controllers/SaidaController.php</file>
-            <file>file:/var/www/html/progest/resources/views/frontend/home.blade.php</file>
+            <file>file:/var/www/html/progest/database/seeds/CoordenacoesSeeder.php</file>
+            <file>file:/var/www/html/progest/database/seeds/DatabaseSeeder.php</file>
+            <file>file:/var/www/html/progest/app/Http/Controllers/Auth/AuthController.php</file>
+            <file>file:/var/www/html/progest/database/seeds/PermissoesSeed.php</file>
+            <file>file:/var/www/html/progest/app/Services/Registrar.php</file>
+            <file>file:/var/www/html/progest/app/Http/Controllers/UsuarioController.php</file>
+            <file>file:/var/www/html/progest/resources/views/template/header.blade.php</file>
+            <file>file:/var/www/html/progest/app/Http/routes.php</file>
+            <file>file:/var/www/html/progest/database/migrations/2014_10_12_000000_create_users_table.php</file>
+            <file>file:/var/www/html/progest/database/seeds/UnidadeSeeder.php</file>
+            <file>file:/var/www/html/progest/app/progest/repositories/UsuarioRepository.php</file>
+            <file>file:/var/www/html/progest/database/migrations/2016_01_20_203952_user_habilitado.php</file>
+            <file>file:/var/www/html/progest/database/seeds/SubItemSeeder.php</file>
+            <file>file:/var/www/html/progest/resources/views/admin/usuarios/form.blade.php</file>
         </group>
     </open-files>
 </project-private>

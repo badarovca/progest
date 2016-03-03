@@ -10,8 +10,8 @@
   | and give it the controller to call when that URI is requested.
   |
  */
-//Entrust::routeNeedsRole('admin*', 'admin');
-//Entrust::routeNeedsRole('pedidos*', 'admin');
+Entrust::routeNeedsRole('admin*', 'admin', Redirect::to('/auth/login'));
+Entrust::routeNeedsRole('pedidos*', 'solicitante', Redirect::to('/auth/login'));
 
 Route::controllers([
     'auth' => 'Auth\AuthController',
