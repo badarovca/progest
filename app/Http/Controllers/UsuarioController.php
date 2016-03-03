@@ -50,7 +50,7 @@ class UsuarioController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-//        dd($request->all());
+        dd($request->all());
         $this->usuarioRepository->store($request->all());
         return redirect()->route('admin.usuarios.index')->with('success', 'Registro inserido com sucesso!');
     }
@@ -75,7 +75,6 @@ class UsuarioController extends Controller {
         $usuario = $this->usuarioRepository->show($id);
         $setores = $this->setorRepository->dataForSelect();
         $roles = ['Nivel1', 'Nivel2'];
-
         return view('admin.usuarios.edit')->with(compact(['usuario', 'setores', 'roles']));
     }
 

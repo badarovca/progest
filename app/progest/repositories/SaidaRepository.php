@@ -13,7 +13,7 @@ class SaidaRepository {
     }
 
     public function store($input) {
-        $saida = new Saida(['obs'=>$input['saida']]);
+        $saida = new Saida(['obs'=>$input['saida']['obs']]);
         $usuario = User::find($input['saida']['solicitante_id']);
         $saida->solicitante()->associate($usuario);
         $saida->responsavel()->associate($usuario);

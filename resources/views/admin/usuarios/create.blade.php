@@ -21,9 +21,11 @@
     <section class = "content">
         {!! Form::model($usuario, ['route' => 'admin.usuarios.store'])!!}
         @include('admin.usuarios.form')
-        <div class="form-group">
-            <div class='col-md-8 '>
-                {!!Form::submit('Salvar', ['class'=>'btn btn-primary pull-right'])!!}
+        <div class="row">
+            <div class="form-group">
+                <div class='col-md-12 pull-right'>
+                    {!!Form::submit('Salvar', ['class'=>'btn btn-primary pull-right'])!!}
+                </div>
             </div>
         </div>
         {!! Form::close()!!}
