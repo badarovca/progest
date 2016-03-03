@@ -73,7 +73,7 @@
 
         @endforeach
         <div class="row">
-            <div class="col-md-12 center-block">
+            <div class="col-md-8 text-center">
                 {!! str_replace('/?', '?', $materiais->render()) !!}
             </div>
         </div>
