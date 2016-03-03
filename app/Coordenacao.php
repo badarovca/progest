@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Coordenacao extends Model {
 
     protected $fillable = [
-        'name', 'coordenador', 'telefone', 'email'
+        'name', 'coordenador', 'telefone', 'email', 'status'
     ];
     
     public function setores() {

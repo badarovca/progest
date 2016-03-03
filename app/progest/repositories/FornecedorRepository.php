@@ -29,6 +29,7 @@ class FornecedorRepository {
         $fornecedor->cnpj = $input['cnpj'];
         $fornecedor->telefone1 = $input['telefone1'];
         $fornecedor->telefone2 = $input['telefone2'];
+        $fornecedor->status = 1;
         $fornecedor->save();
     }
 

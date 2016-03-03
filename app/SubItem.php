@@ -19,7 +19,7 @@ class SubItem extends Model {
      * @var array
      */
     protected $fillable = [
-        'material_consumo'
+        'material_consumo', 'status'
     ];
     
     public function materiais() {
