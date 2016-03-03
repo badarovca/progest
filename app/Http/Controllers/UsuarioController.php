@@ -38,7 +38,7 @@ class UsuarioController extends Controller {
     public function create() {
         $usuario = new User();
         $setores = $this->setorRepository->dataForSelect();
-        $roles = ['Nivel1', 'Nivel2'];
+        $roles = $this->usuarioRepository->getRolesForSelect();
 
         return view('admin.usuarios.create')->with(compact(['usuario', 'setores', 'roles']));
     }
@@ -50,7 +50,6 @@ class UsuarioController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        dd($request->all());
         $this->usuarioRepository->store($request->all());
         return redirect()->route('admin.usuarios.index')->with('success', 'Registro inserido com sucesso!');
     }
@@ -74,7 +73,7 @@ class UsuarioController extends Controller {
     public function edit($id) {
         $usuario = $this->usuarioRepository->show($id);
         $setores = $this->setorRepository->dataForSelect();
-        $roles = ['Nivel1', 'Nivel2'];
+        $roles = $this->usuarioRepository->getRolesForSelect();
         return view('admin.usuarios.edit')->with(compact(['usuario', 'setores', 'roles']));
     }
 

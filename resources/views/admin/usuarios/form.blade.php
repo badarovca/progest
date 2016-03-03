@@ -33,7 +33,7 @@
         </div>
         <div class='col-md-6'>
             {!!Form::label('role', 'Permissão', array('class'=>'control-label'))!!}
-            {!!Form::select('role', $roles, null, ['required' => 'required', 'class'=>'form-control'])!!}
+            {!!Form::select('role', $roles, ($usuario->roles()->first() != null)? $usuario->roles()->first()->id : null, ['required' => 'required', 'class'=>'form-control'])!!}
         </div>
     </div>
 </div>
