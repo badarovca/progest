@@ -9,14 +9,14 @@ use App\User;
 class SaidaRepository {
 
     public function index() {
-        return Saida::all();
+        return Saida::all()->sortBy('creatated_at');
     }
 
     public function store($input) {
         $saida = new Saida(['obs'=>$input['saida']['obs']]);
         $usuario = User::find($input['saida']['solicitante_id']);
         $saida->solicitante()->associate($usuario);
-        $saida->responsavel()->associate($usuario);
+        $saida->responsavel()->associate(Auth::user()->id);
         $saida->save();
 
         $materiais = [];

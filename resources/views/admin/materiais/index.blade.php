@@ -9,11 +9,6 @@
             {!! $page_title or "Materiais" !!}
             <small>{!! $page_description or null !!}</small>
         </h1>
-        <!--You can dynamically generate breadcrumbs here -->
-        <ol class = "breadcrumb">
-            <li><a href = "#"><i class = "fa fa-dashboard"></i> Level</a></li>
-            <li class = "active">Here</li>
-        </ol>
         @include('template.alerts')
         <small><a href="{!! route('admin.materiais.create') !!}">
                 <i class="fa fa-plus"></i> Novo material

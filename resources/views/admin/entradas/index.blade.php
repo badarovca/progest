@@ -13,11 +13,6 @@
             {!! $page_title or "Entradas - " !!}
             <small>Empenho: <b>{!! $empenho->numero or "todos"!!}</b></small>
         </h1>
-        <!--You can dynamically generate breadcrumbs here -->
-        <ol class = "breadcrumb">
-            <li><a href = "#"><i class = "fa fa-dashboard"></i> Level</a></li>
-            <li class = "active">Here</li>
-        </ol>
         @include('template.alerts')
         @if(isset($empenho))
             <small><a href="{{ route('admin.empenhos.entradas.create', [$empenho->id]) }}">

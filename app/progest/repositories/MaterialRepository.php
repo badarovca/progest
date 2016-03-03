@@ -51,9 +51,6 @@ class MaterialRepository {
         $material->descricao = $input['descricao'];
         $material->marca = $input['marca'];
         $material->qtd_1 = $input['qtd_1'];
-        $material->qtd_2 = $input['qtd_2'];
-        $material->qtd_3 = $input['qtd_3'];
-        $material->qtd_4 = $input['qtd_4'];
         $material->disponivel = isset($input['disponivel']) ? 1 : 0;
 
         $subItem = SubItem::find($input['sub_item_id']);
@@ -71,9 +68,6 @@ class MaterialRepository {
         $material->descricao = $input['descricao'];
         $material->marca = $input['marca'];
         $material->qtd_1 = $input['qtd_1'];
-        $material->qtd_2 = $input['qtd_2'];
-        $material->qtd_3 = $input['qtd_3'];
-        $material->qtd_4 = $input['qtd_4'];
         $material->disponivel = isset($input['disponivel']) ? 1 : 0;
 
         $subItem = SubItem::find($input['sub_item_id']);

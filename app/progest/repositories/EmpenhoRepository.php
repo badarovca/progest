@@ -18,7 +18,7 @@ class EmpenhoRepository {
     }
 
     public function index() {
-        return Empenho::all();
+        return Empenho::all()->sortBy('creatated_at');
     }
 
     public function store($input) {

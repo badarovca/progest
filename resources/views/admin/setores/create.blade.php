@@ -10,11 +10,6 @@
             {!! $page_title or "Criar setor" !!}
             <small>{!! $page_description or null !!}</small>
         </h1>
-        <!--You can dynamically generate breadcrumbs here -->
-        <ol class = "breadcrumb">
-            <li><a href = "#"><i class = "fa fa-dashboard"></i> Level</a></li>
-            <li class = "active">Here</li>
-        </ol>
     </section>
 
     <!--Main content -->
@@ -25,9 +20,9 @@
             <div class='col-md-12'>
                 {!!Form::submit('Salvar', ['class'=>'btn btn-primary pull-right'])!!}
             </div>
-        </div>
+        </div>            
         {!! Form::close()!!}
-        
+
     </section><!--/.content -->
 </div><!--/.content-wrapper -->
 @stop

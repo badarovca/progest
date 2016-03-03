@@ -27,13 +27,13 @@
 
             <div class="row">
                 <div class="col-xs-4 col-xs-offset-8">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+                    <button type="submit" class="btn btn-success btn-block btn-flat">Entrar</button>
 
                 </div>
             </div>
-            <a href="{{ url('/password/email') }}">Esqueci a senha</a>
+            <a class="text-green" href="{{ url('/password/email') }}">Esqueci a senha</a>
             <br>
-            <a href="{{ url('/auth/register') }}">Registre-se</a>
+            <!--<a href="{{ url('/auth/register') }}">Registre-se</a>-->
         </form>
 
     </div>

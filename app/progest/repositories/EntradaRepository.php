@@ -16,9 +16,9 @@ class EntradaRepository {
 
     public function index($empenho = null) {
         if ($empenho == null) {
-            return Entrada::all();
+            return Entrada::all()->sortBy('creatated_at');
         } else {
-            return Entrada::where('empenho_id', $empenho)->get();
+            return Entrada::where('empenho_id', $empenho)->orderBy('created_at', 'asc')->get();
         }
     }
 

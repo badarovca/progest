@@ -2,6 +2,7 @@
 
 namespace App\progest\repositories;
 
+use Auth;
 use App\Material;
 use App\Pedido;
 use App\User;
@@ -14,15 +15,14 @@ class PedidoRepository {
         $this->materialRepository = $materialRepository;
     }
 
-    public function index($empenho = null) {
-        return Pedido::all();
+    public function index() {
+        return Pedido::all()->sortBy('creatated_at');
     }
 
     public function store($input) {
         $pedido = new Pedido(['obs' => $input['obs'], 'status' => 'Pendente']);
-        $usuario = User::find(1);
 
-        $pedido->solicitante()->associate($usuario);
+        $pedido->solicitante()->associate(Auth::user()->id);
         
         $pedido->save();
 
