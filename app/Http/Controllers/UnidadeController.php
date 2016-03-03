@@ -90,5 +90,10 @@ class UnidadeController extends Controller {
         $this->unidadeRepository->destroy($id);
         return back()->with('success', 'Removido com sucesso!');
     }
+    
+    public function desativar($id) {
+        $this->unidadeRepository->desativar($id);
+        return back()->with('success', 'Desativado com sucesso!');
+    }
 
 }

@@ -95,5 +95,10 @@ class SetorController extends Controller {
         $this->setorRepository->destroy($id);
         return back()->with('success', 'Removido com sucesso!');
     }
+    
+    public function desativar($id) {
+        $this->setorRepository->desativar($id);
+        return back()->with('success', 'Desativado com sucesso!');
+    }
 
 }

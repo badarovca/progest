@@ -39,9 +39,13 @@ class UnidadeRepository {
 
     public function destroy($id) {
         $unidade = Unidade::find($id);
-        $unidade->desativado = 1;
+        return $unidade->delete();
+    }
+    
+    public function desativar($id){
+        $unidade = Unidade::find($id);
+        $unidade->status = 0;
         return $unidade->save();
-        //return $unidade->delete();
     }
 
 }

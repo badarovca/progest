@@ -45,9 +45,13 @@ class CoordenacaoRepository {
 
     public function destroy($id) {
         $coordenacao = Coordenacao::find($id);
-        $coordenacao->desativado = 1;
+        return $coordenacao->delete();
+    }
+    
+    public function desativar($id){
+        $coordenacao = Coordenacao::find($id);
+        $coordenacao->status = 0;
         return $coordenacao->save();
-        //return $coordenacao->delete();
     }
 
 }

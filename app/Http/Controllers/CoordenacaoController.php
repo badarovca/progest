@@ -90,5 +90,10 @@ class CoordenacaoController extends Controller {
         $this->coordenacaoRepository->destroy($id);
         return back()->with('success', 'Removido com sucesso!');
     }
+    
+    public function desativar($id) {
+        $this->coordenacaoRepository->desativar($id);
+        return back()->with('success', 'Desativado com sucesso!');
+    }
 
 }

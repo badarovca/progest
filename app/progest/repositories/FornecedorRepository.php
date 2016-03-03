@@ -51,9 +51,13 @@ class FornecedorRepository {
 
     public function destroy($id) {
         $fornecedor = Fornecedor::find($id);
-        $fornecedor->desativado = 1;
+        return $fornecedor->delete();
+    }
+    
+    public function desativar($id){
+        $fornecedor = Fornecedor::find($id);
+        $fornecedor->status = 0;
         return $fornecedor->save();
-//return $fornecedor->delete();
     }
 
 }
