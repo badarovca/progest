@@ -2,6 +2,7 @@
 
 namespace App\progest\repositories;
 
+use Auth;
 use App\Saida;
 use App\Material;
 use App\User;
