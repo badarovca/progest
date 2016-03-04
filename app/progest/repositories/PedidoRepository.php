@@ -21,8 +21,7 @@ class PedidoRepository {
 
     public function store($input) {
         $pedido = new Pedido(['obs' => $input['obs'], 'status' => 'Pendente']);
-
-        $pedido->solicitante()->associate(Auth::user()->id);
+        $pedido->solicitante()->associate(Auth::user());
         
         $pedido->save();
 

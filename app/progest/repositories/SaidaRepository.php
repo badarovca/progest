@@ -16,7 +16,7 @@ class SaidaRepository {
         $saida = new Saida(['obs'=>$input['saida']['obs']]);
         $usuario = User::find($input['saida']['solicitante_id']);
         $saida->solicitante()->associate($usuario);
-        $saida->responsavel()->associate(Auth::user()->id);
+        $saida->responsavel()->associate(Auth::user());
         $saida->save();
 
         $materiais = [];
