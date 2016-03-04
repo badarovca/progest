@@ -32,7 +32,7 @@ class UsuariosSeeder extends Seeder {
            'telefone' => '(77) 99199-9991',
            'siape' => '2222222',
            'habilitado' => 1,
-        ])->attachRole(Role::find(1));
+        ])->attachRole(Role::find(2));
         
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
