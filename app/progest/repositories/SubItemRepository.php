@@ -9,7 +9,7 @@ class SubItemRepository {
     public function dataForSelect() {
         $baseArray = SubItem::all();
         $subitemes = array();
-        $subitemes[] = 'Selecione...';
+        $subitemes[''] = 'Selecione...';
         foreach ($baseArray as $value) {
             if ($value->status == 1) {
                 $subitemes[$value->id] = $value->id . "-" . $value->material_consumo;

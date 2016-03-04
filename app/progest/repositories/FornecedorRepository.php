@@ -9,7 +9,7 @@ class FornecedorRepository {
     public function dataForSelect() {
         $baseArray = Fornecedor::all();
         $fornecedores = array();
-        $fornecedores[] = 'Selecione...';
+        $fornecedores[''] = 'Selecione...';
         foreach ($baseArray as $value) {
             if ($value->status == 1) {
                 $fornecedores[$value->id] = $value->razao;

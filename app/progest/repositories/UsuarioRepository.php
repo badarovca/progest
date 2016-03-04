@@ -12,7 +12,7 @@ class UsuarioRepository {
     public function dataForSelect() {
         $baseArray = User::all();
         $usuarios = array();
-        $usuarios[] = 'Selecione...';
+        $usuarios[''] = 'Selecione...';
         foreach ($baseArray as $value) {
             $usuarios[$value->id] = $value->name;
         }

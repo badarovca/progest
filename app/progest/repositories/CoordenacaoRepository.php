@@ -9,7 +9,7 @@ class CoordenacaoRepository {
     public function dataForSelect() {
         $baseArray = Coordenacao::all();
         $coordenacoes = array();
-        $coordenacoes[] = 'Selecione...';
+        $coordenacoes[''] = 'Selecione...';
         foreach ($baseArray as $value) {
             if ($value->status == 1){
                 $coordenacoes[$value->id] = $value->name;

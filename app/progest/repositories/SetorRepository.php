@@ -10,7 +10,7 @@ class SetorRepository {
     public function dataForSelect() {
         $baseArray = Setor::all();
         $setores = array();
-        $setores[] = 'Selecione...';
+        $setores[''] = 'Selecione...';
         foreach ($baseArray as $value) {
             if ($value->status == 1){
                 $setores[$value->id] = $value->name;

@@ -9,7 +9,7 @@ class UnidadeRepository {
     public function dataForSelect() {
         $baseArray = Unidade::all();
         $unidades = array();
-        $unidades[] = 'Selecione...';
+        $unidades[''] = 'Selecione...';
         foreach ($baseArray as $value) {
             if ($value->status == 1) {
                 $unidades[$value->id] = $value->name;
