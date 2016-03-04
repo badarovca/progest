@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('CoordenacoesSeeder');
         $this->call('UnidadeSeeder');
         $this->call('PermissoesSeeder');
+        $this->call('UsuariosSeeder');
         
     }
 

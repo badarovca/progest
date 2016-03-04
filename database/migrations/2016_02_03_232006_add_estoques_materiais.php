@@ -40,7 +40,7 @@ class AddEstoquesMateriais extends Migration {
             $table->dropColumn('qtd_3');
             $table->dropColumn('qtd_4');
             $table->dropColumn('disponivel');
-            $table->dropColumn('sub_item_id')->unsigned();
+            $table->dropForeign('sub_item_id');
         });
     }
 
