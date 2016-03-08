@@ -35,7 +35,7 @@
                     <td>{!! $pedido->id !!}</td>
                     <td>{!! $pedido->solicitante->name !!}</td>
                     <td>{!! $pedido->status !!}</td>
-                    <td>{!! $pedido->created_at !!}</td>
+                    <td>{!! date('d/m/Y',strtotime($pedido->created_at)) !!}</td>
                     <td width="1%" nowrap>
                         <a href="{!! route('admin.pedidos.show', $pedido->id) !!}" class="btn btn-info btn-xs">
                             <i class="fa fa-fw fa-eye"></i> visualizar

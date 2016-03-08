@@ -43,7 +43,7 @@
                     <td>{!! $entrada->empenho->fornecedor->razao !!}</td>
                     <td>{!! $entrada->natureza_op !!}</td>
                     <td>{!! number_format($entrada->vl_total, 2, ',', '.') !!}</td>
-                    <td>{!! $entrada->dt_recebimento !!}</td>
+                    <td>{!! date('d/m/Y',strtotime($entrada->dt_recebimento)) !!}</td>
                     <td width="1%" nowrap>
                         <a href="{!! route('admin.empenhos.entradas.destroy', [$entrada->empenho->id, $entrada->id]) !!}"  data-method="delete" data-confirm="Deseja cancelar a entrada?" class="btn btn-danger btn-xs">
                             <i class="fa fa-fw fa-remove"></i> cancelar

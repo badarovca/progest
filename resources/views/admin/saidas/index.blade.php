@@ -45,7 +45,7 @@
                     <td>{!! $saida->id !!}</td>
                     <td>{!! $saida->solicitante->name !!}</td>
                     <td>{!! $saida->responsavel->name !!}</td>
-                    <td>{!! $saida->created_at !!}</td>
+                    <td>{!! date('d/m/Y',strtotime($saida->created_at)) !!}</td>
                     <td width="1%" nowrap>
                         <a href="{!! route('admin.saidas.destroy', $saida->id) !!}" data-method="delete" data-confirm="Deseja cancelar a saída?" class="btn btn-danger btn-xs">
                             <i class="fa fa-fw fa-remove"></i> cancelar
