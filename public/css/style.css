@@ -5,6 +5,10 @@
     position: absolute!important;
     bottom: -43px!important;
 }
+#add-material{
+    position: absolute!important;
+    bottom: -40px!important;
+}
 
 .inline-block{
     display: inline-block;

@@ -1,6 +1,6 @@
 <fieldset>
     <legend>Materiais</legend>
-    <div class="container-fluid">
+<!--    <div class="container-fluid">-->
         <div class="row row-add-material">
             <div class='col-md-5'>
                 <div class='form-group'>
@@ -20,12 +20,17 @@
                     {!!Form::text(null, null, ['class'=>'form-control valor', 'valor'=>'valor', 'id'=>'valor-material'])!!}
                 </div>
             </div>
-            <div class='col-md-3'>
+            <div class='col-md-1'>
                 <div class='form-group'>
                     {!!Form::button('Adicionar', ['class'=>'btn btn-default add-material', 'id'=>"add-material-empenho"])!!}
                 </div>
             </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <a id='add-material' class='col-md-3 text-right pull-right' href="javascript:void(0)"><button class="btn btn-sm btn-warning">Novo material</button></a>
+                </div>
+            </div>
         </div>
         <br>
-    </div>
+    <!--</div>-->
 </fieldset>

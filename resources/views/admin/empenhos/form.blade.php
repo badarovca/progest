@@ -80,11 +80,19 @@
                                 <th>Descricao</th>
                                 <th>Quant</th>
                                 <th>Valor total</th>
+                                <th>Valor unitário</th>
+                                <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody id='lista-materiais'>
                             @yield('lista-materiais')
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="3" class="text-right">Total</td>
+                                <th id="valor-total-empenho" >00,00</td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
                 <!-- /.box-body -->
@@ -96,9 +104,6 @@
     <br>
     <div class='new-material'>
 
-    </div>
-    <div class='row'>
-        <a id='add-material' class='col-md-3 text-right pull-right' href="javascript:void(0)">Novo material</a>
     </div>
     <br>
 </div>

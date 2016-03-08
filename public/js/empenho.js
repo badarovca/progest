@@ -1,12 +1,14 @@
 $(document).ready(function () {
 
-    $("#add-material").click(function () {
+    $("#add-material").click(function (event) {
+        event.preventDefault();
         url = $("#base_url").val() + '/form-material';
         $.get(
                 url,
                 function (data) {
                     $(".new-material").append(data.html);
                     $.mascarar_campos();
+                    $('.codigo-material').last().focus();
                 });
     });
 
@@ -17,12 +19,12 @@ $(document).ready(function () {
         $.get(
                 url,
                 function (data) {
-                    if (data.success === true){
+                    if (data.success === true) {
                         $("#lista-materiais").append(data.html);
-                    }else{
+                    } else {
                         $("#response-msg").html(data.html);
                     }
-                    
+
                 });
     });
 
@@ -37,20 +39,81 @@ $(document).ready(function () {
             material_descricao = $("#material_id option:selected").text();
             qtd = $("#qtd-material").val();
             valor = $("#valor-material").val();
+            temp = valor.replace('.', '');
+            temp = temp.replace(',', '.');
+            valor_unitario = parseFloat(temp) / parseInt(qtd);
+            valor_unitario = number_format(valor_unitario.toFixed(2), 2, ',', '.');
             $("#lista-materiais").append("\
-                <tr>\n\
+                <tr id='" + material_id + "'>\n\
                 <td style='width: 15%'>" + material_id + "</td>\n\
-                <td style='width: 65%'>" + material_descricao + "</td>\n\
+                <td style='width: 50%'>" + material_descricao + "</td>\n\
                 <td style='width: 10%'><input type='text' class='form-control' name='qtds[" + material_id + "]' id='qtds[" + material_id + "]' value='" + qtd + "' required readonly='true'></td>\n\
-                <td style='width: 10%'><input type='text' class='form-control' name='valores_materiais[" + material_id + "]' id='valores_materiais[" + material_id + "]' value='" + valor + "' required readonly='true'></td>\n\
+                <td style='width: 10%'><input type='text' class='form-control valor-total-material' name='valores_materiais[" + material_id + "]' id='valores_materiais[" + material_id + "]' value='" + valor + "' required readonly='true'></td>\n\
+                <td style='width: 10%'><input type='text' class='form-control valor' value='" + valor_unitario + "' readonly='true' autofocus></td>\n\
+                <td style='width: 5%'><a href='javascript:void(0)' class='btn btn-danger btn-xs remove-material' ><i class='fa fa-fw fa-remove'></i> remover</a></td>\n\
                 </tr>");
             $('#qtd-material').val("");
             $('#valor-material').val("");
+            atualiza_total();
         }
         return;
     });
+
+    //remove material já cadastrado da listagem
+    $("table").on("click", ".remove-material", function () {
+        $(this).closest("tr").remove();
+        atualiza_total();
+    });
+
+    //remove form de cadastro de novo material
+    $(document).on("click", ".remove-form-material", function () {
+        $(this).closest("fieldset").remove();
+        atualiza_total();
+    });
+
+    //atualiza total quando um novo material está sendo adicionado
+    $(document).on("keyup", '.valor-total-material', function (event) {
+        atualiza_total();
+    });
 });
 
+
+function atualiza_total() {
+    total = 0;
+    $('.valor-total-material').each(function (index) {
+        temp = $(this).val().replace('.', '');
+        temp = temp.replace(',', '.');
+        console.log(temp);
+        total += parseFloat(temp);
+    });
+    total = number_format(total, 2, ',', '.');
+    $("#valor-total-empenho").html(total);
+}
+
+//formatar números, assim como a função php numer_format
+function number_format(number, decimals, dec_point, thousands_sep) {
+    // Strip all characters but numerical ones.
+    number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+    var n = !isFinite(+number) ? 0 : +number,
+            prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+            sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+            dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+            s = '',
+            toFixedFix = function (n, prec) {
+                var k = Math.pow(10, prec);
+                return '' + Math.round(n * k) / k;
+            };
+    // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+    s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+    if (s[0].length > 3) {
+        s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+    }
+    if ((s[1] || '').length < prec) {
+        s[1] = s[1] || '';
+        s[1] += new Array(prec - s[1].length + 1).join('0');
+    }
+    return s.join(dec);
+}
 
 function formatRepo(repo) {
     if (repo.loading)
