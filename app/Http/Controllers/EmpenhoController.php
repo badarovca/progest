@@ -19,8 +19,7 @@ class EmpenhoController extends Controller {
     protected $materialRepository;
     protected $unidadeRepository;
 
-    public function __construct(EmpenhoRepository $empenhoRepository, FornecedorRepository $fornecedorRepository,
-            SubItemRepository $subItemRepository, MaterialRepository $materialRepository, UnidadeRepository $unidadeRepository) {
+    public function __construct(EmpenhoRepository $empenhoRepository, FornecedorRepository $fornecedorRepository, SubItemRepository $subItemRepository, MaterialRepository $materialRepository, UnidadeRepository $unidadeRepository) {
         $this->empenhoRepository = $empenhoRepository;
         $this->fornecedorRepository = $fornecedorRepository;
         $this->subItemRepository = $subItemRepository;
@@ -84,6 +83,9 @@ class EmpenhoController extends Controller {
      */
     public function edit($id) {
         $empenho = $this->empenhoRepository->show($id);
+        if ($empenho->entradas()->count() > 0) {
+            return back();
+        }
         $fornecedores = $this->fornecedorRepository->dataForSelect();
         $materiais = $this->materialRepository->dataForSelect();
         return view('admin.empenhos.edit')->with(compact(['empenho', 'fornecedores', 'materiais']));
@@ -112,6 +114,10 @@ class EmpenhoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
+        $empenho = $this->empenhoRepository->show($id);
+        if ($empenho->entradas()->count() > 0) {
+            return back();
+        }
         $this->empenhoRepository->destroy($id);
         return back()->with('success', 'Removido com sucesso!');
     }
@@ -124,7 +130,7 @@ class EmpenhoController extends Controller {
     public function getFormMaterial() {
         $subitens = $this->subItemRepository->dataForSelect();
         $unidades = $this->unidadeRepository->dataForSelect();
-        $returnHTML = view('admin.empenhos.form-material')->with(compact('subitens','unidades'))->render();
+        $returnHTML = view('admin.empenhos.form-material')->with(compact('subitens', 'unidades'))->render();
         return response()->json(array('success' => true, 'html' => $returnHTML));
     }
 

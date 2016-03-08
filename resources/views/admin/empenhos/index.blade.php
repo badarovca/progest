@@ -1,6 +1,10 @@
 @extends('admin.admin_template')
 
 @section('content')
+<!-- Laravel DELETE plugin -->
+<script>
+    window.csrfToken = '<?php echo csrf_token(); ?>';
+</script>
 <!--Content Wrapper. Contains page content -->
 <div class = "content-wrapper">
     <!--Content Header (Page header) -->
@@ -42,9 +46,14 @@
                         <a href="{!! route('admin.empenhos.entradas.index', $empenho->id) !!}" class="btn btn-warning btn-xs">
                             <i class="fa fa-fw fa-archive"></i> entradas
                         </a>
+                        @if($empenho->entradas()->count() == 0)
                         <a href="{!! route('admin.empenhos.edit', $empenho->id) !!}" class="btn btn-primary btn-xs">
                             <i class="fa fa-fw fa-pencil"></i> editar
                         </a>
+                        <a href="{!! route('admin.empenhos.destroy', $empenho->id) !!}" data-method="delete" data-confirm="Deseja remover o registro?" class="btn btn-danger btn-xs">
+                            <i class="fa fa-fw fa-remove"></i> remover
+                        </a>
+                        @endif
                     </td>
                 </tr>
                 @endforeach
