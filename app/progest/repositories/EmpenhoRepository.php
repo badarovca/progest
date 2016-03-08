@@ -23,13 +23,18 @@ class EmpenhoRepository {
 
     public function store($input) {
         $fornecedor_id = $input['empenho']['fornecedor_id'];
+        $solicitante_id = $input['empenho']['solicitante_id'];
         unset($input['empenho']['fornecedor_id']);
+        unset($input['empenho']['solicitante_id']);
         $empenho = new Empenho($input['empenho']);
         $input['materiais']['vl_total'] = $this->realToDolar($input['materiais']['vl_total']);
         $materiais = $this->preparaDadosMateriais($input['materiais']);
 
         $fornecedor = Fornecedor::find($fornecedor_id);
+        $solicitante = Fornecedor::find($solicitante_id);
+        
         $empenho->fornecedor()->associate($fornecedor);
+        $empenho->solicitante()->associate($solicitante);
 
         $empenho->save();
 

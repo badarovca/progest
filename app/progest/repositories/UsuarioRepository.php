@@ -10,11 +10,11 @@ use App\Role;
 class UsuarioRepository {
 
     public function dataForSelect() {
-        $baseArray = User::all();
+        $baseArray = User::where('habilitado', 1)->get();
         $usuarios = array();
         $usuarios[''] = 'Selecione...';
         foreach ($baseArray as $value) {
-            $usuarios[$value->id] = $value->name;
+            $usuarios[$value->id] = $value->name." - ".$value->setor->coordenacao->name;
         }
         return $usuarios;
     }

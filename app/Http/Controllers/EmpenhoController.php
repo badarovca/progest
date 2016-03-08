@@ -10,6 +10,7 @@ use App\progest\repositories\FornecedorRepository;
 use App\progest\repositories\SubItemRepository;
 use App\progest\repositories\MaterialRepository;
 use App\progest\repositories\UnidadeRepository;
+use App\progest\repositories\UsuarioRepository;
 
 class EmpenhoController extends Controller {
 
@@ -18,13 +19,16 @@ class EmpenhoController extends Controller {
     protected $subItemRepository;
     protected $materialRepository;
     protected $unidadeRepository;
+    protected $usuarioRepository;
 
-    public function __construct(EmpenhoRepository $empenhoRepository, FornecedorRepository $fornecedorRepository, SubItemRepository $subItemRepository, MaterialRepository $materialRepository, UnidadeRepository $unidadeRepository) {
+    public function __construct(EmpenhoRepository $empenhoRepository, FornecedorRepository $fornecedorRepository, SubItemRepository $subItemRepository, 
+            MaterialRepository $materialRepository, UnidadeRepository $unidadeRepository, UsuarioRepository $usuarioRepository) {
         $this->empenhoRepository = $empenhoRepository;
         $this->fornecedorRepository = $fornecedorRepository;
         $this->subItemRepository = $subItemRepository;
         $this->materialRepository = $materialRepository;
         $this->unidadeRepository = $unidadeRepository;
+        $this->usuarioRepository = $usuarioRepository;
     }
 
     /**
@@ -47,7 +51,8 @@ class EmpenhoController extends Controller {
         $empenho = null;
         $fornecedores = $this->fornecedorRepository->dataForSelect();
         $materiais = $this->materialRepository->dataForSelect();
-        return view('admin.empenhos.create')->with(compact(['empenho', 'fornecedores', 'materiais']));
+        $users = $this->usuarioRepository->dataForSelect();
+        return view('admin.empenhos.create')->with(compact(['empenho', 'fornecedores', 'materiais', 'users']));
     }
 
     /**

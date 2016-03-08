@@ -1,7 +1,11 @@
 <fieldset>
-    <a href="javascript:void(0)" class="btn btn-danger btn-xs pull-right remove-form-material">
-        <i class="fa fa-fw fa-remove"></i> cancelar
-    </a>
+    <div class="row">
+        <div class="col-md-3 col-md-offset-9">
+            <a href="javascript:void(0)" class="btn btn-danger btn-xs pull-right remove-form-material">
+                <i class="fa fa-fw fa-remove"></i> cancelar
+            </a>
+        </div>
+    </div>
     <legend>Novo material</legend>
     <div class="row">
         <div class='form-group'> 

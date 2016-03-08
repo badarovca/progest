@@ -26,6 +26,10 @@ class Empenho extends Model {
         return $this->belongsTo('App\Fornecedor');
     }
     
+    public function solicitante(){
+        return $this->belongsTo('App\User');
+    }
+    
     public function entradas(){
         return $this->hasMany('App\Entrada');
     }
