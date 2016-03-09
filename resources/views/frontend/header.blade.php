@@ -4,6 +4,9 @@
 @stop
 @section('menu-pedidos')
 <li>
-    <a href="{{route('pedidos.pedido-atual')}}">Pedido atual ({{Cart::count(false)}})</a>    
+    <a href="{{route('pedidos.pedido-atual')}}">Pedido atual ({{Cart::count(false)}})</a>       
+</li>
+<li>
+    <a href="{{route('pedidos.lista-pedidos')}}">Meus pedidos</a> 
 </li>
 @stop

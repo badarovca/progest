@@ -1,4 +1,4 @@
-@extends('admin.admin_template')
+@extends('frontend.frontend_template')
 
 @section('content')
 
@@ -16,9 +16,15 @@
     <section class = "content">
         <div class="container-fluid">
             <div class="box">
-                <div class="box-header">
-                    <h4 class="box-title">Solicitante: {{$pedido->solicitante->name}} (id: {{$pedido->solicitante->id}})</h4>
+                <div class="box-body">
+                    <div class="col-md-12">
+                        <p><b>Status do pedido:</b> {{$pedido->status}}</p>
+                        <p><b>Data do pedido:</b> {{date('d/m/Y',strtotime($pedido->created_at))}}</p>
+                        <p><b>Justificativa:</b> {{$pedido->obs}}</p>
+                    </div>
                 </div>
+            </div>
+            <div class="box">
                 <!-- /.box-header -->
                 <div class="box-body">
                     <table id="example2" class="table table-bordered table-hover">
@@ -26,7 +32,7 @@
                             <tr>
                                 <th>Código</th>
                                 <th>Descrição</th>
-                                <th>Qtd solicitada</th>
+                                <th>Qtd. solicitada</th>
                             </tr>
                         </thead>
                         <tbody>
