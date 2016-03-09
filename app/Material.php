@@ -19,7 +19,7 @@ class Material extends Model {
      * @var array
      */
     protected $fillable = [
-        'codigo', 'descricao', 'unidade', 'subitem_id', 'marca'
+        'codigo', 'descricao', 'unidade', 'subitem_id', 'marca', 'vencimento', 'qtd_min', 'imagem'
     ];
 
     public function subItem() {

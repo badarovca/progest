@@ -64,7 +64,7 @@ jQuery(function ($) {
         $("#num_processo").mask("99999999999/99-99");
 
         //mask para codigo de material
-        $("#codigo").mask("99999?99999999");
+//        $("#codigo").mask("99999?99999999");
 
         //mask para numero NF
         $("#num_nf").mask("999.999.999");

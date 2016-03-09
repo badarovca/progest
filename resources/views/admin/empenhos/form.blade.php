@@ -87,12 +87,12 @@
                         <tbody id='lista-materiais'>
                             @yield('lista-materiais')
                         </tbody>
-                        <tfoot>
+<!--                        <tfoot>
                             <tr>
                                 <th colspan="3" class="text-right">Total</td>
                                 <th id="valor-total-empenho" >00,00</td>
                             </tr>
-                        </tfoot>
+                        </tfoot>-->
                     </table>
                 </div>
                 <!-- /.box-body -->
@@ -106,5 +106,11 @@
 
     </div>
     <br>
+    
+    <div class="row">
+        <div class='col-md-3 col-md-offset-9 text-right'>
+            <b>Total: <span id='valor-total-empenho'>00,00</span></b>
+        </div>
+    </div>
 </div>
 

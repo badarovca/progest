@@ -63,7 +63,7 @@ class EmpenhoController extends Controller {
      */
     public function store(Request $request) {
         $input['empenho'] = $request->except('_token', 'codigo', 'descricao', 'marca', 'sub_item_id', 'vl_total', 'quant', 'ids_materiais');
-        $input['materiais'] = $request->only('codigo', 'descricao', 'unidade_id', 'marca', 'sub_item_id', 'vl_total', 'quant');
+        $input['materiais'] = $request->only('codigo', 'descricao', 'unidade_id', 'marca', 'sub_item_id', 'vl_total', 'quant', 'vencimento', 'qtd_min', 'imagem');
         $input['qtds'] = $request->only('qtds');
         $input['valores_materiais'] = $request->only('valores_materiais');
         $this->empenhoRepository->store($input);
@@ -105,7 +105,7 @@ class EmpenhoController extends Controller {
      */
     public function update(Request $request, $id) {
         $input['empenho'] = $request->except('_token', 'codigo', 'descricao', 'marca', 'sub_item_id', 'vl_total', 'quant', 'ids_materiais');
-        $input['materiais'] = $request->only('codigo', 'descricao', 'unidade_id', 'marca', 'sub_item_id', 'vl_total', 'quant');
+        $input['materiais'] = $request->only('codigo', 'descricao', 'unidade_id', 'marca', 'sub_item_id', 'vl_total', 'quant', 'vencimento', 'qtd_min', 'imagem');
         $input['qtds'] = $request->only('qtds');
         $input['valores_materiais'] = $request->only('valores_materiais');
         $this->empenhoRepository->update($id, $input);

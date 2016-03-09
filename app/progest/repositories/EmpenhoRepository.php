@@ -8,13 +8,16 @@ use App\Material;
 use App\SubItem;
 use App\Entrada;
 use App\Unidade;
+use App\progest\repositories\ImagemRepository;
 
 class EmpenhoRepository {
 
     protected $materialRepository;
+    protected $imagemRepository;
 
-    public function __construct(MaterialRepository $materialRepository) {
+    public function __construct(MaterialRepository $materialRepository, ImagemRepository $imagemRepository) {
         $this->materialRepository = $materialRepository;
+        $this->imagemRepository = $imagemRepository;
     }
 
     public function index() {
@@ -28,11 +31,12 @@ class EmpenhoRepository {
         unset($input['empenho']['solicitante_id']);
         $empenho = new Empenho($input['empenho']);
         $input['materiais']['vl_total'] = $this->realToDolar($input['materiais']['vl_total']);
+//        dd($input['materiais']);
         $materiais = $this->preparaDadosMateriais($input['materiais']);
 
         $fornecedor = Fornecedor::find($fornecedor_id);
         $solicitante = Fornecedor::find($solicitante_id);
-        
+
         $empenho->fornecedor()->associate($fornecedor);
         $empenho->solicitante()->associate($solicitante);
 
@@ -126,9 +130,18 @@ class EmpenhoRepository {
         foreach ($materiaisArray as $key => $val) {
             $materiaisObjects[$key] = new Material([
                 'codigo' => $val['codigo'], 'descricao' => $val['descricao'],
-                'marca' => $val['marca'],
+                'marca' => $val['marca'], 'vencimento' => isset($val['vencimento']) ? $val['vencimento'] : null,
+                'qtd_min' => $val['qtd_min'], 'imagem' => '',
                 'qtd_1' => 0, 'qtd_2' => 0, 'qtd_3' => 0, 'qtd_4' => 0, 'disponivel' => 0
             ]);
+
+            if (isset($val['imagem'])) {
+                $thumbs = [
+                    ['width' => '100', 'height' => '100'],
+                    ['width' => '400', 'height' => '400'],
+                ];
+                $materiaisObjects[$key]->imagem = $this->imagemRepository->sendImage($val['imagem'], 'img/materiais/', $thumbs);
+            }
 
             $subItem = SubItem::find($val['sub_item_id']);
             $materiaisObjects[$key]->subItem()->associate($subItem);
@@ -141,6 +154,9 @@ class EmpenhoRepository {
             unset($materiaisArray[$key]['unidade_id']);
             unset($materiaisArray[$key]['marca']);
             unset($materiaisArray[$key]['sub_item_id']);
+            unset($materiaisArray[$key]['imagem']);
+            unset($materiaisArray[$key]['vencimento']);
+            unset($materiaisArray[$key]['qtd_min']);
         }
         $materiais['joinings'] = $materiaisArray;
         $materiais['objects'] = $materiaisObjects;

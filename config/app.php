@@ -131,6 +131,7 @@ return [
         'Collective\Html\HtmlServiceProvider',
         'Zizaco\Entrust\EntrustServiceProvider',
         'Gloudemans\Shoppingcart\ShoppingcartServiceProvider',
+        'Intervention\Image\ImageServiceProvider',
     ],
     /*
       |--------------------------------------------------------------------------
@@ -180,5 +181,6 @@ return [
         'Html' => 'Collective\Html\HtmlFacade',
         'Entrust' => 'Zizaco\Entrust\EntrustFacade',
         'Cart' => 'Gloudemans\Shoppingcart\Facades\Cart',
+        'Image' => 'Intervention\Image\Facades\Image',
     ],
 ];
