@@ -46,7 +46,7 @@
                 <div class="box box-solid">
                     <div class="box-body">
                         <div class="image inline-block">
-                            <img src="{{ asset("img/material.png") }}" alt="{{$material->descricao}}"/>
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#imagem{{$material->id}}"><img src="{{ $material->imagem != '' ? asset($material->imagem) : asset("img/material.png")}}" width="100" height="100"alt="{{$material->descricao}}"/></a>
                         </div>
                         <div class="description inline-block">
                             <div><span><b>Descrição: </b></span> {{$material->descricao}}</div>
@@ -62,7 +62,7 @@
                         {!! Form::open(array('route' => 'pedidos.add-material')) !!}
                         <div class='form-group'>
                             {!! Form::label('qtd[$material->id]', 'Quantidade')!!}
-                        {!!Form::number("qtd[$material->id]", null, array('class'=>'form-control', 'id' => "qtd[$material->id]", 'required' => 'required', 'min'=>'0'))!!}
+                            {!!Form::number("qtd[$material->id]", null, array('class'=>'form-control', 'id' => "qtd[$material->id]", 'required' => 'required', 'min'=>'0'))!!}
                         </div>
                         {!! Form::submit('Adicionar ao pedido', ['class'=>'btn btn-default'])!!}
                         {!! Form::close() !!}
@@ -70,8 +70,24 @@
                 </div>
             </div>
         </div>
-
+        <div class="modal fade" id="imagem{{$material->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">{{$material->descricao}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class='text-center center-block'>
+                            <img src="{{ $material->imagem != '' ? asset($material->imagem) : asset("img/material.png")}}"alt="{{$material->descricao}}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         @endforeach
+
+
         <div class="row">
             <div class="col-md-8 text-center">
                 {!! str_replace('/?', '?', $materiais->render()) !!}
