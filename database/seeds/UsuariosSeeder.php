@@ -34,6 +34,15 @@ class UsuariosSeeder extends Seeder {
            'habilitado' => 1,
         ])->attachRole(Role::find(2));
         
+        User::create([
+           'name' => 'Almoxarife',
+           'email' => 'almoxarife@progest.com',
+           'password' => bcrypt('almoxarife1'),
+           'telefone' => '(77) 99789-9021',
+           'siape' => '3333333',
+           'habilitado' => 1,
+        ])->attachRole(Role::find(3));
+        
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 

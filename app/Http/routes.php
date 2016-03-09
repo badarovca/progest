@@ -10,7 +10,23 @@
   | and give it the controller to call when that URI is requested.
   |
  */
-Entrust::routeNeedsRole('admin*', 'admin', Redirect::to('/auth/login'));
+//Permissões ADMIN
+Entrust::routeNeedsRole('admin/usuarios*', 'admin', Redirect::to('/auth/login'));
+Entrust::routeNeedsRole('admin/setores*', 'admin', Redirect::to('/auth/login'));
+Entrust::routeNeedsRole('admin/coordenacoes*', 'admin', Redirect::to('/auth/login'));
+Entrust::routeNeedsRole('admin/fornecedores*', 'admin', Redirect::to('/auth/login'));
+Entrust::routeNeedsRole('admin/subitens*', 'admin', Redirect::to('/auth/login'));
+Entrust::routeNeedsRole('admin/unidades*', 'admin', Redirect::to('/auth/login'));
+Entrust::routeNeedsRole('admin/materiais*', 'admin', Redirect::to('/auth/login'));
+
+//Permissões ADMIN e ALMOXARIFE
+Entrust::routeNeedsRole('admin', array('admin','almoxarife'), Redirect::to('/auth/login'), false);
+Entrust::routeNeedsRole('admin/empenhos*', array('admin','almoxarife'), Redirect::to('/auth/login'), false);
+Entrust::routeNeedsRole('admin/entradas*', array('admin','almoxarife'), Redirect::to('/auth/login'), false);
+Entrust::routeNeedsRole('admin/pedidos*', array('admin','almoxarife'), Redirect::to('/auth/login'), false);
+Entrust::routeNeedsRole('admin/saidas*', array('admin','almoxarife'), Redirect::to('/auth/login'), false);
+
+//Permissões SOLICITANTE
 Entrust::routeNeedsRole('pedidos*', 'solicitante', Redirect::to('/auth/login'));
 
 Route::controllers([

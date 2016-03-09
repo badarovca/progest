@@ -23,6 +23,10 @@ class PermissoesSeeder extends Seeder {
            'name' => 'solicitante',
            'display_name' => 'Solicitante',
         ]);
+        Role::create([
+           'name' => 'almoxarife',
+           'display_name' => 'Almoxarife',
+        ]);
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 
