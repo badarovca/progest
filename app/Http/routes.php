@@ -43,6 +43,8 @@ Route::group(['prefix' => 'pedidos'], function () {
     Route::get('/', ['as' => 'pedidos', 'uses' => 'PedidoController@exibirMateriais']);
     Route::get('/busca-materiais', ['as' => 'pedidos.busca-materiais', 'uses' => 'PedidoController@search']);
     Route::get('/pedido-atual', ['as' => 'pedidos.pedido-atual', 'uses' => 'PedidoController@getPedidoAtual']);
+    Route::get('/lista-pedidos', ['as' => 'pedidos.lista-pedidos', 'uses' => 'PedidoController@exibirPedidos']);
+    Route::get('/pedidos/{id}', ['as' => 'pedidos.show', 'uses' => 'PedidoController@show_solicitante']);
     Route::post('/add-material', ['as' => 'pedidos.add-material', 'uses' => 'PedidoController@addMaterial']);
     Route::post('/store', ['as' => 'pedidos.store', 'uses' => 'PedidoController@store']);
     Route::delete('/remover-material/{rowid}', ['as' => 'pedidos.remover-material', 'uses' => 'PedidoController@removeMaterial']);

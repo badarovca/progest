@@ -34,6 +34,11 @@ class PedidoController extends Controller {
         $materiais = $this->materialRepository->index(['disponivel' => true, 'paginate' => 20]);
         return view('frontend.home')->with(compact('materiais'));
     }
+    
+    public function exibirPedidos() {
+        $pedidos = $this->pedidoRepository->index(['paginate' => 20]);
+        return view('frontend.pedidos.lista-pedidos')->with(compact('pedidos'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -70,8 +75,12 @@ class PedidoController extends Controller {
             return view('admin.pedidos.create-saida')->with(compact('pedido'));
         }else{
             return view('admin.pedidos.show')->with(compact('pedido'));
-        }
-        
+        } 
+    }
+    
+    public function show_solicitante($id) {
+        $pedido = $this->pedidoRepository->show($id);
+        return view('frontend.pedidos.show')->with(compact('pedido'));
     }
 
     /**
