@@ -14,7 +14,7 @@
 
     <!--Main content -->
     <section class = "content">
-        {!! Form::model($empenho, ['route' => ['admin.empenhos.update', $empenho->id], 'method'=>'PUT'])!!}
+        {!! Form::model($empenho, ['route' => ['admin.empenhos.update', $empenho->id], 'method'=>'PUT', 'files'=>true])!!}
         @include('admin.empenhos.form-edit')
         <div class="form-group">
             <div class='col-md-12'>

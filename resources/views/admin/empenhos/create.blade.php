@@ -14,7 +14,7 @@
 
     <!--Main content -->
     <section class = "content">
-        {!! Form::model($empenho, ['route' => 'admin.empenhos.store'])!!}
+        {!! Form::model($empenho, ['route' => 'admin.empenhos.store', 'files'=>true])!!}
         @include('admin.empenhos.form')
         <div class="form-group">
             <div class='col-md-12'>
