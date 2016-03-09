@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 Use App\progest\repositories\PedidoRepository;
@@ -36,7 +37,7 @@ class PedidoController extends Controller {
     }
     
     public function exibirPedidos() {
-        $pedidos = $this->pedidoRepository->index(['paginate' => 20]);
+        $pedidos = $this->pedidoRepository->index(['user_id' => Auth::user()->id,  'paginate' => 20]);
         return view('frontend.pedidos.lista-pedidos')->with(compact('pedidos'));
     }
 

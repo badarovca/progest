@@ -4,7 +4,7 @@
 <!--Content Wrapper. Contains page content -->
 <div class = "content-wrapper">
     <!--Content Header (Page header) -->
-    <section class = "content-header">
+    <section class = "content-header container">
         <h1>
             {!! $page_title or "Meus pedidos" !!}
             <small>{!! $page_description or null !!}</small>
@@ -17,11 +17,11 @@
 
     <!--Main content -->
     <section class = "content container">
-        <!--Your Page Content Here -->
-        <div class="box">
-            <div class="box-dody">
-                <div class="row">
-                    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <!--Your Page Content Here -->
+                <div class="box">
+                    <div class="box-dody">
                         @if(count($pedidos) > 0)
                         <table class="table table-bordered table-hover table-striped">
                             <thead>
@@ -48,8 +48,14 @@
                             </tbody>
                         </table>
                         @else
-                        <h5 class="well">Nenhum pedido ainda cadastrado.</h5>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5>Nenhum pedido ainda cadastrado.</h5>
+                                <br>
+                            </div>
+                        </div>
                         @endif
+
                     </div>
                 </div>
             </div>

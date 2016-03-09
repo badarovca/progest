@@ -15,14 +15,25 @@ class PedidoRepository {
         $this->materialRepository = $materialRepository;
     }
 
-    public function index() {
-        return Pedido::all()->sortBy('creatated_at');
+    public function index($filter = null) {
+        if ($filter) {
+            $pedidos = Pedido::where(function($query) use (&$filter) {
+                        if (isset($filter['user_id'])) {
+                            $query->where('user_id', '=', $filter['user_id']);
+                        }
+                    })
+                    ->orderBy('created_at', 'desc')
+                    ->paginate($filter['paginate']);
+        } else {
+            $pedidos = Pedido::all()->sortBy('creatated_at');
+        }
+        return $pedidos;
     }
 
     public function store($input) {
         $pedido = new Pedido(['obs' => $input['obs'], 'status' => 'Pendente']);
         $pedido->solicitante()->associate(Auth::user());
-        
+
         $pedido->save();
 
         foreach ($input['qtds'] as $key => $val) {
@@ -36,7 +47,7 @@ class PedidoRepository {
 
     public function update($id, $input) {
         $pedido = Pedido::find($id);
-        foreach ($input as $key=>$val){
+        foreach ($input as $key => $val) {
             $pedido->$key = $val;
         }
         return $pedido->save();
