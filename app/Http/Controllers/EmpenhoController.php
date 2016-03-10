@@ -93,7 +93,8 @@ class EmpenhoController extends Controller {
         }
         $fornecedores = $this->fornecedorRepository->dataForSelect();
         $materiais = $this->materialRepository->dataForSelect();
-        return view('admin.empenhos.edit')->with(compact(['empenho', 'fornecedores', 'materiais']));
+        $users = $this->usuarioRepository->dataForSelect();
+        return view('admin.empenhos.edit')->with(compact(['empenho', 'fornecedores', 'materiais', 'users']));
     }
 
     /**

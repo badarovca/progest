@@ -6,6 +6,7 @@ use Auth;
 use App\Saida;
 use App\Material;
 use App\User;
+use App\Pedido;
 
 class SaidaRepository {
 
@@ -18,6 +19,10 @@ class SaidaRepository {
         $usuario = User::find($input['saida']['solicitante_id']);
         $saida->solicitante()->associate($usuario);
         $saida->responsavel()->associate(Auth::user());
+        if(isset($input['pedido_id'])){
+            $pedido = Pedido::find($input['pedido_id']);
+            $saida->pedido()->associate($pedido);
+        }
         $saida->save();
 
         $materiais = [];

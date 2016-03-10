@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/var/www/html/progest/config/app.php</file>
+            <file>file:/var/www/html/progest/app/progest/repositories/PedidoRepository.php</file>
+            <file>file:/var/www/html/progest/app/Http/routes.php</file>
+            <file>file:/var/www/html/progest/resources/views/frontend/pedidos/lista-pedidos.blade.php</file>
+            <file>file:/var/www/html/progest/resources/views/frontend/pedidos/pedido-atual.blade.php</file>
+            <file>file:/var/www/html/progest/app/progest/repositories/UsuarioRepository.php</file>
+            <file>file:/var/www/html/progest/composer.json</file>
+            <file>file:/var/www/html/progest/app/Http/Controllers/EmpenhoController.php</file>
+            <file>file:/var/www/html/progest/app/Http/Controllers/PedidoController.php</file>
+            <file>file:/var/www/html/progest/resources/views/frontend/home.blade.php</file>
+        </group>
     </open-files>
 </project-private>

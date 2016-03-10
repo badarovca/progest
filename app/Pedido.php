@@ -19,5 +19,9 @@ class Pedido extends Model {
     public function materiais() {
         return $this->belongsToMany('App\Material', 'pedido_material')->withTimestamps()->withPivot('quant');
     }
+    
+    public function saida(){
+        return $this->hasOne('App\Saida');
+    }
 
 }

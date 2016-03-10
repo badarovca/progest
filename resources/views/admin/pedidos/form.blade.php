@@ -45,7 +45,7 @@
         </div>
     </div>
     
-    {!!Form::hidden('solicitante_id', 1);!!}
+    {!!Form::hidden('solicitante_id', $pedido->solicitante->id);!!}
     {!!Form::hidden("pedido[$pedido->id]", "Resolvido");!!}
     <div class="row">
         <div class='form-group'>

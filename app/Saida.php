@@ -21,5 +21,9 @@ class Saida extends Model {
     public function materiais() {
         return $this->belongsToMany('App\Material', 'saida_material')->withTimestamps()->withPivot('quant');
     }
+    
+    public function pedido(){
+        return $this->belongsTo('App\Pedido');
+    }
 
 }

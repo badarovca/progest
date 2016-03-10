@@ -60,6 +60,7 @@ class SaidaController extends Controller {
         if($pedido['pedido'] != null){
             foreach($pedido['pedido'] as $key=>$val){
                 $status['status'] = $val;
+                $input['pedido_id'] = $key;
                 $this->pedidoRepository->update($key, $status);
             }
         }
