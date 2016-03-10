@@ -3,8 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laracasts\Presenter\PresentableTrait;
 
 class Material extends Model {
+    
+     use PresentableTrait;
+     
+    protected $presenter = 'App\progest\presenters\MaterialPresenter';
 
     /**
      * The database table used by the model.

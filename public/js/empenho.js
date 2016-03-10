@@ -1,5 +1,6 @@
 $(document).ready(function () {
-
+    atualiza_total();
+    
     $("#add-material").click(function (event) {
         event.preventDefault();
         url = $("#base_url").val() + '/form-material';
@@ -79,15 +80,16 @@ $(document).ready(function () {
 
 
 function atualiza_total() {
-    total = 0;
-    $('.valor-total-material').each(function (index) {
-        temp = $(this).val().replace('.', '');
-        temp = temp.replace(',', '.');
-        console.log(temp);
-        total += parseFloat(temp);
-    });
-    total = number_format(total, 2, ',', '.');
-    $("#valor-total-empenho").html(total);
+    if ($('html').find('valor-total-material')) {
+        total = 0;
+        $('.valor-total-material').each(function (index) {
+            temp = $(this).val().replace('.', '');
+            temp = temp.replace(',', '.');
+            total += parseFloat(temp);
+        });
+        total = number_format(total, 2, ',', '.');
+        $("#valor-total-empenho").html(total);
+    }
 }
 
 //formatar números, assim como a função php numer_format
