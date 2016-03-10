@@ -64,8 +64,8 @@ class EntradaController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function show($id) {
-        $entrada = $this->entradaRepository->show($id);
+    public function show($idEmpenho, $idEntrada) {
+        $entrada = $this->entradaRepository->show($idEntrada);
         return view('admin.entradas.show')->with(compact(['entrada']));
     }
 
