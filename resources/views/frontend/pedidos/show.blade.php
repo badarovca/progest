@@ -50,7 +50,7 @@
                             <tr>
                                 <th>Código</th>
                                 <th>Descrição</th>
-                                <th>Qtd. solicitada</th>
+                                <th>Qtd. entregue</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,7 +64,7 @@
                         </tbody>
                     </table>
                     <h3 class="text-center">Observações</h3>
-                    
+                    <p>{{$pedido->saida->obs}}</p>
                     @endif
                 </div>
             </div>

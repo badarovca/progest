@@ -68,12 +68,16 @@ class EmpenhoRepository {
         $empenho->el_consumo = $input['empenho']['el_consumo'];
         $empenho->mod_licitacao = $input['empenho']['mod_licitacao'];
         $empenho->num_processo = $input['empenho']['num_processo'];
-        $empenho->solicitantes = $input['empenho']['solicitantes'];
+
         $input['materiais']['vl_total'] = $this->realToDolar($input['materiais']['vl_total']);
         $materiais = $this->preparaDadosMateriais($input['materiais']);
 
         $fornecedor = Fornecedor::find($input['empenho']['fornecedor_id']);
+        $solicitante = Fornecedor::find($input['empenho']['solicitante_id']);
+
         $empenho->fornecedor()->associate($fornecedor);
+        $empenho->solicitante()->associate($solicitante);
+        
 
         if ($input['qtds']['qtds']) {
             $materiais_ids = [];

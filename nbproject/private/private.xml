@@ -5,7 +5,10 @@
         <group>
             <file>file:/var/www/html/progest/app/Http/routes.php</file>
             <file>file:/var/www/html/progest/resources/views/frontend/pedidos/show.blade.php</file>
+            <file>file:/var/www/html/progest/app/progest/repositories/EmpenhoRepository.php</file>
             <file>file:/var/www/html/progest/resources/views/frontend/pedidos/lista-pedidos.blade.php</file>
+            <file>file:/var/www/html/progest/app/Http/Controllers/EntradaController.php</file>
+            <file>file:/var/www/html/progest/app/progest/repositories/EntradaRepository.php</file>
         </group>
     </open-files>
 </project-private>
