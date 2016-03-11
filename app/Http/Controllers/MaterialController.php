@@ -13,7 +13,7 @@ class MaterialController extends Controller {
 
     protected $materialRepository;
     protected $subItemRepository;
-    protected $UnidadeItemRepository;
+    protected $unidadeRepository;
     
 
     public function __construct(SubItemRepository $subItemRepository, MaterialRepository $materialRepository, 
@@ -28,9 +28,14 @@ class MaterialController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $materiais = $this->materialRepository->index();
-        return view('admin.materiais.index')->with(compact('materiais'));
+    public function index(Request $input) {
+        $input->flash();
+        $input = $input->all();
+        $input['paginate'] = 20;
+        $materiais = $this->materialRepository->index($input);
+        $unidades = $this->unidadeRepository->dataForSelect();
+        $subitens = $this->subItemRepository->dataForSelect();
+        return view('admin.materiais.index')->with(compact('materiais', 'unidades', 'subitens'));
     }
 
     /**
