@@ -31,3 +31,10 @@
     border-color: #00A65A!important;
 }
 
+
+.skin-green .main-header .logo {
+     background-color: #222d32!important; 
+}
+.skin-green .main-header .logo:hover {
+    background-color: #1a2226!important;
+}

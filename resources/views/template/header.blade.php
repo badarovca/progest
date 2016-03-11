@@ -2,7 +2,7 @@
 <header class="main-header">
 
     <!-- Logo -->
-    <a href="{{ url('/')}}" class="logo"><b>Pro</b>Gest</a>
+    <a href="{{ url('/')}}" class="logo"><img class="img-fluid" src='{{asset('img/logo-horizontal.png')}}' style="max-width: 150px"></a>
 
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
