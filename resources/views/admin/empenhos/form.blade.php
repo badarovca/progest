@@ -47,6 +47,7 @@
                 {!!Form::label('mod_licitacao', 'Modalidade da licitação', array('class'=>'control-label'))!!}
 <!--                {!!Form::text('mod_licitacao', null, array('class'=>'form-control', 'id' => 'mod_licitacao', 'required' => 'required'))!!}-->
                 {!!Form::select('mod_licitacao', [
+                ''=>'Selecione...', 
                 'Concorrência'=>'Concorrência', 
                 'Concurso'=>'Concurso', 
                 'Convite'=>'Convite', 
@@ -54,7 +55,7 @@
                 'Pregão'=>'Pregão', 
                 'Pregão Eletrônico'=>'Pregão Eletrônico', 
                 'Tomada de Preços' => 'Tomada de Preços'
-                ], 'Pregão', ['required' => 'required', 'class'=>'form-control', 'id'=>'mod_licitacao'])!!}
+                ], null, ['required' => 'required', 'class'=>'form-control', 'id'=>'mod_licitacao'])!!}
             </div>
             <div class='col-md-6'>
                 {!!Form::label('num_processo', 'Nº do processo', array('class'=>'control-label'))!!}

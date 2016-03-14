@@ -72,5 +72,5 @@
     '95'=>'95 Indenização pela Execução de Trabalhos de Campo', 
     '96'=>'96 Ressarcimento de Despesas de Pessoal Requisitado', 
     '99'=>'99 A Classificar', 
-    ], 30, ['required' => 'required', 'class'=>'form-control', 'id'=>'el_consumo'])!!}
+    ], null, ['required' => 'required', 'class'=>'form-control', 'id'=>'el_consumo'])!!}
 </div>
