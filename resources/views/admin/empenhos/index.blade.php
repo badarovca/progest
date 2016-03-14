@@ -40,7 +40,7 @@
                     <td>{!! $empenho->numero !!}</td>
                     <td>{!! $empenho->fornecedor->razao !!}</td>
                     <td>{!! $empenho->tipo !!}</td>
-                    <td>{!! $empenho->mod_aplicacao !!}</td>
+                    <td>{!! $empenho->mod_licitacao !!}</td>
                     <td>{!! $empenho->num_processo !!}</td>
                     <td width="1%" nowrap>
                         <a href="{!! route('admin.empenhos.entradas.index', $empenho->id) !!}" class="btn btn-warning btn-xs">
