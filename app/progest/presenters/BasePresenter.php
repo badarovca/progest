@@ -5,12 +5,12 @@ use Laracasts\Presenter\Presenter;
 
 class BasePresenter extends Presenter {
 
-    public function formatDate($data) {
-        return date('d/m/Y', strtotime($data));
+    public function created_at($data) {
+        return date('d/m/Y', strtotime($this->created_at));
     }
 
-    public function formatDateTime($data) {
-        return date('d/m/Y H:i', strtotime($data));
+    public function last_update() {
+        return date('d/m/Y H:i', strtotime($this->updated_at));
     }
 
     public function getThumbUrl($caminho, $width, $height) {
