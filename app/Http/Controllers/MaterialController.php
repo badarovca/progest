@@ -32,7 +32,7 @@ class MaterialController extends Controller {
     public function index(FilterMaterialRequest $input) {
         $input->flash();
         $input = $input->all();
-        $input['paginate'] = 20;
+        $input['paginate'] = 2;
         $materiais = $this->materialRepository->index($input);
         $order = [''=>'Selecione...', 
             'updated_at-desc' => 'Data - mais atual', 'updated_at-asc' => 'Data - mais antigo', 
@@ -40,7 +40,7 @@ class MaterialController extends Controller {
             'qtd_1-asc' => 'Estoque - menor', 'qtd_1-desc' => 'Estoque - maior', 
             'sub_item_id-asc' => 'SubItem'];
             
-        return view('admin.materiais.index')->with(compact('materiais', 'order'));
+        return view('admin.materiais.index')->with(compact('materiais', 'order', 'input'));
     }
 
     /**

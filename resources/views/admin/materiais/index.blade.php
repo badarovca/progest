@@ -90,7 +90,7 @@
         @endif
         <div class="row">
             <div class="col-md-12 text-center">
-                {!! str_replace('/?', '?', $materiais->render()) !!}
+                {!! str_replace('/?', '?', $materiais->appends($input)->render()) !!}
             </div>
         </div>
     </section><!--/.content -->

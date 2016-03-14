@@ -63,7 +63,7 @@ class MaterialRepository {
                             $query->where('unidade_id', '=', $filter['unidade']);
                         }
                     })->orderBy($orderBy[0], $orderBy[1])
-                    ->paginate();
+                    ->paginate($filter['paginate']);
         } else {
             $materiais = Material::all();
         }
