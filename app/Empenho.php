@@ -19,7 +19,7 @@ class Empenho extends Model {
      * @var array
      */
     protected $fillable = [
-        'numero', 'tipo', 'cat_despesa', 'mod_aplicacao', 'el_consumo', 'mod_licitacao', 'num_processo', 'solicitantes','fornecedor_id'
+        'numero', 'tipo', 'cat_despesa', 'el_consumo', 'mod_licitacao', 'num_processo', 'solicitantes','fornecedor_id'
     ];
     
     public function fornecedor(){

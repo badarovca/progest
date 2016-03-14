@@ -10,8 +10,8 @@
             </div>
             <div class='col-md-2'>
                 <div class='form-group'>
-                    {!!Form::label('quant', 'Quant', array('class'=>'control-label'))!!}
-                    {!!Form::number(null, null, ['class'=>'form-control', 'quant'=>'quant', 'id'=>'qtd-material'])!!}
+                    {!!Form::label('quant', 'Quantidade', array('class'=>'control-label'))!!}
+                    {!!Form::number(null, null, ['min'=>'0', 'class'=>'form-control', 'quant'=>'quant', 'id'=>'qtd-material'])!!}
                 </div>
             </div>
             <div class='col-md-2'>

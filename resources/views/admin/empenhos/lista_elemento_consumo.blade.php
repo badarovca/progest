@@ -1,116 +1,76 @@
-<script></script>
-<div class="container-fluid">
-    <div class="row">
-        <div class='form-group'> 
-            <div class='col-md-6'>
-                {!!Form::label('numero', 'Número', array('class'=>'control-label'))!!}
-                {!!Form::text('numero', null, array('class'=>'form-control', 'id' => 'numero', 'required' => 'required'))!!}
-            </div>
-
-            <div class='col-md-6'>
-                {!!Form::label('tipo', 'Tipo', array('class'=>'control-label'))!!}
-                {!!Form::select('tipo', ['ORDINÁRIO'=>'ORDINÁRIO', 'ESTIMATIVO' => 'ESTIMATIVO', 'GLOBAL' => 'GLOBAL'], null, ['required' => 'required', 'class'=>'form-control', 'id'=>'fornecedor_id'])!!}
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class='form-group'>
-            <div class='col-md-6'>
-                {!!Form::label('fornecedor_id', 'Fornecedor', array('class'=>'control-label'))!!}
-                {!!Form::select('fornecedor_id', $fornecedores, null, ['required' => 'required', 'class'=>'form-control', 'id'=>'fornecedor_id'])!!}
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class='form-group'>
-            <div class='col-md-2'>
-                {!!Form::label('cat_despesa', 'Categoria da despesa', array('class'=>'control-label'))!!}
-                {!!Form::text('cat_despesa', null, array('class'=>'form-control', 'id' => 'cat_despesa', 'required' => 'required'))!!}
-            </div>
-            <div class='col-md-2'>
-                {!!Form::label('mod_aplicacao', 'Mod. aplicação', array('class'=>'control-label'))!!}
-                {!!Form::text('mod_aplicacao', null, array('class'=>'form-control', 'id' => 'mod_aplicacao', 'required' => 'required'))!!}
-            </div>
-            <div class='col-md-2'>
-                {!!Form::label('el_consumo', 'Elemento de consumo', array('class'=>'control-label'))!!}
-                {!!Form::text('el_consumo', null, array('class'=>'form-control', 'id' => 'el_consumo', 'required' => 'required'))!!}
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class='form-group'>
-            <div class='col-md-6'>
-                {!!Form::label('mod_licitacao', 'Modalidade da licitação', array('class'=>'control-label'))!!}
-                {!!Form::text('mod_licitacao', null, array('class'=>'form-control', 'id' => 'mod_licitacao', 'required' => 'required'))!!}
-            </div>
-            <div class='col-md-6'>
-                {!!Form::label('num_processo', 'Nº do processo', array('class'=>'control-label'))!!}
-                {!!Form::text('num_processo', null, array('class'=>'form-control', 'id' => 'num_processo', 'required' => 'required'))!!}
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class='form-group'>
-            <div class='col-md-12'>
-                {!!Form::label('solicitante_id', 'Solicitante', array('class'=>'control-label'))!!}
-                {!!Form::select('solicitante_id', $users, null, ['required' => 'required', 'class'=>'form-control', 'id'=>'solicitante_id'])!!}
-            </div>
-        </div>
-    </div>
-    <br>
-    @include('admin.empenhos.form-select-material')
-    <br>
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">Materiais</h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <table id="example2" class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Descricao</th>
-                                <th>Quant</th>
-                                <th>Valor total</th>
-                                <th>Valor unitário</th>
-                                <th>Ação</th>
-                            </tr>
-                        </thead>
-                        <tbody id='lista-materiais'>
-                            @yield('lista-materiais')
-                        </tbody>
-<!--                        <tfoot>
-                            <tr>
-                                <th colspan="3" class="text-right">Total</td>
-                                <th id="valor-total-empenho" >00,00</td>
-                            </tr>
-                        </tfoot>-->
-                    </table>
-                </div>
-                <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-
-        </div>
-    </div>
-    <br>
-    <div class='new-material'>
-
-    </div>
-    <br>
-    
-    <div class="row">
-        <div class='col-md-3 col-md-offset-9 text-right'>
-            <b>Total: <span id='valor-total-empenho'>00,00</span></b>
-        </div>
-    </div>
+<div class='col-md-4'>
+    {!!Form::label('el_consumo', 'Elemento de consumo', array('class'=>'control-label'))!!}
+    <!--                {!!Form::text('el_consumo', null, array('class'=>'form-control', 'id' => 'el_consumo', 'required' => 'required'))!!}-->  
+    {!!Form::select('el_consumo', [
+    ''=>'Selecione...', 
+    '01 Aposentadorias e Reformas'=>'01 Aposentadorias e Reformas', 
+    '03 Pensões'=>'03 Pensões', 
+    '04 Contratação por Tempo Determinado'=>'04 Contratação por Tempo Determinado', 
+    '05 Outros Benefícios Previdenciários'=>'05 Outros Benefícios Previdenciários', 
+    '06 Benefício Mensal ao Deficiente e ao Idoso'=>'06 Benefício Mensal ao Deficiente e ao Idoso', 
+    '07 Contribuição a Entidades Fechadas de Previdência'=>'07 Contribuição a Entidades Fechadas de Previdência', 
+    '08 Outros Benefícios Assistenciais'=>'08 Outros Benefícios Assistenciais', 
+    '09 Salário-Família'=>'09 Salário-Família', 
+    '10 Outros Benefícios de Natureza Social'=>'10 Outros Benefícios de Natureza Social', 
+    '11 Vencimentos e Vantagens Fixas – Pessoal Civil'=>'11 Vencimentos e Vantagens Fixas – Pessoal Civil', 
+    '12 Vencimentos e Vantagens Fixas – Pessoal Militar'=>'12 Vencimentos e Vantagens Fixas – Pessoal Militar', 
+    '13 Obrigações Patronais'=>'13 Obrigações Patronais', 
+    '14 Diárias – Civil'=>'14 Diárias – Civil', 
+    '15 Diárias – Militar'=>'15 Diárias – Militar', 
+    '16 Outras Despesas Variáveis – Pessoal Civil'=>'16 Outras Despesas Variáveis – Pessoal Civil', 
+    '17 Outras Despesas Variáveis – Pessoal Militar'=>'17 Outras Despesas Variáveis – Pessoal Militar', 
+    '18 Auxílio Financeiro a Estudantes'=>'18 Auxílio Financeiro a Estudantes', 
+    '19 Auxílio-Fardamento'=>'19 Auxílio-Fardamento', 
+    '20 Auxílio Financeiro a Pesquisadores'=>'20 Auxílio Financeiro a Pesquisadores', 
+    '21 Juros sobre a Dívida por Contrato'=>'21 Juros sobre a Dívida por Contrato', 
+    '22 Outros Encargos sobre a Dívida por Contrato'=>'22 Outros Encargos sobre a Dívida por Contrato', 
+    '23 Juros, Deságios e Descontos da Dívida Mobiliária'=>'23 Juros, Deságios e Descontos da Dívida Mobiliária', 
+    '24 Outros Encargos sobre a Dívida Mobiliária'=>'24 Outros Encargos sobre a Dívida Mobiliária', 
+    '25 Encargos sobre Operações de Crédito por Antecipação da Receita'=>'25 Encargos sobre Operações de Crédito por Antecipação da Receita', 
+    '26 Obrigações decorrentes de Política Monetária'=>'26 Obrigações decorrentes de Política Monetária', 
+    '27 Encargos pela Honra de Avais, Garantias, Seguros e Similares'=>'27 Encargos pela Honra de Avais, Garantias, Seguros e Similares', 
+    '28 Remuneração de Cotas de Fundos Autárquicos'=>'28 Remuneração de Cotas de Fundos Autárquicos', 
+    '30 Material de Consumo'=>'30 Material de Consumo', 
+    '31 Premiações Culturais, Artísticas, Científicas, Desportivas e Outras'=>'31 Premiações Culturais, Artísticas, Científicas, Desportivas e Outras', 
+    '32 Material de Distribuição Gratuita'=>'32 Material de Distribuição Gratuita', 
+    '33 Passagens e Despesas com Locomoção'=>'33 Passagens e Despesas com Locomoção', 
+    '34 Outras Despesas de Pessoal decorrentes de Contratos de Terceirização'=>'34 Outras Despesas de Pessoal decorrentes de Contratos de Terceirização', 
+    '35 Serviços de Consultoria'=>'35 Serviços de Consultoria', 
+    '36 Outros Serviços de Terceiros – Pessoa Física'=>'36 Outros Serviços de Terceiros – Pessoa Física', 
+    '37 Locação de Mão-de-Obra'=>'37 Locação de Mão-de-Obra', 
+    '38 Arrendamento Mercantil'=>'38 Arrendamento Mercantil', 
+    '42 MANUAL DE DESPESA NACIONAL – 1ª EDIÇÃO'=>'42 MANUAL DE DESPESA NACIONAL – 1ª EDIÇÃO', 
+    '39 Outros Serviços de Terceiros – Pessoa Jurídica'=>'39 Outros Serviços de Terceiros – Pessoa Jurídica', 
+    '41 Contribuições'=>'41 Contribuições', 
+    '42 Auxílios'=>'42 Auxílios', 
+    '43 Subvenções Sociais'=>'43 Subvenções Sociais', 
+    '45 Equalização de Preços e Taxas'=>'45 Equalização de Preços e Taxas', 
+    '46 Auxílio-Alimentação'=>'46 Auxílio-Alimentação', 
+    '47 Obrigações Tributárias e Contributivas'=>'47 Obrigações Tributárias e Contributivas', 
+    '48 Outros Auxílios Financeiros a Pessoas Físicas'=>'48 Outros Auxílios Financeiros a Pessoas Físicas', 
+    '49 Auxílio-Transporte'=>'49 Auxílio-Transporte', 
+    '51 Obras e Instalações'=>'51 Obras e Instalações', 
+    '52 Equipamentos e Material Permanente'=>'52 Equipamentos e Material Permanente', 
+    '61 Aquisição de Imóveis'=>'61 Aquisição de Imóveis', 
+    '62 Aquisição de Produtos para Revenda'=>'62 Aquisição de Produtos para Revenda', 
+    '63 Aquisição de Títulos de Crédito'=>'63 Aquisição de Títulos de Crédito', 
+    '64 Aquisição de Títulos Representativos de Capital já Integralizado'=>'64 Aquisição de Títulos Representativos de Capital já Integralizado', 
+    '65 Constituição ou Aumento de Capital de Empresas'=>'65 Constituição ou Aumento de Capital de Empresas', 
+    '66 Concessão de Empréstimos e Financiamentos'=>'66 Concessão de Empréstimos e Financiamentos', 
+    '67 Depósitos Compulsórios'=>'67 Depósitos Compulsórios', 
+    '71 Principal da Dívida Contratual Resgatado'=>'71 Principal da Dívida Contratual Resgatado', 
+    '72 Principal da Dívida Mobiliária Resgatado'=>'72 Principal da Dívida Mobiliária Resgatado', 
+    '73 Correção Monetária ou Cambial da Dívida Contratual Resgatada'=>'73 Correção Monetária ou Cambial da Dívida Contratual Resgatada', 
+    '74 Correção Monetária ou Cambial da Dívida Mobiliária Resgatada'=>'74 Correção Monetária ou Cambial da Dívida Mobiliária Resgatada', 
+    '75 Correção Monetária da Dívida de Operações de Crédito por Antecipação da Receita'=>'75 Correção Monetária da Dívida de Operações de Crédito por Antecipação da Receita', 
+    '76 Principal Corrigido da Dívida Mobiliária Refinanciado'=>'76 Principal Corrigido da Dívida Mobiliária Refinanciado', 
+    '77 Principal Corrigido da Dívida Contratual Refinanciado'=>'77 Principal Corrigido da Dívida Contratual Refinanciado', 
+    '81 Distribuição Constitucional ou Legal de Receitas'=>'81 Distribuição Constitucional ou Legal de Receitas', 
+    '92 Despesas de Exercícios Anteriores'=>'92 Despesas de Exercícios Anteriores', 
+    '93 Indenizações e Restituições'=>'93 Indenizações e Restituições', 
+    '94 Indenizações e Restituições Trabalhistas'=>'94 Indenizações e Restituições Trabalhistas', 
+    '95 Indenização pela Execução de Trabalhos de Campo'=>'95 Indenização pela Execução de Trabalhos de Campo', 
+    '96 Ressarcimento de Despesas de Pessoal Requisitado'=>'96 Ressarcimento de Despesas de Pessoal Requisitado', 
+    '99 A Classificar'=>'99 A Classificar', 
+    ], null, ['required' => 'required', 'class'=>'form-control', 'id'=>'el_consumo'])!!}
 </div>
-

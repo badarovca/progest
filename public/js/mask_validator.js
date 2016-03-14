@@ -57,8 +57,8 @@ jQuery(function ($) {
         //mask para mod. aplicação de empenho
         $("#mod_aplicacao").mask("9?99");
 
-        //mask para elemento de consumo de empenho
-        $("#el_consumo").mask("9?99");
+//        //mask para elemento de consumo de empenho
+//        $("#el_consumo").mask("9?99");
 
         //mask para num. processo de empenho
         $("#num_processo").mask("99999999999/99-99");
