@@ -39,7 +39,6 @@
     '36'=>'36 Outros Serviços de Terceiros – Pessoa Física', 
     '37'=>'37 Locação de Mão-de-Obra', 
     '38'=>'38 Arrendamento Mercantil', 
-    '42'=>'42 MANUAL DE DESPESA NACIONAL – 1ª EDIÇÃO', 
     '39'=>'39 Outros Serviços de Terceiros – Pessoa Jurídica', 
     '41'=>'41 Contribuições', 
     '42'=>'42 Auxílios', 
