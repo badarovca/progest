@@ -28,7 +28,7 @@ return [
 	|
 	*/
 
-	'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+	'host' => env('MAIL_HOST', 'smtps.ifba.edu.br'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return [
 	|
 	*/
 
-	'port' => env('MAIL_PORT', 587),
+	'port' => env('MAIL_PORT', 465),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' => "gestifba@gmail.com", 'name' => "ProGest"],
+	'from' => ['address' => "progest.vdc@ifba.edu.br", 'name' => "PROGest"],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
 	|
 	*/
 
-	'username' => env('MAIL_USERNAME', 'gestifba@gmail.com'),
+	'username' => env('MAIL_USERNAME', 'progest.vdc@ifba.edu.br'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
 	|
 	*/
 
-	'password' => env('MAIL_PASSWORD', 'ifbaalmox'),
+	'password' => env('MAIL_PASSWORD', '16proIfB@VdGes'),
 
 	/*
 	|--------------------------------------------------------------------------
