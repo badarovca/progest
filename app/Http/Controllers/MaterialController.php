@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Http\Requests\FilterMaterialRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\progest\repositories\SubItemRepository;
@@ -28,14 +29,18 @@ class MaterialController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $input) {
+    public function index(FilterMaterialRequest $input) {
         $input->flash();
         $input = $input->all();
         $input['paginate'] = 20;
         $materiais = $this->materialRepository->index($input);
-        $unidades = $this->unidadeRepository->dataForSelect();
-        $subitens = $this->subItemRepository->dataForSelect();
-        return view('admin.materiais.index')->with(compact('materiais', 'unidades', 'subitens'));
+        $order = [''=>'Selecione...', 
+            'updated_at-desc' => 'Data - mais atual', 'updated_at-asc' => 'Data - mais antigo', 
+            'descricao-asc' => 'Nome - a-z', 'descricao-desc' => 'Nome - z-a', 
+            'qtd_1-asc' => 'Estoque - menor', 'qtd_1-desc' => 'Estoque - maior', 
+            'sub_item_id-asc' => 'SubItem'];
+            
+        return view('admin.materiais.index')->with(compact('materiais', 'order'));
     }
 
     /**

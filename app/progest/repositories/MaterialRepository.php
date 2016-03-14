@@ -35,19 +35,22 @@ class MaterialRepository {
 
     public function index($filter = null) {
         if ($filter) {
+            $orderBy = isset($filter['order']) && $filter['order'] != '' ? explode('-', $filter['order']) : ['descricao', 'asc'];
+//            dd($orderBy);
             $materiais = Material::where(function($query) use (&$filter) {
                         if (isset($filter['disponivel'])) {
                             $query->where('qtd_1', '>', 0);
                             $query->where('disponivel', '=', 1);
                         }
-                        if (isset($filter['busca'])) {
+                        if (isset($filter['busca']) && $filter['busca'] != '') {
                             $query->where('descricao', 'like', "%" . $filter['busca'] . "%")
                             ->orWhere('marca', 'like', "%" . $filter['busca'] . "%")
                             ->orWhere('codigo', 'like', "%" . $filter['busca'] . "%");
                         }
-                        if (isset($filter['qtd_min'])) {
-                            $query->whereRaw('materials.qtd_1 <= materials.qtd_min')
-                            ->where('qtd_1', '!=', "");
+                        if (isset($filter['qtd_min']) && $filter['qtd_min'] != '') {
+                            $query->whereRaw('materials.qtd_1 < materials.qtd_min')
+                            ->where('qtd_1', '!=', "")
+                            ->where('qtd_min', '!=', "");
                         }
                     })
                     ->whereHas('subitem', function ($query) use (&$filter) {
@@ -59,8 +62,7 @@ class MaterialRepository {
                         if (isset($filter['unidade']) && $filter['unidade'] != '') {
                             $query->where('unidade_id', '=', $filter['unidade']);
                         }
-                    })
-                    ->orderBy('descricao', 'asc')
+                    })->orderBy($orderBy[0], $orderBy[1])
                     ->paginate();
         } else {
             $materiais = Material::all();

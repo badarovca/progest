@@ -21,20 +21,16 @@
                 {!! Form::open(array('route' => 'admin.materiais.index', 'method'=>'GET', 'class'=>'')) !!}
                 <!--<div class="input-group">-->
                 <div class='col-md-2'>
-                    {!!Form::label('sub_item_id', 'Quantidade mínima', array('class'=>'control-label'))!!}
+                    {!!Form::label('sub_item_id', 'Quantidade mínima', array('class'=>'control-label', 'title'=>'Itens com quantidade em estoque menor ou igual a quantidade mínima'))!!}
                     <div class="checkbox">
                         <label>
-                            {!!Form::checkbox('qtd_min', old('qtd_min'))!!} Quantidade mínima
+                            {!!Form::checkbox('qtd_min', old('qtd_min'), ['title'=>'Itens com quantidade em estoque menor ou igual a quantidade mínima'])!!} Quantidade mínima
                         </label>
                     </div>
                 </div>
                 <div class='col-md-2'>
-                    {!!Form::label('sub_item_id', 'Unidade', array('class'=>'control-label'))!!}
-                    {!!Form::select('unidade', $unidades, old('unidade'), ['class'=>'form-control', 'id'=>'unidade'])!!}
-                </div>
-                <div class='col-md-2'>
-                    {!!Form::label('sub_item_id', 'Subitem', array('class'=>'control-label'))!!}
-                    {!!Form::select('subitem', $subitens, old('subitem'), ['class'=>'form-control', 'id'=>'subitem'])!!}
+                    {!!Form::label('order', 'Ordenar', array('class'=>'control-label'))!!}
+                    {!!Form::select('order', $order, old('order'), ['class'=>'form-control', 'id'=>'unidade'])!!}
                 </div>
                 <div class='col-md-4'>
                     {!!Form::label('sub_item_id', 'Busca', array('class'=>'control-label'))!!}
@@ -67,6 +63,7 @@
                     <th>Unidade</th>
                     <th>Quant.</th>
                     <th>subItem</th>
+                    <th>Última alteração</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -78,6 +75,7 @@
                     <td>{!! $material->unidade->name !!}</td>
                     <td>{!! $material->qtd_1 + $material->qtd_2 + $material->qtd_3 + $material->qtd_4!!}</td>
                     <td>{!! $material->subItem->material_consumo !!}</td>
+                    <td>{!! $material->present()->last_update !!}</td>
                     <td width="1%" nowrap>
                         <a href="{!! route('admin.materiais.edit', $material->id) !!}" class="btn btn-primary btn-xs">
                             <i class="fa fa-fw fa-pencil"></i> editar
