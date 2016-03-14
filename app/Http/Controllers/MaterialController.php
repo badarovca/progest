@@ -32,8 +32,9 @@ class MaterialController extends Controller {
     public function index(FilterMaterialRequest $input) {
         $input->flash();
         $input = $input->all();
-        $input['paginate'] = 2;
-        $materiais = $this->materialRepository->index($input);
+        $filter = $input;
+        $filter['paginate'] = 20;
+        $materiais = $this->materialRepository->index($filter);
         $order = [''=>'Selecione...', 
             'updated_at-desc' => 'Data - mais atual', 'updated_at-asc' => 'Data - mais antigo', 
             'descricao-asc' => 'Nome - a-z', 'descricao-desc' => 'Nome - z-a', 
