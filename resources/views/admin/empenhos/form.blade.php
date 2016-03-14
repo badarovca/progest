@@ -20,26 +20,26 @@
                 {!!Form::label('fornecedor_id', 'Fornecedor', array('class'=>'control-label'))!!}
                 {!!Form::select('fornecedor_id', $fornecedores, null, ['required' => 'required', 'class'=>'form-control', 'id'=>'fornecedor_id'])!!}
             </div>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class='form-group'>
             <div class='col-md-2'>
                 {!!Form::label('cat_despesa', 'Categoria da despesa', array('class'=>'control-label'))!!}
                 {!!Form::text('cat_despesa', null, array('class'=>'form-control', 'id' => 'cat_despesa', 'required' => 'required'))!!}
             </div>
+            @include('admin.empenhos.lista_elemento_consumo')
+        </div>
+    </div>
+
+
+<!--    <div class="row">
+        <div class='form-group'>
+            
             <div class='col-md-2'>
                 {!!Form::label('mod_aplicacao', 'Mod. aplicação', array('class'=>'control-label'))!!}
                 {!!Form::text('mod_aplicacao', null, array('class'=>'form-control', 'id' => 'mod_aplicacao', 'required' => 'required'))!!}
             </div>
-            <div class='col-md-2'>
-                {!!Form::label('el_consumo', 'Elemento de consumo', array('class'=>'control-label'))!!}
-                {!!Form::text('el_consumo', null, array('class'=>'form-control', 'id' => 'el_consumo', 'required' => 'required'))!!}
-            </div>
+            
+            
         </div>
-    </div>
+    </div>-->
 
     <div class="row">
         <div class='form-group'>
@@ -78,7 +78,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Descricao</th>
-                                <th>Quant</th>
+                                <th>Quantidade</th>
                                 <th>Valor total</th>
                                 <th>Valor unitário</th>
                                 <th>Ação</th>

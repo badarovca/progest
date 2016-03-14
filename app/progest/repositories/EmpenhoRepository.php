@@ -64,7 +64,6 @@ class EmpenhoRepository {
         $empenho->numero = $input['empenho']['numero'];
         $empenho->tipo = $input['empenho']['tipo'];
         $empenho->cat_despesa = $input['empenho']['cat_despesa'];
-        $empenho->mod_aplicacao = $input['empenho']['mod_aplicacao'];
         $empenho->el_consumo = $input['empenho']['el_consumo'];
         $empenho->mod_licitacao = $input['empenho']['mod_licitacao'];
         $empenho->num_processo = $input['empenho']['num_processo'];
