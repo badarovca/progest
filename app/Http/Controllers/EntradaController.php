@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\progest\repositories\EntradaRepository;
 use App\progest\repositories\EmpenhoRepository;
+use App\Http\Requests\CriarEntradaRequest;
 
 class EntradaController extends Controller {
 
@@ -46,7 +47,7 @@ class EntradaController extends Controller {
      *
      * @return Response
      */
-    public function store($empenho, Request $request) {
+    public function store($empenho, CriarEntradaRequest $request) {
 //        dd($request->all());
         $input['entrada'] = $request->only('num_nf', 'numero_emepenho', 'cod_chave', 'natureza_op', 'dt_emissao', 'dt_recebimento');
         $input['materiais'] = $request->only('qtds');

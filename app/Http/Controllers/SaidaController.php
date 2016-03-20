@@ -9,6 +9,7 @@ use App\progest\repositories\UsuarioRepository;
 use App\progest\repositories\SaidaRepository;
 use App\progest\repositories\PedidoRepository;
 use Illuminate\Http\Request;
+use App\Http\Requests\CriarSaidaRequest;
 
 class SaidaController extends Controller {
 
@@ -53,7 +54,7 @@ class SaidaController extends Controller {
      *
      * @return Response
      */
-    public function store(Request $request) {
+    public function store(CriarSaidaRequest $request) {
         $input['materiais'] = $request->only('qtds');
         $input['saida'] = $request->except('qtds', '_token', 'pedido');
         $pedido = $request->only('pedido');

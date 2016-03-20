@@ -25,7 +25,7 @@
         @include('admin.saidas.form')
         <div class="form-group">
             <div class='col-md-12'>
-                {!!Form::submit('Salvar', ['class'=>'btn btn-primary pull-right'])!!}
+                {!!Form::submit('Confirmar', ['class'=>'btn btn-primary pull-right'])!!}
             </div>
         </div>
         {!! Form::close()!!}

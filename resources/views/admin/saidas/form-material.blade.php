@@ -1,3 +1,13 @@
+@if ($errors->any())
+<div class="container-fluid">
+    <ul class="alert alert-error">
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 <fieldset>
     <legend>Materiais</legend>
     <div class="container-fluid">
@@ -11,7 +21,7 @@
             <div class='col-md-2'>
                 <div class='form-group'>
                     {!!Form::label('quant', 'Quant', array('class'=>'control-label'))!!}
-                    {!!Form::number(null, null, ['class'=>'form-control', 'quant'=>'quant', 'id'=>'qtd-material'])!!}
+                    {!!Form::number(null, null, ['class'=>'form-control', 'quant'=>'quant', 'id'=>'qtd-material', 'min' => '0'])!!}
                 </div>
             </div>
             <div class='col-md-3'>

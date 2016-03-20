@@ -9,6 +9,7 @@ Use App\progest\repositories\PedidoRepository;
 Use App\progest\repositories\MaterialRepository;
 Use Cart;
 use Illuminate\Http\Request;
+use App\Http\Requests\PedidoRequest;
 
 class PedidoController extends Controller {
 
@@ -55,7 +56,7 @@ class PedidoController extends Controller {
      *
      * @return Response
      */
-    public function store(Request $request) {
+    public function store(PedidoRequest $request) {
         $input = $request->only('qtds', 'obs');
         $pedido = $this->pedidoRepository->store($input);
         if ($pedido) {
