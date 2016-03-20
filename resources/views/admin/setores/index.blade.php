@@ -54,6 +54,11 @@
         @else
         <h5 class="well">Nenhum setor ainda cadastrado.</h5>
         @endif
+        <div class="row">
+            <div class="col-md-12 text-center">
+                {!! str_replace('/?', '?', $setores->render()) !!}
+            </div>
+        </div>
     </section><!--/.content -->
 </div><!--/.content-wrapper -->
 @stop

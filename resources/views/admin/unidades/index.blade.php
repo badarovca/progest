@@ -52,6 +52,11 @@
         @else
         <h5 class="well">Nenhuma unidade ainda cadastrada.</h5>
         @endif
+        <div class="row">
+            <div class="col-md-12 text-center">
+                {!! str_replace('/?', '?', $unidades->render()) !!}
+            </div>
+        </div>
     </section><!--/.content -->
 </div><!--/.content-wrapper -->
 @stop

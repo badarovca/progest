@@ -24,10 +24,13 @@ class UsuarioController extends Controller {
         $this->setorRepository = $setorRepository;
     }
 
-    public function index() {
-        $usuarios = $this->usuarioRepository->index();
-
-        return view('admin.usuarios.index')->with(compact('usuarios'));
+    public function index(Request $input) {
+        $input->flash();
+        $input = $input->all();
+        $filter = $input;
+        $filter['paginate'] = 50;
+        $usuarios = $this->usuarioRepository->index($filter);
+        return view('admin.usuarios.index')->with(compact('usuarios', 'input'));
     }
 
     /**

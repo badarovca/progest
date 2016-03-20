@@ -20,7 +20,7 @@ class SetorRepository {
     }
 
     public function index() {
-        return Setor::all();
+        return Setor::paginate(50);
     }
 
     public function store($input) {

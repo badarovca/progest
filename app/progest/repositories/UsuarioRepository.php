@@ -14,12 +14,12 @@ class UsuarioRepository {
         $usuarios = array();
         $usuarios[''] = 'Selecione...';
         foreach ($baseArray as $value) {
-            $usuarios[$value->id] = $value->name." - ".$value->setor->coordenacao->name;
+            $usuarios[$value->id] = $value->name . " - " . $value->setor->coordenacao->name;
         }
         return $usuarios;
     }
-    
-    public function getRolesForSelect(){
+
+    public function getRolesForSelect() {
         $baseArray = Role::all();
         $roles = array();
         $roles[] = 'Selecione...';
@@ -29,8 +29,24 @@ class UsuarioRepository {
         return $roles;
     }
 
-    public function index() {
-        return User::all();
+    public function index($filter = null) {
+        if ($filter) {
+            $usuarios = User::where(function($query) use (&$filter) {
+                        if (isset($filter['habilitado'])) {
+                            $query->where('habilitado', '=', 1);
+                        }else{
+                            $query->where('habilitado', '=', 0);
+                        }
+                        if (isset($filter['busca']) && $filter['busca'] != '') {
+                            $query->where('name', 'like', "%" . $filter['busca'] . "%")
+                                    ->orWhere('email', 'like', "%" . $filter['busca'] . "%")
+                                    ->orWhere('siape', 'like', "%" . $filter['busca'] . "%");
+                        }
+                    })->paginate($filter['paginate']);
+        } else {
+            $usuarios = User::all();
+        }
+        return $usuarios;
     }
 
     public function store($input) {
@@ -59,9 +75,9 @@ class UsuarioRepository {
 
         $setor = Setor::find($input['setor_id']);
         $user->setor()->associate($setor);
-        
+
         $user->save();
-        if($user->roles()->first()->id != $input['role']){
+        if ($user->roles()->first()->id != $input['role']) {
             $user->roles()->sync([$input['role']]);
         }
         return $user;

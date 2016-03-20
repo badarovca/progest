@@ -33,7 +33,7 @@ class MaterialController extends Controller {
         $input->flash();
         $input = $input->all();
         $filter = $input;
-        $filter['paginate'] = 20;
+        $filter['paginate'] = 50;
         $materiais = $this->materialRepository->index($filter);
         $order = [''=>'Selecione...', 
             'updated_at-desc' => 'Data - mais atual', 'updated_at-asc' => 'Data - mais antigo', 

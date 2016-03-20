@@ -46,9 +46,9 @@
                         <a href="{!! route('admin.fornecedores.edit', $fornecedor->id) !!}" class="btn btn-primary btn-xs">
                             <i class="fa fa-fw fa-pencil"></i> editar
                         </a>
-<!--                        <a href="{!! route('admin.fornecedores.destroy', $fornecedor->id) !!}" data-method="delete" data-confirm="Deseja remover o registro?" class="btn btn-danger btn-xs">
-                            <i class="fa fa-fw fa-remove"></i> remover
-                        </a>-->
+                        <!--                        <a href="{!! route('admin.fornecedores.destroy', $fornecedor->id) !!}" data-method="delete" data-confirm="Deseja remover o registro?" class="btn btn-danger btn-xs">
+                                                    <i class="fa fa-fw fa-remove"></i> remover
+                                                </a>-->
                     </td>
                 </tr>
                 @endforeach
