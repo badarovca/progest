@@ -19,7 +19,7 @@ class SubItemRepository {
     }
 
     public function index() {
-        return SubItem::all();
+        return SubItem::paginate(50);
     }
 
     public function store($input) {

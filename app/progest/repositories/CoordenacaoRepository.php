@@ -19,7 +19,7 @@ class CoordenacaoRepository {
     }
 
     public function index() {
-        return Coordenacao::all();
+        return Coordenacao::paginate(50);
     }
 
     public function store($input) {

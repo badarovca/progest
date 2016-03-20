@@ -19,7 +19,7 @@ class UnidadeRepository {
     }
 
     public function index() {
-        return Unidade::all();
+        return Unidade::paginate(50);
     }
 
     public function store($input) {
