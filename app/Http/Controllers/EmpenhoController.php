@@ -77,7 +77,8 @@ class EmpenhoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+        $empenho = $this->empenhoRepository->show($id);
+        return view('admin.empenhos.show')->with(compact(['empenho']));
     }
 
     /**

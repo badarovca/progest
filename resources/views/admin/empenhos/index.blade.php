@@ -53,6 +53,10 @@
                         <a href="{!! route('admin.empenhos.destroy', $empenho->id) !!}" data-method="delete" data-confirm="Deseja remover o registro?" class="btn btn-danger btn-xs">
                             <i class="fa fa-fw fa-remove"></i> remover
                         </a>
+                        @else
+                        <a href="{!! route('admin.empenhos.show', $empenho->id) !!}" class="btn btn-primary btn-xs">
+                            <i class="fa fa-fw fa-eye"></i> visualizar
+                        </a>
                         @endif
                     </td>
                 </tr>
