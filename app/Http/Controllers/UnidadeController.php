@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\progest\repositories\UnidadeRepository;
+use App\Http\Requests\CriarUnidadeRequest;
 
 class UnidadeController extends Controller {
 
@@ -42,7 +43,7 @@ class UnidadeController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(CriarUnidadeRequest $request) {
         $this->unidadeRepository->store($request->all());
         return redirect()->route('admin.unidades.index')->with('success', 'Registro inserido com sucesso!');
     }

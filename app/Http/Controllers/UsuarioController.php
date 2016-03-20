@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\progest\repositories\UsuarioRepository;
 use App\progest\repositories\SetorRepository;
 Use App\User;
+Use App\Http\Requests\CriarUsuarioRequest;
 
 class UsuarioController extends Controller {
 
@@ -49,7 +50,7 @@ class UsuarioController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(CriarUsuarioRequest $request) {
         $this->usuarioRepository->store($request->all());
         return redirect()->route('admin.usuarios.index')->with('success', 'Registro inserido com sucesso!');
     }

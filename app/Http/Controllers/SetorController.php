@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\progest\repositories\SetorRepository;
 use App\progest\repositories\CoordenacaoRepository;
+Use App\Http\Requests\CriarSetorRequest;
 
 class SetorController extends Controller {
 
@@ -46,7 +47,7 @@ class SetorController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(CriarSetorRequest $request) {
         $this->setorRepository->store($request->all());
         return redirect()->route('admin.setores.index')->with('success', 'Registro inserido com sucesso!');
     }
