@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\progest\repositories\SubItemRepository;
 use App\progest\repositories\MaterialRepository;
 use App\progest\repositories\UnidadeRepository;
+use App\Http\Requests\CriarMaterialRequest;
 
 class MaterialController extends Controller {
 
@@ -62,7 +63,7 @@ class MaterialController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(CriarMaterialRequest $request) {
         $this->materialRepository->store($request->all());
         return redirect()->route('admin.materiais.index')->with('success', 'Registro inserido com sucesso!');
     }
