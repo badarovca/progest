@@ -65,7 +65,7 @@
                             <div class='form-group'>
                                 <div class='col-md-12'>
                                     {!!Form::label('obs', 'Justificativa', array('class'=>'control-label'))!!}
-                                    {!!Form::textarea('obs', null, array('class'=>'form-control', 'id' => 'obs', 'required' => 'required', 'rows'=>'3'))!!}
+                                    {!!Form::textarea('obs', null, array('class'=>'form-control', 'id' => 'obs', 'required' => 'required', 'placeholder'=>'Descreva resumidademnte motivo para qual deseja o produto. Ex. material de rotina, material para semana pedagógica...' , 'rows'=>'3'))!!}
                                 </div>
                             </div>
                         </div>

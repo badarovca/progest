@@ -16,7 +16,7 @@
 
             <div class='col-md-9'>
                 {!!Form::label('descricao[]', 'Descrição', array('class'=>'control-label'))!!}
-                {!!Form::text('descricao[]', null, array('class'=>'form-control', 'id' => 'descricao[]', 'required' => 'required'))!!}
+                {!!Form::text('descricao[]', null, array('class'=>'form-control', 'id' => 'descricao[]', 'placeholder'=>'Descreva o nome principal do material seguido das dimensões ou quantidades, e demais especificações.''required' => 'required'))!!}
             </div>
         </div>
     </div>
