@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CriarFornecedorRequest;
 
 use Illuminate\Http\Request;
 use App\progest\repositories\FornecedorRepository;
@@ -41,7 +42,7 @@ class FornecedorController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(CriarFornecedorRequest $request) {
         $this->fornecedorRepository->store($request->all());
         return redirect()->route('admin.fornecedores.index')->with('success', 'Registro inserido com sucesso!');
     }

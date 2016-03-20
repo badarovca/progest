@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\progest\repositories\SubItemRepository;
+use App\Http\Requests\CriarSubitemRequest;
 
 class SubItemController extends Controller {
 
@@ -42,7 +43,7 @@ class SubItemController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(CriarSubitemRequest $request) {
         $this->subItemRepository->store($request->all());
         return redirect()->route('admin.subitens.index')->with('success', 'Registro inserido com sucesso!');
     }

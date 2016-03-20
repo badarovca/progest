@@ -104,6 +104,25 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'nome',
+        'email' => 'e-mail',
+        'siape' => 'SIAPE',
+        'role' => 'permissão',
+        'material_consumo' => 'material de consumo',
+        'coordenacao_id' => 'coordenação',
+        'fantasia' => 'nome fantasia',
+        'razao' => 'razão social',
+        'endereco' => 'endereço',
+        'cnpj' => 'CNPJ',
+        'telefone1' => 'telefone',
+        'telefone1' => 'telefone',
+        'codigo' => 'código',
+        'descricao' => 'descrição',
+        'unidade_id' => 'unidade',
+        'sub_item_id' => 'subitem',
+        'qtd_1' => 'estoque',
+        'qtd_min' => 'quantidade mínima'
+    ],
 
 ];

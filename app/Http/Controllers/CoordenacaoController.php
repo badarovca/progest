@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\progest\repositories\CoordenacaoRepository;
+use App\Http\Requests\CriarCoordenacaoRequest;
 
 class CoordenacaoController extends Controller {
 
@@ -42,7 +43,7 @@ class CoordenacaoController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(CriarCoordenacaoRequest $request) {
         $this->coordenacaoRepository->store($request->all());
         return redirect()->route('admin.coordenacoes.index')->with('success', 'Registro inserido com sucesso!');
     }
