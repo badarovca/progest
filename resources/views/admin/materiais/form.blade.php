@@ -34,7 +34,7 @@
                 {!!Form::text('marca', null, array('class'=>'form-control', 'id' => 'marca', 'required' => 'required'))!!}
             </div>
             <div class='col-md-5'>
-                {!!Form::label('sub_item_id', 'Subitens', array('class'=>'control-label'))!!}
+                {!!Form::label('sub_item_id', 'Subitem', array('class'=>'control-label'))!!}
                 {!!Form::select('sub_item_id', $subitens, null, ['required' => 'required', 'class'=>'form-control', 'id'=>'sub_item_id'])!!}
             </div>
         </div>
