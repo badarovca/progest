@@ -11,6 +11,7 @@ use App\progest\repositories\SubItemRepository;
 use App\progest\repositories\MaterialRepository;
 use App\progest\repositories\UnidadeRepository;
 use App\progest\repositories\UsuarioRepository;
+use App\Http\Requests\CriarEmpenhoRequest;
 
 class EmpenhoController extends Controller {
 
@@ -61,7 +62,7 @@ class EmpenhoController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(CriarEmpenhoRequest $request) {
         $input['empenho'] = $request->except('_token', 'codigo', 'descricao', 'marca', 'sub_item_id', 'vl_total', 'quant', 'ids_materiais');
         $input['materiais'] = $request->only('codigo', 'descricao', 'unidade_id', 'marca', 'sub_item_id', 'vl_total', 'qtd_solicitada', 'vencimento', 'qtd_min', 'imagem');
         $input['submateriais'] = $request->only('submateriais');

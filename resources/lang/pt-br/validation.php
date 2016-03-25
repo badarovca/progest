@@ -122,7 +122,23 @@ return [
         'unidade_id' => 'unidade',
         'sub_item_id' => 'subitem',
         'qtd_1' => 'estoque',
-        'qtd_min' => 'quantidade mínima'
+        'qtd_min' => 'quantidade mínima',
+        'numero' => 'número',
+        'fornecedor_id' => 'fornecedor',
+        'cat_despesa' => 'categoria da despesa',
+        'el_consumo' => 'elemento de consumo',
+        'mod_licitacao' => 'modalidade de licitação',
+        'num_processo' => 'número do processo',
+        'solicitante_id' => 'solicitante',
+        'num_nf' => 'número NF',
+        'numero_empenho' => 'empenho',
+        'cod_chave' => 'código chave',
+        'natureza_op' => 'natureza da operação',
+        'dt_emissao' => 'data emissão',
+        'dt_recebimento' => 'data recebimento',
+        'solicitante_id' => 'solicitante',
+        'obs' => 'observação'
+        
     ],
 
 ];
