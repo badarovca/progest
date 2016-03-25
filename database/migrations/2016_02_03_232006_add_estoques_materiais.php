@@ -12,13 +12,6 @@ class AddEstoquesMateriais extends Migration {
      */
     public function up() {
         Schema::table('materials', function(Blueprint $table) {
-            $table->dropColumn('qtd');
-            $table->dropColumn('vl_total');
-            $table->dropColumn('vl_un');
-            $table->string('qtd_1');
-            $table->string('qtd_2');
-            $table->string('qtd_3');
-            $table->string('qtd_4');
             $table->boolean('disponivel');
             $table->integer('sub_item_id')->unsigned();
             $table->foreign('sub_item_id')->references('id')->on('sub_items');

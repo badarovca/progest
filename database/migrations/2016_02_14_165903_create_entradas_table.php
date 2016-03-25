@@ -15,7 +15,7 @@ class CreateEntradasTable extends Migration {
             $table->increments('id');
             $table->string('num_nf');
             $table->integer('empenho_id')->unsigned();
-            $table->foreign('empenho_id')->references('id')->on('empenhos')->onDelete('cascade');
+            $table->foreign('empenho_id')->references('id')->on('empenhos');
             $table->string('natureza_op');
             $table->string('cod_chave');
             $table->double('vl_total', 10, 2);
@@ -24,11 +24,11 @@ class CreateEntradasTable extends Migration {
             $table->timestamps();
         });
         
-        Schema::create('entrada_material', function(Blueprint $table) {
+        Schema::create('entrada_sub_material', function(Blueprint $table) {
             $table->integer('entrada_id')->unsigned()->index();
-            $table->foreign('entrada_id')->references('id')->on('entradas')->onDelete('cascade');
-            $table->integer('material_id')->unsigned()->index();
-            $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade');
+            $table->foreign('entrada_id')->references('id')->on('entradas');
+            $table->integer('sub_material_id')->unsigned()->index();
+            $table->foreign('sub_material_id')->references('id')->on('sub_materials');
             $table->integer('quant');
             $table->double('vl_total', 8, 2);
             $table->timestamps();

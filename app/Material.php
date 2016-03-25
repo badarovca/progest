@@ -24,7 +24,7 @@ class Material extends Model {
      * @var array
      */
     protected $fillable = [
-        'codigo', 'descricao', 'unidade', 'subitem_id', 'marca', 'vencimento', 'qtd_min', 'imagem'
+        'codigo', 'descricao', 'unidade', 'subitem_id', 'marca', 'qtd_min', 'imagem'
     ];
 
     public function subItem() {
@@ -35,16 +35,8 @@ class Material extends Model {
         return $this->belongsTo('App\Unidade');
     }
     
-    public function empenhos(){
-        return $this->belongsToMany('App\Empenho')->withTimestamps()->withPivot('quant', 'vl_total');
-    }
-    
-    public function entradas(){
-        return $this->belongsToMany('App\Entrada')->withTimestamps()->withPivot('quant', 'vl_total');
-    }
-    
-    public function saidas(){
-        return $this->belongsToMany('App\Saida', 'saida_material')->withTimestamps()->withPivot('quant');
+    public function subMateriais() {
+        return $this->hasMany('App\SubMaterial');
     }
     
     public function pedidos(){

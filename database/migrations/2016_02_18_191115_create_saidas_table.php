@@ -21,11 +21,11 @@ class CreateSaidasTable extends Migration {
             $table->timestamps();
         });
         
-        Schema::create('saida_material', function(Blueprint $table) {
+        Schema::create('saida_sub_material', function(Blueprint $table) {
             $table->integer('saida_id')->unsigned()->index();
-            $table->foreign('saida_id')->references('id')->on('saidas')->onDelete('cascade');
-            $table->integer('material_id')->unsigned()->index();
-            $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade');
+            $table->foreign('saida_id')->references('id')->on('saidas');
+            $table->integer('sub_material_id')->unsigned()->index();
+            $table->foreign('sub_material_id')->references('id')->on('sub_materials');
             $table->integer('quant');
             $table->timestamps();
         });

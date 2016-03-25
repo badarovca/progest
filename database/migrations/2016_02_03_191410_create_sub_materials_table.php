@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMaterialsTable extends Migration {
+class CreateSubMaterialsTable extends Migration {
 
     /**
      * Run the migrations.
@@ -11,12 +11,13 @@ class CreateMaterialsTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('materials', function(Blueprint $table) {
+        Schema::create('sub_materials', function(Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('codigo');
-            $table->string('descricao', 300);
-            $table->string('marca', 100);
             $table->timestamps();
+            $table->date('vencimento');
+            $table->integer('qtd');
+            $table->integer('material_id')->unsigned();
+            $table->foreign('material_id')->references('id')->on('materials');
         });
     }
 
@@ -26,7 +27,7 @@ class CreateMaterialsTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::drop('materials');
+        Schema::drop('sub_materials');
     }
 
 }

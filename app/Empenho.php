@@ -34,8 +34,8 @@ class Empenho extends Model {
         return $this->hasMany('App\Entrada');
     }
     
-    public function materiais() {
-        return $this->belongsToMany('App\Material')->withTimestamps()->withPivot('quant', 'vl_total');
+    public function subMateriais() {
+        return $this->belongsToMany('App\SubMaterial')->withTimestamps()->withPivot('quant', 'vl_total');
     }
 
 }

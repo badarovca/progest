@@ -19,8 +19,8 @@ class Entrada extends Model {
         return $this->belongsTo('App\Empenho');
     }
     
-    public function materiais() {
-        return $this->belongsToMany('App\Material')->withTimestamps()->withPivot('quant', 'vl_total');
+    public function subMateriais() {
+        return $this->belongsToMany('App\SubMaterial')->withTimestamps()->withPivot('quant', 'vl_total');
     }
 
 }

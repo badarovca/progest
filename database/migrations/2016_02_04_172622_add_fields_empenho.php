@@ -24,11 +24,11 @@ class AddFieldsEmpenho extends Migration {
             $table->foreign('fornecedor_id')->references('id')->on('fornecedors')->onDelete('cascade');
         });
 
-        Schema::create('empenho_material', function(Blueprint $table) {
+        Schema::create('empenho_sub_material', function(Blueprint $table) {
             $table->integer('empenho_id')->unsigned()->index();
             $table->foreign('empenho_id')->references('id')->on('empenhos')->onDelete('cascade');
-            $table->integer('material_id')->unsigned()->index();
-            $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade');
+            $table->integer('sub_material_id')->unsigned()->index();
+            $table->foreign('sub_material_id')->references('id')->on('sub_materials')->onDelete('cascade');
             $table->integer('quant');
             $table->double('vl_total', 8, 2);
             $table->timestamps();
