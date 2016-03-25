@@ -3,8 +3,10 @@
 namespace App\progest\repositories;
 
 use App\Fornecedor;
+use App\User;
 use App\Empenho;
 use App\Material;
+use App\SubMaterial;
 use App\SubItem;
 use App\Entrada;
 use App\Unidade;
@@ -30,33 +32,30 @@ class EmpenhoRepository {
         unset($input['empenho']['fornecedor_id']);
         unset($input['empenho']['solicitante_id']);
         $empenho = new Empenho($input['empenho']);
-        $input['materiais']['vl_total'] = $this->realToDolar($input['materiais']['vl_total']);
-//        dd($input['materiais']);
-        $materiais = $this->preparaDadosMateriais($input['materiais']);
 
         $fornecedor = Fornecedor::find($fornecedor_id);
-        $solicitante = Fornecedor::find($solicitante_id);
-
+        $solicitante = User::find($solicitante_id);
         $empenho->fornecedor()->associate($fornecedor);
         $empenho->solicitante()->associate($solicitante);
-
         $empenho->save();
 
-        if ($input['qtds']['qtds']) {
-            $materiais_ids = [];
-
-            foreach ($input['qtds']['qtds'] as $key => $val) {
-                $vl_total = $this->realToDolar($input['valores_materiais']['valores_materiais'][$key]);
-                $materiais_ids[$key] = ['quant' => $val, 'vl_total' => $vl_total];
-            }
-            $empenho->materiais()->sync($materiais_ids);
+        $subMateriais = $this->prepararSubMateriais($input['materiais'], $empenho);
+        if ($subMateriais) {
+            $empenho->subMateriais()->saveMany($subMateriais);
         }
-
-        if ($materiais) {
-            foreach ($materiais['objects'] as $key => $val) {
-                $empenho->materiais()->save($val, $materiais['joinings'][$key]);
+        if ($input['submateriais']['submateriais']) {
+            foreach ($input['submateriais']['submateriais'] as $id => $array) {
+                $subMaterial = new SubMaterial([
+                    'vencimento' => $array['vencimento'],
+                    'vl_total' => $this->realToDolar($array['vl_total']),
+                    'qtd_solicitada' => $array['qtd_solicitada'],
+                    'material_id' => $id,
+                ]);
+                $subMaterial->empenho()->associate($empenho);
+                $subMaterial->save();
             }
         }
+//
     }
 
     public function update($id, $input) {
@@ -69,31 +68,32 @@ class EmpenhoRepository {
         $empenho->num_processo = $input['empenho']['num_processo'];
 
         $input['materiais']['vl_total'] = $this->realToDolar($input['materiais']['vl_total']);
-        $materiais = $this->preparaDadosMateriais($input['materiais']);
 
         $fornecedor = Fornecedor::find($input['empenho']['fornecedor_id']);
         $solicitante = Fornecedor::find($input['empenho']['solicitante_id']);
 
         $empenho->fornecedor()->associate($fornecedor);
         $empenho->solicitante()->associate($solicitante);
-        
 
-        if ($input['qtds']['qtds']) {
-            $materiais_ids = [];
-
-            foreach ($input['qtds']['qtds'] as $key => $val) {
-                $vl_total = $this->realToDolar($input['valores_materiais']['valores_materiais'][$key]);
-                $materiais_ids[$key] = ['quant' => $val, 'vl_total' => $vl_total];
-            }
-            $empenho->materiais()->sync($materiais_ids);
+        $subMateriais = $this->prepararSubMateriais($input['materiais'], $empenho);
+        if ($subMateriais) {
+            $empenho->subMateriais()->saveMany($subMateriais);
         }
-
-        if ($materiais) {
-            foreach ($materiais['objects'] as $key => $val) {
-                $empenho->materiais()->save($val, $materiais['joinings'][$key]);
+        if ($input['submateriais']['submateriais']) {
+            foreach ($empenho->subMateriais as $subMaterial) {
+                $subMaterial->delete();
+            }
+            foreach ($input['submateriais']['submateriais'] as $id => $array) {
+                $subMaterial = new SubMaterial([
+                    'vencimento' => $array['vencimento'],
+                    'vl_total' => $this->realToDolar($array['vl_total']),
+                    'qtd_solicitada' => $array['qtd_solicitada'],
+                    'material_id' => $id,
+                ]);
+                $subMaterial->empenho()->associate($empenho);
+                $subMaterial->save();
             }
         }
-
         return $empenho->save();
     }
 
@@ -103,6 +103,9 @@ class EmpenhoRepository {
 
     public function destroy($id) {
         $empenho = Empenho::find($id);
+        foreach ($empenho->subMateriais as $subMaterial) {
+            $subMaterial->delete();
+        }
         return $empenho->delete();
     }
 
@@ -119,7 +122,7 @@ class EmpenhoRepository {
         return $input;
     }
 
-    public function preparaDadosMateriais($input) {
+    public function prepararSubMateriais($input, $empenho) {
         $materiaisArray = array();
         foreach ($input as $key => $val) {
             if ($val === null) {
@@ -130,12 +133,13 @@ class EmpenhoRepository {
             }
         }
         $materiaisObjects = array();
+        $subMateriaisObjects = array();
         foreach ($materiaisArray as $key => $val) {
             $materiaisObjects[$key] = new Material([
                 'codigo' => $val['codigo'], 'descricao' => $val['descricao'],
-                'marca' => $val['marca'], 'vencimento' => isset($val['vencimento']) ? $val['vencimento'] : null,
+                'marca' => $val['marca'],
                 'qtd_min' => $val['qtd_min'], 'imagem' => '',
-                'qtd_1' => 0, 'qtd_2' => 0, 'qtd_3' => 0, 'qtd_4' => 0, 'disponivel' => 0
+                'disponivel' => 0
             ]);
 
             if (isset($val['imagem'])) {
@@ -151,19 +155,17 @@ class EmpenhoRepository {
 
             $unidade = Unidade::find($val['unidade_id']);
             $materiaisObjects[$key]->unidade()->associate($unidade);
+            $materiaisObjects[$key]->save();
 
-            unset($materiaisArray[$key]['codigo']);
-            unset($materiaisArray[$key]['descricao']);
-            unset($materiaisArray[$key]['unidade_id']);
-            unset($materiaisArray[$key]['marca']);
-            unset($materiaisArray[$key]['sub_item_id']);
-            unset($materiaisArray[$key]['imagem']);
-            unset($materiaisArray[$key]['vencimento']);
-            unset($materiaisArray[$key]['qtd_min']);
+            $subMateriaisObjects[$key] = new SubMaterial([
+                'vencimento' => isset($val['vencimento']) ? $val['vencimento'] : null,
+                'qtd_estoque' => 0, 'qtd_solicitada' => $val['qtd_solicitada'],
+                'vl_total' => $this->realToDolar($val['vl_total']),
+            ]);
+            $subMateriaisObjects[$key]->material()->associate($materiaisObjects[$key]);
+            $subMateriaisObjects[$key]->empenho()->associate($empenho);
         }
-        $materiais['joinings'] = $materiaisArray;
-        $materiais['objects'] = $materiaisObjects;
-        return $materiais;
+        return $subMateriaisObjects;
     }
 
     public function getQtdsEntregues($empenho) {

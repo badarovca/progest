@@ -42,7 +42,7 @@
         <div class="form-group">
             <div class="col-md-4">
                 {!!Form::label('vencimento[]', 'Vencimento', array('class'=>'control-label'))!!}
-                {!!Form::date('vencimento[]', null, array('class'=>'form-control', 'id' => 'dt_emissao'))!!}
+                {!!Form::date('vencimento[]', null, array('class'=>'form-control', 'id' => 'vencimento[]'))!!}
             </div>
             <div class="col-md-4">
                 {!!Form::label('imagem[]', 'Imagem', array('class'=>'control-label'))!!}
@@ -62,8 +62,8 @@
                 {!!Form::number('qtd_min[]', null, array('class'=>'form-control', 'id' => 'qtd_min[]', 'min'=> '0', 'required' => 'required'))!!}
             </div>
             <div class='col-md-3'>
-                {!!Form::label('quant[]', 'Quantidade', array('class'=>'control-label'))!!}
-                {!!Form::text('quant[]', null, array('class'=>'form-control', 'id' => 'quant[]', 'required' => 'required'))!!}
+                {!!Form::label('qtd_solicitada[]', 'Quantidade', array('class'=>'control-label'))!!}
+                {!!Form::text('qtd_solicitada[]', null, array('class'=>'form-control', 'id' => 'qtd_solicitada[]', 'required' => 'required'))!!}
             </div>
         </div>
     </div>

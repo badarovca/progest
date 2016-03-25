@@ -28,19 +28,6 @@
         </div>
     </div>
 
-
-<!--    <div class="row">
-        <div class='form-group'>
-            
-            <div class='col-md-2'>
-                {!!Form::label('mod_aplicacao', 'Mod. aplicação', array('class'=>'control-label'))!!}
-                {!!Form::text('mod_aplicacao', null, array('class'=>'form-control', 'id' => 'mod_aplicacao', 'required' => 'required'))!!}
-            </div>
-            
-            
-        </div>
-    </div>-->
-
     <div class="row">
         <div class='form-group'>
             <div class='col-md-6'>
@@ -91,6 +78,7 @@
                                 <th>Quantidade</th>
                                 <th>Valor total</th>
                                 <th>Valor unitário</th>
+                                <th>Vencimento</th>
                                 <th>Ação</th>
                             </tr>
                         </thead>

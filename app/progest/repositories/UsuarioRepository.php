@@ -33,9 +33,7 @@ class UsuarioRepository {
         if ($filter) {
             $usuarios = User::where(function($query) use (&$filter) {
                         if (isset($filter['habilitado'])) {
-                            $query->where('habilitado', '=', 1);
-                        }else{
-                            $query->where('habilitado', '=', 0);
+                            $query->where('habilitado', '=', $filter['habilitado']);
                         }
                         if (isset($filter['busca']) && $filter['busca'] != '') {
                             $query->where('name', 'like', "%" . $filter['busca'] . "%")

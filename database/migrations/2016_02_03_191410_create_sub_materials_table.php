@@ -15,9 +15,13 @@ class CreateSubMaterialsTable extends Migration {
             $table->increments('id');
             $table->timestamps();
             $table->date('vencimento');
-            $table->integer('qtd');
+            $table->double('vl_total', 8, 2);
+            $table->integer('qtd_estoque');
+            $table->integer('qtd_solicitada');
             $table->integer('material_id')->unsigned();
             $table->foreign('material_id')->references('id')->on('materials');
+            $table->integer('empenho_id')->unsigned();
+            $table->foreign('empenho_id')->references('id')->on('empenhos');
         });
     }
 

@@ -21,11 +21,7 @@
                 {!! Form::open(array('route' => 'admin.usuarios.index', 'method'=>'GET', 'class'=>'')) !!}
                 <div class='col-md-2'>
                     {!!Form::label('habilitado', 'Habilitado', array('class'=>'control-label', 'title'=>'Itens com quantidade em estoque menor ou igual a quantidade mínima'))!!}
-                    <div class="checkbox">
-                        <label>
-                            {!!Form::checkbox('habilitado', old('habilitado'), ['title'=>'Somente usuários habilitados'])!!} Usuários habilitados
-                        </label>
-                    </div>
+                    {!!Form::select('habilitado', ['1'=>'Habilitado', '0'=>'Desabilitado' ], old('habilitado'), ['required' => 'required', 'class'=>'form-control'])!!}
                 </div>
                 <div class='col-md-8'>
                     {!!Form::label('sub_item_id', 'Busca', array('class'=>'control-label'))!!}

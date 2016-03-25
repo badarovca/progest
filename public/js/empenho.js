@@ -40,6 +40,7 @@ $(document).ready(function () {
             material_descricao = $("#material_id option:selected").text();
             qtd = $("#qtd-material").val();
             valor = $("#valor-material").val();
+            vencimento = $("#vencimento").val();
             temp = valor.replace('.', '');
             temp = temp.replace(',', '.');
             valor_unitario = parseFloat(temp) / parseInt(qtd);
@@ -47,14 +48,16 @@ $(document).ready(function () {
             $("#lista-materiais").append("\
                 <tr id='" + material_id + "'>\n\
                 <td style='width: 15%'>" + material_id + "</td>\n\
-                <td style='width: 50%'>" + material_descricao + "</td>\n\
-                <td style='width: 10%'><input type='text' class='form-control' name='qtds[" + material_id + "]' id='qtds[" + material_id + "]' value='" + qtd + "' required readonly='true'></td>\n\
-                <td style='width: 10%'><input type='text' class='form-control valor-total-material' name='valores_materiais[" + material_id + "]' id='valores_materiais[" + material_id + "]' value='" + valor + "' required readonly='true'></td>\n\
+                <td style='width: 40%'>" + material_descricao + "</td>\n\
+                <td style='width: 10%'><input type='text' class='form-control' name='submateriais[" + material_id + "][qtd_solicitada]' id='qtds[" + material_id + "]' value='" + qtd + "' required readonly='true'></td>\n\
+                <td style='width: 10%'><input type='text' class='form-control valor-total-material' name='submateriais[" + material_id + "][vl_total]' id='valores_materiais[" + material_id + "]' value='" + valor + "' required readonly='true'></td>\n\
                 <td style='width: 10%'><input type='text' class='form-control valor' value='" + valor_unitario + "' readonly='true' autofocus></td>\n\
+                <td style='width: 10%'><input type='date' class='form-control'name='submateriais[" + material_id + "][vencimento]' id='vencimentos_materiais[" + material_id + "]' value='" + vencimento + "' readonly='true' autofocus></td>\n\
                 <td style='width: 5%'><a href='javascript:void(0)' class='btn btn-danger btn-xs remove-material' ><i class='fa fa-fw fa-remove'></i> remover</a></td>\n\
                 </tr>");
             $('#qtd-material').val("");
             $('#valor-material').val("");
+            $('#vencimento').val("");
             atualiza_total();
         }
         return;
