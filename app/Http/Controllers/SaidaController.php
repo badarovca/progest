@@ -114,7 +114,7 @@ class SaidaController extends Controller {
 
     public function addMaterial($material, $qtd) {
         $material = $this->materialRepository->show($material);
-        if ($material->qtd_1 < $qtd) {
+        if ($material->present()->getQtdEstoque < $qtd) {
             $html = "<div class='alert alert-danger alert-dismissible'>"
                     . "<button type='buttom' class='close' data-dismiss='alert' aria-hidden='true'>x</button>"
                     . "Quantidade não disponível no estoque.</div>";

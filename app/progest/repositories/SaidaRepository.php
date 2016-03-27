@@ -5,6 +5,7 @@ namespace App\progest\repositories;
 use Auth;
 use App\Saida;
 use App\Material;
+use App\SubMaterial;
 use App\User;
 use App\Pedido;
 
@@ -15,6 +16,7 @@ class SaidaRepository {
     }
 
     public function store($input) {
+        $subMateriais = $this->saidaSubMateriais($input['materiais']['qtds']);
         $saida = new Saida(['obs'=>$input['saida']['obs']]);
         $usuario = User::find($input['saida']['solicitante_id']);
         $saida->solicitante()->associate($usuario);
@@ -58,6 +60,14 @@ class SaidaRepository {
             $material->save();
         }
         return $saida->delete();
+    }
+    
+    public function saidaSubMateriais($materiaisArray){
+        foreach($materiaisArray as $id=>$qtd){
+            $material = Material::find($id);
+            $subMateriais = $material->subMateriais->where('qtd_estoque', '>', '0')->sortBy('created_at');
+            dd($subMateriais);
+        }        
     }
 
 }
