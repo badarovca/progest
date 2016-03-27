@@ -50,7 +50,7 @@ class EntradaController extends Controller {
         $input['entrada'] = $request->only('num_nf', 'numero_emepenho', 'cod_chave', 'natureza_op', 'dt_emissao', 'dt_recebimento');
         $input['subMateriais'] = $request->only('qtds');
         $input['empenho'] = $empenho;
-
+        
         $this->entradaRepository->store($input);
 
         return redirect()->route('admin.empenhos.entradas.index', [$empenho])->with('success', 'Registro inserido com sucesso!');

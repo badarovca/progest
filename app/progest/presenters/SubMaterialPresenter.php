@@ -14,7 +14,9 @@ class SubMaterialPresenter extends BasePresenter {
         $qtd = 0;
         foreach ($this->empenho->entradas as $entrada) {
             foreach ($entrada->subMateriais as $subMaterial) {
-                $qtd += $subMaterial->pivot->quant;
+                if($this->id == $subMaterial->id){
+                    $qtd += $subMaterial->pivot->quant;
+                }
             }
         }
         return $qtd;
