@@ -66,13 +66,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($empenho->materiais as $material)
+                            
+                            @foreach($empenho->subMateriais as $subMaterial)
                             <tr>
-                                <td style="width: 10%">{{$material->codigo}}</td>
-                                <td style="width: 70%">{{$material->descricao}}</td>
-                                <td style="width: 5%">{{($material->pivot->quant - $qtds[$material->id]['qnt_entregue'])}}</td>
-                                <td style="width: 5%">{{$qtds[$material->id]['qnt_entregue']}}</td>
-                                <td style="width: 10%">{!!Form::number("qtds[$material->id]", null, array('class'=>'form-control', 'id' => 'qtd[$material->id]', 'required' => 'required', 'min' => '0', 'max'=>$material->pivot->quant - $qtds[$material->id]['qnt_entregue'] ,$material->pivot->quant - $qtds[$material->id]['qnt_entregue'] > 0 ? '' : 'disabled'))!!}</td>
+                                <td style="width: 10%">{{$subMaterial->material->codigo}}</td>
+                                <td style="width: 70%">{{$subMaterial->material->descricao}}</td>
+                                <td style="width: 5%">{{$subMaterial->present()->getQtdRestante()}}</td>
+                                <td style="width: 5%">{{$subMaterial->present()->getQtdEntregue()}}</td>
+                                <td style="width: 10%">{!!Form::number("qtds[$subMaterial->id]", null, array('class'=>'form-control', 'id' => 'qtds[$subMaterial->id]', 'required' => 'required', 'min' => '0', 'max'=>$subMaterial->present()->getQtdRestante() ,$subMaterial->present()->getQtdRestante() > 0 ? '' : 'disabled'))!!}</td>
                             </tr>
                             @endforeach
                         </tbody>

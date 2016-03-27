@@ -26,9 +26,9 @@ class CreateEntradasTable extends Migration {
         
         Schema::create('entrada_sub_material', function(Blueprint $table) {
             $table->integer('entrada_id')->unsigned()->index();
-            $table->foreign('entrada_id')->references('id')->on('entradas');
+            $table->foreign('entrada_id')->references('id')->on('entradas')->onDelete('cascade');
             $table->integer('sub_material_id')->unsigned()->index();
-            $table->foreign('sub_material_id')->references('id')->on('sub_materials');
+            $table->foreign('sub_material_id')->references('id')->on('sub_materials')->onDelete('cascade');
             $table->integer('quant');
             $table->double('vl_total', 8, 2);
             $table->timestamps();

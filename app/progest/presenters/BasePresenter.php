@@ -12,6 +12,14 @@ class BasePresenter extends Presenter {
     public function last_update() {
         return date('d/m/Y H:i', strtotime($this->updated_at));
     }
+    
+    public function formatDate($date){
+        return date('d/m/Y', strtotime($date));
+    }
+    
+    public function formatDateTime($date){
+        return date('d/m/Y H:i', strtotime($date));
+    }
 
     public function getThumbUrl($caminho, $width, $height) {
         $ext = strchr($caminho, '.');

@@ -38,8 +38,7 @@ class EntradaController extends Controller {
     public function create($empenho) {
         $entrada = null;
         $empenho = $this->empenhoRepository->show($empenho);
-        $qtds = $this->empenhoRepository->getQtdsEntregues($empenho);
-        return view('admin.entradas.create')->with(compact(['empenho', 'entrada', 'qtds']));
+        return view('admin.entradas.create')->with(compact(['empenho', 'entrada']));
     }
 
     /**
@@ -48,9 +47,8 @@ class EntradaController extends Controller {
      * @return Response
      */
     public function store($empenho, CriarEntradaRequest $request) {
-//        dd($request->all());
         $input['entrada'] = $request->only('num_nf', 'numero_emepenho', 'cod_chave', 'natureza_op', 'dt_emissao', 'dt_recebimento');
-        $input['materiais'] = $request->only('qtds');
+        $input['subMateriais'] = $request->only('qtds');
         $input['empenho'] = $empenho;
 
         $this->entradaRepository->store($input);

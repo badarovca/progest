@@ -30,15 +30,6 @@ class CriarEmpenhoRequest extends Request {
                     'mod_licitacao' => 'required',
                     'num_processo' => 'required',
                     'solicitante_id' => 'required|exists:users,id',
-                    'codigo' => 'required|numeric|unique:materials|min:10',
-                    'descricao' => 'required|min:10',
-                    'unidade_id' => 'required|exists:unidades,id',
-                    'marca' => 'required',
-                    'sub_item_id' => 'required|exists:sub_items,id',
-                    'vencimento' => 'date',
-                    'imagem' => 'image',
-                    'qtd_1' => 'numeric|min:0|required',
-                    'qtd_min' => 'numeric|min:0|required'
 		];
 	}
 

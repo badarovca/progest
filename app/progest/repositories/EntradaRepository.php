@@ -4,6 +4,7 @@ namespace App\progest\repositories;
 
 use App\Empenho;
 use App\Material;
+use App\SubMaterial;
 use App\Entrada;
 
 class EntradaRepository {
@@ -29,17 +30,17 @@ class EntradaRepository {
         $entrada->empenho()->associate($empenho);
 
         $entrada->save();
-        $materiais = [];
-        foreach ($input['materiais']['qtds'] as $key => $val) {
-            $materiais[$key] = ['quant' => $val];
+        $subMateriais = [];
+        foreach ($input['subMateriais']['qtds'] as $key => $val) {
+            $subMateriais[$key] = ['quant' => $val];
         }
 
-        $entrada->materiais()->sync($materiais);
+        $entrada->subMateriais()->sync($subMateriais);
 
-        foreach ($materiais as $key => $val) {
-            $material = Material::find($key);
-            $material->qtd_1 += $val['quant'];
-            $material->save();
+        foreach ($subMateriais as $key => $val) {
+            $subMaterial = SubMaterial::find($key);
+            $subMaterial->qtd_estoque += $val['quant'];
+            $subMaterial->save();
         }
 
         return $entrada;
@@ -69,9 +70,9 @@ class EntradaRepository {
     public function destroy($id) {
         $entrada = Entrada::find($id);
 
-        foreach ($entrada->materiais as $material) {
-            $material->qtd_1 -= $material->pivot->quant;
-            $material->save();
+        foreach ($entrada->subMateriais as $subMaterial) {
+            $subMaterial->qtd_estoque -= $subMaterial->pivot->quant;
+            $subMaterial->save();
         }
         return $entrada->delete();
     }

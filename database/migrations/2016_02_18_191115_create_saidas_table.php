@@ -23,9 +23,9 @@ class CreateSaidasTable extends Migration {
         
         Schema::create('saida_sub_material', function(Blueprint $table) {
             $table->integer('saida_id')->unsigned()->index();
-            $table->foreign('saida_id')->references('id')->on('saidas');
+            $table->foreign('saida_id')->references('id')->on('saidas')->onDelete('cascade');
             $table->integer('sub_material_id')->unsigned()->index();
-            $table->foreign('sub_material_id')->references('id')->on('sub_materials');
+            $table->foreign('sub_material_id')->references('id')->on('sub_materials')->onDelete('cascade');
             $table->integer('quant');
             $table->timestamps();
         });

@@ -169,12 +169,12 @@ class EmpenhoRepository {
     }
 
     public function getQtdsEntregues($empenho) {
-        foreach ($empenho->materiais as $material) {
-            $qtds[$material->id]['qnt_entregue'] = 0;
+        foreach ($empenho->subMateriais as $subMaterial) {
+            $qtds[$subMaterial->id]['qnt_entregue'] = 0;
         }
         foreach ($empenho->entradas as $entrada) {
-            foreach ($entrada->materiais as $material) {
-                $qtds[$material->id]['qnt_entregue'] += $material->pivot->quant;
+            foreach ($entrada->materiais as $subMaterial) {
+                $qtds[$subMaterial->id]['qnt_entregue'] += $subMaterial->pivot->quant;
             }
         }
 
