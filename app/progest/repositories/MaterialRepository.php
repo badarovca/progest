@@ -43,7 +43,6 @@ class MaterialRepository {
 //            dd($orderBy);
             $materiais = Material::where(function($query) use (&$filter) {
                         if (isset($filter['disponivel'])) {
-                            $query->where('qtd_1', '>', 0);
                             $query->where('disponivel', '=', 1);
                         }
                         if (isset($filter['busca']) && $filter['busca'] != '') {
@@ -55,6 +54,11 @@ class MaterialRepository {
                             $query->whereRaw('materials.qtd_1 < materials.qtd_min')
                             ->where('qtd_1', '!=', "")
                             ->where('qtd_min', '!=', "");
+                        }
+                    })
+                    ->whereHas('subMateriais', function ($query) use (&$filter) {
+                        if ($filter['disponivel']) {
+                            $query->where('qtd_estoque', '>', 0);
                         }
                     })
                     ->whereHas('subitem', function ($query) use (&$filter) {
