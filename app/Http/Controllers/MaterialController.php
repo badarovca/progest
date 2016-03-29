@@ -51,10 +51,11 @@ class MaterialController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        $material = null;
-        $subitens = $this->subItemRepository->dataForSelect();
-        $unidades = $this->unidadeRepository->dataForSelect();
-        return view('admin.materiais.create')->with(compact(['material', 'subitens', 'unidades']));
+//        $material = null;
+//        $subitens = $this->subItemRepository->dataForSelect();
+//        $unidades = $this->unidadeRepository->dataForSelect();
+//        return view('admin.materiais.create')->with(compact(['material', 'subitens', 'unidades']));
+        return back();
     }
 
     /**
@@ -64,8 +65,9 @@ class MaterialController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(CriarMaterialRequest $request) {
-        $this->materialRepository->store($request->all());
-        return redirect()->route('admin.materiais.index')->with('success', 'Registro inserido com sucesso!');
+//        $this->materialRepository->store($request->all());
+//        return redirect()->route('admin.materiais.index')->with('success', 'Registro inserido com sucesso!');
+        return back();
     }
 
     /**

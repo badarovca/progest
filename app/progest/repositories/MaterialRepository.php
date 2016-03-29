@@ -57,7 +57,7 @@ class MaterialRepository {
                         }
                     })
                     ->whereHas('subMateriais', function ($query) use (&$filter) {
-                        if ($filter['disponivel']) {
+                        if (isset($filter['disponivel'])) {
                             $query->where('qtd_estoque', '>', 0);
                         }
                     })
