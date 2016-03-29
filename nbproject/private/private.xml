@@ -4,14 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/var/www/html/progest/app/progest/presenters/SubMaterialPresenter.php</file>
-            <file>file:/var/www/html/progest/resources/views/admin/empenhos/form-material.blade.php</file>
-            <file>file:/var/www/html/progest/app/SubMaterial.php</file>
-            <file>file:/var/www/html/progest/app/progest/repositories/EmpenhoRepository.php</file>
-            <file>file:/var/www/html/progest/public/js/empenho.js</file>
-            <file>file:/var/www/html/progest/app/Material.php</file>
-            <file>file:/var/www/html/progest/resources/views/admin/empenhos/form-edit.blade.php</file>
-            <file>file:/var/www/html/progest/resources/views/admin/empenhos/form-select-material.blade.php</file>
-            <file>file:/var/www/html/progest/app/Http/Controllers/EmpenhoController.php</file>
+            <file>file:/var/www/html/progest/resources/views/admin/entradas/form-material.blade.php</file>
+            <file>file:/var/www/html/progest/app/Http/Controllers/EntradaController.php</file>
+            <file>file:/var/www/html/progest/app/progest/repositories/EntradaRepository.php</file>
+            <file>file:/var/www/html/progest/resources/views/admin/entradas/form.blade.php</file>
         </group>
     </open-files>
 </project-private>

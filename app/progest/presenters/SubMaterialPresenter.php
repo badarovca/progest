@@ -14,12 +14,20 @@ class SubMaterialPresenter extends BasePresenter {
         $qtd = 0;
         foreach ($this->empenho->entradas as $entrada) {
             foreach ($entrada->subMateriais as $subMaterial) {
-                if($this->id == $subMaterial->id){
+                if ($this->id == $subMaterial->id) {
                     $qtd += $subMaterial->pivot->quant;
                 }
             }
         }
         return $qtd;
+    }
+
+    public function getVencimento() {
+        if ($this->vencimento != "0000-00-00") {
+            return date('d/m/Y', strtotime($this->vencimento));
+        } else {
+            return "-";
+        }
     }
 
     public function getQtdRestante() {

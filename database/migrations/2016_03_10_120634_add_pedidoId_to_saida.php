@@ -12,7 +12,7 @@ class AddPedidoIdToSaida extends Migration {
      */
     public function up() {
         Schema::table('saidas', function ($table) {
-            $table->integer('pedido_id')->unsigned();
+            $table->integer('pedido_id')->unsigned()->nullable();
             $table->foreign('pedido_id')->references('id')->on('pedidos');
         });
     }

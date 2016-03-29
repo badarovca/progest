@@ -9,11 +9,11 @@ class MaterialPresenter extends BasePresenter {
         $valorUn = number_format($valorUn, 2, ',', '.');
         return $valorUn;
     }
-    
-    public function getQtdEstoque(){
+
+    public function getQtdEstoque() {
         $qtd = 0;
-        foreach ($this->subMateriais as $subMaterial){
-            $qtd = $subMaterial->qtd_estoque;
+        foreach ($this->subMateriais as $subMaterial) {
+            $qtd += $subMaterial->qtd_estoque;
         }
         return $qtd;
     }
