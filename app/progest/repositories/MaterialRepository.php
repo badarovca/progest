@@ -83,7 +83,6 @@ class MaterialRepository {
         $material->codigo = $input['codigo'];
         $material->descricao = $input['descricao'];
         $material->marca = $input['marca'];
-        $material->qtd_1 = $input['qtd_1'];
         $material->disponivel = isset($input['disponivel']) ? 1 : 0;
         $material->vencimento = isset($input['vencimento']) ? $input['vencimento'] : null;
         $material->qtd_min = $input['qtd_min'];
@@ -111,7 +110,6 @@ class MaterialRepository {
         $material->codigo = $input['codigo'];
         $material->descricao = $input['descricao'];
         $material->marca = $input['marca'];
-        $material->qtd_1 = $input['qtd_1'];
         $material->disponivel = isset($input['disponivel']) ? 1 : 0;
         $material->vencimento = isset($input['vencimento']) ? $input['vencimento'] : null;
         $material->qtd_min = $input['qtd_min'];

@@ -29,7 +29,6 @@ class CriarMaterialRequest extends Request {
                     'sub_item_id' => 'required|exists:sub_items,id',
                     'vencimento' => 'date',
                     'imagem' => 'image',
-                    'qtd_1' => 'numeric|min:0|required',
                     'qtd_min' => 'numeric|min:0|required'
 		];
 	}

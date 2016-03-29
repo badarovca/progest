@@ -73,7 +73,7 @@
                     <td>{!! $material->codigo !!}</td>
                     <td>{!! $material->descricao !!}</td>
                     <td>{!! $material->unidade->name !!}</td>
-                    <td>{!! $material->qtd_1 + $material->qtd_2 + $material->qtd_3 + $material->qtd_4!!}</td>
+                    <td>{!! $material->present()->getQtdEstoque!!}</td>
                     <td>{!! $material->subItem->material_consumo !!}</td>
                     <td>{!! $material->present()->last_update !!}</td>
                     <td width="1%" nowrap>

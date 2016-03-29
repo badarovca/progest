@@ -65,10 +65,6 @@
     <div class="row">
         <div class='form-group'>
             <div class='col-md-2'>
-                {!!Form::label('qtd_1', 'Estoque', array('class'=>'control-label'))!!}
-                {!!Form::number('qtd_1', null, array('class'=>'form-control', 'id' => 'qtd_1', 'min'=> '0', 'required' => 'required'))!!}
-            </div>
-            <div class='col-md-2'>
                 {!!Form::label('qtd_min', 'Quantidade mínima', array('class'=>'control-label'))!!}
                 {!!Form::number('qtd_min', null, array('class'=>'form-control', 'id' => 'qtd_1', 'min'=> '0', 'required' => 'required'))!!}
             </div>
