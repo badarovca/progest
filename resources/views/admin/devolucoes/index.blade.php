@@ -11,7 +11,7 @@
     <section class = "content-header">
         <h1>
             {!! $page_title or "Devoluções - " !!}
-            <small>Saída: <b>{!! $saída->id or "todas"!!}</b></small>
+            <small>Saída: <b>{!! $saida->id or "todas"!!}</b></small>
         </h1>
         @include('template.alerts')
         @if(isset($saida))
