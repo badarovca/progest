@@ -41,10 +41,10 @@
                 @foreach($submaterial as $submaterial)
                 <tr>
                     <td>{!! $submaterial->id !!}</td>
-                    <td>{!! $submaterial->present()->formatDate($submaterial->vencimento) !!}</td>
+                    <td>{!! $submaterial->present()->getVencimento() !!}</td>
                     <td>{!! $submaterial->qtd_solicitada !!}</td>
                     <td>{!! $submaterial->qtd_estoque !!}</td>
-                    <td>{!! $submaterial->vl_total / $submaterial->qtd_solicitada !!}</td>
+                    <td>{!! $submaterial->present()->getValorUn() !!}</td>
                     <td width="1%" nowrap>
                         <a href="{!! route('admin.submateriais.edit', $submaterial->id) !!}" class="btn btn-primary btn-xs">
                             <i class="fa fa-fw fa-pencil"></i> editar

@@ -57,7 +57,7 @@
     <div class='row'>
         <div class='col-md-6'>
             <b>Imagem atual:</b><br>
-            <img src="{{asset($material->imagem)}}">
+            <img src="{{asset($material->present()->getThumbUrl($material->imagem, 400,400))}}">
         </div>
     </div>
     <br>
