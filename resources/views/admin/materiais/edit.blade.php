@@ -10,6 +10,7 @@
             {!! $page_title or "Editar material" !!}
             <small>{!! $page_description or null !!}</small>
         </h1>
+        @include('template.alerts')
     </section>
 
     <!--Main content -->
