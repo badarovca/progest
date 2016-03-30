@@ -89,8 +89,8 @@ class MaterialRepository {
         $material->imagem = '';
         if (isset($input['imagem'])) {
             $thumbs = [
-                ['width' => '100', 'height' => '100'],
                 ['width' => '400', 'height' => '400'],
+                ['width' => '100', 'height' => '100'],
             ];
             $material->imagem = $this->imagemRepository->sendImage($input['imagem'], 'img/materiais/', $thumbs);
         }
@@ -115,8 +115,8 @@ class MaterialRepository {
         $material->qtd_min = $input['qtd_min'];
         if (isset($input['imagem'])) {
             $thumbs = [
-                ['width' => '100', 'height' => '100'],
                 ['width' => '400', 'height' => '400'],
+                ['width' => '100', 'height' => '100'],
             ];
             $material->imagem = $this->imagemRepository->sendImage($input['imagem'], 'img/materiais/', $thumbs);
         }

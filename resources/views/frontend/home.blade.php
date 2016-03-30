@@ -46,7 +46,7 @@
                 <div class="box box-solid">
                     <div class="box-body">
                         <div class="image inline-block">
-                            <a href="javascript:void(0)" data-toggle="modal" data-target="#imagem{{$material->id}}"><img src="{{ $material->imagem != '' ? asset($material->imagem) : asset("img/material.png")}}" width="100" height="100"alt="{{$material->descricao}}"/></a>
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#imagem{{$material->id}}"><img src="{{ $material->imagem != '' ? asset($material->present()->getThumbUrl($material->imagem, '100', '100')) : asset("img/material.png")}}" width="100" height="100"alt="{{$material->descricao}}"/></a>
                         </div>
                         <div class="description inline-block">
                             <div><span><b>Descrição: </b></span> {{$material->descricao}}</div>
@@ -79,7 +79,7 @@
                     </div>
                     <div class="modal-body">
                         <div class='text-center center-block'>
-                            <img src="{{ $material->imagem != '' ? asset($material->imagem) : asset("img/material.png")}}"alt="{{$material->descricao}}"/>
+                            <img src="{{ $material->imagem != '' ? asset($material->present()->getThumbUrl($material->imagem, '400', '400')) : asset("img/material.png")}}"alt="{{$material->descricao}}"/>
                         </div>
                     </div>
                 </div>
