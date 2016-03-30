@@ -19,7 +19,7 @@ class FornecedorRepository {
     }
 
     public function index() {
-        return Fornecedor::all();
+        return Fornecedor::paginate(50);
     }
 
     public function store($input) {

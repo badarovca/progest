@@ -35,5 +35,9 @@ class SubMaterial extends Model {
     public function saidas() {
         return $this->belongsToMany('App\Saida', 'saida_sub_material')->withTimestamps()->withPivot('quant');
     }
+    
+    public function devolucoes() {
+        return $this->belongsToMany('App\Devolucao', 'devolucao_sub_material')->withTimestamps()->withPivot('quant');
+    }
 
 }

@@ -15,7 +15,7 @@
         </h1>
         @include('template.alerts')
         @if(isset($empenho))
-            <small><a href="{{ route('admin.empenhos.entradas.create', [$empenho->id]) }}">
+        <small><a href="{{ route('admin.empenhos.entradas.create', [$empenho->id]) }}">
                 <i class="fa fa-plus"></i> Nova entrada
             </a></small>
         @endif
@@ -56,6 +56,11 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                {!! str_replace('/?', '?', $entradas->render()) !!}
+            </div>
+        </div>
         @else
         <h5 class="well">Nenhuma entrada ainda cadastrado.</h5>
         @endif

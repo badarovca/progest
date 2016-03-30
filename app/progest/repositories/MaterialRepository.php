@@ -51,13 +51,13 @@ class MaterialRepository {
                             ->orWhere('codigo', 'like', "%" . $filter['busca'] . "%");
                         }
                         if (isset($filter['qtd_min']) && $filter['qtd_min'] != '') {
-                            $query->whereRaw('materials.qtd_1 < materials.qtd_min')
-                            ->where('qtd_1', '!=', "")
-                            ->where('qtd_min', '!=', "");
+//                            $query->whereRaw('materials.qtd_1 < materials.qtd_min')
+//                            ->where('qtd_1', '!=', "")
+//                            ->where('qtd_min', '!=', "");
                         }
                     })
                     ->whereHas('subMateriais', function ($query) use (&$filter) {
-                        if ($filter['disponivel']) {
+                        if (isset($filter['disponivel'])) {
                             $query->where('qtd_estoque', '>', 0);
                         }
                     })

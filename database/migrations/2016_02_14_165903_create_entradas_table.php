@@ -41,7 +41,7 @@ class CreateEntradasTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::drop('entrada_material');
+        Schema::drop('entrada_sub_material');
         Schema::drop('entradas');
     }
 

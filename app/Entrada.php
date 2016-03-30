@@ -27,5 +27,5 @@ class Entrada extends Model {
     public function subMateriais() {
         return $this->belongsToMany('App\SubMaterial')->withTimestamps()->withPivot('quant', 'vl_total');
     }
-
+    
 }

@@ -25,5 +25,9 @@ class Saida extends Model {
     public function pedido(){
         return $this->belongsTo('App\Pedido');
     }
+    
+    public function devolucoes(){
+        return $this->hasMany('App\Devolucao');
+    }
 
 }

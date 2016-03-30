@@ -42,6 +42,7 @@
                     <li><a href="{{ route('admin.entradas')}}">Entradas</a></li>
                     <li><a href="{{ route('admin.pedidos.index')}}">Pedidos</a></li>
                     <li><a href="{{ route('admin.saidas.index')}}">Saídas</a></li>
+                    <li><a href="{{ route('admin.devolucoes')}}">Devoluções</a></li>
                 </ul>
             </li>
 

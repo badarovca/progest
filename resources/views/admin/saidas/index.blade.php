@@ -47,9 +47,14 @@
                     <td>{!! $saida->responsavel->name !!}</td>
                     <td>{!! date('d/m/Y',strtotime($saida->created_at)) !!}</td>
                     <td width="1%" nowrap>
+                        <a href="{!! route('admin.saidas.devolucoes.index', $saida->id) !!}" class="btn btn-warning btn-xs">
+                            <i class="fa fa-fw fa-arrow-down"></i> devoluções
+                        </a>
+                        @if($saida->devolucoes->count() == 0)
                         <a href="{!! route('admin.saidas.destroy', $saida->id) !!}" data-method="delete" data-confirm="Deseja cancelar a saída?" class="btn btn-danger btn-xs">
                             <i class="fa fa-fw fa-remove"></i> cancelar
                         </a>
+                        @endif
                         <a href="{!! route('admin.saidas.show', $saida->id) !!}" class="btn btn-info btn-xs">
                             <i class="fa fa-fw fa-eye"></i> visualizar
                         </a>
@@ -58,6 +63,11 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                {!! str_replace('/?', '?', $saidas->render()) !!}
+            </div>
+        </div>
         @else
         <h5 class="well">Nenhuma saida ainda cadastrado.</h5>
         @endif

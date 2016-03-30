@@ -34,4 +34,18 @@ class SubMaterialPresenter extends BasePresenter {
         return $this->qtd_solicitada - $this->getQtdEntregue();
     }
 
+    public function getQtdDevolvida() {
+        $qtd = 0;
+        foreach ($this->devolucoes as $devolucao) {
+            if ($this->pivot->saida_id == $devolucao->saida->id) {
+                $qtd += $devolucao->pivot->quant;
+            }
+        }
+        return $qtd;
+    }
+
+    public function getQtdMaxDevolucao() {
+        return $this->pivot->quant - $this->getQtdDevolvida();
+    }
+
 }

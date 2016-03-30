@@ -12,7 +12,7 @@ use App\Pedido;
 class SaidaRepository {
 
     public function index() {
-        return Saida::all()->sortBy('creatated_at');
+        return Saida::orderBy('created_at', 'desc')->paginate(50);
     }
 
     public function store($input) {
@@ -37,7 +37,7 @@ class SaidaRepository {
     }
 
     public function show($id) {
-        return Saida::findOrFail($id);
+        return Saida::find($id);
     }
 
     public function destroy($id) {

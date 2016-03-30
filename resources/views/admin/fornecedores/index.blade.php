@@ -54,6 +54,11 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                {!! str_replace('/?', '?', $fornecedores->render()) !!}
+            </div>
+        </div>
         @else
         <h5 class="well">Nenhum fornecedor ainda cadastrado.</h5>
         @endif

@@ -42,8 +42,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('fornecedores', 'FornecedorController');
     Route::resource('empenhos', 'EmpenhoController');
     Route::resource('empenhos.entradas', 'EntradaController');
-    Route::resource('saidas', 'SaidaController');
     Route::get('/entradas', ['as' => 'admin.entradas', 'uses' => 'EntradaController@index']);
+    Route::resource('saidas', 'SaidaController');
+    Route::resource('saidas.devolucoes', 'DevolucaoController');
+    Route::get('/devolucoes', ['as' => 'admin.devolucoes', 'uses' => 'DevolucaoController@index']);
     Route::get('/pedidos', ['as' => 'admin.pedidos.index', 'uses' => 'PedidoController@index']);
     Route::get('/pedidos/{id}', ['as' => 'admin.pedidos.show', 'uses' => 'PedidoController@show']);
     Route::resource('materiais', 'MaterialController');
