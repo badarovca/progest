@@ -10,9 +10,6 @@
             <small>{!! $page_description or null !!}</small>
         </h1>
         @include('template.alerts')
-        <small><a href="{!! route('admin.materiais.create') !!}">
-                <i class="fa fa-plus"></i> Novo material
-            </a></small>
         <!-- Busca e filtros -->
 
         <div class="row">
