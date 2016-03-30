@@ -10,19 +10,23 @@ use App\progest\repositories\SubItemRepository;
 use App\progest\repositories\MaterialRepository;
 use App\progest\repositories\UnidadeRepository;
 use App\Http\Requests\CriarMaterialRequest;
+use App\progest\repositories\SubMaterialRepository;
 
 class MaterialController extends Controller {
 
     protected $materialRepository;
     protected $subItemRepository;
     protected $unidadeRepository;
-    
+    protected $subMaterialRepository;
+
+
 
     public function __construct(SubItemRepository $subItemRepository, MaterialRepository $materialRepository, 
-     UnidadeRepository $unidadeRepository) {
+     UnidadeRepository $unidadeRepository, SubMaterialRepository $subMaterialRepository) {
         $this->subItemRepository = $subItemRepository;
         $this->materialRepository = $materialRepository;
         $this->unidadeRepository = $unidadeRepository;
+        $this->subMaterialRepository = $subMaterialRepository;
     }
 
     /**
@@ -90,7 +94,8 @@ class MaterialController extends Controller {
         $material = $this->materialRepository->show($id);
         $subitens = $this->subItemRepository->dataForSelect();
         $unidades = $this->unidadeRepository->dataForSelect();
-        return view('admin.materiais.edit')->with(compact(['material', 'subitens', 'unidades']));
+        $submaterial = $this->subMaterialRepository->index($id);
+        return view('admin.materiais.edit')->with(compact(['material', 'subitens', 'unidades', 'submaterial']));
     }
 
     /**
