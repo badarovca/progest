@@ -81,19 +81,19 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Descricao</th>
-                                        <th>Quantidade</th>
-                                        <th>Valor total</th>
-                                        <th>Valor unitário</th>
+                                        <th>Qtd. restante</th>
+                                        <th>Qtd. entregue</th>
+                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody id='lista-materiais'>
-                                    @foreach($empenho->materiais as $material)
+                                    @foreach($empenho->subMateriais as $subMaterial)
                                     <tr>
-                                        <td style='width: 15%'>{{$material->id}}</td>
-                                        <td style='width: 60%'>{{$material->descricao}}</td>
-                                        <td style='width: 10%'>{!!Form::number("qtds[$material->id]", $material->pivot->quant, array('class'=>'form-control', 'id' => 'qtds[$material->id]', 'disabled' =>'true'))!!}</td>
-                                        <td style='width: 10%'>{!!Form::text("valores_materiais[$material->id]", number_format($material->pivot->vl_total, 2, ',', '.'), array('class'=>'form-control valor valor-total-material', 'id' => 'valores_materiais[$material->id]', 'disabled' =>'true'))!!}</td>
-                                        <td style='width: 10%'>{!!Form::text("valores_materiais[$material->id]", $material->present()->getValorUn, array('class'=>'form-control valor', 'id' => 'valores_materiais[$material->id]', 'disabled' =>'true'))!!}</td>
+                                        <td style="width: 10%">{{$subMaterial->material->codigo}}</td>
+                                        <td style="width: 70%">{{$subMaterial->material->descricao}}</td>
+                                        <td style="width: 5%">{{$subMaterial->present()->getQtdRestante()}}</td>
+                                        <td style="width: 5%">{{$subMaterial->present()->getQtdEntregue()}}</td>
+                                        <td style="width: 10%">{{$subMaterial->qtd_solicitada}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

@@ -17,7 +17,7 @@
         <div class="container-fluid">
             <div class="box">
                 <div class="box-header">
-                    <h4 class="box-title">Solicitante: {{$pedido->solicitante->name}} (id: {{$pedido->solicitante->id}})</h4>
+                    <h4 class="box-title">Solicitante: {{$pedido->solicitante->name}} (id: {{$pedido->solicitante->id}}) - Pedido nº {{$pedido->id}}</h4>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

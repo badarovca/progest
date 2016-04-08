@@ -34,6 +34,12 @@
                     <li><a href="{{ route('admin.materiais.index')}}">Materiais</a></li>
                 </ul>
             </li>
+            <li class="treeview">
+                <a href="#"><span>Relatórios</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="#">Contábil</a></li>
+                </ul>
+            </li>
             @endif
             <li class="treeview">
                 <a href="#"><span>Movimentação</span> <i class="fa fa-angle-left pull-right"></i></a>

@@ -22,7 +22,7 @@
         <div class="container-fluid">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Saída de materiais</h3>
+                    <h3 class="box-title">Saída de materiais - {{$saida->id}}</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

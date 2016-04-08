@@ -22,7 +22,7 @@ class CriarEntradaRequest extends Request {
 	public function rules()
 	{
 		return [
-                    'num_nf' => 'required|unique:entradas',
+                    'num_nf' => 'required',
                     'numero_empenho' => 'exists:empenhos,numero',
                     'cod_chave' => 'required|unique:entradas',
                     'natureza_op' => 'required',

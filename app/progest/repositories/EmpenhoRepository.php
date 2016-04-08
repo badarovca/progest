@@ -70,8 +70,7 @@ class EmpenhoRepository {
         $input['materiais']['vl_total'] = $this->realToDolar($input['materiais']['vl_total']);
 
         $fornecedor = Fornecedor::find($input['empenho']['fornecedor_id']);
-        $solicitante = Fornecedor::find($input['empenho']['solicitante_id']);
-
+        $solicitante = User::find($input['empenho']['solicitante_id']);
         $empenho->fornecedor()->associate($fornecedor);
         $empenho->solicitante()->associate($solicitante);
 

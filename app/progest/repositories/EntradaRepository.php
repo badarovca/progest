@@ -6,13 +6,16 @@ use App\Empenho;
 use App\Material;
 use App\SubMaterial;
 use App\Entrada;
+use App\Saldo;
 
 class EntradaRepository {
 
     protected $materialRepository;
+    protected $relatorioRepository;
 
-    public function __construct(MaterialRepository $materialRepository) {
+    public function __construct(MaterialRepository $materialRepository, RelatorioRepository $relatorioRepository) {
         $this->materialRepository = $materialRepository;
+        $this->relatorioRepository = $relatorioRepository;
     }
 
     public function index($empenho = null) {
@@ -41,26 +44,14 @@ class EntradaRepository {
             $subMaterial = SubMaterial::find($key);
             $subMaterial->qtd_estoque += $val['quant'];
             $subMaterial->save();
+            $valor = (round($subMaterial->vl_total/$subMaterial->qtd_solicitada, 2)*$val['quant']);
+            $this->relatorioRepository->updateSaldo($subMaterial, $valor);
         }
 
         return $entrada;
     }
 
     public function update($id, $input) {
-        $empenho = Empenho::find($id);
-        $empenho->numero = $input['numero'];
-        $empenho->tipo = $input['tipo'];
-        $empenho->cat_despesa = $input['cat_despesa'];
-        $empenho->mod_aplicacao = $input['mod_aplicacao'];
-        $empenho->el_consumo = $input['el_consumo'];
-        $empenho->mod_licitacao = $input['mod_licitacao'];
-        $empenho->num_processo = $input['num_processo'];
-        $empenho->solicitantes = $input['solicitantes'];
-
-        $fornecedor = Fornecedor::find($input['fornecedor_id']);
-        $empenho->fornecedor()->associate($fornecedor);
-
-        return $empenho->save();
     }
 
     public function show($id) {
@@ -71,6 +62,8 @@ class EntradaRepository {
         $entrada = Entrada::find($id);
 
         foreach ($entrada->subMateriais as $subMaterial) {
+            $valor = "-".(round($subMaterial->vl_total/$subMaterial->qtd_solicitada, 2)*$subMaterial->pivot->quant);
+            $this->relatorioRepository->updateSaldo($subMaterial, $valor);
             $subMaterial->qtd_estoque -= $subMaterial->pivot->quant;
             $subMaterial->save();
         }

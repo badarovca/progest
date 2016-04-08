@@ -26,7 +26,7 @@ class CriarUsuarioRequest extends Request {
                     'siape' => 'required|numeric|min:7',
                     'email' => 'required|email|unique:users',
                     'telefone' => 'min:10',
-                    'setor' => 'required|exists:setors,id',
+                    'setor_id' => 'required|exists:setors,id',
                     'role' => 'required|exists:roles,id'
 		];
 	}

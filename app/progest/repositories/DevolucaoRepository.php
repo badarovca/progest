@@ -10,9 +10,11 @@ use App\Devolucao;
 class DevolucaoRepository {
 
     protected $materialRepository;
+    protected $relatorioRepository;
 
-    public function __construct(MaterialRepository $materialRepository) {
+    public function __construct(MaterialRepository $materialRepository, RelatorioRepository $relatorioRepository) {
         $this->materialRepository = $materialRepository;
+        $this->relatorioRepository = $relatorioRepository;
     }
 
     public function index($saida = null) {
@@ -41,6 +43,8 @@ class DevolucaoRepository {
             $subMaterial = SubMaterial::find($key);
             $subMaterial->qtd_estoque += $val['quant'];
             $subMaterial->save();
+            $valor = (round($subMaterial->vl_total / $subMaterial->qtd_solicitada, 2) * $val['quant']);
+            $this->relatorioRepository->updateSaldo($subMaterial, $valor);
         }
 
         return $devolucao;
@@ -58,6 +62,8 @@ class DevolucaoRepository {
         $devolucao = Devolucao::find($id);
 
         foreach ($devolucao->subMateriais as $subMaterial) {
+            $valor = "-" . (round($subMaterial->vl_total / $subMaterial->qtd_solicitada, 2) * $subMaterial->pivot->quant);
+            $this->relatorioRepository->updateSaldo($subMaterial, $valor);
             $subMaterial->qtd_estoque -= $subMaterial->pivot->quant;
             $subMaterial->save();
         }

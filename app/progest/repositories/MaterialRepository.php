@@ -3,16 +3,20 @@
 namespace App\progest\repositories;
 
 use App\Material;
+use App\SubMaterial;
 use App\SubItem;
 use App\Unidade;
 use App\progest\repositories\ImagemRepository;
+use App\progest\repositories\RelatorioRepository;
 
 class MaterialRepository {
 
     protected $imagemRepository;
+    protected $relatorioRepository;
 
-    public function __construct(ImagemRepository $imagemRepository) {
+    public function __construct(ImagemRepository $imagemRepository, RelatorioRepository $relatorioRepository) {
         $this->imagemRepository = $imagemRepository;
+        $this->relatorioRepository = $relatorioRepository;
     }
 
     public function dataForSelect($filter = null) {

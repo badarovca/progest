@@ -25,5 +25,4 @@ class SubItem extends Model {
     public function materiais() {
         return $this->hasMany('App\Material');
     }
-
 }

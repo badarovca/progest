@@ -11,6 +11,12 @@ use App\Pedido;
 
 class SaidaRepository {
 
+    protected $relatorioRepository;
+
+    public function __construct(RelatorioRepository $relatorioRepository) {
+        $this->relatorioRepository = $relatorioRepository;
+    }
+
     public function index() {
         return Saida::orderBy('created_at', 'desc')->paginate(50);
     }
@@ -44,6 +50,8 @@ class SaidaRepository {
         $saida = Saida::find($id);
 
         foreach ($saida->subMateriais as $subMaterial) {
+            $valor = (round($subMaterial->vl_total / $subMaterial->qtd_solicitada, 2) * $subMaterial->pivot->quant);
+            $this->relatorioRepository->updateSaldo($subMaterial, $valor);
             $subMaterial->qtd_estoque += $subMaterial->pivot->quant;
             $subMaterial->save();
         }
@@ -59,6 +67,8 @@ class SaidaRepository {
                     })->sortBy('created_at');
             $rest = $qtd;
             foreach ($subMateriais as $subMaterial) {
+                $valor = "-".(round($subMaterial->vl_total / $subMaterial->qtd_solicitada, 2) * $rest);
+                $this->relatorioRepository->updateSaldo($subMaterial, $valor);
                 if ($subMaterial->qtd_estoque >= $rest) {
                     $subMaterial->qtd_estoque -= $rest;
                     $subMateriaisArray[$subMaterial->id] = ['quant' => $rest];

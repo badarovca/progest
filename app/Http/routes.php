@@ -19,6 +19,7 @@ Entrust::routeNeedsRole('admin/subitens*', 'admin', Redirect::to('/auth/login'))
 Entrust::routeNeedsRole('admin/unidades*', 'admin', Redirect::to('/auth/login'));
 Entrust::routeNeedsRole('admin/materiais*', 'admin', Redirect::to('/auth/login'));
 Entrust::routeNeedsRole('admin/submateriais*', 'admin', Redirect::to('/auth/login'));
+Entrust::routeNeedsRole('admin/relatorios*', 'admin', Redirect::to('/auth/login'));
 
 //Permissões ADMIN e ALMOXARIFE
 Entrust::routeNeedsRole('admin', array('admin','almoxarife'), Redirect::to('/auth/login'), false);
@@ -53,6 +54,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('subitens', 'SubItemController');
     Route::resource('submateriais', 'SubMaterialController');
     Route::get('/home', 'HomeController@index');
+    Route::get('/relatorios', 'RelatorioController@index');
+    Route::get('/relatorios/contabil', ['as' => 'admin.relatorios.contabil', 'uses' => 'RelatorioController@getRelatorioContabil']);
     Route::get('/', 'AdminController@index');
 });
 
