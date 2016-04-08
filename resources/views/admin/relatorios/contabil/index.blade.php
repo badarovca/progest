@@ -38,6 +38,7 @@
     <section class = "content">
         <!--Your Page Content Here -->
         @if(isset($dados))
+        <h3 class="text-right">Período: {{$periodo}} </h3>
         <table class="table table-bordered table-hover table-striped">
             <thead>
                 <tr>
@@ -54,13 +55,22 @@
                 <tr>
                     <td>{!! $linha->id !!}</td>
                     <td>{!! $linha->material_consumo !!}</td>
-                    <td>{!! $linha->vl_saldo_inicial !!}</td>
-                    <td>{!! $linha->vl_entrada + $linha->vl_devolucao !!}</td>
-                    <td>{!! $linha->vl_saida -  $linha->vl_devolucao  !!}</td>
-                    <td>{!! $linha->vl_saldo_final  !!}</td>
+                    <td>{!! number_format($linha->vl_saldo_inicial, 2, ',', '.')!!}</td>
+                    <td>{!! number_format($linha->vl_entrada + $linha->vl_devolucao, 2, ',', '.') !!}</td>
+                    <td>{!! number_format($linha->vl_saida -  $linha->vl_devolucao, 2, ',', '.') !!}</td>
+                    <td>{!! number_format($linha->vl_saldo_final, 2, ',', '.')!!}</td>
                 </tr>
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    <td class="text-right" colspan="2"><b>Totais</b></td>
+                    <td><b>{{number_format($totais['saldo_inicial'], 2, ',', '.')}}</b></td>
+                    <td><b>{{number_format($totais['entradas'], 2, ',', '.')}}</b></td>
+                    <td><b>{{number_format($totais['saidas'], 2, ',', '.')}}</b></td>
+                    <td><b>{{number_format($totais['saldo_final'], 2, ',', '.')}}</b></td>
+                </tr>
+            </tfoot>
         </table>
         @else
         <p>Selecione um período</p>

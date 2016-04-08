@@ -104,5 +104,20 @@ class RelatorioRepository {
             on saldos_iniciais.id = saldos_finais.id;"));
         return collect($result);
     }
+    
+    public function getTotais($dados) {
+        if ($dados == null){
+            return null;
+        }
+        $totais = ['entradas' => 0, 'saidas' => 0, 'saldo_inicial' => 0, 'saldo_final' => 0];
+        foreach ($dados as $linha){
+            $totais['entradas'] += $linha->vl_entrada + $linha->vl_devolucao;
+            $totais['saidas'] += $linha->vl_saida - $linha->vl_devolucao;
+            $totais['saldo_inicial'] += $linha->vl_saldo_inicial;
+            $totais['saldo_final'] += $linha->vl_saldo_final;
+        }
+        
+        return $totais;
+    }
 
 }
