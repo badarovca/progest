@@ -17,12 +17,12 @@
                 {!! Form::open(array('route' => 'admin.relatorios.contabil', 'method'=>'GET', 'class'=>'')) !!}
                 <div class='col-md-2'>
                     {!!Form::label('ano', 'Ano', array('class'=>'control-label'))!!}
-                    {!!Form::select('ano', $anos, old('ano'), ['class'=>'form-control', 'id'=>'ano', 'required'=>'required'])!!}
+                    {!!Form::select('ano', $anos, old('ano'), ['class'=>'form-control', 'id'=>'ano_relatorio', 'required'=>'required'])!!}
                 </div>
-                <div class='col-md-2'>
+                <div class='col-md-3'>
                     {!!Form::label('mes', 'Mês', array('class'=>'control-label'))!!}
                     <div class="input-group">
-                        {!!Form::select('mes', $meses, old('mes'), ['class'=>'form-control', 'id'=>'mes', 'required'=>'required'])!!}
+                        {!!Form::select('mes', [''=>'Selecione o ano'], old('mes'), ['class'=>'form-control', 'id'=>'meses_relatorio', 'required'=>'required'])!!}
                         <span class="input-group-btn">
                             {!! Form::submit('Ir', ['class'=>'btn btn-default'])!!}
                         </span>

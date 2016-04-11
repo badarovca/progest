@@ -1,6 +1,6 @@
 $(document).ready(function () {
     atualiza_total();
-    
+
     $("#add-material").click(function (event) {
         event.preventDefault();
         url = $("#base_url").val() + '/form-material';
@@ -61,6 +61,20 @@ $(document).ready(function () {
             atualiza_total();
         }
         return;
+    });
+
+    //atualiza lista de meses a partir do ano 
+    $("#ano_relatorio").click(function () {
+        ano = $("#ano_relatorio").val();
+        url = $("#base_url").val() + '/get-meses-relatorio/'+ano;
+        $.get(
+                url,
+                function (data) {
+                    if (data.success === true) {
+                        $("#meses_relatorio").html('');
+                           $("#meses_relatorio").append(data.html);
+                    }
+                });
     });
 
     //remove material já cadastrado da listagem

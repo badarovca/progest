@@ -3,6 +3,7 @@
 namespace App\progest\repositories;
 
 use App\Saldo;
+use App\SubItem;
 
 class RelatorioRepository {
 
@@ -14,14 +15,20 @@ class RelatorioRepository {
                     $query->where('ano', '=', $ano);
                     $query->where('sub_item_id', '=', $subMaterial->material->subItem->id);
                 })->first();
-        if($saldo != null){
+        if ($saldo != null) {
             $saldo->valor += $valor;
             $saldo->save();
-        }else{
-            $date = strtotime($ano."-".$mes."-01 -1 month");
-            $valor += $this->getSaldoMes($date, $subMaterial->material->subItem->id);
-            $saldo = new Saldo(['mes'=>$mes, 'ano'=>$ano, 'sub_item_id'=>$subMaterial->material->subItem->id, 'valor'=>$valor]);
-            $saldo->save();
+        } else {
+            $subItens = SubItem::all(['id']);
+            $date = strtotime($ano . "-" . $mes . "-01 -1 month");
+            foreach ($subItens as $subItem) {
+                $valorMesAnterior = $this->getSaldoMes($date, $subItem->id);
+                if ($subItem->id == $subMaterial->material->subItem->id) {
+                    $valorMesAnterior += $valor;
+                }
+                $saldo = new Saldo(['mes' => $mes, 'ano' => $ano, 'sub_item_id' => $subItem->id, 'valor' => $valorMesAnterior]);
+                $saldo->save();
+            }
         }
         return $saldo;
     }
@@ -38,8 +45,8 @@ class RelatorioRepository {
     public function getRelatorioContabil($input) {
         $periodo = [date("Y-m-d", strtotime($input['ano'] . "-" . $input['mes'] . "-01")), date("Y-m-t", strtotime($input['ano'] . "-" . $input['mes'] . "-01"))];
 //        dd($periodo);
-        $mesAnterior = date("m", strtotime($periodo[0]."-1 month"));
-        $anoAnterior = date("Y", strtotime($periodo[0]."-1 month"));
+        $mesAnterior = date("m", strtotime($periodo[0] . "-1 month"));
+        $anoAnterior = date("Y", strtotime($periodo[0] . "-1 month"));
         $result = \DB::select(\DB::raw("
             select entradas.*, saidas.vl_saida, devolucoes.vl_devolucao, 
             saldos_finais.vl_saldo_final, saldos_iniciais.vl_saldo_inicial from
@@ -52,7 +59,7 @@ class RelatorioRepository {
             left join sub_materials
             on materials.id = sub_materials.material_id
             left join entrada_sub_material
-            on sub_materials.id = entrada_sub_material.sub_material_id and (entrada_sub_material.created_at between '".$periodo[0]."' and '".$periodo[1]."')
+            on sub_materials.id = entrada_sub_material.sub_material_id and (entrada_sub_material.created_at between '" . $periodo[0] . "' and '" . $periodo[1] . "')
             left join entradas
             on entrada_sub_material.entrada_id = entradas.id 
             group by sub_items.id) entradas
@@ -66,7 +73,7 @@ class RelatorioRepository {
             left join sub_materials
             on materials.id = sub_materials.material_id
             left join saida_sub_material
-            on sub_materials.id = saida_sub_material.sub_material_id and (saida_sub_material.created_at between '".$periodo[0]."' and '".$periodo[1]."')
+            on sub_materials.id = saida_sub_material.sub_material_id and (saida_sub_material.created_at between '" . $periodo[0] . "' and '" . $periodo[1] . "')
             left join saidas
             on saida_sub_material.saida_id = saidas.id 
             group by sub_items.id) saidas
@@ -81,7 +88,7 @@ class RelatorioRepository {
             left join sub_materials
             on materials.id = sub_materials.material_id
             left join devolucao_sub_material
-            on sub_materials.id = devolucao_sub_material.sub_material_id and (devolucao_sub_material.created_at between '".$periodo[0]."' and '".$periodo[1]."')
+            on sub_materials.id = devolucao_sub_material.sub_material_id and (devolucao_sub_material.created_at between '" . $periodo[0] . "' and '" . $periodo[1] . "')
             left join devolucaos
             on devolucao_sub_material.devolucao_id = devolucaos.id 
             group by sub_items.id) devolucoes
@@ -91,7 +98,7 @@ class RelatorioRepository {
             saldos.valor as vl_saldo_inicial
             from sub_items
             left join saldos
-            on sub_items.id = saldos.sub_item_id and saldos.mes = '".$mesAnterior."' and saldos.ano = '".$anoAnterior."'
+            on sub_items.id = saldos.sub_item_id and saldos.mes = '" . $mesAnterior . "' and saldos.ano = '" . $anoAnterior . "'
             group by sub_items.id) saldos_iniciais
             on devolucoes.id = saldos_iniciais.id
             left join
@@ -99,24 +106,24 @@ class RelatorioRepository {
             saldos.valor as vl_saldo_final
             from sub_items
             left join saldos
-            on sub_items.id = saldos.sub_item_id and saldos.mes = '".$input['mes']."' and saldos.ano = '".$input['ano']."'
+            on sub_items.id = saldos.sub_item_id and saldos.mes = '" . $input['mes'] . "' and saldos.ano = '" . $input['ano'] . "'
             group by sub_items.id) saldos_finais
             on saldos_iniciais.id = saldos_finais.id;"));
         return collect($result);
     }
-    
+
     public function getTotais($dados) {
-        if ($dados == null){
+        if ($dados == null) {
             return null;
         }
         $totais = ['entradas' => 0, 'saidas' => 0, 'saldo_inicial' => 0, 'saldo_final' => 0];
-        foreach ($dados as $linha){
+        foreach ($dados as $linha) {
             $totais['entradas'] += $linha->vl_entrada + $linha->vl_devolucao;
             $totais['saidas'] += $linha->vl_saida - $linha->vl_devolucao;
             $totais['saldo_inicial'] += $linha->vl_saldo_inicial;
             $totais['saldo_final'] += $linha->vl_saldo_final;
         }
-        
+
         return $totais;
     }
 

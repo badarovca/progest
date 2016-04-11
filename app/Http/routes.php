@@ -74,4 +74,5 @@ Route::group(['prefix' => 'pedidos'], function () {
 });
 
 Route::get('form-material', ['uses' => 'EmpenhoController@getFormMaterial']);
+Route::get('get-meses-relatorio/{ano}', ['uses' => 'RelatorioController@getMesesRelatorio']);
 Route::get('add-material-saida/{material}/{qtd}', ['uses' => 'SaidaController@addMaterial']);
