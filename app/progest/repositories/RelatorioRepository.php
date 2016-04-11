@@ -33,11 +33,13 @@ class RelatorioRepository {
         return $saldo;
     }
 
-    public function getSaldoMes($date, $subItemId) {
+    public function getSaldoMes($date, $subItemId = null) {
         $saldo = Saldo::where(function ($query) use (&$date, &$subItemId) {
                     $query->where('mes', '=', date('m', $date));
                     $query->where('ano', '=', date('Y', $date));
-                    $query->where('sub_item_id', '=', $subItemId);
+                    if ($subItemId != null) {
+                        $query->where('sub_item_id', '=', $subItemId);
+                    }
                 })->get();
         return $saldo->first() == null ? 0 : $saldo->first()->valor;
     }
