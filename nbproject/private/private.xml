@@ -5,6 +5,7 @@
         <group>
             <file>file:/var/www/html/progest/resources/views/admin/pedidos/form.blade.php</file>
             <file>file:/var/www/html/progest/app/Http/Controllers/RelatorioController.php</file>
+            <file>file:/var/www/html/progest/app/Http/Controllers/EntradaController.php</file>
             <file>file:/var/www/html/progest/resources/views/admin/relatorios/contabil/index.blade.php</file>
             <file>file:/var/www/html/progest/app/progest/repositories/EntradaRepository.php</file>
             <file>file:/var/www/html/progest/app/progest/repositories/RelatorioRepository.php</file>

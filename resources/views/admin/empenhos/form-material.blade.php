@@ -11,7 +11,7 @@
         <div class='form-group'> 
             <div class='col-md-3'>
                 {!!Form::label('codigo[]', 'Código', array('class'=>'control-label'))!!}
-                {!!Form::number('codigo[]', null, array('class'=>'form-control codigo-material', 'id' => 'codigo[]', 'required' => 'required'))!!}
+                {!!Form::number('codigo[]', null, array('class'=>'form-control codigo-material', 'id' => 'codigo[]'))!!}
             </div>
 
             <div class='col-md-9'>
