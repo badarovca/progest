@@ -47,19 +47,23 @@
                     <th>Saldo Inicial</th>
                     <th>Enradas</th>
                     <th>Saídas</th>
+                    <th>Devoluções</th>
                     <th>Saldo Final</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($dados as $linha)
+                @if($linha->id != null)
                 <tr>
                     <td>{!! $linha->id !!}</td>
                     <td>{!! $linha->material_consumo !!}</td>
                     <td>{!! number_format($linha->vl_saldo_inicial, 2, ',', '.')!!}</td>
-                    <td>{!! number_format($linha->vl_entrada + $linha->vl_devolucao, 2, ',', '.') !!}</td>
-                    <td>{!! number_format($linha->vl_saida -  $linha->vl_devolucao, 2, ',', '.') !!}</td>
+                    <td>{!! number_format($linha->vl_entrada, 2, ',', '.') !!}</td>
+                    <td>{!! number_format($linha->vl_saida, 2, ',', '.') !!}</td>
+                    <td>{!! number_format($linha->vl_devolucao, 2, ',', '.') !!}</td>
                     <td>{!! number_format($linha->vl_saldo_final, 2, ',', '.')!!}</td>
                 </tr>
+                @endif
                 @endforeach
             </tbody>
             <tfoot>
@@ -68,6 +72,7 @@
                     <td><b>{{number_format($totais['saldo_inicial'], 2, ',', '.')}}</b></td>
                     <td><b>{{number_format($totais['entradas'], 2, ',', '.')}}</b></td>
                     <td><b>{{number_format($totais['saidas'], 2, ',', '.')}}</b></td>
+                    <td><b>{{number_format($totais['devolucoes'], 2, ',', '.')}}</b></td>
                     <td><b>{{number_format($totais['saldo_final'], 2, ',', '.')}}</b></td>
                 </tr>
             </tfoot>

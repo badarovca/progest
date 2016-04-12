@@ -37,7 +37,7 @@
                                 <td style="width: 70%">{{$material->descricao}}</td>
                                 <td style="width: 5%">{{($material->pivot->quant)}}</td>
                                 <td style="width: 5%">{{$material->present()->getQtdEstoque()}}</td>
-                                <td style="width: 10%">{!!Form::number("qtds[$material->id]", null, array('class'=>'form-control', 'id' => 'qtd[$material->id]', 'required' => 'required', 'min' => '0', 'max'=>$material->present()->getQtdEstoque, $material->present()->getQtdEstoque > 0 ? '' : 'disabled'))!!}</td>
+                                <td style="width: 10%">{!!Form::number("qtds[$material->id]", null, array('class'=>'form-control', 'id' => 'qtd[$material->id]', 'required' => 'required', 'min' => '0', 'max'=>$material->present()->getQtdEstoque < $material->pivot->quant ? $material->present()->getQtdEstoque : $material->pivot->quant, $material->present()->getQtdEstoque > 0 ? '' : 'disabled'))!!}</td>
                             </tr>
                             @endforeach
                         </tbody>
