@@ -119,7 +119,7 @@
 
             <div class="row">
                 <div class='col-md-3 col-md-offset-9 text-right'>
-                    <b>Total: <span id='valor-total-empenho'>00,00</span></b>
+                    <b>Total: <span>{{$empenho->present()->getValorTotal()}}</span></b>
                 </div>
             </div>
         </div>

@@ -57,13 +57,13 @@
                 {!!Form::label('vl_total[]', 'Valor total', array('class'=>'control-label'))!!}
                 {!!Form::text('vl_total[]', null, array('class'=>'form-control valor valor-total-material', 'id' => 'vl_total[]', 'required' => 'required'))!!}
             </div>
-            <div class='col-md-2'>
-                {!!Form::label('qtd_min[]', 'Quantidade mínima', array('class'=>'control-label'))!!}
-                {!!Form::number('qtd_min[]', null, array('class'=>'form-control', 'id' => 'qtd_min[]', 'min'=> '0', 'required' => 'required'))!!}
-            </div>
             <div class='col-md-3'>
                 {!!Form::label('qtd_solicitada[]', 'Quantidade', array('class'=>'control-label'))!!}
                 {!!Form::text('qtd_solicitada[]', null, array('class'=>'form-control', 'id' => 'qtd_solicitada[]', 'required' => 'required'))!!}
+            </div>
+            <div class='col-md-2'>
+                {!!Form::label('qtd_min[]', 'Quantidade mínima', array('class'=>'control-label'))!!}
+                {!!Form::number('qtd_min[]', null, array('class'=>'form-control', 'id' => 'qtd_min[]', 'min'=> '0', 'required' => 'required'))!!}
             </div>
         </div>
     </div>

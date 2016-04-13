@@ -3,8 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laracasts\Presenter\PresentableTrait;
 
 class Empenho extends Model {
+    
+    use PresentableTrait;
+
+    protected $presenter = 'App\progest\presenters\EmpenhoPresenter';
 
     /**
      * The database table used by the model.
