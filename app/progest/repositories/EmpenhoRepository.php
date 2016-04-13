@@ -67,17 +67,11 @@ class EmpenhoRepository {
         $empenho->mod_licitacao = $input['empenho']['mod_licitacao'];
         $empenho->num_processo = $input['empenho']['num_processo'];
 
-        $input['materiais']['vl_total'] = $this->realToDolar($input['materiais']['vl_total']);
-
         $fornecedor = Fornecedor::find($input['empenho']['fornecedor_id']);
         $solicitante = User::find($input['empenho']['solicitante_id']);
         $empenho->fornecedor()->associate($fornecedor);
         $empenho->solicitante()->associate($solicitante);
-
-        $subMateriais = $this->prepararSubMateriais($input['materiais'], $empenho);
-        if ($subMateriais) {
-            $empenho->subMateriais()->saveMany($subMateriais);
-        }
+        
         if ($input['submateriais']['submateriais']) {
             foreach ($empenho->subMateriais as $subMaterial) {
                 $subMaterial->delete();
@@ -93,6 +87,12 @@ class EmpenhoRepository {
                 $subMaterial->save();
             }
         }
+        
+        $subMateriais = $this->prepararSubMateriais($input['materiais'], $empenho);
+        if ($subMateriais) {
+            $empenho->subMateriais()->saveMany($subMateriais);
+        }
+        
         return $empenho->save();
     }
 
