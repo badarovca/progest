@@ -54,6 +54,7 @@ class UsuarioRepository {
         $user->email = $input['email'];
         $user->telefone = $input['telefone'];
         $user->habilitado = isset($input['habilitado']) ? 1 : 0;
+        $user->password = isset($input['password']) ? bcrypt($input['password']) : null;
 
         $setor = Setor::find($input['setor_id']);
         $user->setor()->associate($setor);
@@ -70,7 +71,8 @@ class UsuarioRepository {
         $user->email = $input['email'];
         $user->telefone = $input['telefone'];
         $user->habilitado = isset($input['habilitado']) ? 1 : 0;
-
+        $user->password = isset($input['password']) ? bcrypt($input['password']) : $user->password;
+        
         $setor = Setor::find($input['setor_id']);
         $user->setor()->associate($setor);
 

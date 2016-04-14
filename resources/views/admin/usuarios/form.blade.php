@@ -7,7 +7,7 @@
     </ul>
 </div>
 @endif
-
+{!! Form::hidden('id', $usuario->id) !!}
 <div class="row">
     <div class='form-group'> 
         <div class='col-md-6'>
@@ -44,6 +44,19 @@
         <div class='col-md-6'>
             {!!Form::label('role', 'Permissão', array('class'=>'control-label'))!!}
             {!!Form::select('role', $roles, ($usuario->roles()->first() != null)? $usuario->roles()->first()->id : null, ['required' => 'required', 'class'=>'form-control'])!!}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class='form-group'>
+        <div class='col-md-6'>
+            {!!Form::label('password', 'Senha', array('class'=>'control-label'))!!}
+            {!!Form::password('password', ['class'=>'form-control', 'max'=>'10'])!!}
+        </div>
+        <div class='col-md-6'>
+            {!!Form::label('password_confirmation', 'Confirmação de senha', array('class'=>'control-label'))!!}
+            {!!Form::password('password_confirmation', ['class'=>'form-control', 'max'=>'10'])!!}
         </div>
     </div>
 </div>

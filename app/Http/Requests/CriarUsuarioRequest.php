@@ -27,6 +27,7 @@ class CriarUsuarioRequest extends Request {
                     'email' => 'required|email|unique:users',
                     'telefone' => 'min:10',
                     'setor_id' => 'required|exists:setors,id',
+                    'password' => 'confirmed',
                     'role' => 'required|exists:roles,id'
 		];
 	}

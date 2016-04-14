@@ -34,6 +34,9 @@
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
+                            <div class="pull-left">
+                                <a href="{{ route('redefinir-senha') }}" class="btn btn-default btn-flat">Alterar Senha</a>
+                            </div>
                             <div class="pull-right">
                                 <a href="{{ url('/auth/logout') }}" class="btn btn-default btn-flat">Sair</a>
                             </div>

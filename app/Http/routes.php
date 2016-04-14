@@ -21,12 +21,16 @@ Entrust::routeNeedsRole('admin/materiais*', 'admin', Redirect::to('/auth/login')
 Entrust::routeNeedsRole('admin/submateriais*', 'admin', Redirect::to('/auth/login'));
 Entrust::routeNeedsRole('admin/relatorios*', 'admin', Redirect::to('/auth/login'));
 
+//Permissões ADMIN, ALMOXARIFE e SOLICITANTE
+Entrust::routeNeedsRole('redefinir-senha', array('admin', 'almoxarife', 'solicitante'), Redirect::to('/auth/login'), false);
+Entrust::routeNeedsRole('update-senha', array('admin', 'almoxarife', 'solicitante'), Redirect::to('/auth/login'), false);
+
 //Permissões ADMIN e ALMOXARIFE
-Entrust::routeNeedsRole('admin', array('admin','almoxarife'), Redirect::to('/auth/login'), false);
-Entrust::routeNeedsRole('admin/empenhos*', array('admin','almoxarife'), Redirect::to('/auth/login'), false);
-Entrust::routeNeedsRole('admin/entradas*', array('admin','almoxarife'), Redirect::to('/auth/login'), false);
-Entrust::routeNeedsRole('admin/pedidos*', array('admin','almoxarife'), Redirect::to('/auth/login'), false);
-Entrust::routeNeedsRole('admin/saidas*', array('admin','almoxarife'), Redirect::to('/auth/login'), false);
+Entrust::routeNeedsRole('admin', array('admin', 'almoxarife'), Redirect::to('/auth/login'), false);
+Entrust::routeNeedsRole('admin/empenhos*', array('admin', 'almoxarife'), Redirect::to('/auth/login'), false);
+Entrust::routeNeedsRole('admin/entradas*', array('admin', 'almoxarife'), Redirect::to('/auth/login'), false);
+Entrust::routeNeedsRole('admin/pedidos*', array('admin', 'almoxarife'), Redirect::to('/auth/login'), false);
+Entrust::routeNeedsRole('admin/saidas*', array('admin', 'almoxarife'), Redirect::to('/auth/login'), false);
 
 //Permissões SOLICITANTE
 Entrust::routeNeedsRole('pedidos*', 'solicitante', Redirect::to('/auth/login'));
@@ -59,7 +63,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@index');
 });
 
-Route::get('/', 'HomeController@index');
+Route::get('/', ['as' => 'default', 'uses'=>'HomeController@index']);
 Route::get('/home', 'HomeController@index');
 
 Route::group(['prefix' => 'pedidos'], function () {
@@ -72,6 +76,9 @@ Route::group(['prefix' => 'pedidos'], function () {
     Route::post('/store', ['as' => 'pedidos.store', 'uses' => 'PedidoController@store']);
     Route::delete('/remover-material/{rowid}', ['as' => 'pedidos.remover-material', 'uses' => 'PedidoController@removeMaterial']);
 });
+
+Route::get('redefinir-senha', ['as' => 'redefinir-senha', 'uses' => 'UsuarioController@changePassword']);
+Route::post('update-senha', ['as' => 'update-senha', 'uses' => 'UsuarioController@updatePassword']);
 
 Route::get('form-material', ['uses' => 'EmpenhoController@getFormMaterial']);
 Route::get('get-meses-relatorio/{ano}', ['uses' => 'RelatorioController@getMesesRelatorio']);
