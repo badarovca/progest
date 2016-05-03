@@ -22,8 +22,18 @@ class EmpenhoRepository {
         $this->imagemRepository = $imagemRepository;
     }
 
-    public function index() {
-        return Empenho::all()->sortBy('creatated_at');
+    public function index($filter = null) {
+        if ($filter) {
+            $empenhos = Empenho::where(function($query) use (&$filter) {
+                        if (isset($filter['busca']) && $filter['busca'] != '') {
+                            $query->where('numero', 'like', "%" . $filter['busca'] . "%")
+                                    ->orWhere('mod_licitacao', 'like', "%" . $filter['busca'] . "%");
+                        }
+                    })->paginate($filter['paginate'])->sortByDesc('created_at');
+        } else {
+            $empenhos = Empenho::all()->sortByDesc('created_at');
+        }
+        return $empenhos;
     }
 
     public function store($input) {
@@ -71,7 +81,7 @@ class EmpenhoRepository {
         $solicitante = User::find($input['empenho']['solicitante_id']);
         $empenho->fornecedor()->associate($fornecedor);
         $empenho->solicitante()->associate($solicitante);
-        
+
         if ($input['submateriais']['submateriais']) {
             foreach ($empenho->subMateriais as $subMaterial) {
                 $subMaterial->delete();
@@ -87,12 +97,12 @@ class EmpenhoRepository {
                 $subMaterial->save();
             }
         }
-        
+
         $subMateriais = $this->prepararSubMateriais($input['materiais'], $empenho);
         if ($subMateriais) {
             $empenho->subMateriais()->saveMany($subMateriais);
         }
-        
+
         return $empenho->save();
     }
 

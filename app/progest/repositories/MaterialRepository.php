@@ -36,7 +36,7 @@ class MaterialRepository {
         }
         $materiais = array('' => 'Selecione...');
         foreach ($baseArray as $value) {
-            $materiais[$value->id] = $value->descricao . " (cod: $value->codigo)";
+            $materiais[$value->id] = $value->descricao ." - ".$value->marca." (cod: $value->codigo)";
         }
         return $materiais;
     }

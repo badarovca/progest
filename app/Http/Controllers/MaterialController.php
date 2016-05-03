@@ -43,7 +43,7 @@ class MaterialController extends Controller {
         $order = [''=>'Selecione...', 
             'updated_at-desc' => 'Data - mais atual', 'updated_at-asc' => 'Data - mais antigo', 
             'descricao-asc' => 'Nome - a-z', 'descricao-desc' => 'Nome - z-a', 
-            'qtd_1-asc' => 'Estoque - menor', 'qtd_1-desc' => 'Estoque - maior', 
+//            'qtd_1-asc' => 'Estoque - menor', 'qtd_1-desc' => 'Estoque - maior', 
             'sub_item_id-asc' => 'SubItem'];
             
         return view('admin.materiais.index')->with(compact('materiais', 'order', 'input'));

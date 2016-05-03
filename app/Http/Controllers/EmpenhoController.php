@@ -22,8 +22,7 @@ class EmpenhoController extends Controller {
     protected $unidadeRepository;
     protected $usuarioRepository;
 
-    public function __construct(EmpenhoRepository $empenhoRepository, FornecedorRepository $fornecedorRepository, SubItemRepository $subItemRepository, 
-            MaterialRepository $materialRepository, UnidadeRepository $unidadeRepository, UsuarioRepository $usuarioRepository) {
+    public function __construct(EmpenhoRepository $empenhoRepository, FornecedorRepository $fornecedorRepository, SubItemRepository $subItemRepository, MaterialRepository $materialRepository, UnidadeRepository $unidadeRepository, UsuarioRepository $usuarioRepository) {
         $this->empenhoRepository = $empenhoRepository;
         $this->fornecedorRepository = $fornecedorRepository;
         $this->subItemRepository = $subItemRepository;
@@ -37,10 +36,15 @@ class EmpenhoController extends Controller {
      *
      * @return Response
      */
-    public function index() {
-        $empenhos = $this->empenhoRepository->index();
+    public function index(Request $input) {
+        $input->flash();
+        $input = $input->all();
+        $filter = $input;
+        $filter['paginate'] = 50;
+        
+        $empenhos = $this->empenhoRepository->index($filter);
 
-        return view('admin.empenhos.index')->with(compact('empenhos'));
+        return view('admin.empenhos.index')->with(compact('empenhos', 'input'));
     }
 
     /**

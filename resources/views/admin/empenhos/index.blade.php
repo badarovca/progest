@@ -17,6 +17,29 @@
         <small><a href="{!! route('admin.empenhos.create') !!}">
                 <i class="fa fa-plus"></i> Novo empenho
             </a></small>
+
+        <!-- Busca e filtros -->
+
+        <div class="row">
+            <fieldset>
+                <legend>Busca</legend>
+                {!! Form::open(array('route' => 'admin.empenhos.index', 'method'=>'GET', 'class'=>'')) !!}
+                <div class='col-md-8'>
+                    <div class="input-group">
+                        {!!Form::text('busca', old('busca'), array('class'=>'form-control', 'id' => 'busca', 'placeholder'=>'Número do empenho ou modalidade da licitação'))!!}
+
+                        <span class="input-group-btn">
+                            {!! Form::submit('Ir', ['class'=>'btn btn-default'])!!}
+                        </span>
+                    </div>
+                </div>
+                <!--                <div class='col-md-2'><br>
+                
+                                </div>-->
+                {!! Form::close() !!}
+            </fieldset>
+        </div>
+        <br>
     </section>
 
     <!--Main content -->
