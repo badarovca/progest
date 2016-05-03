@@ -85,7 +85,7 @@ class EntradaRepository {
             $materiaisObjects[$key] = new Material([
                 'codigo' => $val['codigo'], 'descricao' => $val['descricao'],
                 'unidade' => $val['unidade'], 'marca' => $val['marca'],
-                'qtd_1' => 0, 'qtd_2' => 0, 'qtd_3' => 0, 'qtd_4' => 0, 'disponivel' => 0
+                'qtd_1' => 0, 'qtd_2' => 0, 'qtd_3' => 0, 'qtd_4' => 0, 'disponivel' => 1
             ]);
 
             $subItem = SubItem::find($val['sub_item_id']);
