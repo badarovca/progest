@@ -31,7 +31,7 @@
             </thead>
             <tbody>
                 @foreach($pedidos as $pedido)
-                <tr>
+                <tr class="{!!$pedido->status == 'Pendente'? 'warning' : ''!!}">
                     <td>{!! $pedido->id !!}</td>
                     <td>{!! $pedido->solicitante->name !!}</td>
                     <td>{!! $pedido->status !!}</td>
