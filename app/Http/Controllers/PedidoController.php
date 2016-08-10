@@ -27,7 +27,7 @@ class PedidoController extends Controller {
      * @return Response
      */
     public function index() {
-        $pedidos = $this->pedidoRepository->index();
+        $pedidos = $this->pedidoRepository->index(['paginate'=>50]);
         
         return view('admin.pedidos.index')->with(compact('pedidos'));
     }

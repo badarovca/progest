@@ -54,11 +54,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($pedido->saida->materiais as $material)
+                            @foreach($pedido->saida->subMateriais as $subMaterial)
                             <tr>
-                                <td style="width: 10%">{{$material->codigo}}</td>
-                                <td style="width: 75%">{{$material->descricao}}</td>
-                                <td style="width: 15%">{{$material->pivot->quant}}</td>
+                                <td style="width: 10%">{{$subMaterial->material->codigo}}</td>
+                                <td style="width: 75%">{{$subMaterial->material->descricao}}</td>
+                                <td style="width: 15%">{{$subMaterial->pivot->quant}}</td>
                             </tr>
                             @endforeach
                         </tbody>
