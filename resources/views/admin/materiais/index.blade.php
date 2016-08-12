@@ -29,18 +29,18 @@
                             {!!Form::select('disp', $filter['disp'], old('disp'), ['class'=>'form-control', 'id'=>'disp'])!!}
                         </div>
 
-                        <div class='col-md-3'>
-                            {!!Form::label('qtd_min', 'Quantidade mínima', array('class'=>'control-label'))!!}
+                        <div class='col-md-2'>
+                            {!!Form::label('qtd_min', 'Qtd mín.', array('class'=>'control-label'))!!}
                             {!!Form::select('qtd_min', $filter['qtd_min'], old('qtd_min'), ['class'=>'form-control', 'id'=>'qtd_min'])!!}
 
                         </div>
-                        <div class='col-md-4'>
+                        <div class='col-md-3'>
                             {!!Form::label('busca', 'Busca', array('class'=>'control-label'))!!}
-                            <!--<div class="input-group">-->
-                                {!!Form::text('busca', old('busca'), array('class'=>'form-control', 'id' => 'busca', 'placeholder'=>'Código, descrição, marca...'))!!}
-                                
-
-                            <!--</div>-->
+                            {!!Form::text('busca', old('busca'), array('class'=>'form-control', 'id' => 'busca', 'placeholder'=>'Código, descrição, marca...'))!!}
+                        </div>
+                        <div class='col-md-2'>
+                            {!!Form::label('paginate', 'Mostrar', array('class'=>'control-label'))!!}
+                            {!!Form::select('paginate', $filter['paginate'], old('paginate'), ['class'=>'form-control', 'id'=>'paginate'])!!}
                         </div>
                         <div class='col-md-1'>
                             <label class="control-label"></label>

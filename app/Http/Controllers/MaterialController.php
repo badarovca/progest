@@ -35,7 +35,7 @@ class MaterialController extends Controller {
         $input->flash();
         $input = $input->all();
         $filter = $input;
-        $filter['paginate'] = 50;
+        $filter['paginate'] = isset($filter['paginate']) ? $filter['paginate'] : 50;
         $materiais = $this->materialRepository->index($filter);
         $filter = [
         'estq' => [
@@ -52,6 +52,11 @@ class MaterialController extends Controller {
         '' => 'Selecione...',
         'acima_qtd_min' => 'Acima da quantidade mínima',
         'abaixo_qtd_min' => 'Abaixo da quantidade mínima',
+        ],
+        'paginate' => [
+        '50' => '50',
+        '100' => '100',
+        'null' => 'Todos',
         ]
         ];
 

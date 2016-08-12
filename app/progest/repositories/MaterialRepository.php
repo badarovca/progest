@@ -47,24 +47,24 @@ class MaterialRepository {
 //            dd($orderBy);
             $materiais = Material::where(function($query) use (&$filter) {
                         if (isset($filter['disp']) && $filter['disp'] == 'disponivel') {
-                            $query->where('disponivel', '=', 1)
-                            ->where(function($query) use (&$filter) {
-                                if (isset($filter['busca']) && $filter['busca'] != '') {
-                                    $query->where('descricao', 'like', "%" . $filter['busca'] . "%")
-                                    ->orWhere('marca', 'like', "%" . $filter['busca'] . "%")
-                                    ->orWhere('codigo', 'like', "%" . $filter['busca'] . "%");
-                                }
-                            });
+                            $query->where('disponivel', '=', 1);
+//                            ->where(function($query) use (&$filter) {
+//                                if (isset($filter['busca']) && $filter['busca'] != '') {
+//                                    $query->where('descricao', 'like', "%" . $filter['busca'] . "%")
+//                                    ->orWhere('marca', 'like', "%" . $filter['busca'] . "%")
+//                                    ->orWhere('codigo', 'like', "%" . $filter['busca'] . "%");
+//                                }
+//                            });
                         } 
                         if (isset($filter['disp']) && $filter['disp'] == 'indisponivel') {
-                            $query->where('disponivel', '=', 0)
-                            ->where(function($query) use (&$filter) {
-                                if (isset($filter['busca']) && $filter['busca'] != '') {
-                                    $query->where('descricao', 'like', "%" . $filter['busca'] . "%")
-                                    ->orWhere('marca', 'like', "%" . $filter['busca'] . "%")
-                                    ->orWhere('codigo', 'like', "%" . $filter['busca'] . "%");
-                                }
-                            });
+                            $query->where('disponivel', '=', 0);
+//                            ->where(function($query) use (&$filter) {
+//                                if (isset($filter['busca']) && $filter['busca'] != '') {
+//                                    $query->where('descricao', 'like', "%" . $filter['busca'] . "%")
+//                                    ->orWhere('marca', 'like', "%" . $filter['busca'] . "%")
+//                                    ->orWhere('codigo', 'like', "%" . $filter['busca'] . "%");
+//                                }
+//                            });
                         }
                         if (isset($filter['busca']) && $filter['busca'] != '') {
                                 $query->where('descricao', 'like', "%" . $filter['busca'] . "%")
@@ -90,7 +90,7 @@ class MaterialRepository {
                     })
                     ->orderBy($orderBy[0], $orderBy[1])
 //                    ->toSql();
-                    ->paginate($filter['paginate']);
+                    ->paginate($filter['paginate'] == "null"? null : $filter['paginate']);
         } else {
             $materiais = Material::all();
         }

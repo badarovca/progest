@@ -33,7 +33,7 @@ class PedidoController extends Controller {
     }
 
     public function exibirMateriais() {
-        $materiais = $this->materialRepository->index(['disponivel' => true, 'em_estq' => true,'paginate' => 20]);
+        $materiais = $this->materialRepository->index(['disp' => 'disponivel', 'em_estq' => true,'paginate' => 20]);
         return view('frontend.home')->with(compact('materiais'));
     }
     
