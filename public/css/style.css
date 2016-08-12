@@ -38,3 +38,11 @@
 .skin-green .main-header .logo:hover {
     background-color: #fec802!important;
 }
+
+/*@media print*/
+/*{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}*/

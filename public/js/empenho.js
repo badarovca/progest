@@ -66,13 +66,13 @@ $(document).ready(function () {
     //atualiza lista de meses a partir do ano 
     $("#ano_relatorio").click(function () {
         ano = $("#ano_relatorio").val();
-        url = $("#base_url").val() + '/get-meses-relatorio/'+ano;
+        url = $("#base_url").val() + '/get-meses-relatorio/' + ano;
         $.get(
                 url,
                 function (data) {
                     if (data.success === true) {
                         $("#meses_relatorio").html('');
-                           $("#meses_relatorio").append(data.html);
+                        $("#meses_relatorio").append(data.html);
                     }
                 });
     });
@@ -92,6 +92,15 @@ $(document).ready(function () {
     //atualiza total quando um novo material está sendo adicionado
     $(document).on("keyup", '.valor-total-material', function (event) {
         atualiza_total();
+    });
+
+    //tranforma tabelas html em DataTables
+    $("#listaMateriais").DataTable({
+        "language": {
+            "url": $("#base_url").val() +"/js/data-table-pt-br.js"
+        },
+        bPaginate: false,
+        bFilter: false, bInfo: false
     });
 });
 

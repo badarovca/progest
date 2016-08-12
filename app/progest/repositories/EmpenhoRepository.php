@@ -148,7 +148,7 @@ class EmpenhoRepository {
                 'codigo' => $val['codigo'], 'descricao' => $val['descricao'],
                 'marca' => $val['marca'],
                 'qtd_min' => $val['qtd_min'], 'imagem' => '',
-                'disponivel' => 0
+                'disponivel' => 1
             ]);
 
             if (isset($val['imagem'])) {

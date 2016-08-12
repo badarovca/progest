@@ -19,10 +19,7 @@ class MaterialController extends Controller {
     protected $unidadeRepository;
     protected $subMaterialRepository;
 
-
-
-    public function __construct(SubItemRepository $subItemRepository, MaterialRepository $materialRepository, 
-     UnidadeRepository $unidadeRepository, SubMaterialRepository $subMaterialRepository) {
+    public function __construct(SubItemRepository $subItemRepository, MaterialRepository $materialRepository, UnidadeRepository $unidadeRepository, SubMaterialRepository $subMaterialRepository) {
         $this->subItemRepository = $subItemRepository;
         $this->materialRepository = $materialRepository;
         $this->unidadeRepository = $unidadeRepository;
@@ -40,13 +37,26 @@ class MaterialController extends Controller {
         $filter = $input;
         $filter['paginate'] = 50;
         $materiais = $this->materialRepository->index($filter);
-        $order = [''=>'Selecione...', 
-            'updated_at-desc' => 'Data - mais atual', 'updated_at-asc' => 'Data - mais antigo', 
-            'descricao-asc' => 'Nome - a-z', 'descricao-desc' => 'Nome - z-a', 
-//            'qtd_1-asc' => 'Estoque - menor', 'qtd_1-desc' => 'Estoque - maior', 
-            'sub_item_id-asc' => 'SubItem'];
-            
-        return view('admin.materiais.index')->with(compact('materiais', 'order', 'input'));
+        $filter = [
+        'estq' => [
+        '' => 'Selecione...',
+        'em_estq' => 'Em estoque',
+        'sem_estq' => 'Sem estoque',
+        ],
+        'disp' => [
+        '' => 'Selecione...',
+        'disponivel' => 'Disponível',
+        'indisponivel' => 'Indisponível',
+        ],
+        'qtd_min' => [
+        '' => 'Selecione...',
+        'acima_qtd_min' => 'Acima da quantidade mínima',
+        'abaixo_qtd_min' => 'Abaixo da quantidade mínima',
+        ]
+        ];
+
+
+        return view('admin.materiais.index')->with(compact('materiais', 'filter','input'));
     }
 
     /**
@@ -120,8 +130,8 @@ class MaterialController extends Controller {
         $this->materialRepository->destroy($id);
         return back()->with('success', 'Removido com sucesso!');
     }
-    
-    public function buscarMateriais(Request $request, $param){
+
+    public function buscarMateriais(Request $request, $param) {
         dd($this->materialRepository->search($param)->toJson());
     }
 
