@@ -46,51 +46,55 @@ class MaterialRepository {
             $orderBy = isset($filter['order']) && $filter['order'] != '' ? explode('-', $filter['order']) : ['descricao', 'asc'];
 //            dd($orderBy);
             $materiais = Material::where(function($query) use (&$filter) {
-                        if (isset($filter['disp']) && $filter['disp'] == 'disponivel') {
-                            $query->where('disponivel', '=', 1)
-                            ->where(function($query) use (&$filter) {
-                                if (isset($filter['busca']) && $filter['busca'] != '') {
-                                    $query->where('descricao', 'like', "%" . $filter['busca'] . "%")
-                                    ->orWhere('marca', 'like', "%" . $filter['busca'] . "%")
-                                    ->orWhere('codigo', 'like', "%" . $filter['busca'] . "%");
-                                }
-                            });
-                        } 
-                        if (isset($filter['disp']) && $filter['disp'] == 'indisponivel') {
-                            $query->where('disponivel', '=', 0)
-                            ->where(function($query) use (&$filter) {
-                                if (isset($filter['busca']) && $filter['busca'] != '') {
-                                    $query->where('descricao', 'like', "%" . $filter['busca'] . "%")
-                                    ->orWhere('marca', 'like', "%" . $filter['busca'] . "%")
-                                    ->orWhere('codigo', 'like', "%" . $filter['busca'] . "%");
-                                }
-                            });
-                        }
-                        if (isset($filter['busca']) && $filter['busca'] != '') {
+                        if (isset($filter['disp'])) {
+                            if ($filter['disp'] == 'disponivel') {
+                                $query->where('disponivel', '=', 1)
+                                ->where(function($query) use (&$filter) {
+                                    if (isset($filter['busca']) && $filter['busca'] != '') {
+                                        $query->where('descricao', 'like', "%" . $filter['busca'] . "%")
+                                        ->orWhere('marca', 'like', "%" . $filter['busca'] . "%")
+                                        ->orWhere('codigo', 'like', "%" . $filter['busca'] . "%");
+                                    }
+                                });
+                            }
+                            if ($filter['disp'] == 'indisponivel') {
+                                $query->where('disponivel', '=', 0)
+                                ->where(function($query) use (&$filter) {
+                                    if (isset($filter['busca']) && $filter['busca'] != '') {
+                                        $query->where('descricao', 'like', "%" . $filter['busca'] . "%")
+                                        ->orWhere('marca', 'like', "%" . $filter['busca'] . "%")
+                                        ->orWhere('codigo', 'like', "%" . $filter['busca'] . "%");
+                                    }
+                                });
+                            }
+                        } else {
+                            if (isset($filter['busca']) && $filter['busca'] != '') {
                                 $query->where('descricao', 'like', "%" . $filter['busca'] . "%")
                                 ->orWhere('marca', 'like', "%" . $filter['busca'] . "%")
                                 ->orWhere('codigo', 'like', "%" . $filter['busca'] . "%");
                             }
+                        }
                     })
                     ->whereHas('subMateriais', function ($query) use (&$filter) {
                         if (isset($filter['estq']) && $filter['estq'] == 'em_estq') {
                             $query->where('qtd_estoque', '>', 0);
                         }
                         if (isset($filter['estq']) && $filter['estq'] == 'sem_estq') {
-                            $query->where('qtd_estoque', '<=', 0);
+                            $query->groupBy('material_id');
+                            $query->havingRaw('SUM(qtd_estoque) <= 0');
                         }
                         if (isset($filter['qtd_min']) && $filter['qtd_min'] == 'acima_qtd_min') {
                             $query->groupBy('material_id');
                             $query->havingRaw('SUM(qtd_estoque) > materials.qtd_min');
                         }
-                        if (isset($filter['qtd_min'])&& $filter['qtd_min'] == 'abaixo_qtd_min') {
+                        if (isset($filter['qtd_min']) && $filter['qtd_min'] == 'abaixo_qtd_min') {
                             $query->groupBy('material_id');
-                            $query->havingRaw('SUM(qtd_estoque) < materials.qtd_min');
+                            $query->havingRaw('SUM(qtd_estoque) <= materials.qtd_min');
                         }
                     })
                     ->orderBy($orderBy[0], $orderBy[1])
 //                    ->toSql();
-                    ->paginate($filter['paginate'] == "null"? null : $filter['paginate']);
+                    ->paginate($filter['paginate'] == "null" ? null : $filter['paginate']);
         } else {
             $materiais = Material::all();
         }
