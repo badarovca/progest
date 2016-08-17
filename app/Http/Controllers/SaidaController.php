@@ -45,7 +45,7 @@ class SaidaController extends Controller {
     public function create() {
         $saida = null;
         $users = $this->usuarioRepository->dataForSelect();
-        $materiais = $this->materialRepository->dataForSelect(['disponivel' => true]);
+        $materiais = $this->materialRepository->dataForSelect(['disp' => 'disponivel']);
         return view('admin.saidas.create')->with(compact(['saida', 'users', 'materiais']));
     }
 

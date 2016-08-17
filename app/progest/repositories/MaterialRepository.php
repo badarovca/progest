@@ -22,12 +22,12 @@ class MaterialRepository {
     public function dataForSelect($filter = null) {
         if ($filter) {
             $baseArray = Material::where(function($query) use (&$filter) {
-                                if ($filter['disponivel']) {
+                                if ($filter['disp'] && $filter['disp'] == 'disponivel') {
                                     $query->where('disponivel', '=', 1);
                                 }
                             })
                             ->whereHas('subMateriais', function ($query) use (&$filter) {
-                                if ($filter['disponivel']) {
+                                if ($filter['disp'] && $filter['disp'] == 'disponivel') {
                                     $query->where('qtd_estoque', '>', 0);
                                 }
                             })->get();

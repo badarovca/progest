@@ -19,6 +19,10 @@ class SubMaterial extends Model {
     protected $fillable = [
         'vencimento', 'qtd_estoque', 'vl_total', 'qtd_solicitada', 'material_id'
     ];
+    
+    public function subItem() {
+        return $this->belongsTo('App\SubItem');
+    }
 
     public function material() {
         return $this->belongsTo('App\Material');

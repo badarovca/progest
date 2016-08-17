@@ -74,7 +74,6 @@
                     <th>Descrição</th>
                     <th>Unidade</th>
                     <th>Quant.</th>
-                    <th>subItem</th>
                     <th>Última alteração</th>
                     <th class='no-print'>Ações</th>
                 </tr>
@@ -86,7 +85,6 @@
                     <td>{!! $material->descricao !!}</td>
                     <td>{!! $material->unidade->name !!}</td>
                     <td>{!! $material->present()->getQtdEstoque!!}</td>
-                    <td>{!! $material->subItem->material_consumo !!}</td>
                     <td>{!! $material->present()->last_update !!}</td>
                     <td class='no-print' width="1%" nowrap>
                         <a href="{!! route('admin.materiais.edit', $material->id) !!}" class="btn btn-primary btn-xs">

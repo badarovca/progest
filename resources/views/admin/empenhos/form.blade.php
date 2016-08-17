@@ -89,6 +89,7 @@
                                 <th>Valor total</th>
                                 <th>Valor unitário</th>
                                 <th>Vencimento</th>
+                                <th>SubItem</th>
                                 <th>Ação</th>
                             </tr>
                         </thead>

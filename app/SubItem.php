@@ -22,7 +22,7 @@ class SubItem extends Model {
         'material_consumo', 'status'
     ];
     
-    public function materiais() {
-        return $this->hasMany('App\Material');
+    public function subMateriais() {
+        return $this->hasMany('App\SubMaterial');
     }
 }

@@ -13,7 +13,7 @@ class RelatorioRepository {
         $saldo = Saldo::where(function($query) use(&$mes, &$ano, &$subMaterial) {
                     $query->where('mes', '=', $mes);
                     $query->where('ano', '=', $ano);
-                    $query->where('sub_item_id', '=', $subMaterial->material->subItem->id);
+                    $query->where('sub_item_id', '=', $subMaterial->subItem->id);
                 })->first();
         if ($saldo != null) {
             $saldo->valor += $valor;
@@ -23,7 +23,7 @@ class RelatorioRepository {
             $date = strtotime($ano . "-" . $mes . "-01 -1 month");
             foreach ($subItens as $subItem) {
                 $valorMesAnterior = $this->getSaldoMes($date, $subItem->id);
-                if ($subItem->id == $subMaterial->material->subItem->id) {
+                if ($subItem->id == $subMaterial->subItem->id) {
                     $valorMesAnterior += $valor;
                 }
                 $saldo = new Saldo(['mes' => $mes, 'ano' => $ano, 'sub_item_id' => $subItem->id, 'valor' => $valorMesAnterior]);
@@ -56,9 +56,9 @@ class RelatorioRepository {
             SUM(ROUND(sub_materials.vl_total/sub_materials.qtd_solicitada, 2)*entrada_sub_material.quant)
             as vl_entrada, null as vl_saida, null as vl_devolucao, null as vl_saldo_inicial, null as vl_saldo_final
             from sub_items
-            left join materials
-            on sub_items.id = materials.sub_item_id
             left join sub_materials
+            on sub_items.id = sub_materials.sub_item_id
+            left join materials
             on materials.id = sub_materials.material_id
             right join entrada_sub_material
             on sub_materials.id = entrada_sub_material.sub_material_id
@@ -71,9 +71,9 @@ class RelatorioRepository {
             null as vl_entrada, SUM(ROUND(sub_materials.vl_total/sub_materials.qtd_solicitada, 2)*saida_sub_material.quant)
             as vl_saida, null as vl_devolucao, null as vl_saldo_inicial, null as vl_saldo_final
             from sub_items
-            left join materials
-            on sub_items.id = materials.sub_item_id
             left join sub_materials
+            on sub_items.id = sub_materials.sub_item_id
+            left join materials
             on materials.id = sub_materials.material_id
             right join saida_sub_material
             on sub_materials.id = saida_sub_material.sub_material_id
@@ -86,9 +86,9 @@ class RelatorioRepository {
             null as vl_entrada, null as vl_saida, SUM(ROUND(sub_materials.vl_total/sub_materials.qtd_solicitada, 2)*devolucao_sub_material.quant) as vl_devolucao, 
             null as vl_saldo_inicial, null as vl_saldo_final
             from sub_items
-            left join materials
-            on sub_items.id = materials.sub_item_id
             left join sub_materials
+            on sub_items.id = sub_materials.sub_item_id
+            left join materials
             on materials.id = sub_materials.material_id
             right join devolucao_sub_material
             on sub_materials.id = devolucao_sub_material.sub_material_id

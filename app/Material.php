@@ -27,10 +27,6 @@ class Material extends Model {
         'codigo', 'descricao', 'unidade', 'subitem_id', 'marca', 'qtd_min', 'imagem'
     ];
 
-    public function subItem() {
-        return $this->belongsTo('App\SubItem');
-    }
-    
     public function unidade() {
         return $this->belongsTo('App\Unidade');
     }

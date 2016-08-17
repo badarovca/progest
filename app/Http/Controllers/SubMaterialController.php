@@ -16,8 +16,9 @@ class SubMaterialController extends Controller {
 
     protected $subMaterialRepository;
 
-    public function __construct(SubMaterialRepository $subMaterialRepository) {
+    public function __construct(SubMaterialRepository $subMaterialRepository, SubItemrepository $subItemRepository) {
         $this->subMaterialRepository = $subMaterialRepository;
+        $this->subItemRepository = $subItemRepository;
     }
 
     /**
@@ -66,7 +67,8 @@ class SubMaterialController extends Controller {
      */
     public function edit($id) {
         $submaterial = $this->subMaterialRepository->show($id);
-        return view('admin.submateriais.edit')->with(compact('submaterial'));
+        $subitens = $this->subItemRepository->dataForSelect();
+        return view('admin.submateriais.edit')->with(compact(['submaterial', 'subitens']));
     }
 
     /**

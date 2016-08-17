@@ -61,6 +61,8 @@ class EmpenhoRepository {
                     'qtd_solicitada' => $array['qtd_solicitada'],
                     'material_id' => $id,
                 ]);
+                $subItem = SubItem::find($array['subItem']);
+                $subMaterial->subItem()->associate($subItem);
                 $subMaterial->empenho()->associate($empenho);
                 $subMaterial->save();
             }
@@ -159,9 +161,6 @@ class EmpenhoRepository {
                 $materiaisObjects[$key]->imagem = $this->imagemRepository->sendImage($val['imagem'], 'img/materiais/', $thumbs);
             }
 
-            $subItem = SubItem::find($val['sub_item_id']);
-            $materiaisObjects[$key]->subItem()->associate($subItem);
-
             $unidade = Unidade::find($val['unidade_id']);
             $materiaisObjects[$key]->unidade()->associate($unidade);
             $materiaisObjects[$key]->save();
@@ -171,6 +170,9 @@ class EmpenhoRepository {
                 'qtd_estoque' => 0, 'qtd_solicitada' => $val['qtd_solicitada'],
                 'vl_total' => $this->realToDolar($val['vl_total']),
             ]);
+
+            $subItem = SubItem::find($val['sub_item_id']);
+            $subMateriaisObjects[$key]->subItem()->associate($subItem);
             $subMateriaisObjects[$key]->material()->associate($materiaisObjects[$key]);
             $subMateriaisObjects[$key]->empenho()->associate($empenho);
         }

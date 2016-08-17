@@ -56,8 +56,9 @@ class EmpenhoController extends Controller {
         $empenho = null;
         $fornecedores = $this->fornecedorRepository->dataForSelect();
         $materiais = $this->materialRepository->dataForSelect();
+        $subItens = $this->subItemRepository->dataForSelect();
         $users = $this->usuarioRepository->dataForSelect();
-        return view('admin.empenhos.create')->with(compact(['empenho', 'fornecedores', 'materiais', 'users']));
+        return view('admin.empenhos.create')->with(compact(['empenho', 'subItens','fornecedores', 'materiais', 'users']));
     }
 
     /**
@@ -98,8 +99,9 @@ class EmpenhoController extends Controller {
         }
         $fornecedores = $this->fornecedorRepository->dataForSelect();
         $materiais = $this->materialRepository->dataForSelect();
+        $subItens = $this->subItemRepository->dataForSelect();
         $users = $this->usuarioRepository->dataForSelect();
-        return view('admin.empenhos.edit')->with(compact(['empenho', 'fornecedores', 'materiais', 'users']));
+        return view('admin.empenhos.edit')->with(compact(['empenho', 'fornecedores', 'subItens','materiais', 'users']));
     }
 
     /**
