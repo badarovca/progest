@@ -12,7 +12,7 @@
             <div class='col-md-5'>
                 <div class='form-group'>
                     {!!Form::label('sub_item_id', 'SubItens', array('class'=>'control-label'))!!}
-                    {!!Form::select('sub_item_id', $subItens, null, ['required' => 'required', 'class'=>'form-control', 'id'=>'sub_item_id'])!!}
+                    {!!Form::select('sub_item_id', $subItens, null, ['class'=>'form-control', 'id'=>'sub_item_id'])!!}
                 </div>
             </div>
         </div>

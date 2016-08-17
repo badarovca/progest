@@ -24,7 +24,7 @@ class Material extends Model {
      * @var array
      */
     protected $fillable = [
-        'codigo', 'descricao', 'unidade', 'subitem_id', 'marca', 'qtd_min', 'imagem'
+        'codigo', 'descricao', 'unidade', 'subitem_id', 'marca', 'qtd_min', 'imagem', 'disponivel'
     ];
 
     public function unidade() {
