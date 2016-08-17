@@ -35,7 +35,7 @@ $(document).ready(function () {
     });
 
     $("#add-material-empenho").on('click', function (e) {
-        if ($('#qtd-material').val() != '' && $('#valor-material').val() != '' && $("#material_id").val() != '') {
+        if ($('#qtd-material').val() != '' && $('#valor-material').val() != '' && $("#material_id").val() != '' && $("#sub_item_id").val() != '') {
             material_id = $("#material_id").val();
             material_descricao = $("#material_id option:selected").text();
             qtd = $("#qtd-material").val();
