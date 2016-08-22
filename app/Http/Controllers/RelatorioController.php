@@ -8,16 +8,34 @@ use Illuminate\Http\Request;
 use App\progest\repositories\MaterialRepository;
 use App\progest\repositories\SubMaterialRepository;
 use App\progest\repositories\RelatorioRepository;
+use App\progest\repositories\FornecedorRepository;
+use App\progest\repositories\EntradaRepository;
 
 class RelatorioController extends Controller {
 
     protected $materialRepository;
     protected $relatorioRepository;
+    protected $subMaterialRepository;
+    protected $entradaRepository;
+    protected $fornecedorRepository;
 
-    public function __construct(MaterialRepository $materialRepository, RelatorioRepository $relatorioRepository, SubMaterialRepository $subMaterialRepository) {
+    public function __construct(MaterialRepository $materialRepository, RelatorioRepository $relatorioRepository, SubMaterialRepository $subMaterialRepository, FornecedorRepository $fornecedorRepository, EntradaRepository $entradaRepository) {
         $this->materialRepository = $materialRepository;
         $this->subMaterialRepository = $subMaterialRepository;
+        $this->entradaRepository = $entradaRepository;
         $this->relatorioRepository = $relatorioRepository;
+        $this->fornecedorRepository = $fornecedorRepository;
+        $this->anos = [];
+        $this->anos[''] = 'Selecione';
+        $this->meses = [
+            '' => 'Selecione',
+            '01' => 'Janeiro', '02' => 'Fevereiro', '03' => 'Março', '04' => 'Abril', '05' => 'Maio', '06' => 'Junho',
+            '07' => 'Julho', '08' => 'Agosto', '09' => 'Setembro', '10' => 'Outubro', '11' => 'Novembro', '12' => 'Dezembro'
+        ];
+
+        for ($i = (int) date('Y'); $i >= 2016; $i--) {
+            $this->anos[$i] = $i;
+        }
     }
 
     /**
@@ -30,22 +48,26 @@ class RelatorioController extends Controller {
     }
 
     public function getRelatorioContabil(Request $input) {
-        $anos = [];
-        $anos[''] = 'Selecione';
-        $meses = [
-            '' => 'Selecione',
-            '01' => 'Janeiro', '02' => 'Fevereiro', '03' => 'Março', '04' => 'Abril', '05' => 'Maio', '06' => 'Junho',
-            '07' => 'Julho', '08' => 'Agosto', '09' => 'Setembro', '10' => 'Outubro', '11' => 'Novembro', '12' => 'Dezembro'
-        ];
-
-        for ($i = (int) date('Y'); $i >= 2012; $i--) {
-            $anos[$i] = $i;
-        }
+        $input->flash();
+        $anos = $this->anos;
+        $meses = $this->meses;
         $data = $input->only('mes', 'ano');
         $dados = ($data['mes'] != null && $data['ano'] != null) ? $this->relatorioRepository->getRelatorioContabil($data) : null;
         $totais = $this->relatorioRepository->getTotais($dados);
         $periodo = date('m/Y', strtotime($data['ano'] . "-" . $data['mes'] . "-01"));
         return view('admin.relatorios.contabil.index')->with(compact(['anos', 'meses', 'dados', 'totais', 'periodo']));
+    }
+
+    public function getRelatorioEntradas(Request $input) {
+        $input->flash();
+        $data = $input->only('dt_inicial', 'dt_final', 'numero', 'fornecedor_id');
+        $fornecedores = $this->fornecedorRepository->dataForSelect();
+        $entradas = array_filter($data) ? $this->entradaRepository->index($data) : null;
+        if ($entradas != null) {
+            $total = EntradaRepository::CalcTotal($entradas);
+        }
+
+        return view('admin.relatorios.entradas.index')->with(compact(['entradas', 'fornecedores', 'total']));
     }
 
     public function getMesesRelatorio(Request $input, $ano) {
@@ -62,12 +84,12 @@ class RelatorioController extends Controller {
                     unset($meses[sprintf('0%d', $i)]);
                 }
             }
-        }elseif ($ano > date('Y')) {
+        } elseif ($ano > date('Y')) {
             $meses = ['' => 'Selecione um ano válido.'];
         }
         $html = '';
-        foreach ($meses as $key=>$value){
-            $html .= "<option value='".$key."'>$value</option>";
+        foreach ($meses as $key => $value) {
+            $html .= "<option value='" . $key . "'>$value</option>";
         }
         return response()->json(['success' => true, 'html' => $html]);
     }

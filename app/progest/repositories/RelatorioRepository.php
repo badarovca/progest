@@ -4,6 +4,7 @@ namespace App\progest\repositories;
 
 use App\Saldo;
 use App\SubItem;
+use DB;
 
 class RelatorioRepository {
 

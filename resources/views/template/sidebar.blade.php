@@ -38,6 +38,10 @@
                 <a href="#"><span>Relatórios</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('admin.relatorios.contabil')}}">Contábil</a></li>
+                    <li><a href="{{route('admin.relatorios.entradas')}}">Entradas NF</a></li>
+                    <li><a href="#">Materiais</a></li>
+                    <li><a href="#">Consumo</a></li>
+                    <li><a href="#">Empenhos</a></li>
                 </ul>
             </li>
             @endif

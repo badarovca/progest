@@ -18,11 +18,27 @@ class EntradaRepository {
         $this->relatorioRepository = $relatorioRepository;
     }
 
-    public function index($empenho = null) {
-        if ($empenho == null) {
+    public function index($input = null) {
+        if ($input == null) {
             return Entrada::orderBy('created_at', 'desc')->paginate(50);
         } else {
-            return Entrada::where('empenho_id', $empenho)->orderBy('created_at', 'desc')->paginate(50);
+            $entradas = Entrada::where(function($query) use (&$input) {
+                        if (isset($input['dt_inicial']) && isset($input['dt_final']) && $input['dt_inicial'] != null && $input['dt_final'] != null) {
+                            $query->whereBetween('dt_recebimento', [$input['dt_inicial'], $input['dt_final']]);
+                        }
+                        $query->whereHas('empenho', function ($query) use (&$input) {
+                            if (isset($input['numero']) && $input['numero'] != null) {
+
+                                $query->where('numero', $input['numero']);
+                            }
+                            if (isset($input['fornecedor_id']) && $input['fornecedor_id'] != null) {
+                                $query->whereHas('fornecedor', function ($query) use (&$input) {
+                                    $query->where('id', $input['fornecedor_id']);
+                                });
+                            }
+                        });
+                    })->get();
+            return $entradas;
         }
     }
 
@@ -44,7 +60,7 @@ class EntradaRepository {
             $subMaterial = SubMaterial::find($key);
             $subMaterial->qtd_estoque += $val['quant'];
             $subMaterial->save();
-            $valor = (round($subMaterial->vl_total/$subMaterial->qtd_solicitada, 2)*$val['quant']);
+            $valor = (round($subMaterial->vl_total / $subMaterial->qtd_solicitada, 2) * $val['quant']);
             $this->relatorioRepository->updateSaldo($subMaterial, $valor);
         }
 
@@ -52,6 +68,7 @@ class EntradaRepository {
     }
 
     public function update($id, $input) {
+        
     }
 
     public function show($id) {
@@ -62,11 +79,24 @@ class EntradaRepository {
         $entrada = Entrada::find($id);
 
         foreach ($entrada->subMateriais as $subMaterial) {
-            $valor = "-".(round($subMaterial->vl_total/$subMaterial->qtd_solicitada, 2)*$subMaterial->pivot->quant);
+            $valor = "-" . (round($subMaterial->vl_total / $subMaterial->qtd_solicitada, 2) * $subMaterial->pivot->quant);
             $this->relatorioRepository->updateSaldo($subMaterial, $valor);
             $subMaterial->qtd_estoque -= $subMaterial->pivot->quant;
             $subMaterial->save();
         }
         return $entrada->delete();
     }
+
+    public static function CalcTotal($entradas) {
+        $total = 0;
+        foreach ($entradas as $entrada) {
+            foreach ($entrada->subMateriais as $subMaterial) {
+                $valorUn = round($subMaterial->vl_total / $subMaterial->qtd_solicitada, 2);
+                $total += $valorUn * $subMaterial->pivot->quant;
+            }
+        }
+        $total = number_format($total, 2, ',', '.');
+        return $total;
+    }
+
 }
