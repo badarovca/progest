@@ -75,7 +75,7 @@ class RelatorioController extends Controller {
         $fornecedores = $this->fornecedorRepository->dataForSelect();
         $entradas = array_filter($data) ? $this->entradaRepository->index($data) : null;
         if ($entradas != null) {
-            $total = EntradaRepository::CalcTotal($entradas);
+            $total = EntradaPresenter::CalcTotal($entradas);
         }
 
         return view('admin.relatorios.entradas.index')->with(compact(['entradas', 'fornecedores', 'total']));
