@@ -10,7 +10,7 @@ use App\Role;
 class UsuarioRepository {
 
     public function dataForSelect() {
-        $baseArray = User::where('habilitado', 1)->get();
+        $baseArray = User::where('habilitado', 1)->with('setor.coordenacao')->get();
         $usuarios = array();
         $usuarios[''] = 'Selecione...';
         foreach ($baseArray as $value) {

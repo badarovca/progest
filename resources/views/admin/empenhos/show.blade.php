@@ -7,7 +7,7 @@
     <!--Content Header (Page header) -->
     <section class = "content-header">
         <h1>
-            {!! $page_title or "Novo empenho" !!}
+            {!! $page_title or "Visualização de empenho" !!}
             <small>{!! $page_description or null !!}</small>
         </h1>
     </section>

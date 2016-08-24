@@ -14,7 +14,7 @@
         <br>
         <div class="row">
             <fieldset>
-                {!! Form::open(array('route' => 'admin.relatorios.entradas-nf', 'method'=>'GET', 'class'=>'')) !!}
+                {!! Form::open(array('route' => 'admin.relatorios.entradas', 'method'=>'GET', 'class'=>'')) !!}
                 <div class='col-md-3'>
                     {!!Form::label('numero', 'Número empenho', array('class'=>'control-label'))!!}
                     {!!Form::text('numero', null, array('class'=>'form-control', 'id' => 'numero'))!!}

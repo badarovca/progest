@@ -60,7 +60,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/home', 'HomeController@index');
     Route::get('/relatorios', 'RelatorioController@index');
     Route::get('/relatorios/contabil', ['as' => 'admin.relatorios.contabil', 'uses' => 'RelatorioController@getRelatorioContabil']);
-    Route::get('/relatorios/entradas', ['as' => 'admin.relatorios.entradas', 'uses' => 'RelatorioController@getRelatorioEntradas']);
+    Route::get('/relatorios/entradas-nf', ['as' => 'admin.relatorios.entradas-nf', 'uses' => 'RelatorioController@getRelatorioEntradas']);
+    Route::get('/relatorios/entradas-materiais', ['as' => 'admin.relatorios.entradas-materiais', 'uses' => 'RelatorioController@getRelatorioEntradasMateriais']);
+    Route::get('/relatorios/saidas-materiais', ['as' => 'admin.relatorios.saidas-materiais', 'uses' => 'RelatorioController@getRelatorioSMateriais']);
     Route::get('/', 'AdminController@index');
 });
 

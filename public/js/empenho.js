@@ -64,6 +64,13 @@ $(document).ready(function () {
         }
         return;
     });
+    
+    //controle de filtros do relatorio
+    $(".criterio-filtro").on('click', function(){
+       select = $(this).val();
+       $("select.select-filtro").attr('disabled', 'disabled');
+       $("#"+select+"_id").removeAttr('disabled');
+    });
 
     //atualiza lista de meses a partir do ano 
     $("#ano_relatorio").click(function () {

@@ -28,16 +28,39 @@ class EntradaRepository {
                         }
                         $query->whereHas('empenho', function ($query) use (&$input) {
                             if (isset($input['numero']) && $input['numero'] != null) {
-
                                 $query->where('numero', $input['numero']);
+                            }
+                            if (isset($input['empenho_id']) && $input['empenho_id'] != null) {
+                                $query->where('id', $input['empenho_id']);
                             }
                             if (isset($input['fornecedor_id']) && $input['fornecedor_id'] != null) {
                                 $query->whereHas('fornecedor', function ($query) use (&$input) {
                                     $query->where('id', $input['fornecedor_id']);
                                 });
                             }
+                            if (isset($input['solicitante_id']) && $input['solicitante_id'] != null) {
+                                $query->whereHas('solicitante', function ($query) use (&$input) {
+                                    $query->where('id', $input['solicitante_id']);
+                                });
+                            }
+                            if (isset($input['setor_id']) && $input['setor_id'] != null) {
+                                $query->whereHas('solicitante', function ($query) use (&$input) {
+                                    $query->whereHas('setor', function($query) use (&$input) {
+                                        $query->where('id', $input['setor_id']);
+                                    });
+                                });
+                            }
+                            if (isset($input['coordenacao_id']) && $input['coordenacao_id'] != null) {
+                                $query->whereHas('solicitante', function ($query) use (&$input) {
+                                    $query->whereHas('setor', function($query) use (&$input) {
+                                        $query->whereHas('coordenacao', function($query) use (&$input) {
+                                            $query->where('id', $input['coordenacao_id']);
+                                        });
+                                    });
+                                });
+                            }
                         });
-                    })->get();
+                    })->with(['subMateriais.material', 'subMateriais.empenho', 'empenho.solicitante.setor.coordenacao'])->paginate(50);
             return $entradas;
         }
     }
@@ -85,18 +108,6 @@ class EntradaRepository {
             $subMaterial->save();
         }
         return $entrada->delete();
-    }
-
-    public static function CalcTotal($entradas) {
-        $total = 0;
-        foreach ($entradas as $entrada) {
-            foreach ($entrada->subMateriais as $subMaterial) {
-                $valorUn = round($subMaterial->vl_total / $subMaterial->qtd_solicitada, 2);
-                $total += $valorUn * $subMaterial->pivot->quant;
-            }
-        }
-        $total = number_format($total, 2, ',', '.');
-        return $total;
     }
 
 }

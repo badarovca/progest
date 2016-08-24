@@ -9,6 +9,13 @@ class SubMaterialPresenter extends BasePresenter {
         $valorUn = number_format($valorUn, 2, ',', '.');
         return $valorUn;
     }
+    
+    public function getValorTotalEntregue() {
+        $valorUn = round($this->vl_total / $this->qtd_solicitada, 2);
+        $valorTotal = $this->getQtdEntregue() * $valorUn;
+        $valorTotal = number_format($valorTotal, 2, ',', '.');
+        return $valorTotal;
+    }
 
     public function getQtdEntregue() {
         $qtd = 0;
