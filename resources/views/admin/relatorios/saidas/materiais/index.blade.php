@@ -6,30 +6,53 @@
     <!--Content Header (Page header) -->
     <section class = "content-header">
         <h1>
-            {!! $page_title or "Relatório - Entradas de NF's por período" !!}
+            {!! $page_title or "Relatório - Saídas de materiais por período" !!}
             <small>{!! $page_description or null !!}</small>
         </h1>
         @include('template.alerts')
         <!-- Busca e filtros -->
         <br>
-        <div class="row">
-            <fieldset>
-                {!! Form::open(array('route' => 'admin.relatorios.entradas', 'method'=>'GET', 'class'=>'')) !!}
-                <div class='col-md-3'>
-                    {!!Form::label('numero', 'Número empenho', array('class'=>'control-label'))!!}
-                    {!!Form::text('numero', null, array('class'=>'form-control', 'id' => 'numero'))!!}
+        <fieldset>
+            <div class="row">
+
+                {!! Form::open(array('route' => 'admin.relatorios.saidas-materiais', 'method'=>'GET', 'class'=>'')) !!}
+                <div class='col-md-12'>
+                    {!!Form::label('', 'Agrupar por:', array('class'=>'control-label'))!!}
+                </div>
+                <div class="col-md-4">
+                    {!!Form::radio('criterio', 'solicitante', false ,array('class'=>'criterio-filtro', 'id'=>'criterio1'))!!}
+                    {!!Form::label('criterio1', 'Solicitante')!!}
+                </div>
+                <div class="col-md-4">
+                    {!!Form::radio('criterio', 'setor', false ,array('class'=>'criterio-filtro', 'id'=>'criterio2'))!!}
+                    {!!Form::label('criterio2', 'Setor')!!}
+                </div>
+                <div class="col-md-4">
+                    {!!Form::radio('criterio', 'coordenacao', false ,array('class'=>'criterio-filtro', 'id'=>'criterio3'))!!} 
+                    {!!Form::label('criterio3', 'Coordenação')!!}
                 </div>
                 <div class='col-md-4'>
-                    {!!Form::label('fornecedor_id', 'Fornecedor', array('class'=>'control-label'))!!}
-                    {!!Form::select('fornecedor_id', $fornecedores, null, ['class'=>'form-control', 'id'=>'fornecedor_id'])!!}
+                    {!!Form::label('solicitante_id', 'Solicitante', array('class'=>'control-label'))!!}
+                    {!!Form::select('solicitante_id', $users, null, ['class'=>'form-control select-filtro', 'id'=>'solicitante_id', 'disabled'=>'disabled'])!!}
                 </div>
+                <div class='col-md-4'>
+                    {!!Form::label('setor_id', 'Setor', array('class'=>'control-label'))!!}
+                    {!!Form::select('setor_id', $setores, null, ['class'=>'form-control select-filtro', 'id'=>'setor_id', 'disabled'=>'disabled'])!!}
+                </div>
+                <div class='col-md-4'>
+                    {!!Form::label('coordenacao_id', 'Coordenação', array('class'=>'control-label'))!!}
+                    {!!Form::select('coordenacao_id', $coordenacoes, null, ['class'=>'form-control select-filtro', 'id'=>'coordenacao_id', 'disabled'=>'disabled'])!!}
+                </div>
+            </div>
+            <br>
+            <div class="row">
                 <div class='col-md-2'>
                     {!!Form::label('dt_inicial', 'Data Inicial', array('class'=>'control-label'))!!}
-                    {!!Form::date('dt_inicial', old('dt_inicial'), ['class'=>'form-control', 'id'=>'dt_inicial'])!!}
+                    {!!Form::date('dt_inicial', old('dt_inicial'), ['class'=>'form-control', 'id'=>'dt_inicial', 'required'=>'required'])!!}
                 </div>
                 <div class='col-md-2'>
                     {!!Form::label('dt_final', 'Data Final', array('class'=>'control-label'))!!}
-                    {!!Form::date('dt_final', old('dt_final'), ['class'=>'form-control', 'id'=>'dt_final'])!!}
+                    {!!Form::date('dt_final', old('dt_final'), ['class'=>'form-control', 'id'=>'dt_final', 'required'=>'required'])!!}
                 </div>
                 <div class='col-md-1'>
                     <div class="input-group">
@@ -40,45 +63,15 @@
                     </div>
                 </div>
                 {!! Form::close() !!}
-            </fieldset>
-        </div>
+            </div>
+        </fieldset>
         <br>
     </section>
 
     <!--Main content -->
     <section class = "content">
         <!--Your Page Content Here -->
-        @if(count($entradas) > 0)
-        <h3 class="text-right">Período:  </h3>
-        <table class="table table-bordered table-hover table-striped">
-            <thead>
-                <tr>
-                    <th>Nota Fiscal</th>
-                    <th>Fornecedor</th>
-                    <th>Empenho</th>
-                    <th>Data de recebimento</th>
-                    <th>Valor</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($entradas as $entrada)
-                <tr>
-                    <td>{!! $entrada->num_nf !!}</td>
-                    <td>{!! $entrada->empenho->fornecedor->razao !!}</td>
-                    <td>{!! $entrada->empenho->numero !!}</td>
-                    <td>{!! $entrada->present()->formatDate($entrada->dt_recebimento) !!}</td>
-                    <td>{!! $entrada->present()->getValorTotal() !!}</td>
-                </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td class="text-right" colspan="4"><b>Total</b></td>
-                    <td class="text-left" ><b>{!!$total!!}</b></td>
-                <tr>
-            </tfoot>
-        </table>
-        @endif
+        @yield('relatorio')
     </section><!--/.content -->
 </div><!--/.content-wrapper -->
 @stop

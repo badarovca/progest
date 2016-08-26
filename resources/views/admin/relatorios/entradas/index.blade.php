@@ -49,7 +49,8 @@
     <section class = "content">
         <!--Your Page Content Here -->
         @if(count($entradas) > 0)
-        <h3 class="text-right">Período:  </h3>
+        <h3 class="text-center">Entradas de Notas Fiscais - {!! $fornecedor or null !!}</h3>
+        <h3 class="text-right">Período: {!! $periodo or null !!}</h3>
         <table class="table table-bordered table-hover table-striped">
             <thead>
                 <tr>

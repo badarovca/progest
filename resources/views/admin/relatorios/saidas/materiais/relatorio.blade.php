@@ -1,13 +1,13 @@
 
-@extends('admin.relatorios.entradas.materiais.index')
+@extends('admin.relatorios.saidas.materiais.index')
 @section('relatorio')
 
-@if(count($entradas) > 0)
+@if(count($saidas) > 0)
 
-<h4 class="text-right">Entradas por {!! $criterios[$criterioAtual] or null!!} - Período: {!!$periodo['dt_inicial']!!} a {!!$periodo['dt_final']!!}</h4>
+<h4 class="text-right">Consumo por {!! $criterios[$criterioAtual] or null!!} - Período: {!!$periodo['dt_inicial']!!} a {!!$periodo['dt_final']!!}</h4>
 
-@foreach($entradas as $entrada)
-<h4 class="text-right">{!!$entrada["$criterioAtual"]!!}</h4>
+@foreach($saidas as $saida)
+<h4 class="text-right">{!!$saida["$criterioAtual"]!!}</h4>
 <table class="table table-bordered table-hover table-striped">
     <thead>
         <tr>
@@ -18,13 +18,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($entrada['subMateriais'] as $subMateriais)
+        @foreach ($saida['subMateriais'] as $subMateriais)
         @foreach ($subMateriais as $subMaterial)
         <tr>
             <td>{!! $subMaterial->material->descricao !!}</td>
-            <td>{!! $subMaterial->present()->getQtdEntregue() !!}</td>
+            <td>{!! $subMaterial->pivot->quant !!}</td>
             <td>{!! $subMaterial->present()->getValorUn() !!}</td>
-            <td class="text-right">{!! $subMaterial->present()->getValorTotalEntregue() !!}</td>
+            <td class="text-right">{!! $subMaterial->present()->formatReal($subMaterial->pivot->quant * $subMaterial->present()->getValorUnBruto) !!}</td>
         </tr>
         @endforeach
         @endforeach
@@ -32,7 +32,7 @@
     <tfoot>
         <tr>
             <td class="text-right" colspan="3"><b>Sub Total</b></td>
-            <td class="text-right" ><b>{!!$entrada['total']!!}</b></td>
+            <td class="text-right" ><b>{!!$saida['total']!!}</b></td>
         <tr>
     </tfoot>
 </table>

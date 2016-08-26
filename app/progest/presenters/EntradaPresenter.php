@@ -55,9 +55,7 @@ class EntradaPresenter extends BasePresenter {
         $solicitantes = [];
         foreach ($entradas as $entrada) {
             $solicitantes[$entrada->empenho->solicitante->id]['solicitante'] = $entrada->empenho->solicitante->name;
-            $solicitantes[$entrada->empenho->solicitante->id]['subMateriais'] = isset($solicitantes[$entrada->empenho->solicitante->id]['subMateriais']) ?
-                    $solicitantes[$entrada->empenho->solicitante->id]['subMateriais']->merge($entrada->subMateriais) :
-                    $entrada->subMateriais;
+            $solicitantes[$entrada->empenho->solicitante->id]['subMateriais'][] = $entrada->subMateriais;
             $solicitantes[$entrada->empenho->solicitante->id]['total'] = isset($solicitantes[$entrada->empenho->solicitante->id]['total']) ?
                     $solicitantes[$entrada->empenho->solicitante->id]['total'] + $entrada->present()->getValorTotalBruto() :
                     $entrada->present()->getValorTotalBruto();
@@ -72,9 +70,7 @@ class EntradaPresenter extends BasePresenter {
         $setores = [];
         foreach ($entradas as $entrada) {
             $setores[$entrada->empenho->solicitante->setor->id]['setor'] = $entrada->empenho->solicitante->setor->name;
-            $setores[$entrada->empenho->solicitante->setor->id]['subMateriais'] = isset($setores[$entrada->empenho->solicitante->setor->id]['subMateriais']) ?
-                    $setores[$entrada->empenho->solicitante->setor->id]['subMateriais']->merge($entrada->subMateriais) :
-                    $entrada->subMateriais;
+            $setores[$entrada->empenho->solicitante->setor->id]['subMateriais'][] = $entrada->subMateriais;
             $setores[$entrada->empenho->solicitante->setor->id]['total'] = isset($setores[$entrada->empenho->solicitante->setor->id]['total']) ?
                     $setores[$entrada->empenho->solicitante->setor->id]['total'] + $entrada->present()->getValorTotalBruto() :
                     $entrada->present()->getValorTotalBruto();
@@ -89,9 +85,7 @@ class EntradaPresenter extends BasePresenter {
         $coordenacoes = [];
         foreach ($entradas as $entrada) {
             $coordenacoes[$entrada->empenho->solicitante->setor->coordenacao->id]['coordenacao'] = $entrada->empenho->solicitante->setor->coordenacao->name;
-            $coordenacoes[$entrada->empenho->solicitante->setor->coordenacao->id]['subMateriais'] = isset($coordenacoes[$entrada->empenho->solicitante->setor->coordenacao->id]['subMateriais']) ?
-                    $coordenacoes[$entrada->empenho->solicitante->setor->coordenacao->id]['subMateriais']->merge($entrada->subMateriais) :
-                    $entrada->subMateriais;
+            $coordenacoes[$entrada->empenho->solicitante->setor->coordenacao->id]['subMateriais'][] = $entrada->subMateriais;
             $coordenacoes[$entrada->empenho->solicitante->setor->coordenacao->id]['total'] = isset($coordenacoes[$entrada->empenho->solicitante->setor->coordenacao->id]['total']) ?
                     $coordenacoes[$entrada->empenho->solicitante->setor->coordenacao->id]['total'] + $entrada->present()->getValorTotalBruto() :
                     $entrada->present()->getValorTotalBruto();

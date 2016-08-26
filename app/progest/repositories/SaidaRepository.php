@@ -17,8 +17,34 @@ class SaidaRepository {
         $this->relatorioRepository = $relatorioRepository;
     }
 
-    public function index() {
-        return Saida::orderBy('created_at', 'desc')->paginate(50);
+    public function index($input = null) {
+        if ($input == null) {
+            return Saida::orderBy('created_at', 'desc')->paginate(50);
+        } else {
+            $saidas = Saida::where(function($query) use (&$input) {
+                        if (isset($input['dt_inicial']) && isset($input['dt_final']) && $input['dt_inicial'] != null && $input['dt_final'] != null) {
+                            $query->whereBetween('created_at', [$input['dt_inicial'], $input['dt_final']]);
+                        }
+                        $query->whereHas('solicitante', function ($query) use (&$input) {
+                            if (isset($input['solicitante_id']) && $input['solicitante_id'] != null) {
+                                $query->where('id', $input['solicitante_id']);
+                            }
+                            if (isset($input['setor_id']) && $input['setor_id'] != null) {
+                                $query->whereHas('setor', function($query) use (&$input) {
+                                    $query->where('id', $input['setor_id']);
+                                });
+                            }
+                            if (isset($input['coordenacao_id']) && $input['coordenacao_id'] != null) {
+                                $query->whereHas('setor', function($query) use (&$input) {
+                                    $query->whereHas('coordenacao', function($query) use (&$input) {
+                                        $query->where('id', $input['coordenacao_id']);
+                                    });
+                                });
+                            }
+                        });
+                    })->with(['subMateriais.material', 'subMateriais.empenho', 'solicitante.setor.coordenacao'])->paginate($input['paginate'] == "null" ? null : $input['paginate']);
+            return $saidas;
+        }
     }
 
     public function store($input) {
@@ -67,7 +93,7 @@ class SaidaRepository {
                     })->sortBy('created_at');
             $rest = $qtd;
             foreach ($subMateriais as $subMaterial) {
-                $valor = "-".(round($subMaterial->vl_total / $subMaterial->qtd_solicitada, 2) * $rest);
+                $valor = "-" . (round($subMaterial->vl_total / $subMaterial->qtd_solicitada, 2) * $rest);
                 $this->relatorioRepository->updateSaldo($subMaterial, $valor);
                 if ($subMaterial->qtd_estoque >= $rest) {
                     $subMaterial->qtd_estoque -= $rest;

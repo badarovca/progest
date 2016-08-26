@@ -20,6 +20,10 @@ class BasePresenter extends Presenter {
     public function formatDateTime($date){
         return date('d/m/Y H:i', strtotime($date));
     }
+    
+    public function formatReal($valor){
+        return number_format($valor, 2, ',', '.');
+    }
 
     public function getThumbUrl($caminho, $width, $height) {
         $ext = strchr($caminho, '.');

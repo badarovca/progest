@@ -10,10 +10,12 @@ use App\progest\repositories\SubMaterialRepository;
 use App\progest\repositories\RelatorioRepository;
 use App\progest\repositories\FornecedorRepository;
 use App\progest\repositories\EntradaRepository;
+use App\progest\repositories\SaidaRepository;
 use App\progest\repositories\CoordenacaoRepository;
 use App\progest\repositories\SetorRepository;
 use App\progest\repositories\UsuarioRepository;
 use App\progest\presenters\EntradaPresenter;
+use App\progest\presenters\SaidaPresenter;
 use DB;
 
 class RelatorioController extends Controller {
@@ -22,15 +24,20 @@ class RelatorioController extends Controller {
     protected $relatorioRepository;
     protected $subMaterialRepository;
     protected $entradaRepository;
+    protected $saidaRepository;
     protected $fornecedorRepository;
     protected $coordenacaoRepository;
     protected $setorRepository;
     protected $usuarioRepository;
 
-    public function __construct(MaterialRepository $materialRepository, RelatorioRepository $relatorioRepository, SubMaterialRepository $subMaterialRepository, FornecedorRepository $fornecedorRepository, EntradaRepository $entradaRepository, CoordenacaoRepository $coordenacaoRepository, SetorRepository $setorRepository, UsuarioRepository $usuarioRepository) {
+    public function __construct(MaterialRepository $materialRepository, RelatorioRepository $relatorioRepository, 
+            SubMaterialRepository $subMaterialRepository, FornecedorRepository $fornecedorRepository, 
+            EntradaRepository $entradaRepository, SaidaRepository $saidaRepository, CoordenacaoRepository $coordenacaoRepository, 
+            SetorRepository $setorRepository, UsuarioRepository $usuarioRepository) {
         $this->materialRepository = $materialRepository;
         $this->subMaterialRepository = $subMaterialRepository;
         $this->entradaRepository = $entradaRepository;
+        $this->saidaRepository = $saidaRepository;
         $this->relatorioRepository = $relatorioRepository;
         $this->fornecedorRepository = $fornecedorRepository;
         $this->coordenacaoRepository = $coordenacaoRepository;
@@ -73,12 +80,15 @@ class RelatorioController extends Controller {
         $input->flash();
         $data = $input->only('dt_inicial', 'dt_final', 'numero', 'fornecedor_id');
         $fornecedores = $this->fornecedorRepository->dataForSelect();
+        $data['paginate'] = null;
         $entradas = array_filter($data) ? $this->entradaRepository->index($data) : null;
         if ($entradas != null) {
             $total = EntradaPresenter::CalcTotal($entradas);
+            $periodo = $entradas->first()->present()->formatDate($data['dt_inicial'])." a ".$entradas->first()->present()->formatDate($data['dt_final']);
+            $fornecedor = ($data['fornecedor_id']) == null ? null : $this->fornecedorRepository->show($data['fornecedor_id'])->razao;
         }
 
-        return view('admin.relatorios.entradas.index')->with(compact(['entradas', 'fornecedores', 'total']));
+        return view('admin.relatorios.entradas.index')->with(compact(['entradas', 'fornecedores', 'total', 'periodo', 'fornecedor']));
     }
 
     public function getRelatorioEntradasMateriais(Request $input) {
@@ -87,9 +97,10 @@ class RelatorioController extends Controller {
         $users = $this->usuarioRepository->dataForSelect();
         $coordenacoes = $this->coordenacaoRepository->dataForSelect();
         $setores = $this->setorRepository->dataForSelect();
+        $data['paginate'] = "null";
         $entradas = array_filter($data) ? $this->entradaRepository->index($data) : null;
         if ($entradas != null && $entradas->first()) {
-            $creterios = [
+            $criterios = [
                 'setor' => 'Setor',
                 'coordenacao' => 'Coordenação',
                 'solicitante' => 'Solicitante',
@@ -103,6 +114,31 @@ class RelatorioController extends Controller {
             $entradas = EntradaPresenter::groupBy($data['criterio'], $entradas);
         }
         return view("admin.relatorios.entradas.materiais.relatorio")->with(compact(['entradas', 'users', 'setores', 'coordenacoes', 'total', 'criterios', 'criterioAtual', 'periodo']));
+    }
+    
+    public function getRelatorioSaidasMateriais(Request $input) {
+        $input->flash();
+        $data = $input->only('dt_inicial', 'dt_final', 'solicitante_id', 'setor_id', 'coordenacao_id', 'criterio');
+        $users = $this->usuarioRepository->dataForSelect();
+        $coordenacoes = $this->coordenacaoRepository->dataForSelect();
+        $setores = $this->setorRepository->dataForSelect();
+        $data['paginate'] = null;
+        $saidas = array_filter($data) ? $this->saidaRepository->index($data) : null;
+        if ($saidas != null && $saidas->first()) {
+            $criterios = [
+                'setor' => 'Setor',
+                'coordenacao' => 'Coordenação',
+                'solicitante' => 'Solicitante',
+            ];
+            $periodo = [
+                'dt_inicial' => $saidas->first()->present()->formatDate($data['dt_inicial']),
+                'dt_final' => $saidas->first()->present()->formatDate($data['dt_final']),
+            ];
+            $criterioAtual = $data['criterio'];
+            $total = SaidaPresenter::CalcTotal($saidas);
+            $saidas = SaidaPresenter::groupBy($data['criterio'], $saidas);
+        }
+        return view("admin.relatorios.saidas.materiais.relatorio")->with(compact(['saidas', 'users', 'setores', 'coordenacoes', 'total', 'criterios', 'criterioAtual', 'periodo']));
     }
 
     public function getMesesRelatorio(Request $input, $ano) {
