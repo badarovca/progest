@@ -63,6 +63,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/relatorios/entradas-nf', ['as' => 'admin.relatorios.entradas-nf', 'uses' => 'RelatorioController@getRelatorioEntradas']);
     Route::get('/relatorios/entradas-materiais', ['as' => 'admin.relatorios.entradas-materiais', 'uses' => 'RelatorioController@getRelatorioEntradasMateriais']);
     Route::get('/relatorios/saidas-materiais', ['as' => 'admin.relatorios.saidas-materiais', 'uses' => 'RelatorioController@getRelatorioSaidasMateriais']);
+    Route::get('/relatorios/empenhos', ['as' => 'admin.relatorios.empenhos', 'uses' => 'RelatorioController@getRelatorioEmpenhos']);
     Route::get('/', 'AdminController@index');
 });
 

@@ -22,14 +22,58 @@ class EmpenhoRepository {
         $this->imagemRepository = $imagemRepository;
     }
 
-    public function index($filter = null) {
-        if ($filter) {
-            $empenhos = Empenho::where(function($query) use (&$filter) {
-                        if (isset($filter['busca']) && $filter['busca'] != '') {
-                            $query->where('numero', 'like', "%" . $filter['busca'] . "%")
-                                    ->orWhere('mod_licitacao', 'like', "%" . $filter['busca'] . "%");
+    public function index($input = null) {
+        if ($input) {
+            $empenhos = Empenho::where(function($query) use (&$input) {
+                        if (isset($input['dt_inicial']) && isset($input['dt_final']) && $input['dt_inicial'] != null && $input['dt_final'] != null) {
+                            $query->whereBetween('created_at', [$input['dt_inicial'], $input['dt_final']]);
                         }
-                    })->paginate($filter['paginate'])->sortByDesc('created_at');
+                        if (isset($input['busca']) && $input['busca'] != '') {
+                            $query->where('numero', 'like', "%" . $input['busca'] . "%")
+                                    ->orWhere('mod_licitacao', 'like', "%" . $input['busca'] . "%");
+                        }
+
+                        $query->whereHas('solicitante', function ($query) use (&$input) {
+                            if (isset($input['solicitante_id']) && $input['solicitante_id'] != null) {
+                                $query->where('id', $input['solicitante_id']);
+                            }
+                            if (isset($input['setor_id']) && $input['setor_id'] != null) {
+                                $query->whereHas('setor', function($query) use (&$input) {
+                                    $query->where('id', $input['setor_id']);
+                                });
+                            }
+                            if (isset($input['coordenacao_id']) && $input['coordenacao_id'] != null) {
+                                $query->whereHas('setor', function($query) use (&$input) {
+                                    $query->whereHas('coordenacao', function($query) use (&$input) {
+                                        $query->where('id', $input['coordenacao_id']);
+                                    });
+                                });
+                            }
+                        });
+                        if (isset($input['fornecedor_id']) && $input['fornecedor_id'] != '') {
+                            $query->whereHas('fornecedor', function($query) use (&$input) {
+                                $query->where('id', $input['fornecedor_id']);
+                            });
+                        }
+                        if (isset($input['status']) && $input['status'] != '') {
+                            if ($input['status'] == 'pendente') {
+                                $query->whereHas('subMateriais', function ($query) use (&$input) {
+                                    $query->whereHas('entradas', function ($query) use (&$input) {
+                                        $query->havingRaw('SUM(entrada_sub_material.quant) != sub_materials.qtd_solicitada');
+                                    });
+                                });
+                                $query->orWhere(function($query) {
+                                    $query->whereDoesntHave('entradas');
+                                });
+                            } else if ($input['status'] == 'fechado') {
+                                $query->whereHas('subMateriais', function ($query) use (&$input) {
+                                    $query->whereHas('entradas', function ($query) use (&$input) {
+                                        $query->havingRaw('SUM(entrada_sub_material.quant) = sub_materials.qtd_solicitada');
+                                    });
+                                });
+                            }
+                        }
+                    })->with(['solicitante', 'fornecedor', 'subMateriais.entradas'])->paginate($input['paginate'])->sortByDesc('created_at');
         } else {
             $empenhos = Empenho::all()->sortByDesc('created_at');
         }

@@ -26,6 +26,7 @@ class EntradaController extends Controller {
      */
     public function index($empenho = null) {
         $filter['empenho_id'] = $empenho; 
+        $filter['paginate'] = null;
         $entradas = $this->entradaRepository->index($filter);
         $empenho = $this->empenhoRepository->show($empenho);
         return view('admin.entradas.index')->with(compact('entradas', 'empenho'));

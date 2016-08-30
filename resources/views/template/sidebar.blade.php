@@ -41,6 +41,7 @@
                     <li><a href="{{route('admin.relatorios.entradas-nf')}}">Entradas NF</a></li>
                     <li><a href="{{route('admin.relatorios.entradas-materiais')}}">Entradas materiais</a></li>
                     <li><a href="{{route('admin.relatorios.saidas-materiais')}}">Saídas materiais</a></li>
+                    <li><a href="{{route('admin.relatorios.empenhos')}}">Empenhos</a></li>
                 </ul>
             </li>
             @endif
