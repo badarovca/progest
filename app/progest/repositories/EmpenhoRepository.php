@@ -66,10 +66,8 @@ class EmpenhoRepository {
                                     $query->whereDoesntHave('entradas');
                                 });
                             } else if ($input['status'] == 'fechado') {
-                                $query->whereHas('subMateriais', function ($query) use (&$input) {
-                                    $query->whereHas('entradas', function ($query) use (&$input) {
-                                        $query->havingRaw('SUM(entrada_sub_material.quant) = sub_materials.qtd_solicitada');
-                                    });
+                                $query->whereHas('entradas.subMateriais', function ($query) {
+                                    $query->havingRaw('SUM(entrada_sub_material.quant) = SUM(qtd_solicitada)');
                                 });
                             }
                         }
