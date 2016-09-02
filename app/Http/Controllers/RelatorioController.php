@@ -170,7 +170,14 @@ class RelatorioController extends Controller {
             ];
             $totais = EmpenhoPresenter::calcTotal($empenhos);
         }
-        return view("admin.relatorios.empenhos.relatorio")->with(compact(['empenhos', 'users', 'fornecedores', 'setores', 'coordenacoes', 'status', 'filtros','totais']));
+        return view("admin.relatorios.empenhos.relatorio")->with(compact(['empenhos', 'users', 'fornecedores', 'setores', 'coordenacoes', 'status', 'filtros', 'totais']));
+    }
+
+    public function getRelatorioFornecedores(Request $input) {
+        $data['status'] = 'pendente';
+        $data['paginate'] = null;
+        $fornecedores = array_filter($data) ? $this->fornecedorRepository->index($data) : null;
+        return view("admin.relatorios.fornecedores.relatorio")->with(compact(['fornecedores', 'status', 'filtros', 'totais']));
     }
 
     public function getMesesRelatorio(Request $input, $ano) {

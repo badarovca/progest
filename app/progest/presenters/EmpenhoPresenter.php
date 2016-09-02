@@ -39,6 +39,10 @@ class EmpenhoPresenter extends BasePresenter {
         $valor = number_format($valorTotal - $valorEntregue, 2, ',', '.');
         return $valor;
     }
+    
+    public function isFechado(){
+        return $this->getValorEntregue() == $this->getValorTotal();
+    }
 
     public static function calcTotal($empenhos) {
         $total = 0;

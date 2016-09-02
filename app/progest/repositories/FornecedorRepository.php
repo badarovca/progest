@@ -3,6 +3,7 @@
 namespace App\progest\repositories;
 
 use App\Fornecedor;
+use DB;
 
 class FornecedorRepository {
 
@@ -18,8 +19,53 @@ class FornecedorRepository {
         return $fornecedores;
     }
 
-    public function index() {
-        return Fornecedor::paginate(50);
+    public function index($input = null) {
+//        DB::connection()->enableQueryLog();
+        if ($input) {
+            $fornecedores = Fornecedor::where(function($query) use ($input) {
+                        if (isset($input['status']) && $input['status'] != null) {
+                            if ($input['status'] == 'fechado') {
+                                $query->whereHas('empenhos', function($query) {
+                                    $query->where(function($query) {
+                                        $query->whereHas('entradas.subMateriais', function ($query) {
+                                            $query->havingRaw('SUM(entrada_sub_material.quant) = SUM(qtd_solicitada)');
+                                        });
+                                    });
+                                });
+                                $query->whereDoesntHave('empenhos', function($query) {
+                                    $query->where(function($query) {
+                                        $query->whereHas('subMateriais', function ($query) use (&$input) {
+                                            $query->whereHas('entradas', function ($query) use (&$input) {
+                                                $query->havingRaw('SUM(entrada_sub_material.quant) != sub_materials.qtd_solicitada');
+                                            });
+                                        });
+                                        $query->orWhere(function($query) {
+                                            $query->whereDoesntHave('entradas');
+                                        });
+                                    });
+                                });
+                            } else
+                            if ($input['status'] == 'pendente') {
+                                $query->whereHas('empenhos', function($query) {
+                                    $query->where(function($query) {
+                                        $query->whereHas('subMateriais', function ($query) use (&$input) {
+                                            $query->whereHas('entradas', function ($query) use (&$input) {
+                                                $query->havingRaw('SUM(entrada_sub_material.quant) != sub_materials.qtd_solicitada');
+                                            });
+                                        });
+                                        $query->orWhere(function($query) {
+                                            $query->whereDoesntHave('entradas');
+                                        });
+                                    });
+                                });
+                            }
+                        }
+                    })->with(['empenhos.subMateriais'])->paginate($input['paginate'])->sortBy('razao');
+        } else {
+            $fornecedores = Fornecedor::paginate(50);
+        }
+//        print_r(DB::getQueryLog());
+        return $fornecedores;
     }
 
     public function store($input) {
