@@ -10,6 +10,7 @@ use App\progest\repositories\SaidaRepository;
 use App\progest\repositories\PedidoRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests\CriarSaidaRequest;
+use Auth;
 
 class SaidaController extends Controller {
 
@@ -18,8 +19,7 @@ class SaidaController extends Controller {
     protected $saidaRepository;
     protected $pedidoRepository;
 
-    public function __construct(MaterialRepository $materialRepository, UsuarioRepository $usuarioRepository, 
-            SaidaRepository $saidaRepository, PedidoRepository $pedidoRepository) {
+    public function __construct(MaterialRepository $materialRepository, UsuarioRepository $usuarioRepository, SaidaRepository $saidaRepository, PedidoRepository $pedidoRepository) {
         $this->materialRepository = $materialRepository;
         $this->usuarioRepository = $usuarioRepository;
         $this->saidaRepository = $saidaRepository;
@@ -46,7 +46,16 @@ class SaidaController extends Controller {
         $saida = null;
         $users = $this->usuarioRepository->dataForSelect();
         $materiais = $this->materialRepository->dataForSelect(['disp' => 'disponivel']);
-        return view('admin.saidas.create')->with(compact(['saida', 'users', 'materiais']));
+        //caso ocorra uma falha na autenticação da saída, buscar materiais e quantidades para mostrar a lista.
+        if (old('qtds')) {
+            $ids = [];
+            $qtds = old('qtds');
+            foreach ($qtds as $key => $val) {
+                $ids[] = $key;
+            }
+            $old_materiais = $this->materialRepository->whereIn($ids);
+        }
+        return view('admin.saidas.create')->with(compact(['saida', 'users', 'materiais', 'old_materiais', 'qtds']));
     }
 
     /**
@@ -56,10 +65,14 @@ class SaidaController extends Controller {
      */
     public function store(CriarSaidaRequest $request) {
         $input['materiais'] = $request->only('qtds');
-        $input['saida'] = $request->except('qtds', '_token', 'pedido');
+        $user = $request->only('email', 'password');
+        $input['saida'] = $request->except('qtds', '_token', 'pedido', 'password');
+        if (!Auth::validate($user)) {
+            return back()->withInput()->withErrors(['validacao' => 'Usuário ou senha incorretos.']);
+        }
         $pedido = $request->only('pedido');
-        if($pedido['pedido'] != null){
-            foreach($pedido['pedido'] as $key=>$val){
+        if ($pedido['pedido'] != null) {
+            foreach ($pedido['pedido'] as $key => $val) {
                 $status['status'] = $val;
                 $input['pedido_id'] = $key;
                 $this->pedidoRepository->update($key, $status);

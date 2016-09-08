@@ -167,5 +167,10 @@ class MaterialRepository {
         $materiais = Material::where('descricao', 'like', "%$param%")->orWhere('marca', 'like', "%$param%")->get();
         return $materiais;
     }
+    
+    public function whereIn($ids = array()){
+        $materiais = Material::whereIn('id',$ids)->get();
+        return $materiais;
+    }
 
 }
