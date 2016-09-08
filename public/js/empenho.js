@@ -34,6 +34,14 @@ $(document).ready(function () {
     $(".material-select2").select2({
     });
 
+    $('form').on('keyup keypress', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
     $("#add-material-empenho").on('click', function (e) {
         if ($('#qtd-material').val() != '' && $('#valor-material').val() != '' && $("#material_id").val() != '' && $("#sub_item_id").val() != '') {
             material_id = $("#material_id").val();
@@ -64,12 +72,12 @@ $(document).ready(function () {
         }
         return;
     });
-    
+
     //controle de filtros do relatorio
-    $(".criterio-filtro").on('click', function(){
-       select = $(this).val();
-       $("select.select-filtro").attr('disabled', 'disabled');
-       $("#"+select+"_id").removeAttr('disabled');
+    $(".criterio-filtro").on('click', function () {
+        select = $(this).val();
+        $("select.select-filtro").attr('disabled', 'disabled');
+        $("#" + select + "_id").removeAttr('disabled');
     });
 
     //atualiza lista de meses a partir do ano 
@@ -106,7 +114,7 @@ $(document).ready(function () {
     //tranforma tabelas html em DataTables
     $("#listaMateriais").DataTable({
         "language": {
-            "url": $("#base_url").val() +"/js/data-table-pt-br.js"
+            "url": $("#base_url").val() + "/js/data-table-pt-br.js"
         },
         bPaginate: false,
         bFilter: false, bInfo: false
