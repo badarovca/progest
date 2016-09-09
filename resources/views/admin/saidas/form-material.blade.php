@@ -13,9 +13,9 @@
     <div class="container-fluid">
         <div class="row row-add-material">
             <div class='col-md-7'>
-                <div class='form-group'>
+                <div class='form-group saida-material'>
                     {!!Form::label('material_id', 'Materiais', array('class'=>'control-label'))!!}
-                    {!!Form::select('null', $materiais, null, ['class'=>'form-control material-select2', 'id'=>'material_id'])!!}
+                    {!!Form::select('null', $materiais, null, ['class'=>'form-control saida-material-select2', 'id'=>'material_id'])!!}
                 </div>
             </div>
             <div class='col-md-2'>

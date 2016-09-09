@@ -16,12 +16,26 @@ $(document).ready(function () {
     $("#add-material-saida").click(function () {
         material_id = $("#material_id").val();
         qtd = $("#qtd-material").val();
+        //verifica campos vazios
+        if (qtd == '' || material_id == '')
+            return;
+        var continua = true;
+        //verifica se o material já está na lista
+        $(".item-saida-material").each(function () {
+            continua = ($(this).find("td:first").html() === material_id) ? false : true;
+            if (!continua)
+                return false;
+        });
+        if (!continua)
+            return;
+        $("#qtd-material").val('');
         url = $("#base_url").val() + '/add-material-saida/' + material_id + "/" + qtd;
         $.get(
                 url,
                 function (data) {
                     if (data.success === true) {
                         $("#lista-materiais").append(data.html);
+                        $(".saida-material-select2").select2('open');
                     } else {
                         $("#response-msg").html(data.html);
                     }
@@ -33,10 +47,24 @@ $(document).ready(function () {
     });
     $(".material-select2").select2({
     });
+    $(".saida-material-select2").select2({
+        dropdownCssClass: 'saida-material'
+    });
 
-    $('form').on('keyup keypress', function (e) {
+    $(document).on('keydown', '.select2-search__field', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13 && $('.select2-search__field').parents('.saida-material').length == 1) {
+            $("#qtd-material").val('1');
+            $("#qtd-material").focus();
+            $("#qtd-material").select();
+            e.preventDefault();
+            return false;
+        }
+    });
+    $(document).on('keydown', '#qtd-material', function (e) {
         var keyCode = e.keyCode || e.which;
         if (keyCode === 13) {
+            $("#add-material-saida").trigger('click');
             e.preventDefault();
             return false;
         }
@@ -158,19 +186,4 @@ function number_format(number, decimals, dec_point, thousands_sep) {
         s[1] += new Array(prec - s[1].length + 1).join('0');
     }
     return s.join(dec);
-}
-
-function formatRepo(repo) {
-    if (repo.loading)
-        return repo.text;
-
-    var markup = "<div class='select2-result-repository clearfix'>" +
-            "<div class='select2-result-repository__meta'>" +
-            "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
-
-    return markup;
-}
-
-function formatRepoSelection(repo) {
-    return repo.full_name || repo.text;
 }

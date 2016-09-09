@@ -29,7 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="{{ asset ("/bower_components/admin-lte/plugins/jQuery/jQuery-2.1.4.min.js") }}"></script>
         <script src="{{asset("/js/jquery.maskedinput.js")}}" type="text/javascript"></script>
         <script src="{{asset("/js/jquery.maskMoney.js")}}" type="text/javascript"></script>
-        <script src="{{asset("/bower_components/admin-lte/plugins/select2/select2.min.js")}}" type="text/javascript"></script>
+        <script src="{{asset("/bower_components/admin-lte/plugins/select2/select2.full.min.js")}}" type="text/javascript"></script>
         <script src="{{asset("/bower_components/admin-lte/plugins/datatables/jquery.dataTables.min.js")}}" type="text/javascript"></script>
         <script src="{{asset("/bower_components/admin-lte/plugins/datatables/dataTables.bootstrap.min.js")}}" type="text/javascript"></script>
         <script src="{{asset("/js/mask_validator.js")}}" type="text/javascript"></script>
