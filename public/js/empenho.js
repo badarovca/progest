@@ -15,7 +15,7 @@ $(document).ready(function () {
 
     $("#add-material-saida").click(function () {
         material_id = $("#material_id").val();
-        qtd = $("#qtd-material").val();
+        qtd = $("#qtd-material-saida").val();
         //verifica campos vazios
         if (qtd == '' || material_id == '')
             return;
@@ -53,15 +53,15 @@ $(document).ready(function () {
 
     $(document).on('keydown', '.select2-search__field', function (e) {
         var keyCode = e.keyCode || e.which;
-        if (keyCode === 13 && $('.select2-search__field').parents('.saida-material').length == 1) {
-            $("#qtd-material").val('1');
-            $("#qtd-material").focus();
-            $("#qtd-material").select();
+        if (keyCode === 13) {
+            $("#qtd-material-saida").val('1');
+            $("#qtd-material-saida").focus();
+            $("#qtd-material-saida").select();
             e.preventDefault();
             return false;
         }
     });
-    $(document).on('keydown', '#qtd-material', function (e) {
+    $(document).on('keydown', '#qtd-material-saida', function (e) {
         var keyCode = e.keyCode || e.which;
         if (keyCode === 13) {
             $("#add-material-saida").trigger('click');

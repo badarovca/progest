@@ -21,7 +21,7 @@
             <div class='col-md-2'>
                 <div class='form-group'>
                     {!!Form::label('quant', 'Quant', array('class'=>'control-label'))!!}
-                    {!!Form::number(null, null, ['class'=>'form-control', 'quant'=>'quant', 'id'=>'qtd-material', 'min' => '0'])!!}
+                    {!!Form::number(null, null, ['class'=>'form-control', 'quant'=>'quant', 'id'=>'qtd-material-saida', 'min' => '0'])!!}
                 </div>
             </div>
             <div class='col-md-3'>
