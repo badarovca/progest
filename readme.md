@@ -1,23 +1,37 @@
-## Laravel PHP Framework
+## ProGest - Sistema de Gerenciamento de Materiais em insituições públicas
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+###Pré requisitos:
+-PHP >= 5.4, PHP < 7
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+-MySQL
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+-Mcrypt PHP Extension
 
-## Official Documentation
+-OpenSSL PHP Extension
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+-Mbstring PHP Extension
 
-## Contributing
+-Tokenizer PHP Extension
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
 
-### License
+O progest é um sistema web de código aberto, desenvolvido no Instituto Federal de Educação, Ciência e Tecnologia da Bahia, campus Vitória da Conquista. 
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+###Principais funcoinalidades:
+-Cadastro de servidores, setores, coordenações e fornecedores;
+
+-Cadastro de empenhos de materiais;
+
+-Cadastro de entradas de materiais;
+
+-Cadastro de solicitações de materiais (para consumo) por servidores;
+
+-Cadastro de saídas de materiais;
+
+-Cadastro de devoluções de materiais;
+
+-Tela de solicitação de matériais de forma remota (não é necessário que o servidor compareça ao almoxarifado);
+
+-Relatórios gerenciais: contábil (saldos de entrada e saída por subitem), empenhos, entradas, saídas,  situação de fornecedores.
+
+#Instalação:
+Basta importar o arquivo database.sql e colocar os arquivos do projeto em uma diretório em seu servidor web.
