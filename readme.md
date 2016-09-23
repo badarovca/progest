@@ -5,6 +5,8 @@
 
 -MySQL
 
+-Composer
+
 -Mcrypt PHP Extension
 
 -OpenSSL PHP Extension
@@ -34,4 +36,4 @@ O progest é um sistema web de código aberto, desenvolvido no Instituto Federal
 -Relatórios gerenciais: contábil (saldos de entrada e saída por subitem), empenhos, entradas, saídas,  situação de fornecedores.
 
 #Instalação:
-Basta importar o arquivo database.sql e colocar os arquivos do projeto em um diretório em seu servidor web.
+Basta importar o arquivo database.sql e colocar os arquivos do projeto em um diretório em seu servidor web e rodar o comando "composer install".
