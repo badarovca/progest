@@ -132,6 +132,7 @@ return [
         'Zizaco\Entrust\EntrustServiceProvider',
         'Gloudemans\Shoppingcart\ShoppingcartServiceProvider',
         'Intervention\Image\ImageServiceProvider',
+        'Maatwebsite\Excel\ExcelServiceProvider',
     ],
     /*
       |--------------------------------------------------------------------------

@@ -41,6 +41,7 @@ Route::controllers([
 ]);
 
 Route::group(['prefix' => 'admin'], function () {
+    Route::get('/importacao', ['as' => 'admin.importacao', 'uses' => 'ImportacaoController@importData']);
     Route::resource('usuarios', 'UsuarioController');
     Route::resource('setores', 'SetorController');
     Route::resource('coordenacoes', 'CoordenacaoController');

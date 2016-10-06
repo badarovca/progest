@@ -30,7 +30,8 @@ class EmpenhoRepository {
                         }
                         if (isset($input['busca']) && $input['busca'] != '') {
                             $query->where('numero', 'like', "%" . $input['busca'] . "%")
-                                    ->orWhere('mod_licitacao', 'like', "%" . $input['busca'] . "%");
+                                    ->orWhere('mod_licitacao', 'like', "%" . $input['busca'] . "%")
+                                    ->orWhere('num_processo', 'like', "%" . $input['busca'] . "%");
                         }
 
                         $query->whereHas('solicitante', function ($query) use (&$input) {

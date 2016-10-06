@@ -23,6 +23,11 @@ class FornecedorRepository {
 //        DB::connection()->enableQueryLog();
         if ($input) {
             $fornecedores = Fornecedor::where(function($query) use ($input) {
+                        if (isset($input['busca']) && $input['busca'] != '') {
+                            $query->where('cnpj', 'like', "%" . $input['busca'] . "%")
+                                    ->orWhere('razao', 'like', "%" . $input['busca'] . "%")
+                                    ->orWhere('fantasia', 'like', "%" . $input['busca'] . "%");
+                        }
                         if (isset($input['status']) && $input['status'] != null) {
                             if ($input['status'] == 'fechado') {
                                 $query->whereHas('empenhos', function($query) {
