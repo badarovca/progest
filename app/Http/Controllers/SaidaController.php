@@ -8,6 +8,8 @@ use App\progest\repositories\MaterialRepository;
 use App\progest\repositories\UsuarioRepository;
 use App\progest\repositories\SaidaRepository;
 use App\progest\repositories\PedidoRepository;
+use App\progest\repositories\CoordenacaoRepository;
+use App\progest\repositories\SetorRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests\CriarSaidaRequest;
 use Auth;
@@ -18,12 +20,16 @@ class SaidaController extends Controller {
     protected $usuarioRepository;
     protected $saidaRepository;
     protected $pedidoRepository;
+    protected $coordenacaoRepository;
+    protected $setorRepository;
 
-    public function __construct(MaterialRepository $materialRepository, UsuarioRepository $usuarioRepository, SaidaRepository $saidaRepository, PedidoRepository $pedidoRepository) {
+    public function __construct(MaterialRepository $materialRepository, UsuarioRepository $usuarioRepository, SaidaRepository $saidaRepository, PedidoRepository $pedidoRepository, CoordenacaoRepository $coordenacaoRepository, SetorRepository $setorRepository) {
         $this->materialRepository = $materialRepository;
         $this->usuarioRepository = $usuarioRepository;
         $this->saidaRepository = $saidaRepository;
         $this->pedidoRepository = $pedidoRepository;
+        $this->coordenacaoRepository = $coordenacaoRepository;
+        $this->setorRepository = $setorRepository;
     }
 
     /**
@@ -31,10 +37,16 @@ class SaidaController extends Controller {
      *
      * @return Response
      */
-    public function index() {
-        $saidas = $this->saidaRepository->index();
+    public function index(Request $input) {
+        $input->flash();
+        $filter = $input->all();
+        $filter['paginate'] = 50;
+        $saidas = $this->saidaRepository->index($filter);
+        $users = $this->usuarioRepository->dataForSelect();
+        $coordenacoes = $this->coordenacaoRepository->dataForSelect();
+        $setores = $this->setorRepository->dataForSelect();
 
-        return view('admin.saidas.index')->with(compact('saidas'));
+        return view('admin.saidas.index')->with(compact('saidas', 'users', 'coordenacoes', 'setores'));
     }
 
     /**

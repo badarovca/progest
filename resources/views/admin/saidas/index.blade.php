@@ -23,6 +23,46 @@
                 <i class="fa fa-plus"></i> Nova saída
             </a>
         </small>
+
+        <!-- Busca e filtros -->
+        <br>
+        <fieldset>
+            <div class="row">
+                {!! Form::open(array('route' => 'admin.saidas.index', 'method'=>'GET', 'class'=>'')) !!}
+                <div class='col-md-4'>
+                    {!!Form::label('solicitante_id', 'Solicitante', array('class'=>'control-label'))!!}
+                    {!!Form::select('solicitante_id', $users, null, ['class'=>'form-control select-filtro', 'id'=>'solicitante_id'])!!}
+                </div>
+                <div class='col-md-4'>
+                    {!!Form::label('setor_id', 'Setor', array('class'=>'control-label'))!!}
+                    {!!Form::select('setor_id', $setores, null, ['class'=>'form-control select-filtro', 'id'=>'setor_id'])!!}
+                </div>
+                <div class='col-md-4'>
+                    {!!Form::label('coordenacao_id', 'Coordenação', array('class'=>'control-label'))!!}
+                    {!!Form::select('coordenacao_id', $coordenacoes, null, ['class'=>'form-control select-filtro', 'id'=>'coordenacao_id'])!!}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class='col-md-2'>
+                    {!!Form::label('dt_inicial', 'Data Inicial', array('class'=>'control-label'))!!}
+                    {!!Form::date('dt_inicial', old('dt_inicial'), ['class'=>'form-control', 'id'=>'dt_inicial'])!!}
+                </div>
+                <div class='col-md-2'>
+                    {!!Form::label('dt_final', 'Data Final', array('class'=>'control-label'))!!}
+                    {!!Form::date('dt_final', old('dt_final'), ['class'=>'form-control', 'id'=>'dt_final'])!!}
+                </div>
+                <div class='col-md-1'>
+                    <div class="input-group">
+                        {!!Form::label('', '', array('class'=>'control-label'))!!}
+                        <span class="input-group">
+                            {!! Form::submit('Ir', ['class'=>'btn btn-default'])!!}
+                        </span>
+                    </div>
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </fieldset>
     </section>
 
     <!--Main content -->
