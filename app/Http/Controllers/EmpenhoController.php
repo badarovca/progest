@@ -41,10 +41,16 @@ class EmpenhoController extends Controller {
         $input = $input->all();
         $filter = $input;
         $filter['paginate'] = 50;
-        
+        $fornecedores = $this->fornecedorRepository->dataForSelect();
+        $status = [
+            '' => 'Selecione...',
+            'pendente' => 'Com pendências',
+            'fechado' => 'Sem pendências',
+        ];
+        $users = $this->usuarioRepository->dataForSelect();
         $empenhos = $this->empenhoRepository->index($filter);
 
-        return view('admin.empenhos.index')->with(compact('empenhos', 'input'));
+        return view('admin.empenhos.index')->with(compact('empenhos', 'input', 'fornecedores', 'status', 'users'));
     }
 
     /**
@@ -58,7 +64,7 @@ class EmpenhoController extends Controller {
         $materiais = $this->materialRepository->dataForSelect();
         $subItens = $this->subItemRepository->dataForSelect();
         $users = $this->usuarioRepository->dataForSelect();
-        return view('admin.empenhos.create')->with(compact(['empenho', 'subItens','fornecedores', 'materiais', 'users']));
+        return view('admin.empenhos.create')->with(compact(['empenho', 'subItens', 'fornecedores', 'materiais', 'users']));
     }
 
     /**
@@ -101,7 +107,7 @@ class EmpenhoController extends Controller {
         $materiais = $this->materialRepository->dataForSelect();
         $subItens = $this->subItemRepository->dataForSelect();
         $users = $this->usuarioRepository->dataForSelect();
-        return view('admin.empenhos.edit')->with(compact(['empenho', 'fornecedores', 'subItens','materiais', 'users']));
+        return view('admin.empenhos.edit')->with(compact(['empenho', 'fornecedores', 'subItens', 'materiais', 'users']));
     }
 
     /**
