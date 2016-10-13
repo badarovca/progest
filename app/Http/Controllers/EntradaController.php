@@ -7,16 +7,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\progest\repositories\EntradaRepository;
 use App\progest\repositories\EmpenhoRepository;
+use App\progest\repositories\FornecedorRepository;
 use App\Http\Requests\CriarEntradaRequest;
 
 class EntradaController extends Controller {
 
     protected $entradaRepository;
     protected $empenhoRepository;
+    protected $fornecedorRepository;
 
-    public function __construct(EntradaRepository $entradaRepository, EmpenhoRepository $empenhoRepository) {
+    public function __construct(EntradaRepository $entradaRepository, EmpenhoRepository $empenhoRepository, FornecedorRepository $fornecedorRepository) {
         $this->entradaRepository = $entradaRepository;
         $this->empenhoRepository = $empenhoRepository;
+        $this->fornecedorRepository = $fornecedorRepository;
     }
 
     /**
@@ -24,12 +27,15 @@ class EntradaController extends Controller {
      *
      * @return Response
      */
-    public function index($empenho = null) {
+    public function index(Request $input, $empenho = null) {
+        $input->flash();
+        $filter = $input->all();
         $filter['empenho_id'] = $empenho; 
         $filter['paginate'] = null;
+        $fornecedores = $this->fornecedorRepository->dataForSelect();
         $entradas = $this->entradaRepository->index($filter);
         $empenho = $this->empenhoRepository->show($empenho);
-        return view('admin.entradas.index')->with(compact('entradas', 'empenho'));
+        return view('admin.entradas.index')->with(compact('entradas', 'empenho', 'fornecedores'));
     }
 
     /**

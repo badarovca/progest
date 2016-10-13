@@ -11,7 +11,7 @@
     <section class = "content-header">
         <h1>
             {!! $page_title or "Entradas - " !!}
-            <small>Empenho: <b>{!! $empenho->numero or "todos"!!}</b></small>
+            <small>Empenho: <b>{!! $empenho->numero or ""!!}</b></small>
         </h1>
         @include('template.alerts')
         @if(isset($empenho))
@@ -19,7 +19,44 @@
                 <i class="fa fa-plus"></i> Nova entrada
             </a></small>
         @endif
+        <!-- Busca e filtros -->
+        @if (!isset($empenho))
+        <fieldset>
+
+            <legend>Busca</legend>
+            {!! Form::open(array('route' => 'admin.entradas', 'method'=>'GET', 'class'=>'')) !!}
+            <div class="row">
+                <div class='col-md-3'>
+                    {!!Form::label('empenho', 'Número empenho', array('class'=>'control-label'))!!}
+                    {!!Form::text('empenho', old('busca'), array('class'=>'form-control', 'id' => 'busca', 'placeholder'=>'Número do empenho'))!!}
+                </div>
+                <div class='col-md-4'>
+                    {!!Form::label('fornecedor_id', 'Fornecedor', array('class'=>'control-label'))!!}
+                    {!!Form::select('fornecedor_id', $fornecedores, null, ['class'=>'form-control select-filtro', 'id'=>'fornecedor_id'])!!}
+                </div>
+                <div class='col-md-2'>
+                    {!!Form::label('dt_inicial', 'Data Inicial', array('class'=>'control-label'))!!}
+                    {!!Form::date('dt_inicial', old('dt_inicial'), ['class'=>'form-control', 'id'=>'dt_inicial'])!!}
+                </div>
+                <div class='col-md-2'>
+                    {!!Form::label('dt_final', 'Data Final', array('class'=>'control-label'))!!}
+                    {!!Form::date('dt_final', old('dt_final'), ['class'=>'form-control', 'id'=>'dt_final'])!!}
+                </div>
+                <div class='col-md-1'>
+                    <div class="input-group">
+                        {!!Form::label('', '', array('class'=>'control-label'))!!}
+                        <span class="input-group">
+                            {!! Form::submit('Ir', ['class'=>'btn btn-default'])!!}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            {!! Form::close() !!}
+        </fieldset>
+        @endif
     </section>
+
+
 
     <!--Main content -->
     <section class = "content">

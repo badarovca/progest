@@ -83,7 +83,7 @@ class RelatorioController extends Controller {
         $fornecedores = $this->fornecedorRepository->dataForSelect();
         $data['paginate'] = null;
         $entradas = array_filter($data) ? $this->entradaRepository->index($data) : null;
-        if ($entradas->first() != null) {
+        if (($entradas) && $entradas->first() != null) {
             $total = EntradaPresenter::CalcTotal($entradas);
             $periodo = $entradas->first()->present()->formatDate($data['dt_inicial']) . " a " . $entradas->first()->present()->formatDate($data['dt_final']);
             $fornecedor = ($data['fornecedor_id']) == null ? null : $this->fornecedorRepository->show($data['fornecedor_id'])->razao;
