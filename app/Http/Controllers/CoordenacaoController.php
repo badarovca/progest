@@ -21,8 +21,12 @@ class CoordenacaoController extends Controller {
         $this->coordenacaoRepository = $userRepository;
     }
 
-    public function index() {
-        $coordenacoes = $this->coordenacaoRepository->index();
+    public function index(Request $input) {
+        $input->flash();
+        $input = $input->all();
+        $filter = $input;
+        $filter['paginate'] = 50;
+        $coordenacoes = $this->coordenacaoRepository->index($filter);
 
         return view('admin.coordenacoes.index')->with(compact('coordenacoes'));
     }

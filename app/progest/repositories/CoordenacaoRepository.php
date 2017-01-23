@@ -18,8 +18,20 @@ class CoordenacaoRepository {
         return $coordenacoes;
     }
 
-    public function index() {
-        return Coordenacao::paginate(50);
+    public function index($filter = null) {
+        if ($filter) {
+            $coodenacoes = Coordenacao::where(function($query) use (&$filter) {
+                        if (isset($filter['habilitado'])) {
+                            $query->where('status', '=', $filter['habilitado']);
+                        }
+                        if (isset($filter['busca']) && $filter['busca'] != '') {
+                            $query->where('name', 'like', "%" . $filter['busca'] . "%");
+                        }
+                    })->paginate($filter['paginate']);
+        } else {
+            $coodenacoes = Coordenacao::paginate(50);
+        }
+        return $coodenacoes;
     }
 
     public function store($input) {

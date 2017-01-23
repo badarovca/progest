@@ -18,6 +18,31 @@
         <small><a href="{!! route('admin.coordenacoes.create') !!}">
                 <i class="fa fa-plus"></i> Nova coordenação
             </a></small>
+        
+        <div class="row">
+            <fieldset>
+                <legend>Busca</legend>
+                {!! Form::open(array('route' => 'admin.coordenacoes.index', 'method'=>'GET', 'class'=>'')) !!}
+                <div class='col-md-2'>
+                    {!!Form::label('habilitado', 'Habilitado', array('class'=>'control-label', 'title'=>'Itens com quantidade em estoque menor ou igual a quantidade mínima'))!!}
+                    {!!Form::select('habilitado', ['1'=>'Habilitado', '0'=>'Desabilitado' ], old('habilitado'), ['class'=>'form-control'])!!}
+                </div>
+                <div class='col-md-8'>
+                    {!!Form::label('sub_item_id', 'Busca', array('class'=>'control-label'))!!}
+                    <div class="input-group">
+                        {!!Form::text('busca', old('busca'), array('class'=>'form-control', 'id' => 'busca', 'placeholder'=>'Nome da coordenação'))!!}
+
+                        <span class="input-group-btn">
+                            {!! Form::submit('Ir', ['class'=>'btn btn-default'])!!}
+                        </span>
+                    </div>
+                </div>
+                <!--                <div class='col-md-2'><br>
+                
+                                </div>-->
+                {!! Form::close() !!}
+            </fieldset>
+        </div>
     </section>
 
     <!--Main content -->

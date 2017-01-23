@@ -20,7 +20,6 @@ class SetorRepository {
     }
 
     public function index($filter = null) {
-//        return Setor::paginate(50);
         if ($filter) {
             $setores = Setor::where(function($query) use (&$filter) {
                         if (isset($filter['habilitado'])) {
