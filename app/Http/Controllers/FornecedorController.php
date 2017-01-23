@@ -1,9 +1,10 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CriarFornecedorRequest;
-
 use Illuminate\Http\Request;
 use App\progest\repositories\FornecedorRepository;
 
@@ -20,9 +21,13 @@ class FornecedorController extends Controller {
         $this->fornecedorRepository = $userRepository;
     }
 
-    public function index() {
-        $fornecedores = $this->fornecedorRepository->index();
-
+    public function index(Request $input) {
+        $input->flash();
+        $input = $input->all();
+        $filter = $input;
+        $filter['paginate'] = 50;
+        
+        $fornecedores = $this->fornecedorRepository->index($filter);
         return view('admin.fornecedores.index')->with(compact('fornecedores'));
     }
 
@@ -90,10 +95,9 @@ class FornecedorController extends Controller {
         $this->fornecedorRepository->destroy($id);
         return back()->with('success', 'Removido com sucesso!');
     }
-    
+
 //    public function desativar($id) {
 //        $this->fornecedorRepository->desativar($id);
 //        return back()->with('success', 'Desativado com sucesso!');
 //    }
-
 }

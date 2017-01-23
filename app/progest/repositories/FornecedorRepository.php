@@ -23,6 +23,9 @@ class FornecedorRepository {
 //        DB::connection()->enableQueryLog();
         if ($input) {
             $fornecedores = Fornecedor::where(function($query) use ($input) {
+                        if (isset($filter['habilitado'])) {
+                            $query->where('status', '=', $filter['habilitado']);
+                        }
                         if (isset($input['busca']) && $input['busca'] != '') {
                             $query->where('cnpj', 'like', "%" . $input['busca'] . "%")
                                     ->orWhere('razao', 'like', "%" . $input['busca'] . "%")
@@ -65,11 +68,10 @@ class FornecedorRepository {
                                 });
                             }
                         }
-                    })->with(['empenhos.subMateriais'])->paginate($input['paginate'])->sortBy('razao');
+                    })->with(['empenhos.subMateriais'])->paginate($input['paginate']);
         } else {
             $fornecedores = Fornecedor::paginate(50);
         }
-//        print_r(DB::getQueryLog());
         return $fornecedores;
     }
 

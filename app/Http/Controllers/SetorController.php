@@ -30,7 +30,6 @@ class SetorController extends Controller {
         $filter = $input;
         $filter['paginate'] = 50;
         $setores = $this->setorRepository->index($filter);
-
         return view('admin.setores.index')->with(compact('setores'));
     }
 
@@ -75,7 +74,7 @@ class SetorController extends Controller {
     public function edit($id) {
         $setor = $this->setorRepository->show($id);
         $coordenacoes = $this->coordenacaoRepository->dataForSelect();
-        return view('admin.setores.edit')->with(compact('setor','coordenacoes'));
+        return view('admin.setores.edit')->with(compact('setor', 'coordenacoes'));
     }
 
     /**
@@ -100,10 +99,9 @@ class SetorController extends Controller {
         $this->setorRepository->destroy($id);
         return back()->with('success', 'Removido com sucesso!');
     }
-    
+
 //    public function desativar($id) {
 //        $this->setorRepository->desativar($id);
 //        return back()->with('success', 'Desativado com sucesso!');
 //    }
-
 }
