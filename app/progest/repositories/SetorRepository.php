@@ -19,8 +19,21 @@ class SetorRepository {
         return $setores;
     }
 
-    public function index() {
-        return Setor::paginate(50);
+    public function index($filter = null) {
+//        return Setor::paginate(50);
+        if ($filter) {
+            $setores = Setor::where(function($query) use (&$filter) {
+                        if (isset($filter['habilitado'])) {
+                            $query->where('status', '=', $filter['habilitado']);
+                        }
+                        if (isset($filter['busca']) && $filter['busca'] != '') {
+                            $query->where('name', 'like', "%" . $filter['busca'] . "%");
+                        }
+                    })->paginate($filter['paginate']);
+        } else {
+            $setores = Setor::paginate(50);
+        }
+        return $setores;
     }
 
     public function store($input) {

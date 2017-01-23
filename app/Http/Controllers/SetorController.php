@@ -24,8 +24,12 @@ class SetorController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $setores = $this->setorRepository->index();
+    public function index(Request $input) {
+        $input->flash();
+        $input = $input->all();
+        $filter = $input;
+        $filter['paginate'] = 50;
+        $setores = $this->setorRepository->index($filter);
 
         return view('admin.setores.index')->with(compact('setores'));
     }
