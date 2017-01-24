@@ -50,13 +50,15 @@ class SaidaRepository {
     public function store($input) {
         $subMateriais = $this->saidaSubMateriais($input['materiais']['qtds']);
         $saida = new Saida(['obs' => $input['saida']['obs']]);
-        $usuario = User::where('email', $input['saida']['email'])->get()->first();
-        $saida->solicitante()->associate($usuario);
-        $saida->responsavel()->associate(Auth::user());
-        if (isset($input['pedido_id'])) {
+        if (!isset($input['pedido_id'])) {
+            $usuario = User::where('email', $input['saida']['email'])->get()->first();
+        } else {
+            $usuario = User::find(Pedido::where('id', $input['pedido_id'])->get()->first()->solicitante->id);
             $pedido = Pedido::find($input['pedido_id']);
             $saida->pedido()->associate($pedido);
         }
+        $saida->solicitante()->associate($usuario);
+        $saida->responsavel()->associate(Auth::user());
         $saida->save();
 
         $saida->subMateriais()->sync($subMateriais);

@@ -22,8 +22,6 @@ class CriarSaidaRequest extends Request {
 	public function rules()
 	{
 		return [
-                    'email' => 'required|exists:users,email',
-                    'password' => 'required',
                     'obs' => 'required'
 		];
 	}

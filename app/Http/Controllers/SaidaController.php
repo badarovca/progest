@@ -79,9 +79,7 @@ class SaidaController extends Controller {
         $input['materiais'] = $request->only('qtds');
         $user = $request->only('email', 'password');
         $input['saida'] = $request->except('qtds', '_token', 'pedido', 'password');
-        if (!Auth::validate($user)) {
-            return back()->withInput()->withErrors(['validacao' => 'Usuário ou senha incorretos.']);
-        }
+        
         $pedido = $request->only('pedido');
         if ($pedido['pedido'] != null) {
             foreach ($pedido['pedido'] as $key => $val) {
@@ -89,6 +87,10 @@ class SaidaController extends Controller {
                 $input['pedido_id'] = $key;
                 $this->pedidoRepository->update($key, $status);
             }
+        }else{
+            if (!Auth::validate($user)) {
+            return back()->withInput()->withErrors(['validacao' => 'Usuário ou senha incorretos.']);
+        }
         }
         $this->saidaRepository->store($input);
 
