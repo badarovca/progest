@@ -93,7 +93,6 @@ class MaterialRepository {
                         }
                     })
                     ->orderBy($orderBy[0], $orderBy[1])
-//                    ->toSql();
                     ->paginate($filter['paginate'] == "null" ? null : $filter['paginate']);
         } else {
             $materiais = Material::all();
