@@ -11,30 +11,34 @@ class RelatorioRepository {
     public function updateSaldo($subMaterial, $valor) {
         $mes = date("m");
         $ano = date("Y");
-        $saldo = Saldo::where(function($query) use(&$mes, &$ano, &$subMaterial) {
-                    $query->where('mes', '=', $mes);
-                    $query->where('ano', '=', $ano);
-                    $query->where('sub_item_id', '=', $subMaterial->subItem->id);
-                })->first();
-        if ($saldo != null) {
-            $saldo->valor += $valor;
-            $saldo->save();
-        } else {
-            $subItens = SubItem::all(['id']);
-            $date = strtotime($ano . "-" . $mes . "-01 -1 month");
-            foreach ($subItens as $subItem) {
-                $valorMesAnterior = $this->getSaldoMes($date, $subItem->id);
-                if ($subItem->id == $subMaterial->subItem->id) {
-                    $valorMesAnterior += $valor;
-                }
-                $saldo = new Saldo(['mes' => $mes, 'ano' => $ano, 'sub_item_id' => $subItem->id, 'valor' => $valorMesAnterior]);
-                $saldo->save();
+        $saldo = null;
+
+        while ($saldo == null) {
+            $saldo = Saldo::where(function($query) use(&$mes, &$ano, &$subMaterial) {
+                        $query->where('mes', '=', $mes);
+                        $query->where('ano', '=', $ano);
+                        $query->where('sub_item_id', '=', $subMaterial->subItem->id);
+                    })->first();
+            if ($saldo == null) {
+                $periodo = date("Y-m-d", strtotime($ano . "-" . $mes . "-01"));
+                $this->inicializaMes($periodo);
             }
         }
+
+        $saldo->valor += $valor;
+        $saldo->save();
         return $saldo;
     }
 
-    public function getSaldoMes($date, $subItemId = null) {
+    public function getSaldosMes($date) {
+        $saldos = Saldo::where(function ($query) use (&$date, &$subItemId) {
+                    $query->where('mes', '=', date('m', $date));
+                    $query->where('ano', '=', date('Y', $date));
+                })->get();
+        return $saldos;
+    }
+
+    public function getSaldoMesBySubItem($date, $subItemId = null) {
         $saldo = Saldo::where(function ($query) use (&$date, &$subItemId) {
                     $query->where('mes', '=', date('m', $date));
                     $query->where('ano', '=', date('Y', $date));
@@ -47,6 +51,53 @@ class RelatorioRepository {
 
     public function getRelatorioContabil($input) {
         $periodo = [date("Y-m-d", strtotime($input['ano'] . "-" . $input['mes'] . "-01")), date("Y-m-t", strtotime($input['ano'] . "-" . $input['mes'] . "-01"))];
+        if ($this->getCountSaldoPeriodo($periodo[0]) == 0) {
+            $this->inicializaMes($periodo[0]);
+        }
+        $result = RelatorioRepository::consultaRelatorioSQL($periodo, $input);
+
+        return $result;
+    }
+
+    public function inicializaMes($periodo) {
+        $periodoTemp = date("Y-m-d", strtotime($periodo . "-1 month"));
+
+        $contSaldo = $this->getCountSaldoPeriodo($periodo);
+        $contMeses = 0;
+        $log = "";
+        //conta qtd de meses ainda não iniciados
+        while ($contSaldo == 0 && date("Y", strtotime($periodoTemp)) > 2016) {
+            $contSaldo = $this->getCountSaldoPeriodo($periodoTemp);
+
+            $periodoTemp = date("Y-m-d", strtotime($periodoTemp . "-1 month"));
+            $contMeses++;
+        }
+        $periodoTemp = date("Y-m-d", strtotime($periodoTemp . "+1 month"));
+//        dd($periodoTemp);
+        //inicializa meses
+        while ($contMeses > 0) {
+            $date = strtotime($periodoTemp);
+            $saldos = $this->getSaldosMes($date);
+
+            $periodoTemp = date("Y-m-d", strtotime($periodoTemp . "+1 month"));
+            $mes = date("m", strtotime($periodoTemp));
+            $ano = date("Y", strtotime($periodoTemp));
+            foreach ($saldos as $saldo) {
+                $newSaldo = new Saldo(['mes' => $mes, 'ano' => $ano, 'sub_item_id' => $saldo->sub_item_id, 'valor' => $saldo->valor]);
+                $newSaldo->save();
+            }
+
+            $contMeses--;
+        }
+    }
+
+    public function getCountSaldoPeriodo($periodo) {
+        $mesAnterior = date("m", strtotime($periodo));
+        $anoAnterior = date("Y", strtotime($periodo));
+        return \DB::table('saldos')->where('mes', $mesAnterior)->where('ano', $anoAnterior)->count();
+    }
+
+    private static function consultaRelatorioSQL($periodo, $input) {
         $mesAnterior = date("m", strtotime($periodo[0] . "-1 month"));
         $anoAnterior = date("Y", strtotime($periodo[0] . "-1 month"));
         $result = \DB::select(\DB::raw("

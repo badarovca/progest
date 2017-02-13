@@ -61,7 +61,7 @@
                     <td>{!! number_format($linha->vl_entrada, 2, ',', '.') !!}</td>
                     <td>{!! number_format($linha->vl_saida, 2, ',', '.') !!}</td>
                     <td>{!! number_format($linha->vl_devolucao, 2, ',', '.') !!}</td>
-                    <td>{!! number_format($linha->vl_saldo_final, 2, ',', '.')!!}</td>
+                    <td>{!! $saldo->present()->formatReal($saldo->present()->getValorSaldoFinal($linha))!!}</td>
                 </tr>
                 @endif
                 @endforeach

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Saldo;
 use App\progest\repositories\MaterialRepository;
 use App\progest\repositories\SubMaterialRepository;
 use App\progest\repositories\RelatorioRepository;
@@ -52,7 +53,7 @@ class RelatorioController extends Controller {
             '07' => 'Julho', '08' => 'Agosto', '09' => 'Setembro', '10' => 'Outubro', '11' => 'Novembro', '12' => 'Dezembro'
         ];
 
-        for ($i = (int) date('Y'); $i >= 2016; $i--) {
+        for ($i = (int) date('Y'); $i >= 2017; $i--) {
             $this->anos[$i] = $i;
         }
     }
@@ -72,9 +73,13 @@ class RelatorioController extends Controller {
         $meses = $this->meses;
         $data = $input->only('mes', 'ano');
         $dados = ($data['mes'] != null && $data['ano'] != null) ? $this->relatorioRepository->getRelatorioContabil($data) : null;
+        if (strtotime(date("Y-m-d")) < strtotime(date($data['ano']."-".$data['mes']."-01"))){
+            $dados = null;
+        }
         $totais = $this->relatorioRepository->getTotais($dados);
         $periodo = date('m/Y', strtotime($data['ano'] . "-" . $data['mes'] . "-01"));
-        return view('admin.relatorios.contabil.index')->with(compact(['anos', 'meses', 'dados', 'totais', 'periodo']));
+        $saldo = new Saldo();
+        return view('admin.relatorios.contabil.index')->with(compact(['anos', 'meses', 'dados', 'totais', 'periodo', 'saldo']));
     }
 
     public function getRelatorioEntradas(Request $input) {
