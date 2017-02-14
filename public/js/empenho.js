@@ -139,14 +139,6 @@ $(document).ready(function () {
         atualiza_total();
     });
 
-    //tranforma tabelas html em DataTables
-    $("#listaMateriais").DataTable({
-        "language": {
-            "url": $("#base_url").val() + "/js/data-table-pt-br.js"
-        },
-        bPaginate: false,
-        bFilter: false, bInfo: false
-    });
 });
 
 
