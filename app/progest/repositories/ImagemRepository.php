@@ -16,7 +16,7 @@ class ImagemRepository {
 
             if (count($thumbs > 0)) {
                 foreach ($thumbs as $val) {
-                    $thumb = $imagem;
+                    $thumb = Image::make($img);;
                     $thumb->fit($val['width'], $val['height']);
                     $caminhoThumb = $path . $nomeUnico . "_" . $val['width'] . "x" . $val['height'] . '.jpg';
                     $thumb->save(public_path($caminhoThumb));

@@ -200,8 +200,8 @@ class EmpenhoRepository {
 
             if (isset($val['imagem'])) {
                 $thumbs = [
-                    ['width' => '100', 'height' => '100'],
                     ['width' => '400', 'height' => '400'],
+                    ['width' => '100', 'height' => '100'],
                 ];
                 $materiaisObjects[$key]->imagem = $this->imagemRepository->sendImage($val['imagem'], 'img/materiais/', $thumbs);
             }
