@@ -67,12 +67,11 @@ class MaterialRepository {
                                     }
                                 });
                             }
-                        } else {
-                            if (isset($filter['busca']) && $filter['busca'] != '') {
-                                $query->where('descricao', 'like', "%" . $filter['busca'] . "%")
-                                ->orWhere('marca', 'like', "%" . $filter['busca'] . "%")
-                                ->orWhere('codigo', 'like', "%" . $filter['busca'] . "%");
-                            }
+                        }
+                        if (isset($filter['busca']) && $filter['busca'] != '') {
+                            $query->where('descricao', 'like', "%" . $filter['busca'] . "%")
+                            ->orWhere('marca', 'like', "%" . $filter['busca'] . "%")
+                            ->orWhere('codigo', 'like', "%" . $filter['busca'] . "%");
                         }
                     })
                     ->whereHas('subMateriais', function ($query) use (&$filter) {
@@ -166,9 +165,9 @@ class MaterialRepository {
         $materiais = Material::where('descricao', 'like', "%$param%")->orWhere('marca', 'like', "%$param%")->get();
         return $materiais;
     }
-    
-    public function whereIn($ids = array()){
-        $materiais = Material::whereIn('id',$ids)->get();
+
+    public function whereIn($ids = array()) {
+        $materiais = Material::whereIn('id', $ids)->get();
         return $materiais;
     }
 
