@@ -138,6 +138,8 @@ class EmpenhoRepository {
                     'qtd_solicitada' => $array['qtd_solicitada'],
                     'material_id' => $id,
                 ]);
+                $subItem = SubItem::find($array['subItem']);
+                $subMaterial->subItem()->associate($subItem);
                 $subMaterial->empenho()->associate($empenho);
                 $subMaterial->save();
             }
