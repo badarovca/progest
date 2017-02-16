@@ -9,4 +9,7 @@
 <li>
     <a href="{{route('pedidos.lista-pedidos')}}">Meus pedidos</a> 
 </li>
+<li>
+    <a href="{{url('/ajuda')}}" target="_blank">Ajuda</a> 
+</li>
 @stop

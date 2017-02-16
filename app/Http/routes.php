@@ -72,6 +72,8 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('/', ['as' => 'default', 'uses'=>'HomeController@index']);
 Route::get('/home', 'HomeController@index');
 
+Route::get('/ajuda', 'AjudaController@index');
+
 Route::group(['prefix' => 'pedidos'], function () {
     Route::get('/', ['as' => 'pedidos', 'uses' => 'PedidoController@exibirMateriais']);
     Route::get('/busca-materiais', ['as' => 'pedidos.busca-materiais', 'uses' => 'PedidoController@search']);

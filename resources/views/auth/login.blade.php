@@ -26,14 +26,12 @@
             </div>
 
             <div class="row">
-                <div class="col-xs-4 col-xs-offset-8">
+                <div class="col-xs-12">
                     <button type="submit" class="btn btn-success btn-block btn-flat">Entrar</button>
-
                 </div>
+                <a class="text-green"  href="{{ url('/password/email') }}">Esqueci a senha</a>
+                <a class="text-green pull-right" target="_blank" href="{{ url('/ajuda') }}">Ajuda</a>
             </div>
-            <a class="text-green" href="{{ url('/password/email') }}">Esqueci a senha</a>
-            <br>
-            <!--<a href="{{ url('/auth/register') }}">Registre-se</a>-->
         </form>
 
     </div>
