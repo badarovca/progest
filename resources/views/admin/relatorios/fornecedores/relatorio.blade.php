@@ -13,8 +13,9 @@
     <thead>
         <tr>
             <th>Empenho</th>
-            <th>Vlr total</th>
-            <th>Vlr pendente</th>
+            <th>Valor total</th>
+            <th>Valor entregue</th>
+            <th>Valor pendente</th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +23,7 @@
         @if (!$empenho->present()->isFechado())
         <tr>
             <td>{!! $empenho->numero !!}</td>
+            <td>{!! $empenho->present()->getValorTotal() !!}</td>
             <td>{!! $empenho->present()->getValorEntregue() !!}</td>
             <td>{!! $empenho->present()->getValorRestante() !!}</td>
         </tr>
