@@ -1,4 +1,4 @@
 <footer class="main-footer">
     <!-- Default to the left -->
-    <strong>Copyright © 2015 <a href="http://www.portal.ifba.edu.br/" target="_blank">IFBA</a>.</strong> All rights reserved.
+    <strong>Copyright © 2017 <a href="http://conquista.ifba.edu.br/" target="_blank">IFBA - Campus Vitória da Conquista</a>.</strong> Todos os direitos reservados.
 </footer>
