@@ -86,7 +86,7 @@ class RelatorioController extends Controller {
         $input->flash();
         $data = $input->only('dt_inicial', 'dt_final', 'numero', 'fornecedor_id');
         $fornecedores = $this->fornecedorRepository->dataForSelect();
-        $data['paginate'] = null;
+        $data['paginate'] = 1000;
         $entradas = array_filter($data) ? $this->entradaRepository->index($data) : null;
         if (($entradas) && $entradas->first() != null) {
             $total = EntradaPresenter::CalcTotal($entradas);
@@ -103,7 +103,7 @@ class RelatorioController extends Controller {
         $users = $this->usuarioRepository->dataForSelect();
         $coordenacoes = $this->coordenacaoRepository->dataForSelect();
         $setores = $this->setorRepository->dataForSelect();
-        $data['paginate'] = "null";
+        $data['paginate'] = 1000;
         $entradas = array_filter($data) ? $this->entradaRepository->index($data) : null;
         if ($entradas != null && $entradas->first()) {
             $criterios = [
@@ -128,7 +128,7 @@ class RelatorioController extends Controller {
         $users = $this->usuarioRepository->dataForSelect();
         $coordenacoes = $this->coordenacaoRepository->dataForSelect();
         $setores = $this->setorRepository->dataForSelect();
-        $data['paginate'] = null;
+        $data['paginate'] = 1000;
         $saidas = array_filter($data) ? $this->saidaRepository->index($data) : null;
         if ($saidas != null && $saidas->first()) {
             $criterios = [
@@ -159,7 +159,7 @@ class RelatorioController extends Controller {
         $users = $this->usuarioRepository->dataForSelect();
         $coordenacoes = $this->coordenacaoRepository->dataForSelect();
         $setores = $this->setorRepository->dataForSelect();
-        $data['paginate'] = null;
+        $data['paginate'] = 1000;
         $empenhos = array_filter($data) ? $this->empenhoRepository->index($data) : null;
         if ($empenhos != null && $empenhos->first()) {
             $filtros = [
@@ -180,7 +180,7 @@ class RelatorioController extends Controller {
 
     public function getRelatorioFornecedores(Request $input) {
         $data['status'] = 'pendente';
-        $data['paginate'] = null;
+        $data['paginate'] = 1000;
         $fornecedores = array_filter($data) ? $this->fornecedorRepository->index($data) : null;
         return view("admin.relatorios.fornecedores.relatorio")->with(compact(['fornecedores', 'status', 'filtros', 'totais']));
     }
