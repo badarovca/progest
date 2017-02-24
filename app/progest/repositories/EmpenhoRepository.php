@@ -78,6 +78,10 @@ class EmpenhoRepository {
         }
         return $empenhos;
     }
+    
+    public function showByNr($numero){
+        return Empenho::where('numero', $numero)->get();
+    }
 
     public function store($input) {
         $fornecedor_id = $input['empenho']['fornecedor_id'];

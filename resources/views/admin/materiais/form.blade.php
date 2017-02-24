@@ -33,9 +33,9 @@
                 {!!Form::label('marca', 'Marca', array('class'=>'control-label'))!!}
                 {!!Form::text('marca', null, array('class'=>'form-control', 'id' => 'marca', 'required' => 'required'))!!}
             </div>
-            <div class="col-md-4">
-                {!!Form::label('vencimento', 'Vencimento', array('class'=>'control-label'))!!}
-                {!!Form::date('vencimento', null, array('class'=>'form-control', 'id' => 'dt_emissao'))!!}
+            <div class='col-md-2'>
+                {!!Form::label('qtd_min', 'Quantidade mínima', array('class'=>'control-label'))!!}
+                {!!Form::number('qtd_min', null, array('class'=>'form-control', 'id' => 'qtd_1', 'min'=> '0', 'required' => 'required'))!!}
             </div>
         </div>
     </div>
@@ -45,10 +45,6 @@
             <div class="col-md-4">
                 {!!Form::label('imagem', 'Imagem', array('class'=>'control-label'))!!}
                 {!!Form::file('imagem', null)!!}
-            </div>
-            <div class='col-md-2'>
-                {!!Form::label('qtd_min', 'Quantidade mínima', array('class'=>'control-label'))!!}
-                {!!Form::number('qtd_min', null, array('class'=>'form-control', 'id' => 'qtd_1', 'min'=> '0', 'required' => 'required'))!!}
             </div>
             <div class='checkbox col-md-4' >
                 <div class="checkbox">

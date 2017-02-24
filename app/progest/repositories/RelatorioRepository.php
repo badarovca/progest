@@ -78,13 +78,19 @@ class RelatorioRepository {
         while ($contMeses > 0) {
             $date = strtotime($periodoTemp);
             $saldos = $this->getSaldosMes($date);
-
             $periodoTemp = date("Y-m-d", strtotime($periodoTemp . "+1 month"));
             $mes = date("m", strtotime($periodoTemp));
             $ano = date("Y", strtotime($periodoTemp));
-            foreach ($saldos as $saldo) {
-                $newSaldo = new Saldo(['mes' => $mes, 'ano' => $ano, 'sub_item_id' => $saldo->sub_item_id, 'valor' => $saldo->valor]);
-                $newSaldo->save();
+            if ($saldos->isEmpty()) {
+                for($i = 1; $i<54; $i++){
+                    $newSaldo = new Saldo(['mes' => $mes, 'ano' => $ano, 'sub_item_id' => $i, 'valor' => 0]);
+                    $newSaldo->save();
+                }
+            } else {
+                foreach ($saldos as $saldo) {
+                    $newSaldo = new Saldo(['mes' => $mes, 'ano' => $ano, 'sub_item_id' => $saldo->sub_item_id, 'valor' => $saldo->valor]);
+                    $newSaldo->save();
+                }
             }
 
             $contMeses--;

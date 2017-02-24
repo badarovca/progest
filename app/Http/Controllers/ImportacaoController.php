@@ -31,10 +31,7 @@ class ImportacaoController extends Controller {
      *
      * @return void
      */
-    public function __construct(EmpenhoRepository $empenhoRepository, EntradaRepository $entradaRepository, 
-            FornecedorRepository $fornecedorRepository, SubItemRepository $subItemRepository, 
-            MaterialRepository $materialRepository, 
-            UsuarioRepository $usuarioRepository) {
+    public function __construct(EmpenhoRepository $empenhoRepository, EntradaRepository $entradaRepository, FornecedorRepository $fornecedorRepository, SubItemRepository $subItemRepository, MaterialRepository $materialRepository, UsuarioRepository $usuarioRepository) {
         $this->empenhoRepository = $empenhoRepository;
         $this->entradaRepository = $entradaRepository;
         $this->fornecedorRepository = $fornecedorRepository;
@@ -47,55 +44,56 @@ class ImportacaoController extends Controller {
         $file = Excel::load(storage_path('ESTOQUE ATUALIZADO.xlsx'), function($reader) {
                     
                 })->ignoreEmpty()->get();
-//        dd($file);
         foreach ($file as $row) {
-            $n_empenho = substr($row->empenho, 0, 4) . "NE800" . substr($row->empenho, 3, 3);
-            if ($row->cnpj == 0) {
-                $cnpj = "00.000.000/0000-00";
-            } else {
-                $cnpj = substr($row->cnpj, 0, 2) . "." . substr($row->cnpj, 2, 3) . "." . substr($row->cnpj, 5, 3) . "/" . substr($row->cnpj, 8, 4) .
-                        "-" . substr($row->cnpj, 12, 2);
-            }
-
-            $empenho = $this->empenhoRepository->index(['busca' => $n_empenho, 'paginate' => null])->first();
-            if ($empenho == null) {
-                $empenho = new Empenho();
-                $fornecedor = $this->fornecedorRepository->index(['busca' => $cnpj, 'paginate' => null])->first();
-                if ($fornecedor == null) {
-                    $fornecedor = new Fornecedor();
-                    $fornecedor->cnpj = $cnpj;
-                    $fornecedor->email = strtolower(str_replace(' ', '', $row->r_social)) . "@email.com";
-                    $fornecedor->razao = $row->r_social;
-                    $fornecedor->fantasia = $row->r_social;
-                    $fornecedor->status = 1;
-                    $fornecedor->save();
+            if ($row->quat_total != 0) {
+                $n_empenho = $row->empenho;
+                if ($row->cnpj == 0) {
+                    $cnpj = "00.000.000/0000-00";
+                } else {
+                    $cnpj = substr($row->cnpj, 0, 2) . "." . substr($row->cnpj, 2, 3) . "." . substr($row->cnpj, 5, 3) . "/" . substr($row->cnpj, 8, 4) .
+                            "-" . substr($row->cnpj, 12, 2);
                 }
-                $empenho->numero = $n_empenho;
-                $empenho->tipo = "ORDINÁRIO";
-                $empenho->cat_despesa = 0;
-                $empenho->el_consumo = 30;
-                $empenho->mod_licitacao = "Pregão";
-                $empenho->num_processo = "00000000000/00-01";
-                $empenho->fornecedor()->associate($fornecedor);
-                $empenho->solicitante()->associate(Auth::user());
+
+                $empenho = $this->empenhoRepository->showByNr($n_empenho)->first();
+                if ($empenho == null) {
+                    $empenho = new Empenho();
+                    $fornecedor = $this->fornecedorRepository->index(['busca' => $cnpj, 'paginate' => null])->first();
+                    if ($fornecedor == null) {
+                        $fornecedor = new Fornecedor();
+                        $fornecedor->cnpj = $cnpj;
+                        $fornecedor->email = strtolower(str_replace(' ', '', $row->r_social)) . "@email.com";
+                        $fornecedor->razao = $row->r_social;
+                        $fornecedor->fantasia = $row->r_social;
+                        $fornecedor->status = 1;
+                        $fornecedor->save();
+                    }
+                    $empenho->numero = $n_empenho;
+                    $empenho->tipo = "ORDINÁRIO";
+                    $empenho->cat_despesa = 0;
+                    $empenho->el_consumo = 30;
+                    $empenho->mod_licitacao = "Pregão";
+                    $empenho->num_processo = "00000000000/00-01";
+                    $empenho->fornecedor()->associate($fornecedor);
+                    $empenho->solicitante()->associate(Auth::user());
+                    $empenho->save();
+                }
+                $material = [];
+                $material['codigo'] = [(int) $row->cod_barras];
+                $material['descricao'] = [$row->descricao];
+                $material['unidade_id'] = [3];
+                $material['marca'] = [''];
+                $material['sub_item_id'] = [(int) $row->sub_item];
+                $material['vl_total'] = [number_format($row->vlr_real, 2, ',', '.')];
+                $material['qtd_solicitada'] = [(int) $row->quat_total];
+                $material['vencimento'] = [''];
+                $material['qtd_min'] = ['0'];
+                $material['imagem'] = [null];
+                $subMateriais = $this->empenhoRepository->prepararSubMateriais($material, $empenho);
+                if ($subMateriais) {
+                    $empenho->subMateriais()->saveMany($subMateriais);
+                }
                 $empenho->save();
             }
-            $material = [];
-            $material['codigo'] = [(int) $row->cod_barras];
-            $material['descricao'] = [$row->descricao];
-            $material['unidade_id'] = [3];
-            $material['marca'] = [''];
-            $material['sub_item_id'] = [(int) $row->sub_item];
-            $material['vl_total'] = [number_format($row->vlr_real, 2, ',', '.')];
-            $material['qtd_solicitada'] = [(int) $row->quat_total];
-            $material['vencimento'] = [''];
-            $material['qtd_min'] = ['0'];
-            $material['imagem'] = [null];
-            $subMateriais = $this->empenhoRepository->prepararSubMateriais($material, $empenho);
-            if ($subMateriais) {
-                $empenho->subMateriais()->saveMany($subMateriais);
-            }
-            $empenho->save();
         }
         foreach ($this->empenhoRepository->index() as $empenho) {
             $input = ['empenho' => $empenho->id,
@@ -109,6 +107,7 @@ class ImportacaoController extends Controller {
             }
             $entrada = $this->entradaRepository->store($input);
         }
+
         dd($this->entradaRepository->index());
         return;
     }
