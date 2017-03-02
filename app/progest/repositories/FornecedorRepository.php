@@ -68,7 +68,7 @@ class FornecedorRepository {
                                 });
                             }
                         }
-                    })->with(['empenhos.subMateriais'])->paginate($input['paginate'] == 'null' ? 1000 : $input['paginate']);
+                    })->with(['empenhos.subMateriais'])->paginate($input['paginate'] == null ? 1000 : $input['paginate']);
         } else {
             $fornecedores = Fornecedor::paginate(50);
         }

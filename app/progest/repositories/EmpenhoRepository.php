@@ -72,7 +72,7 @@ class EmpenhoRepository {
                                 });
                             }
                         }
-                    })->with(['solicitante', 'fornecedor', 'subMateriais.entradas'])->orderBy('created_at', 'desc')->paginate($input['paginate'] == 'null' ? 1000 : $input['paginate']);
+                    })->with(['solicitante', 'fornecedor', 'subMateriais.entradas'])->orderBy('created_at', 'desc')->paginate($input['paginate'] == null ? 1000 : $input['paginate']);
         } else {
             $empenhos = Empenho::all()->sortByDesc('created_at');
         }

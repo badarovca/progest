@@ -60,7 +60,7 @@ class EntradaRepository {
                                 });
                             }
                         });
-                    })->with(['subMateriais.material', 'subMateriais.empenho', 'empenho.solicitante.setor.coordenacao'])->orderBy('created_at', 'desc')->paginate($input['paginate'] == 'null' ? 1000 : $input['paginate']);
+                    })->with(['subMateriais.material', 'subMateriais.empenho', 'empenho.solicitante.setor.coordenacao'])->orderBy('created_at', 'desc')->paginate($input['paginate'] == null ? 1000 : $input['paginate']);
             return $entradas;
         }
     }
