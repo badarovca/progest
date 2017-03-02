@@ -7,19 +7,19 @@ class EntradaPresenter extends BasePresenter {
     public function getValorTotalBruto() {
         $total = 0;
         foreach ($this->subMateriais as $subMaterial) {
-            $valorUn = round($subMaterial->vl_total / $subMaterial->qtd_solicitada, 2);
+            $valorUn = $subMaterial->vl_total / $subMaterial->qtd_solicitada;
             $total += $valorUn * $subMaterial->pivot->quant;
         }
-        return $total;
+        return round($total, 2);
     }
 
     public function getValorTotal() {
         $total = 0;
         foreach ($this->subMateriais as $subMaterial) {
-            $valorUn = round($subMaterial->vl_total / $subMaterial->qtd_solicitada, 2);
+            $valorUn = $subMaterial->vl_total / $subMaterial->qtd_solicitada;
             $total += $valorUn * $subMaterial->pivot->quant;
         }
-        $total = number_format($total, 2, ',', '.');
+        $total = number_format(round($total, 2), 2, ',', '.');
         return $total;
     }
 
@@ -27,7 +27,7 @@ class EntradaPresenter extends BasePresenter {
         $total = 0;
         foreach ($entradas as $entrada) {
             foreach ($entrada->subMateriais as $subMaterial) {
-                $valorUn = round($subMaterial->vl_total / $subMaterial->qtd_solicitada, 2);
+                $valorUn = $subMaterial->vl_total / $subMaterial->qtd_solicitada;
                 $total += $valorUn * $subMaterial->pivot->quant;
             }
         }

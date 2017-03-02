@@ -42,7 +42,7 @@ class SaidaRepository {
                                 });
                             }
                         });
-                    })->with(['subMateriais.material', 'subMateriais.empenho', 'solicitante.setor.coordenacao'])->orderBy('created_at', 'desc')->paginate($input['paginate'] == "null" ? null : $input['paginate']);
+                    })->with(['subMateriais.material', 'subMateriais.empenho', 'solicitante.setor.coordenacao'])->orderBy('created_at', 'desc')->paginate($input['paginate'] == 'null' ? 1000 : $input['paginate']);
             return $saidas;
         }
     }
