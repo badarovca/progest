@@ -83,7 +83,7 @@ class EntradaRepository {
             $subMaterial = SubMaterial::find($key);
             $subMaterial->qtd_estoque += $val['quant'];
             $subMaterial->save();
-            $valor = (round($subMaterial->vl_total / $subMaterial->qtd_solicitada, 2) * $val['quant']);
+            $valor = round(($subMaterial->vl_total / $subMaterial->qtd_solicitada) * $val['quant'], 2);
             $this->relatorioRepository->updateSaldo($subMaterial, $valor);
         }
 

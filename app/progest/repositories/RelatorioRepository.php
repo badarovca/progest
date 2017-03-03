@@ -111,7 +111,7 @@ class RelatorioRepository {
             sum(vl_saldo_inicial) as vl_saldo_inicial, sum(vl_saldo_final) as vl_saldo_final
             from(
             (select sub_items.id, sub_items.material_consumo, 
-            SUM(ROUND(sub_materials.vl_total/sub_materials.qtd_solicitada, 2)*entrada_sub_material.quant)
+            ROUND(SUM((sub_materials.vl_total/sub_materials.qtd_solicitada)*entrada_sub_material.quant), 2)
             as vl_entrada, null as vl_saida, null as vl_devolucao, null as vl_saldo_inicial, null as vl_saldo_final
             from sub_items
             left join sub_materials
@@ -126,7 +126,7 @@ class RelatorioRepository {
             group by sub_items.id)
             union all
             (select sub_items.id, sub_items.material_consumo, 
-            null as vl_entrada, SUM(ROUND(sub_materials.vl_total/sub_materials.qtd_solicitada, 2)*saida_sub_material.quant)
+            null as vl_entrada, ROUND(SUM((sub_materials.vl_total/sub_materials.qtd_solicitada)*saida_sub_material.quant), 2)
             as vl_saida, null as vl_devolucao, null as vl_saldo_inicial, null as vl_saldo_final
             from sub_items
             left join sub_materials
@@ -141,7 +141,7 @@ class RelatorioRepository {
             group by sub_items.id)
             union all
             (select sub_items.id, sub_items.material_consumo, 
-            null as vl_entrada, null as vl_saida, SUM(ROUND(sub_materials.vl_total/sub_materials.qtd_solicitada, 2)*devolucao_sub_material.quant) as vl_devolucao, 
+            null as vl_entrada, null as vl_saida, ROUND(SUM((sub_materials.vl_total/sub_materials.qtd_solicitada)*devolucao_sub_material.quant), 2) as vl_devolucao, 
             null as vl_saldo_inicial, null as vl_saldo_final
             from sub_items
             left join sub_materials
