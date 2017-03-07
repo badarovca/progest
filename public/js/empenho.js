@@ -1,6 +1,6 @@
 $(document).ready(function () {
     atualiza_total();
-    
+
     //não permite que o formulário seja enviado mais de uma vez
     $("form").submit(function (event) {
         $(':input[type="submit"]').prop('disabled', true);
@@ -25,22 +25,30 @@ $(document).ready(function () {
         //verifica campos vazios
         if (qtd == '' || material_id == '')
             return;
-        var continua = true;
-        //verifica se o material já está na lista
+        var atualiza = false;
+        //verifica se o material já está na lista. Se estiver, a lista deve ser atualizada
         $(".item-saida-material").each(function () {
-            continua = ($(this).find("td:first").html() === material_id) ? false : true;
-            if (!continua)
-                return false;
+            if ($(this).find("td:first").html() === material_id) {
+                qtd = parseInt(qtd) + parseInt($(this).find("input:first").val());
+                atualiza = true;
+            }
         });
-        if (!continua)
-            return;
-        $("#qtd-material").val('');
+
         url = $("#base_url").val() + '/add-material-saida/' + material_id + "/" + qtd;
         $.get(
                 url,
                 function (data) {
                     if (data.success === true) {
-                        $("#lista-materiais").append(data.html);
+                        $("#qtd-material-saida").val('');
+                        //atualiza a lista caso seja necessário;
+                        if (atualiza) {
+                            $(".item-saida-material").each(function () {
+                                if ($(this).find("td:first").html() === material_id)
+                                    $(this).remove();
+                            });
+                        }
+                        $("#lista-materiais").prepend(data.html);
+
                         $(".saida-material-select2").select2('open');
                     } else {
                         $("#response-msg").html(data.html);

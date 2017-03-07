@@ -70,7 +70,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               user experience -->
         <!-- Laravel DELETE plugin -->
         <script src="{{ asset ("/js/laravel.js") }}"></script>
-        <script src="{{ asset ("/js/empenho.js") }}"></script>
+        <script src="{{ asset ("/js/empenho.js?v=2") }}"></script>
 
     </body>
 </html>
