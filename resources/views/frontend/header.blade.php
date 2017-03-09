@@ -3,9 +3,13 @@
 
 @stop
 @section('menu-pedidos')
+
+@if (Cart::count(false))
 <li>
-    <a href="{{route('pedidos.pedido-atual')}}">Pedido atual ({{Cart::count(false)}})</a>       
+    <a href="{{route('pedidos.pedido-atual')}}">Finalizar pedido <span class="label label-danger">{{Cart::count(false)}}</span></a>       
 </li>
+@endif
+
 <li>
     <a href="{{route('pedidos.lista-pedidos')}}">Meus pedidos</a> 
 </li>
