@@ -21,7 +21,7 @@
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                <input type="password" name="password" id="password" class="form-control" placeholder="Senha">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
 
@@ -29,8 +29,7 @@
                 <div class="col-xs-12">
                     <button type="submit" class="btn btn-success btn-block btn-flat">Entrar</button>
                 </div>
-                <a class="text-green"  href="{{ url('/password/email') }}">Esqueci a senha</a>
-                <a class="text-green pull-right" target="_blank" href="{{ url('/ajuda') }}">Ajuda</a>
+                <a class="text-green" target="_blank" href="{{ url('/ajuda') }}">Ajuda</a>
             </div>
         </form>
 

@@ -31,7 +31,7 @@
             </div>
             <div class='col-md-5'>
                 {!!Form::label('marca', 'Marca', array('class'=>'control-label'))!!}
-                {!!Form::text('marca', null, array('class'=>'form-control', 'id' => 'marca', 'required' => 'required'))!!}
+                {!!Form::text('marca', null, array('class'=>'form-control', 'id' => 'marca'))!!}
             </div>
             <div class='col-md-2'>
                 {!!Form::label('qtd_min', 'Quantidade mínima', array('class'=>'control-label'))!!}
