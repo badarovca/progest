@@ -33,6 +33,7 @@
                             </p>
                         </li>
                         <!-- Menu Footer-->
+                        @section('botoes-usuario')
                         <li class="user-footer">
                             <div class="pull-left">
                                 <a href="{{ route('redefinir-senha') }}" class="btn btn-default btn-flat">Alterar Senha</a>
@@ -41,6 +42,7 @@
                                 <a href="{{ url('/auth/logout') }}" class="btn btn-default btn-flat">Sair</a>
                             </div>
                         </li>
+                        @show
                     </ul>
                 </li>
             </ul>
