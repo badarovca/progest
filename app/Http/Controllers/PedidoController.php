@@ -128,7 +128,7 @@ class PedidoController extends Controller {
             Cart::add(array('id' => $id, 'qty' => $qtd, 'name' => $material->descricao, 'price' => 0));
         }
 
-        return redirect()->route('pedidos')->with('success', 'Item adicionado ao pedido!');
+        return redirect()->back()->with('success', 'Item adicionado ao pedido!');
     }
 
     public function getPedidoAtual() {
