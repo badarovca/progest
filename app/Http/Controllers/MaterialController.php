@@ -111,7 +111,8 @@ class MaterialController extends Controller {
         $subitens = $this->subItemRepository->dataForSelect();
         $unidades = $this->unidadeRepository->dataForSelect();
         $submaterial = $this->subMaterialRepository->index($id);
-        return view('admin.materiais.edit')->with(compact(['material', 'subitens', 'unidades', 'submaterial']));
+        $disponibilidade = [1 => 'Disponível', 0 => 'Indisponível'];
+        return view('admin.materiais.edit')->with(compact(['material', 'subitens', 'unidades', 'submaterial', 'disponibilidade']));
     }
 
     /**

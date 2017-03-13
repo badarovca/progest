@@ -31,8 +31,8 @@
         @if(isset($busca))
         <div class='row'>
             <div class='col-md-12'>
-                @if($materiais->count() > 0)
-                <h4 class='title'>Busca por: <b>{{$busca['busca']}}</b> ({{$materiais->count()}} resultado(s))</h4> 
+                @if($materiais->total() > 0)
+                <h4 class='title'>Busca por: <b>{{$busca['busca']}}</b> ({{$materiais->total()}} resultado(s))</h4> 
                 @else
                 <h4 class='title'>Nenhum resultado encontrado.</h4>
                 @endif
@@ -90,7 +90,11 @@
 
         <div class="row">
             <div class="col-md-8 text-center">
+                @if (!isset($busca))
                 {!! str_replace('/?', '?', $materiais->render()) !!}
+                @else
+                {!! str_replace('/?', '?', $materiais->appends($busca)->render()) !!}
+                @endif
             </div>
         </div>
     </section><!--/.content -->

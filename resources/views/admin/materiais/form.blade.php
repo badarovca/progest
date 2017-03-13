@@ -37,6 +37,10 @@
                 {!!Form::label('qtd_min', 'Quantidade mínima', array('class'=>'control-label'))!!}
                 {!!Form::number('qtd_min', null, array('class'=>'form-control', 'id' => 'qtd_1', 'min'=> '0', 'required' => 'required'))!!}
             </div>
+            <div class='col-md-3' >
+                {!!Form::label('disponivel', 'Disponibilidade', array('class'=>'control-label'))!!}
+                {!!Form::select('disponivel', $disponibilidade, null, ['required' => 'required', 'class'=>'form-control', 'id'=>'disponivel'])!!}
+            </div>
         </div>
     </div>
 
@@ -45,13 +49,6 @@
             <div class="col-md-4">
                 {!!Form::label('imagem', 'Imagem', array('class'=>'control-label'))!!}
                 {!!Form::file('imagem', null)!!}
-            </div>
-            <div class='checkbox col-md-4' >
-                <div class="checkbox">
-                    <label>
-                        {!!Form::checkbox('disponivel', null)!!} Disponível
-                    </label>
-                </div>
             </div>
         </div>
     </div>
