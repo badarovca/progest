@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use App\Http\Requests;
 use App\Http\Requests\FilterMaterialRequest;
 use App\Http\Controllers\Controller;
@@ -107,6 +108,7 @@ class MaterialController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
+        Session::forget('_old_input');
         $material = $this->materialRepository->show($id);
         $subitens = $this->subItemRepository->dataForSelect();
         $unidades = $this->unidadeRepository->dataForSelect();

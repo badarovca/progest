@@ -93,8 +93,13 @@ class SaidaController extends Controller {
         }
         }
         $this->saidaRepository->store($input);
-
-        return redirect()->route('admin.saidas.index')->with('success', 'Saída efetuada com sucesso!');
+        
+        if($pedido['pedido'] != null){
+            return redirect()->route('admin.pedidos.index')->with('success', 'Saída efetuada com sucesso!');
+        }else{
+            return redirect()->route('admin.saidas.index')->with('success', 'Saída efetuada com sucesso!');
+        }
+        
     }
 
     /**

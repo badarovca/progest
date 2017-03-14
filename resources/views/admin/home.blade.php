@@ -27,7 +27,7 @@
             <div class="icon">
               <i class="fa fa-shopping-cart"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <a href="{{ route('admin.pedidos.index')}}" class="small-box-footer">
               Visualizar <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
@@ -44,7 +44,7 @@
             <div class="icon">
               <i class="ion ion-clipboard"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <a href="{{ route('admin.empenhos.index')}}?status=pendente" class="small-box-footer">
               Visualizar <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
@@ -61,7 +61,7 @@
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <a href="{{ route('admin.usuarios.index')}}" class="small-box-footer">
               Visualizar <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
@@ -78,7 +78,7 @@
             <div class="icon">
               <i class="fa fa-exclamation-circle"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <a href="{{ route('admin.materiais.index') }}?qtd_min=abaixo_qtd_min" class="small-box-footer">
               Visualizar <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>
