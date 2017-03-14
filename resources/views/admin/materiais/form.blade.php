@@ -39,11 +39,7 @@
             </div>
             <div class='col-md-3' >
                 {!!Form::label('disponivel', 'Disponibilidade', array('class'=>'control-label'))!!}
-                <div class="checkbox">
-                    <label>
-                        {!!Form::checkbox('disponivel', null)!!} Disponível
-                    </label>
-                </div>
+                {!!Form::select('disponivel', $disponibilidade, null, ['required' => 'required', 'class'=>'form-control', 'id'=>'disponivel'])!!}
             </div>
         </div>
     </div>
