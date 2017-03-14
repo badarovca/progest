@@ -15,15 +15,22 @@ class PedidoRepository {
         $this->materialRepository = $materialRepository;
     }
 
-    public function index($filter = null) {
-        if ($filter) {
-            $pedidos = Pedido::where(function($query) use (&$filter) {
-                        if (isset($filter['user_id'])) {
-                            $query->where('user_id', '=', $filter['user_id']);
+    public function index($input = null) {
+        if ($input) {
+            $pedidos = Pedido::where(function($query) use (&$input) {
+                        if (isset($input['user_id'])) {
+                            $query->where('user_id', '=', $input['user_id']);
+                        }
+                        if (isset($input['status'])) {
+                            if ($input['status'] == 'pendente') {
+                                $query->whereDoesntHave('saida');
+                            } else if ($input['status'] == 'resolvido') {
+                                $query->whereHas('saida');
+                            }
                         }
                     })
                     ->orderBy('created_at', 'desc')
-                    ->paginate($filter['paginate']);
+                    ->paginate($input['paginate'] == null ? 1000 : $input['paginate']);
         } else {
             $pedidos = Pedido::all()->sortBy('creatated_at');
         }
