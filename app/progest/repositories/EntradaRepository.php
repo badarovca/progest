@@ -24,7 +24,7 @@ class EntradaRepository {
         } else {
             $entradas = Entrada::where(function($query) use (&$input) {
                         if (isset($input['dt_inicial']) && isset($input['dt_final']) && $input['dt_inicial'] != null && $input['dt_final'] != null) {
-                            $query->whereBetween('dt_recebimento', [$input['dt_inicial'], $input['dt_final']]);
+                            $query->whereBetween('dt_recebimento', [$input['dt_inicial']." 00:00:00", $input['dt_final']." 23:59:59"]);
                         }
                         $query->whereHas('empenho', function ($query) use (&$input) {
                             if (isset($input['numero']) && $input['numero'] != null) {

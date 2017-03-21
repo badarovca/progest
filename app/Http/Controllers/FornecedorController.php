@@ -69,6 +69,9 @@ class FornecedorController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
+        if (URL::current() != URL::previous()){
+            Session::forget('_old_input');
+        }
         $fornecedor = $this->fornecedorRepository->show($id);
         return view('admin.fornecedores.edit')->with(compact('fornecedor'));
     }

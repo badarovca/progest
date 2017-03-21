@@ -69,6 +69,9 @@ class CoordenacaoController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
+        if (URL::current() != URL::previous()){
+            Session::forget('_old_input');
+        }
         $coordenacao = $this->coordenacaoRepository->show($id);
         return view('admin.coordenacoes.edit')->with(compact('coordenacao'));
     }

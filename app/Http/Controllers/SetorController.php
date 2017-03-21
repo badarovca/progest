@@ -72,6 +72,9 @@ class SetorController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
+        if (URL::current() != URL::previous()){
+            Session::forget('_old_input');
+        }
         $setor = $this->setorRepository->show($id);
         $coordenacoes = $this->coordenacaoRepository->dataForSelect();
         return view('admin.setores.edit')->with(compact('setor', 'coordenacoes'));

@@ -88,7 +88,7 @@ class MaterialRepository {
                         }
                         if (isset($filter['qtd_min']) && $filter['qtd_min'] == 'abaixo_qtd_min') {
                             $query->groupBy('material_id');
-                            $query->havingRaw('SUM(qtd_estoque) <= materials.qtd_min');
+                            $query->havingRaw('SUM(qtd_estoque) < materials.qtd_min');
                         }
                     })
                     ->orderBy($orderBy[0], $orderBy[1])

@@ -41,7 +41,7 @@ Route::controllers([
 ]);
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/importacao', ['as' => 'admin.importacao', 'uses' => 'ImportacaoController@importData']);
+//    Route::get('/importacao', ['as' => 'admin.importacao', 'uses' => 'ImportacaoController@importData']);
     Route::resource('usuarios', 'UsuarioController');
     Route::resource('setores', 'SetorController');
     Route::resource('coordenacoes', 'CoordenacaoController');
@@ -73,6 +73,7 @@ Route::get('/', ['as' => 'default', 'uses'=>'HomeController@index']);
 Route::get('/home', 'HomeController@index');
 
 Route::get('/ajuda', 'AjudaController@index');
+Route::get('/longin-institucional', 'Auth\AuthRadiusController@authenticate');
 
 Route::group(['prefix' => 'pedidos'], function () {
     Route::get('/', ['as' => 'pedidos', 'uses' => 'PedidoController@exibirMateriais']);

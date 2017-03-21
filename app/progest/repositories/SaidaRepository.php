@@ -23,7 +23,7 @@ class SaidaRepository {
         } else {
             $saidas = Saida::where(function($query) use (&$input) {
                         if (isset($input['dt_inicial']) && isset($input['dt_final']) && $input['dt_inicial'] != null && $input['dt_final'] != null) {
-                            $query->whereBetween('created_at', [$input['dt_inicial'], $input['dt_final']]);
+                            $query->whereBetween('created_at', [[$input['dt_inicial']." 00:00:00", $input['dt_final']." 23:59:59"]]);
                         }
                         $query->whereHas('solicitante', function ($query) use (&$input) {
                             if (isset($input['solicitante_id']) && $input['solicitante_id'] != null) {

@@ -78,6 +78,9 @@ class UsuarioController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
+        if (URL::current() != URL::previous()){
+            Session::forget('_old_input');
+        }
         $usuario = $this->usuarioRepository->show($id);
         $setores = $this->setorRepository->dataForSelect();
         $roles = $this->usuarioRepository->getRolesForSelect();

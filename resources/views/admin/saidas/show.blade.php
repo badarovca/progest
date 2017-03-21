@@ -22,29 +22,44 @@
         <div class="container-fluid">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Saída de materiais - {{$saida->id}}</h3>
+                    <h3 class="box-title"> Saída {{$saida->id}}</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
+                    <div class="col-md-12">
+                        <p><b>Solicitante: </b> {{$saida->solicitante->name}}</p>
+                        <p><b>Data: </b> {{date('d/m/Y',strtotime($saida->created_at))}}</p>
+                    </div>
                     <table id="example2" class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>Cód</th>
                                 <th>Descricao</th>
-                                <th>Vencimento</th>
                                 <th>Qtd</th>
+                                <th>Vl. unitário</th>
+                                <th>Vl. total</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($saida->subMateriais as $subMaterial)
                             <tr>
-                                <td style="width: 10%">{{$subMaterial->material->codigo}}</td>
-                                <td style="width: 58%">{{$subMaterial->material->descricao}}</td>
-                                <td style="width: 58%">{{$subMaterial->present()->getVencimento()}}</td>
-                                <td style="width: 5%">{{$subMaterial->pivot->quant}}</td>
+                                <td style="width: 10%" class="text-center">{{$subMaterial->material->codigo}}</td>
+                                <td style="width: 60%" class="text-center">{{$subMaterial->material->descricao}}</td>
+                                <td style="width: 5%" class="text-center">{{$subMaterial->pivot->quant}}</td>
+                                <td style="width: 10%" class="text-right">{{ $subMaterial->present()->getValorUn() }}</td>
+                                <td style="width: 15%" class="text-right">{{ $subMaterial->present()->formatReal($subMaterial->pivot->quant * $subMaterial->present()->getValorUnBruto) }}</td>
+
                             </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="text-right" colspan="2"><b>Totais</b></td>
+                                <td class="text-center">{{$saida->subMateriais()->count()}}</td>
+                                <td></td>
+                                <td class="text-right"><b>{{$saida->present()->getValorTotal()}}</b></td>
+                            </tr>
+                        </tfoot>
                     </table>
                     <br>
                     <div class="row">
