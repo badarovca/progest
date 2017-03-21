@@ -8,11 +8,13 @@
     <section class = "content-header">
         <h1>
             {!! $page_title or ("Pedido $pedido->id - " ) !!}
+            @if($pedido->saida != null)
             <small>
                 <a href="{!! route('admin.saidas.show', $pedido->saida->id) !!}">
                     Visualizar saída
                 </a>
             </small>
+            @endif
         </h1>
     </section>
 
