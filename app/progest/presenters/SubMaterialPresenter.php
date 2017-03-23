@@ -5,7 +5,7 @@ namespace App\progest\presenters;
 class SubMaterialPresenter extends BasePresenter {
     
     public function getValorUnBruto(){
-        return round($this->vl_total / $this->qtd_solicitada, 2);
+        return ($this->vl_total / $this->qtd_solicitada);
     }
     
     public function getValorUn() {

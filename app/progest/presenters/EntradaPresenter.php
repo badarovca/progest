@@ -31,7 +31,7 @@ class EntradaPresenter extends BasePresenter {
                 $total += $valorUn * $subMaterial->pivot->quant;
             }
         }
-        $total = number_format($total, 2, ',', '.');
+        $total = number_format(round($total, 2), 2, ',', '.');
         return $total;
     }
 

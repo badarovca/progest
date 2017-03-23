@@ -45,6 +45,11 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                {!! str_replace('/?', '?', $pedidos->render()) !!}
+            </div>
+        </div>
         @else
         <h5 class="well">Nenhum pedido ainda cadastrado.</h5>
         @endif

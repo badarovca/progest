@@ -51,7 +51,7 @@ class EmpenhoPresenter extends BasePresenter {
                 $total += $subMaterial->vl_total;
             }
         }
-        $total = number_format($total, 2, ',', '.');
+        $total = number_format(round($total, 2), 2, ',', '.');
         $totais['total'] = $total;
         $totais['totalEntregue'] = EmpenhoPresenter::calcTotalEntregue($empenhos);
         $totais['totalPendente'] = EmpenhoPresenter::calcTotalPendente($empenhos);
@@ -69,7 +69,7 @@ class EmpenhoPresenter extends BasePresenter {
             }
             $total += $valor;
         }
-        $total = number_format($total, 2, ',', '.');
+        $total = number_format(round($total, 2), 2, ',', '.');
         return $total;
     }
 
@@ -89,7 +89,7 @@ class EmpenhoPresenter extends BasePresenter {
             }
             $total += $valorTotal - $valorEntregue;
         }
-        $total = number_format($total, 2, ',', '.');
+        $total = number_format(round($total, 2), 2, ',', '.');
         return $total;
     }
 

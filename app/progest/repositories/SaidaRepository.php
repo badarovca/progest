@@ -78,7 +78,7 @@ class SaidaRepository {
         $saida = Saida::find($id);
 
         foreach ($saida->subMateriais as $subMaterial) {
-            $valor = (round($subMaterial->vl_total / $subMaterial->qtd_solicitada, 2) * $subMaterial->pivot->quant);
+            $valor = round(($subMaterial->vl_total / $subMaterial->qtd_solicitada) * $subMaterial->pivot->quant, 2);
             $this->relatorioRepository->updateSaldo($subMaterial, $valor);
             $subMaterial->qtd_estoque += $subMaterial->pivot->quant;
             $subMaterial->save();
@@ -95,7 +95,7 @@ class SaidaRepository {
                     })->sortBy('created_at');
             $rest = $qtd;
             foreach ($subMateriais as $subMaterial) {
-                $valor = "-" . (round($subMaterial->vl_total / $subMaterial->qtd_solicitada, 2) * $rest);
+                $valor = "-" . round(($subMaterial->vl_total / $subMaterial->qtd_solicitada) * $rest, 2);
                 $this->relatorioRepository->updateSaldo($subMaterial, $valor);
                 if ($subMaterial->qtd_estoque >= $rest) {
                     $subMaterial->qtd_estoque -= $rest;
