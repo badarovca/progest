@@ -30,6 +30,7 @@
             <thead>
                 <tr>
                     <th>Submaterial</th>
+                    <th>Empenho</th>
                     <th>Vencimento</th>
                     <th>Solicitado</th>
                     <th>Em estoque</th>
@@ -41,6 +42,7 @@
                 @foreach($submaterial as $submaterial)
                 <tr>
                     <td>{!! $submaterial->id !!}</td>
+                    <td>{!! $submaterial->empenho->numero !!}</td>
                     <td>{!! $submaterial->present()->getVencimento() !!}</td>
                     <td>{!! $submaterial->qtd_solicitada !!}</td>
                     <td>{!! $submaterial->qtd_estoque !!}</td>

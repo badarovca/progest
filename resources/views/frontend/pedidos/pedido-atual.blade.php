@@ -71,8 +71,8 @@
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-md-3 col-md-offset-9">
-                                <a class="link-black" href="{{route('pedidos')}}">Adicionar itens</a>
+                            <div class="col-md-4 col-md-offset-8">
+                                <a class="btn btn-warning" href="{{route('pedidos')}}">Adicionar mais itens</a>
                                 {!! Form::submit('Finalizar pedido', ['class'=>'btn btn-success pull-right'])!!}
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                             <div class="col-md-12">
                                 <h5>Não há nenhum item no seu pedido atual.</h5>
                                 <br>
-                                <a class="link-black" href="{{route('pedidos')}}">Adicionar itens</a>
+                                <a class="btn btn-warning" href="{{route('pedidos')}}">Adicionar itens</a>
                             </div>
                         </div>
                         @endif

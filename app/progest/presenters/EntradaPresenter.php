@@ -22,6 +22,14 @@ class EntradaPresenter extends BasePresenter {
         $total = number_format(round($total, 2), 2, ',', '.');
         return $total;
     }
+    
+    public function verificaSaidas(){
+        foreach ($this->subMateriais as $subMaterial){
+            if ($subMaterial->saidas->count() > 0)
+                return true;
+        }
+        return false;
+    }
 
     public static function CalcTotal($entradas) {
         $total = 0;

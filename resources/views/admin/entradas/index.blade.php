@@ -82,9 +82,11 @@
                     <td>{!! $entrada->present()->getValorTotal() !!}</td>
                     <td>{!! $entrada->present()->formatDate($entrada->dt_recebimento) !!}</td>
                     <td width="1%" nowrap>
+                        @if(!$entrada->present()->verificaSaidas())
                         <a href="{!! route('admin.empenhos.entradas.destroy', [$entrada->empenho->id, $entrada->id]) !!}"  data-method="delete" data-confirm="Deseja cancelar a entrada?" class="btn btn-danger btn-xs">
                             <i class="fa fa-fw fa-remove"></i> cancelar
                         </a>
+                        @endif
                         <a href="{!! route('admin.empenhos.entradas.show', [$entrada->empenho->id, $entrada->id]) !!}" class="btn btn-info btn-xs">
                             <i class="fa fa-fw fa-eye"></i> visualizar
                         </a>
