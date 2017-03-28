@@ -15,6 +15,9 @@
     <a href="{{route('pedidos.lista-pedidos')}}">Meus pedidos</a> 
 </li>
 <li>
+    <a href="{{route('pedidos.consumo-do-campus')}}">Consumo do campus</a> 
+</li>
+<li>
     <a href="{{url('/ajuda')}}" target="_blank">Ajuda</a> 
 </li>
 @stop

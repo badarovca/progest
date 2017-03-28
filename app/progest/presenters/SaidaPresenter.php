@@ -64,6 +64,7 @@ class SaidaPresenter extends BasePresenter {
                     $solicitantes[$saida->solicitante->id]['total'] + $totalSubMateriais:
                     $totalSubMateriais;
         }
+        asort($solicitantes);
         foreach ($solicitantes as $key => $val) {
             $solicitantes[$key]['total'] = number_format(round($val['total'], 2), 2, ',', '.');
         }
@@ -83,6 +84,7 @@ class SaidaPresenter extends BasePresenter {
                     $setores[$saida->solicitante->setor->id]['total'] + $totalSubMateriais :
                     $totalSubMateriais;
         }
+        asort($setores);
         foreach ($setores as $key => $val) {
             $setores[$key]['total'] = number_format(round($val['total'], 2), 2, ',', '.');    
         }
@@ -102,6 +104,7 @@ class SaidaPresenter extends BasePresenter {
                     $coordenacoes[$saida->solicitante->setor->coordenacao->id]['total'] + $totalSubMateriais :
                     $totalSubMateriais;
         }
+        asort($coordenacoes);
         foreach ($coordenacoes as $key => $val) {
             $coordenacoes[$key]['total'] = number_format(round($val['total'], 2), 2, ',', '.');
         }
