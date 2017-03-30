@@ -60,7 +60,8 @@ class PedidoController extends Controller {
     public function getRelatorioSaidasMateriais(Request $input) {
         $input->flash();
         $data = $input->only('dt_inicial', 'dt_final', 'solicitante_id', 'setor_id', 'coordenacao_id', 'criterio');
-        $users = $this->usuarioRepository->dataForSelect();
+        $users = array();
+        $users[''] = 'Todos';
         $coordenacoes = $this->coordenacaoRepository->dataForSelect();
         $setores = $this->setorRepository->dataForSelect();
         $data['paginate'] = null;

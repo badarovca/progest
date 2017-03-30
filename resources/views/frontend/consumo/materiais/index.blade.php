@@ -65,8 +65,15 @@
                         </span>
                     </div>
                 </div>
-                {!! Form::close() !!}
             </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="{!! route('pedidos') !!}">
+                    <i class="fa fa-plus"></i> Novo pedido
+                </a>
+                </div>
+            </div>
+            {!! Form::close() !!}
         </fieldset>
         <br>
     </section>
