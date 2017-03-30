@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Auth;
 
+use Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
@@ -33,6 +34,15 @@ class AuthController extends Controller {
 		$this->registrar = $registrar;
 
 		$this->middleware('guest', ['except' => 'getLogout']);
+	}
+        
+        
+        public function getLogout()
+	{       
+            $this->auth->logout();
+            //destroi a sessão ao deslogar do sistema
+            Session::flush();
+            return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
 	}
 
 }

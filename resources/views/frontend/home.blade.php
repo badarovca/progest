@@ -62,7 +62,7 @@
                         {!! Form::open(array('route' => 'pedidos.add-material')) !!}
                         <div class='form-group'>
                             {!! Form::label('qtd[$material->id]', 'Quantidade')!!}
-                            {!!Form::number("qtd[$material->id]", null, array('class'=>'form-control', 'id' => "qtd[$material->id]", 'required' => 'required', 'min'=>'0'))!!}
+                            {!!Form::number("qtd[$material->id]", null, array('class'=>'form-control', 'id' => "qtd[$material->id]", 'required' => 'required', 'min'=>'1'))!!}
                         </div>
                         {!! Form::submit('Adicionar ao pedido', ['class'=>'btn btn-default'])!!}
                         {!! Form::close() !!}

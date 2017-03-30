@@ -44,7 +44,7 @@
                                         @foreach($itens as $item)
                                         <tr>
                                             <td style="width: 80%">{{$item->name}}</td>
-                                            <td style="width: 10%">{!!Form::text("qtds[$item->id]", $item->qty, array('class'=>'form-control', 'id' => "qtds[$item->id]", 'required' => 'required', 'readonly' => 'true'))!!}</td>
+                                            <td style="width: 10%">{!!Form::number("qtds[$item->id]", $item->qty, array('class'=>'form-control', 'id' => "qtds[$item->id]", 'required' => 'required', 'min'=>'1'))!!}</td>
                                             <td style="width: 10%">
                                                 <a href="{!! route('pedidos.remover-material', $item->rowid) !!}" data-method="delete" data-confirm="Deseja remover estes itens do pedido?" class="btn btn-danger btn-xs">
                                                     <i class="fa fa-fw fa-remove"></i> remover
