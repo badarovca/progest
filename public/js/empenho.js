@@ -1,6 +1,14 @@
 $(document).ready(function () {
     atualiza_total();
 
+    //input 'date' no firefox
+    if ($.browser.mozilla) {
+        $('input[type="date"]').datepicker({
+            language: 'pt-BR',
+            format: 'yyyy-mm-dd',
+        });
+    }
+
     //não permite que o formulário seja enviado mais de uma vez
     $("form").submit(function (event) {
         $(':input[type="submit"]').prop('disabled', true);

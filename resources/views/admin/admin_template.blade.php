@@ -24,6 +24,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               apply the skin class to the body tag so the changes take effect.
         -->
         <link href="{{ asset("/bower_components/admin-lte/dist/css/skins/skin-green.min.css")}}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset("/bower_components/admin-lte/plugins/datepicker/datepicker3.css")}}" rel="stylesheet" type="text/css" />
 
         <!-- jQuery 2.1.3 -->
         <script src="{{ asset ("/bower_components/admin-lte/plugins/jQuery/jQuery-2.1.4.min.js") }}"></script>
@@ -32,6 +33,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="{{asset("/bower_components/admin-lte/plugins/select2/select2.full.min.js")}}" type="text/javascript"></script>
         <script src="{{asset("/bower_components/admin-lte/plugins/datatables/jquery.dataTables.min.js")}}" type="text/javascript"></script>
         <script src="{{asset("/bower_components/admin-lte/plugins/datatables/dataTables.bootstrap.min.js")}}" type="text/javascript"></script>
+        <script src="{{asset("/bower_components/admin-lte/plugins/datepicker/bootstrap-datepicker.js")}}" type="text/javascript"></script>
+        <script src="{{asset("/bower_components/admin-lte/plugins/datepicker/locales/bootstrap-datepicker.pt-BR.js")}}" type="text/javascript"></script>
         <script src="{{asset("/js/mask_validator.js")}}" type="text/javascript"></script>
 
 
@@ -70,7 +73,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               user experience -->
         <!-- Laravel DELETE plugin -->
         <script src="{{ asset ("/js/laravel.js") }}"></script>
-        <script src="{{ asset ("/js/empenho.js?v=2") }}"></script>
+        <script src="{{ asset ("/js/empenho.js?v=3") }}"></script>
 
     </body>
 </html>
