@@ -37,3 +37,11 @@ O progest é um sistema web de código aberto, desenvolvido no Instituto Federal
 
 # Instalação:
 Basta importar o arquivo database.sql, colocar os arquivos do projeto em um diretório em seu servidor web e rodar o comando "composer install" dentro da pasta do projeto.
+
+O banco importado contém dois usuários, um com permissão de Administrador e outro Solicitante:
+
+email: administrador@teste.com
+senha: teste
+
+email: solicitante@teste.com
+senha: teste
