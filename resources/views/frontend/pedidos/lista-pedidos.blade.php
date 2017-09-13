@@ -47,6 +47,11 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                {!! str_replace('/?', '?', $pedidos->render()) !!}
+                            </div>
+                        </div>
                         @else
                         <div class="row">
                             <div class="col-md-12">
