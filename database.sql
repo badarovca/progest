@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `progest` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `progest`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
 --
 -- Host: localhost    Database: progest
@@ -34,7 +32,7 @@ CREATE TABLE `coordenacaos` (
   `telefone` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +41,7 @@ CREATE TABLE `coordenacaos` (
 
 LOCK TABLES `coordenacaos` WRITE;
 /*!40000 ALTER TABLE `coordenacaos` DISABLE KEYS */;
-INSERT INTO `coordenacaos` VALUES (1,'Coordenacao1','2016-03-27 19:28:12','2016-03-27 19:28:12','','','(00) 0000-0000',1);
+INSERT INTO `coordenacaos` VALUES (1,'Coordenacao1','2016-03-27 19:28:12','2016-03-27 19:28:12','','','(00) 0000-0000',1),(35,'Coordenacao2','2018-01-15 17:32:25','2018-01-15 17:32:25','Coordenador','coordenador@email.com','(12) 30918-2301',1);
 /*!40000 ALTER TABLE `coordenacaos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -626,7 +624,7 @@ CREATE TABLE `setors` (
   PRIMARY KEY (`id`),
   KEY `setors_coordenacao_id_foreign` (`coordenacao_id`),
   CONSTRAINT `setors_coordenacao_id_foreign` FOREIGN KEY (`coordenacao_id`) REFERENCES `coordenacaos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -635,7 +633,7 @@ CREATE TABLE `setors` (
 
 LOCK TABLES `setors` WRITE;
 /*!40000 ALTER TABLE `setors` DISABLE KEYS */;
-INSERT INTO `setors` VALUES (1,'Setor1','2016-03-27 19:28:48','2016-03-27 19:28:48',1,1);
+INSERT INTO `setors` VALUES (1,'Setor1','2016-03-27 19:28:48','2016-03-27 19:28:48',1,1),(57,'Setor2','2018-01-15 17:32:35','2018-01-15 17:32:35',35,1);
 /*!40000 ALTER TABLE `setors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -762,7 +760,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Administrador','administrador@progest.com','$2y$10$DLW0QcH.Ps2B3M/HMheChOt8/CJ.SSG0aE1bzRSNKQ53LxAsMQstO','(77) 98888-8888','1111111',1,'qxLcIiFB5ioJPwkgMbrKsyKAD0YzXey108C0sz2XcVhFXIFwywXpIV3EPXBK','2016-03-27 19:28:14','2018-01-12 21:25:09',1),(2,'Solicitante','solicitante@progest.com','$2y$10$IJe6MutShQBgDosMObwWSeGmAClBa1Qo2CTKC44nWQPJ/3N5wiI9S','(77) 99199-9991','2222222',1,'ZUHlxq7I8idUSCObCqdmcCJ8bF6MkkqXLhRt6SWqzfLVpj4ZycBpDIU3qsad','2016-03-27 19:28:14','2018-01-12 21:28:36',1);
+INSERT INTO `users` VALUES (1,'Administrador','administrador@progest.com','$2y$10$mW58F49bT77lI.dhK9MqH.Jc1tltp.kKi1LM1X3dc5WsktiAnZUb.','(77) 98888-8888','1111111',1,'p8jQ0RrhMn1oDs5pz13MNBfoOSb5wAWhDIDUNaqrFWyZjyQrTM5xy9iu3pCJ','2016-03-27 19:28:14','2018-01-15 18:21:50',1),(2,'Solicitante','solicitante@progest.com','$2y$10$c5Qhm14gSelaU5V.LM3HB.BH8g2qFRwwE.WPgCn9/3NRnC16qe6eq','(77) 99199-9991','2222222',1,'ZUHlxq7I8idUSCObCqdmcCJ8bF6MkkqXLhRt6SWqzfLVpj4ZycBpDIU3qsad','2016-03-27 19:28:14','2018-01-15 18:21:59',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -775,4 +773,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-15 10:00:11
+-- Dump completed on 2018-01-15 12:22:30
