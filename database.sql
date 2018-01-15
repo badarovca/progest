@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `progest` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `progest`;
--- MySQL dump 10.13  Distrib 5.7.12, for linux-glibc2.5 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: progest
+-- Host: localhost    Database: progest
 -- ------------------------------------------------------
--- Server version	5.7.17-0ubuntu0.16.04.1
+-- Server version	5.7.20-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -34,8 +34,18 @@ CREATE TABLE `coordenacaos` (
   `telefone` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `coordenacaos`
+--
+
+LOCK TABLES `coordenacaos` WRITE;
+/*!40000 ALTER TABLE `coordenacaos` DISABLE KEYS */;
+INSERT INTO `coordenacaos` VALUES (1,'Coordenacao1','2016-03-27 19:28:12','2016-03-27 19:28:12','','','(00) 0000-0000',1);
+/*!40000 ALTER TABLE `coordenacaos` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `devolucao_sub_material`
@@ -58,6 +68,15 @@ CREATE TABLE `devolucao_sub_material` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `devolucao_sub_material`
+--
+
+LOCK TABLES `devolucao_sub_material` WRITE;
+/*!40000 ALTER TABLE `devolucao_sub_material` DISABLE KEYS */;
+/*!40000 ALTER TABLE `devolucao_sub_material` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `devolucaos`
 --
 
@@ -72,8 +91,17 @@ CREATE TABLE `devolucaos` (
   PRIMARY KEY (`id`),
   KEY `devolucaos_saida_id_foreign` (`saida_id`),
   CONSTRAINT `devolucaos_saida_id_foreign` FOREIGN KEY (`saida_id`) REFERENCES `saidas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `devolucaos`
+--
+
+LOCK TABLES `devolucaos` WRITE;
+/*!40000 ALTER TABLE `devolucaos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `devolucaos` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `empenho_sub_material`
@@ -95,6 +123,15 @@ CREATE TABLE `empenho_sub_material` (
   CONSTRAINT `empenho_sub_material_sub_material_id_foreign` FOREIGN KEY (`sub_material_id`) REFERENCES `sub_materials` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empenho_sub_material`
+--
+
+LOCK TABLES `empenho_sub_material` WRITE;
+/*!40000 ALTER TABLE `empenho_sub_material` DISABLE KEYS */;
+/*!40000 ALTER TABLE `empenho_sub_material` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `empenhos`
@@ -120,8 +157,17 @@ CREATE TABLE `empenhos` (
   KEY `empenhos_solicitante_id_foreign` (`solicitante_id`),
   CONSTRAINT `empenhos_fornecedor_id_foreign` FOREIGN KEY (`fornecedor_id`) REFERENCES `fornecedors` (`id`) ON DELETE CASCADE,
   CONSTRAINT `empenhos_solicitante_id_foreign` FOREIGN KEY (`solicitante_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empenhos`
+--
+
+LOCK TABLES `empenhos` WRITE;
+/*!40000 ALTER TABLE `empenhos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `empenhos` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `entrada_sub_material`
@@ -145,6 +191,15 @@ CREATE TABLE `entrada_sub_material` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `entrada_sub_material`
+--
+
+LOCK TABLES `entrada_sub_material` WRITE;
+/*!40000 ALTER TABLE `entrada_sub_material` DISABLE KEYS */;
+/*!40000 ALTER TABLE `entrada_sub_material` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `entradas`
 --
 
@@ -165,8 +220,17 @@ CREATE TABLE `entradas` (
   PRIMARY KEY (`id`),
   KEY `entradas_empenho_id_foreign` (`empenho_id`),
   CONSTRAINT `entradas_empenho_id_foreign` FOREIGN KEY (`empenho_id`) REFERENCES `empenhos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `entradas`
+--
+
+LOCK TABLES `entradas` WRITE;
+/*!40000 ALTER TABLE `entradas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `entradas` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `fornecedors`
@@ -189,8 +253,17 @@ CREATE TABLE `fornecedors` (
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `fornecedors_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `fornecedors`
+--
+
+LOCK TABLES `fornecedors` WRITE;
+/*!40000 ALTER TABLE `fornecedors` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fornecedors` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `materials`
@@ -214,8 +287,17 @@ CREATE TABLE `materials` (
   PRIMARY KEY (`id`),
   KEY `materials_unidade_id_foreign` (`unidade_id`),
   CONSTRAINT `materials_unidade_id_foreign` FOREIGN KEY (`unidade_id`) REFERENCES `unidades` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=183 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `materials`
+--
+
+LOCK TABLES `materials` WRITE;
+/*!40000 ALTER TABLE `materials` DISABLE KEYS */;
+/*!40000 ALTER TABLE `materials` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `migrations`
@@ -229,6 +311,16 @@ CREATE TABLE `migrations` (
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `migrations`
+--
+
+LOCK TABLES `migrations` WRITE;
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT INTO `migrations` VALUES ('2014_10_12_000000_create_users_table',1),('2014_10_12_100000_create_password_resets_table',1),('2016_01_20_130632_create_setors_table',1),('2016_01_20_130642_create_coordenacaos_table',1),('2016_01_20_200314_relationship_usuario_setor_coordenacao',1),('2016_01_20_203952_user_habilitado',1),('2016_01_20_204422_create_fornecedors_table',1),('2016_02_03_125130_create_materials_table',1),('2016_02_03_125610_create_empenhos_table',1),('2016_02_03_133338_create_sub_items_table',1),('2016_02_03_191410_create_sub_materials_table',1),('2016_02_03_232006_add_estoques_materiais',1),('2016_02_04_172622_add_fields_empenho',1),('2016_02_14_165903_create_entradas_table',1),('2016_02_18_191115_create_saidas_table',1),('2016_02_25_160745_create_unidades_table',1),('2016_02_25_185843_entrust_setup_tables',1),('2016_02_26_184436_relationship_unidade_material',1),('2016_02_29_141125_relationship_setor_coordenacao',1),('2016_03_01_181644_excluindo_coluna_coordenacao_de_usuario',1),('2016_03_01_184451_inclusao_campos_coordenacao',1),('2016_03_01_190652_create_pedidos_table',1),('2016_03_02_144444_inclusao_campos_ativado',1),('2016_03_03_132150_arrumar_gambiarra_status_ativado',1),('2016_03_08_231153_add_solicitante_empenho',1),('2016_03_09_113511_add_imagem_estoque_min_material',1),('2016_03_10_120634_add_pedidoId_to_saida',1),('2016_03_14_151000_remocao_campo_mod_aplicacao',1),('2016_03_29_214021_create_devolucaos_table',2);
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `password_resets`
@@ -245,6 +337,16 @@ CREATE TABLE `password_resets` (
   KEY `password_resets_token_index` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `password_resets`
+--
+
+LOCK TABLES `password_resets` WRITE;
+/*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
+INSERT INTO `password_resets` VALUES ('markrener@hotmail.com','3b234c93a06995e96be644565d3b37ec9341b4c7ba84faaaf4105c020877bebc','2016-04-15 14:26:45'),('lucianoleal@ifba.edu.br','56fe88325b15f2d521cd15bbe7a9a6f48beaed975d3854f9623787572c612211','2016-05-18 15:32:25'),('srozane@ifba.edu.br','30509d623a2abd381dd2a9403ddf03d3873680ed54b9299a0d0928d803fdda0b','2016-05-30 20:40:29'),('IGGORLBS@GMAIL.COM','eb0c7e025315782895de43f0d2ed2a505edfe8fdf2d796e3e3469f44e22b6f91','2016-06-07 18:07:08'),('marceladantas@gmail.com','d7cc578e37cf50ec0d9283eaf509f5874d8b21653b208f191171b7c28ad09d5a','2016-09-20 13:45:39'),('rtorquato@gmail.com','feccbbae4c2fdb784d389217600b4d294defaae81e2d4992a33f601d6e3c636b','2017-03-09 14:21:42');
+/*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `pedido_material`
@@ -267,6 +369,15 @@ CREATE TABLE `pedido_material` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `pedido_material`
+--
+
+LOCK TABLES `pedido_material` WRITE;
+/*!40000 ALTER TABLE `pedido_material` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pedido_material` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `pedidos`
 --
 
@@ -283,8 +394,17 @@ CREATE TABLE `pedidos` (
   PRIMARY KEY (`id`),
   KEY `pedidos_user_id_foreign` (`user_id`),
   CONSTRAINT `pedidos_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pedidos`
+--
+
+LOCK TABLES `pedidos` WRITE;
+/*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `permission_role`
@@ -302,6 +422,15 @@ CREATE TABLE `permission_role` (
   CONSTRAINT `permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `permission_role`
+--
+
+LOCK TABLES `permission_role` WRITE;
+/*!40000 ALTER TABLE `permission_role` DISABLE KEYS */;
+/*!40000 ALTER TABLE `permission_role` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `permissions`
@@ -323,6 +452,15 @@ CREATE TABLE `permissions` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `permissions`
+--
+
+LOCK TABLES `permissions` WRITE;
+/*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `role_user`
 --
 
@@ -338,6 +476,16 @@ CREATE TABLE `role_user` (
   CONSTRAINT `role_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `role_user`
+--
+
+LOCK TABLES `role_user` WRITE;
+/*!40000 ALTER TABLE `role_user` DISABLE KEYS */;
+INSERT INTO `role_user` VALUES (1,1),(4,1),(2,2);
+/*!40000 ALTER TABLE `role_user` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `roles`
@@ -359,6 +507,16 @@ CREATE TABLE `roles` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `roles`
+--
+
+LOCK TABLES `roles` WRITE;
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` VALUES (1,'admin','Administrador',NULL,'2016-03-27 19:28:14','2016-03-27 19:28:14'),(2,'solicitante','Solicitante',NULL,'2016-03-27 19:28:14','2016-03-27 19:28:14'),(3,'almoxarife','Almoxarife',NULL,'2016-03-27 19:28:14','2016-03-27 19:28:14');
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `saida_sub_material`
 --
 
@@ -377,6 +535,15 @@ CREATE TABLE `saida_sub_material` (
   CONSTRAINT `saida_sub_material_sub_material_id_foreign` FOREIGN KEY (`sub_material_id`) REFERENCES `sub_materials` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `saida_sub_material`
+--
+
+LOCK TABLES `saida_sub_material` WRITE;
+/*!40000 ALTER TABLE `saida_sub_material` DISABLE KEYS */;
+/*!40000 ALTER TABLE `saida_sub_material` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `saidas`
@@ -400,8 +567,17 @@ CREATE TABLE `saidas` (
   CONSTRAINT `saidas_pedido_id_foreign` FOREIGN KEY (`pedido_id`) REFERENCES `pedidos` (`id`),
   CONSTRAINT `saidas_responsavel_id_foreign` FOREIGN KEY (`responsavel_id`) REFERENCES `users` (`id`),
   CONSTRAINT `saidas_solicitante_id_foreign` FOREIGN KEY (`solicitante_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `saidas`
+--
+
+LOCK TABLES `saidas` WRITE;
+/*!40000 ALTER TABLE `saidas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `saidas` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `saldos`
@@ -415,14 +591,23 @@ CREATE TABLE `saldos` (
   `sub_item_id` int(10) unsigned NOT NULL,
   `mes` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `ano` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `valor` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `valor` decimal(11,3) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `saldos_sub_item_id_foreign` (`sub_item_id`),
   CONSTRAINT `saldos_sub_item_id_foreign` FOREIGN KEY (`sub_item_id`) REFERENCES `sub_items` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2174 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `saldos`
+--
+
+LOCK TABLES `saldos` WRITE;
+/*!40000 ALTER TABLE `saldos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `saldos` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `setors`
@@ -441,8 +626,18 @@ CREATE TABLE `setors` (
   PRIMARY KEY (`id`),
   KEY `setors_coordenacao_id_foreign` (`coordenacao_id`),
   CONSTRAINT `setors_coordenacao_id_foreign` FOREIGN KEY (`coordenacao_id`) REFERENCES `coordenacaos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `setors`
+--
+
+LOCK TABLES `setors` WRITE;
+/*!40000 ALTER TABLE `setors` DISABLE KEYS */;
+INSERT INTO `setors` VALUES (1,'Setor1','2016-03-27 19:28:48','2016-03-27 19:28:48',1,1);
+/*!40000 ALTER TABLE `setors` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `sub_items`
@@ -462,6 +657,16 @@ CREATE TABLE `sub_items` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `sub_items`
+--
+
+LOCK TABLES `sub_items` WRITE;
+/*!40000 ALTER TABLE `sub_items` DISABLE KEYS */;
+INSERT INTO `sub_items` VALUES (1,'COMBUSTÍVEIS E LUBRIFICANTES AUTOMOTIVOS','2016-03-27 19:28:09','2016-04-12 21:28:43',0),(2,'COMBUSTÍVEIS E LUBRIFICANTES DE AVIAÇÃO','2016-03-27 19:28:10','2016-04-12 21:28:48',0),(3,'COMBUSTÍVEIS E LUBRIFICANTES PARA OUTRAS FINALIDADES','2016-03-27 19:28:10','2016-04-12 21:29:00',0),(4,'GÁS ENGARRAFADO','2016-03-27 19:28:10','2016-04-12 21:29:05',0),(5,'EXPLOSIVOS E MUNIÇÕES','2016-03-27 19:28:10','2016-04-12 21:29:16',0),(6,'ALIMENTOS PARA ANIMAIS','2016-03-27 19:28:10','2016-04-12 21:34:25',0),(7,'GÊNEROS DE ALIMENTAÇÃO','2016-03-27 19:28:10','2016-03-27 19:28:10',1),(8,'ANIMAIS PARA PESQUISA E ABATE','2016-03-27 19:28:10','2016-04-12 21:34:35',0),(9,'MATERIAL FARMACOLÓGICO','2016-03-27 19:28:10','2016-04-12 21:34:52',0),(10,'MATERIAL ODONTOLÓGICO','2016-03-27 19:28:10','2016-04-12 21:35:40',0),(11,'MATERIAL QUÍMICO','2016-03-27 19:28:10','2016-04-12 21:36:21',0),(12,'MATERIAL DE COUDELARIA OU DE USO ZOOTÉCNICO','2016-03-27 19:28:10','2016-04-12 21:36:10',0),(13,'MATERIAL DE CAÇA E PESCA','2016-03-27 19:28:10','2016-04-12 21:36:47',0),(14,'MATERIAL EDUCATIVO E ESPORTIVO','2016-03-27 19:28:10','2016-03-27 19:28:10',1),(15,'MATERIAL PARA FESTIVIDADES E HOMENAGENS','2016-03-27 19:28:10','2016-03-27 19:28:10',1),(16,'MATERIAL DE EXPEDIENTE','2016-03-27 19:28:10','2016-03-27 19:28:10',1),(17,'MATERIAL DE PROCESSAMENTO DE DADOS','2016-03-27 19:28:10','2016-03-27 19:28:10',1),(18,'MATERIAIS E MEDICAMENTOS PARA USO VETERINÁRIO','2016-03-27 19:28:10','2017-03-27 16:52:31',1),(19,'MATERIAL DE ACONDICIONAMENTO E EMBALAGEM','2016-03-27 19:28:10','2017-03-27 16:52:22',1),(20,'MATERIAL DE CAMA, MESA E BANHO','2016-03-27 19:28:10','2016-03-27 19:28:10',1),(21,'MATERIAL DE COPA E COZINHA','2016-03-27 19:28:10','2016-03-27 19:28:10',1),(22,'MATERIAL DE LIMPEZA E PRODUÇÃO DE HIGIENIZAÇÃO','2016-03-27 19:28:10','2016-03-27 19:28:10',1),(23,'UNIFORMES, TECIDOS E AVIAMENTOS','2016-03-27 19:28:10','2016-04-12 21:41:48',0),(24,'MATERIAL PARA MANUTENÇÃO DE BENS IMÓVEIS','2016-03-27 19:28:10','2016-03-27 19:28:10',1),(25,'MATERIAL PARA MANUTENÇÃO DE BENS MÓVEIS (EXCETO VEÍCULOS)','2016-03-27 19:28:10','2016-03-27 19:28:10',1),(26,'MATERIAL ELÉTRICO E ELETRÔNICO','2016-03-27 19:28:10','2016-03-27 19:28:10',1),(27,'MATERIAL DE MANOBRA E PATRULHAMENTO','2016-03-27 19:28:10','2016-04-12 21:42:15',0),(28,'MATERIAL DE PROTEÇÃO E SEGURANÇA','2016-03-27 19:28:10','2016-03-27 19:28:10',1),(29,'MATERIAL PARA ÁUDIO, VÍDEO E FOTO','2016-03-27 19:28:11','2016-03-27 19:28:11',1),(30,'MATERIAL PARA COMUNICAÇÕES','2016-03-27 19:28:11','2016-03-27 19:28:11',1),(31,'SEMENTES, MUDAS DE PLANTAS E INSUMOS','2016-03-27 19:28:11','2016-03-27 19:28:11',1),(32,'SUPRIMENTO DE AVIAÇÃO','2016-03-27 19:28:11','2016-03-27 19:28:11',1),(33,'MATERIAL PARA PRODUÇÃO INDUSTRIAL','2016-03-27 19:28:11','2016-03-27 19:28:11',1),(34,'SOBRESSALENTES, MÁQUINAS E MOTORES DE NAVIOS E EMBARCAÇÕES','2016-03-27 19:28:11','2016-03-27 19:28:11',1),(35,'MATERIAL LABORATORIAL','2016-03-27 19:28:11','2016-03-27 19:28:11',1),(36,'MATERIAL HOSPITALAR','2016-03-27 19:28:11','2016-03-27 19:28:11',1),(37,'SOBRESSALENTES DE ARMAMENTO','2016-03-27 19:28:11','2016-04-12 21:42:34',0),(38,'SUPRIMENTO DE PROTEÇÃO AO VÔO','2016-03-27 19:28:11','2016-04-12 21:40:05',0),(39,'MATERIAL PARA MANUTENÇÃO DE VEÍCULOS','2016-03-27 19:28:11','2016-03-27 19:28:11',1),(40,'MATERIAL BIOLÓGICO','2016-03-27 19:28:11','2016-04-12 21:39:25',0),(41,'MATERIAL PARA UTILIZAÇÃO EM GRÁFICA','2016-03-27 19:28:11','2016-04-12 21:39:13',0),(42,'FERRAMENTAS','2016-03-27 19:28:11','2016-03-27 19:28:11',1),(43,'MATERIAL PARA REABILITAÇÃO PROFISSIONAL','2016-03-27 19:28:11','2016-04-12 21:38:59',0),(44,'MATERIAL DE SINALIZAÇÃO VISUAL E AFINS','2016-03-27 19:28:11','2016-03-27 19:28:11',1),(45,'MATERIAL TÉCNICO PARA SELEÇÃO E TREINAMENTO','2016-03-27 19:28:11','2016-04-12 21:38:47',0),(46,'MATERIAL BIBLIOGRÁFICO NÃO IMOBILIZÁVEL','2016-03-27 19:28:11','2017-09-21 17:11:25',1),(47,'AQUISIÇÃO DE SOFTWARES DE BASE','2016-03-27 19:28:11','2016-04-12 21:38:12',0),(48,'BENS MÓVEIS NÃO ATIVÁVEIS','2016-03-27 19:28:11','2016-04-12 21:38:03',0),(49,'BILHETES DE PASSAGEM','2016-03-27 19:28:11','2016-04-12 21:37:39',0),(50,'BANDEIRAS, FLÂMULAS E INSÍGNIAS','2016-03-27 19:28:11','2016-03-27 19:28:11',1),(51,'DISCOTECAS E FILMOTECAS NAO IMOBILIZAVEL','2016-03-27 19:28:11','2016-04-12 21:37:23',0),(52,'MATERIAL DE CARATER SECRETO OU RESERVADO','2016-03-27 19:28:11','2016-04-12 21:37:17',0),(53,'MATERIAL METEOROLOGICO','2016-03-27 19:28:11','2016-04-12 21:37:09',0);
+/*!40000 ALTER TABLE `sub_items` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `sub_materials`
 --
 
@@ -473,7 +678,7 @@ CREATE TABLE `sub_materials` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `vencimento` date NOT NULL,
-  `vl_total` double(8,2) NOT NULL,
+  `vl_total` decimal(10,3) NOT NULL,
   `qtd_estoque` int(11) NOT NULL,
   `qtd_solicitada` int(11) NOT NULL,
   `material_id` int(10) unsigned NOT NULL,
@@ -486,8 +691,17 @@ CREATE TABLE `sub_materials` (
   CONSTRAINT `sub_materials_empenho_id_foreign` FOREIGN KEY (`empenho_id`) REFERENCES `empenhos` (`id`),
   CONSTRAINT `sub_materials_material_id_foreign` FOREIGN KEY (`material_id`) REFERENCES `materials` (`id`),
   CONSTRAINT `sub_materials_sub_item_id_foreign` FOREIGN KEY (`sub_item_id`) REFERENCES `sub_items` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=194 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sub_materials`
+--
+
+LOCK TABLES `sub_materials` WRITE;
+/*!40000 ALTER TABLE `sub_materials` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sub_materials` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `unidades`
@@ -503,8 +717,18 @@ CREATE TABLE `unidades` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `unidades`
+--
+
+LOCK TABLES `unidades` WRITE;
+/*!40000 ALTER TABLE `unidades` DISABLE KEYS */;
+INSERT INTO `unidades` VALUES (1,'Caixa','2016-03-27 19:28:13','2016-03-27 19:28:13',1),(2,'Dúzia','2016-03-27 19:28:13','2016-03-27 19:28:13',1),(3,'Unidade','2016-03-27 19:28:13','2016-03-27 19:28:13',1),(4,'Pacote','2016-03-27 19:28:13','2016-03-27 19:28:13',1),(5,'Cento','2016-03-27 19:28:13','2016-03-27 19:28:13',1),(6,'Resma','2016-03-27 19:28:13','2016-03-27 19:28:13',1),(7,'Frasco','2016-03-27 19:28:13','2016-03-27 19:28:13',1),(8,'Quilo','2016-03-27 19:28:13','2016-03-27 19:28:13',1),(9,'Litro','2016-03-27 19:28:14','2016-03-27 19:28:14',1),(10,'Estojo','2016-04-12 20:57:12','2017-07-20 22:27:37',1),(11,'Galão','2016-04-15 15:56:45','2017-07-20 22:28:20',1),(12,'Par','2016-04-19 20:26:46','2017-07-20 22:28:28',1),(13,'Metro','2016-05-24 14:53:26','2016-05-24 14:53:26',1),(14,'Jogo','2017-07-20 22:28:45','2017-07-20 22:28:45',1),(15,'Fardo','2017-07-20 22:29:11','2017-07-20 22:29:11',1),(16,'Rolo','2017-09-05 23:12:02','2017-09-11 23:01:45',1);
+/*!40000 ALTER TABLE `unidades` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `users`
@@ -529,8 +753,18 @@ CREATE TABLE `users` (
   UNIQUE KEY `users_email_unique` (`email`),
   KEY `users_setor_id_foreign` (`setor_id`),
   CONSTRAINT `users_setor_id_foreign` FOREIGN KEY (`setor_id`) REFERENCES `setors` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=231 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'Administrador','administrador@progest.com','$2y$10$DLW0QcH.Ps2B3M/HMheChOt8/CJ.SSG0aE1bzRSNKQ53LxAsMQstO','(77) 98888-8888','1111111',1,'qxLcIiFB5ioJPwkgMbrKsyKAD0YzXey108C0sz2XcVhFXIFwywXpIV3EPXBK','2016-03-27 19:28:14','2018-01-12 21:25:09',1),(2,'Solicitante','solicitante@progest.com','$2y$10$IJe6MutShQBgDosMObwWSeGmAClBa1Qo2CTKC44nWQPJ/3N5wiI9S','(77) 99199-9991','2222222',1,'ZUHlxq7I8idUSCObCqdmcCJ8bF6MkkqXLhRt6SWqzfLVpj4ZycBpDIU3qsad','2016-03-27 19:28:14','2018-01-12 21:28:36',1);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -541,34 +775,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-14 15:27:01
-
-SET FOREIGN_KEY_CHECKS=0;
-use progest
-
-LOCK TABLES `coordenacaos` WRITE;
-/*!40000 ALTER TABLE `coordenacaos` DISABLE KEYS */;
-INSERT INTO `coordenacaos` VALUES (1,'Coordenacao1','2016-03-27 22:28:12','2016-03-27 22:28:12','Coordenador','coordenacao@gmail.com','(00) 0000-0000',1);
-/*!40000 ALTER TABLE `coordenacaos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `setors`
---
-
-LOCK TABLES `setors` WRITE;
-/*!40000 ALTER TABLE `setors` DISABLE KEYS */;
-INSERT INTO `setors` VALUES (1,'Setor1','2016-03-27 22:28:48','2016-03-27 22:28:48',1,1);
-/*!40000 ALTER TABLE `setors` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Administrador','administrador@teste.com','$2y$10$m6lPmvC9eS4cMBb5PD7G..S8bYiIrmOgdtJ2bw7BQZiQQVOk4tZd.','(77) 98888-8888','1111111',1,'WCERk1td3f9CjGvnK7BbTeYfIrc51ACgZ0g4qKRF3yiMfvBwXxzXtFBmaekm','2016-03-27 22:28:14','2017-07-24 21:24:08',1),(2,'Solicitante','solicitante@teste.com','$2y$10$VdFVXFPDqO/bolmMQvqJIuKhHvzEtA6CY/55RNVEoX7lb4GdpTuB6','(77) 99199-9991','2222222',1,'SHh9Dq7qtpJcWH2SlJK4ywlI6fgmRzBX2g03BeJvxaNwVM9SZnHoQR7fTOW3','2016-03-27 22:28:14','2017-07-24 21:25:32',1);
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
-SET FOREIGN_KEY_CHECKS=1;
+-- Dump completed on 2018-01-15 10:00:11
